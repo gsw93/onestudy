@@ -1,0 +1,215 @@
+// /*----------  HERO SECTION  ----------*/
+.hero-area, .hero-area-2{
+	.content-block{
+		h1 {
+			color: $light;
+			font-size: 65px;
+			font-weight: bold;
+			letter-spacing: 0.05em;
+			margin-bottom: 15px;
+			@include tablet {
+				font-size: 40px;
+			}
+		}
+		p {
+			color:$light;
+			font-size: 23px;
+			line-height: 30px;
+			letter-spacing: 0.05em;
+			@include tablet {
+				font-size: 17px;
+			}
+		}
+	}
+}
+.hero-area {
+	padding:100px 0 0;
+	// contents
+	.content-block {
+		padding-bottom: 80px;
+	}
+	// advanced search
+	.advance-search {
+		background:$primary-color;
+		padding:28px 18px 28px 18px;
+		border-radius:3px;
+		margin-bottom:-50px;
+		@include mobile {
+			margin-bottom: -80px;
+		}
+		[class*='col-']{
+			padding-left: 26px;
+			padding-right: 26px;
+			&:before{
+				background: #fb8996;
+			   	bottom: 8px;
+			   	content: " ";
+			   	left: 0;
+			   	position: absolute;
+			   	width: 1px;
+			   	top: 0;
+			   	height: 100%;
+			   	@include tablet {
+			   		width: 0;
+				}	
+			}
+		}
+		[class*='col-']:first-child:before {
+		   display: none;
+		}
+		.block{
+			@include mobile {
+				display: block !important;
+			}
+			.form-control{
+				height: 45px;
+			}
+			.btn-secondary{
+				padding: 10px 30px;
+			}
+		}
+		// custom form contron styles
+		.form-control{
+			color: $light !important;
+			border-color: rgba(255, 255, 255, .5 );
+			&:focus{
+				color: $light !important;
+				background: $primary-color;
+			}
+		}
+		
+		.sbHolder{
+		  background: $primary-color;
+		  border: 1px solid rgba(255, 255, 255, .5 );
+		  text-align: left;
+		  height: 45px;
+		  @include tablet {
+		  	margin-bottom: 10px;
+		  }
+		  
+		  .sbSelector{
+		    color: $light !important;
+		  }
+		  .sbToggle{
+			  top: 10px;
+			&::before{
+				color: #ffffff;
+			  }
+		  }
+
+		  .sbOptions{
+	        background: $primary-color;
+	        border-color: $light;
+	        z-index: 2;
+		    li{
+		      a{
+		        color: $light;
+		        &:hover{
+		          color: $light !important;
+		        }
+		      }
+		      span{
+		      	color: $light;
+		      }
+		    }
+		  }
+		}
+		// form control placeholder color change
+		.form-control::-webkit-input-placeholder { color: white; }  /* WebKit, Blink, Edge */
+		.form-control:-moz-placeholder { color: white; }  /* Mozilla Firefox 4 to 18 */
+		.form-control::-moz-placeholder { color: white; }  /* Mozilla Firefox 19+ */
+		.form-control:-ms-input-placeholder { color: white; }  /* Internet Explorer 10-11 */
+		.form-control::-ms-input-placeholder { color: white; }  /* Microsoft Edge */
+		button{
+			display: block;
+			@include mobile {
+				width: 100%;
+			}
+		}
+	}
+}
+.hero-area-2{
+	.sbHolder{
+	  background: $light;
+	  text-align: left;
+	  @include tablet {
+	  	margin-bottom: 10px;
+	  }
+	  .sbToggle{
+	    background: url(../plugins/selectbox/img/down-arrow-gray.png) no-repeat;
+	  }
+	  .sbOptions{
+        z-index: 2;
+	  }
+	}
+}
+
+// /*----------  Submit Coupon Section  ----------*/
+.submit-coupon{
+	// custom form control styles
+	.form-control,.sbHolder{
+		margin-bottom: 30px;
+	}
+	button{
+		margin-top: 20px;	
+	}
+}
+// /*----------  Deal Category Section  ----------*/
+.deals-categories{
+	padding: 100px 0 0 0;
+	.border-bottom{
+		padding-bottom: 70px;
+	}
+}
+
+// /*----------  HERO AREA SECTION  ----------*/
+.hero-area-2 {
+	@include tablet {
+		padding: 60px 0;
+	}
+	// hero contents
+	.content-block {
+		padding-bottom: 30px;
+	}
+	form{
+		margin-bottom: 13px;
+	}
+	// coupon search
+	.coupon-ig{
+		margin-bottom: 6px;
+		input{
+			background: $primary-color;
+			color:$light;
+			border-color: transparent;
+		}
+		.input-group-addon{
+			background: $primary-color;
+			color:$light;
+			border-left: none;
+			i{
+				font-size: 17px;
+				padding-right: 7px;
+			}
+		}
+		// form control placeholder color change
+		.form-control::-webkit-input-placeholder { color: white; }  /* WebKit, Blink, Edge */
+		.form-control:-moz-placeholder { color: white; }  /* Mozilla Firefox 4 to 18 */
+		.form-control::-moz-placeholder { color: white; }  /* Mozilla Firefox 19+ */
+		.form-control:-ms-input-placeholder { color: white; }  /* Internet Explorer 10-11 */
+		.form-control::-ms-input-placeholder { color: white; }  /* Microsoft Edge */
+	}
+	// category search
+	.category-search{
+		.form-control{
+			background: $light;
+		}
+	}
+}
+
+.best-deal{
+	.block{
+		.tab-content{
+			margin-top: 30px;
+		}
+	}
+}

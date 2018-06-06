@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>One Study - 스터디 매칭 서비스</title>
+
+    <!-- PLUGINS CSS STYLE -->
+    <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Select 2 -->
+    <link href="plugins/selectbox/select_option1.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link href="plugins/owl-carousel/assets/owl.carousel.min.css" rel="stylesheet" media="screen">
+    <!-- Owl Carousel Theme -->
+    <link href="plugins/owl-carousel/assets/owl.theme.green.min.css" rel="stylesheet" media="screen">
+    <!-- Fancy Box -->
+    <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+    <!-- Datepicker -->
+    <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/board.css">
+
+    <!-- FAVICON -->
+    <link href="img/favicon.png" rel="shortcut icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="body-wrapper">
+<!--=====================================
+=            Top Header Menu            =
+======================================-->
+<%- include topHeader.ejs %>
+<!--=============================
+=            Nav Bar            =
+==============================-->
+<%- include topButton.ejs %>
+<!--==================================
+=            Store Coupon            =
+===================================-->
+<section class="store-coupon section">
+    <div class="category-select">
+        <div class="row selects">
+            <select class="form-control" style="height: 35px;">
+                <option value="지역">지역</option>
+                <option value="서울">서울</option>
+                <option value="경기">경기</option>
+            </select>
+            <select class="form-control" style="height: 35px;">
+                <option value="레벨">레벨</option>
+                <option value="고급">고급</option>
+                <option value="중급">중급</option>
+                <option value="초급">초급</option>
+            </select>
+            <select class="form-control" style="height: 35px;">
+                <option value="시간">시간</option>
+                <option value="오전">오전</option>
+                <option value="오후">오후</option>
+            </select>
+            <select class="form-control" style="height: 35px;">
+                <option value="시작">시작</option>
+            </select>
+            <ul>
+                <li>
+                    <a href="">검색</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-md-6" style="color:orange;">
+                <%= board.length %>개의 스터디
+            </div>
+            <div class="col-md-6" style="color:orange;">
+                <button onclick="location.href='/writeStudy'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
+            </div>
+        </div>
+        <div class="row">
+          <% if(board !== null){
+            for (var i=0; i< board.length; i++){ %>
+            <div class="col-lg-3 col-sm-6" style="margin-top: 40px;;">
+                <div class="block-cnt">
+                    <div class="cnt">
+                        <div class="cnt_text">
+                          <% i+1 %>
+                            <h5><a href="/studyView?id=<%=board[i]._id%>"><%= board[i].title %></a></h5>
+                            <p><% for(var n=0; n< board[i].category.length;n++){ %>
+                              <%= board[i].category[n] %> &nbsp; <% } %><br>
+                                <%= board[i].region %><br>
+                                <%= board[i].studyTerm %>주 진행 (시간 협의)</p>
+                            <span id="study_maxnum">모집 : <%= board[i].maxNum %>명&nbsp;</span><span id="study_num">(<%= board[i].currentNum %>명)</span>
+                              <ul class="study_state">
+                                  <li class="deadlineIcon" style="display:none;"></li>
+                                  <!-- <li id="end" style="display:none;background-color:red;">마감임박</li>
+                                  <li id="gather" style="display:none;background-color:orange;">모집중</li> -->
+                              </ul>
+                                <script type="text/javascript">
+                                  var ddd = new Date('<%- board[i].deadline %>');
+                                  var date = new Date();
+                                  date.setDate(date.getDate()+7);
+
+                                  if(ddd<date){
+                                    var x = document.getElementsByClassName("deadlineIcon");
+                                    x[<%- i%>].style.display = "block";
+                                    x[<%- i%>].style.backgroundColor = "red";
+                                    x[<%- i%>].innerHTML = "마감임박";
+                                  }
+                                  else if(ddd>=date){
+                                    var x = document.getElementsByClassName("deadlineIcon");
+                                    x[<%- i%>].style.display = "block";
+                                    x[<%- i%>].style.backgroundColor = "orange";
+                                    x[<%- i%>].innerHTML = "모집중";
+                                  }
+                                </script>
+                        </div>
+                    </div>
+                    <div class="people-img" style="top: -15%;">
+                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg"
+                             width="50px" height="50px">
+                    </div>
+                </div>
+            </div>
+            <% }} %>
+        </div>
+
+    </div>
+</section>
+
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<%- include footer.ejs %>
+
+
+<!-- JAVASCRIPTS -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+<script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="js/custom.js"></script>
+
+</body>
+
+</html>

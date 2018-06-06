@@ -1,0 +1,45 @@
+<section class="top-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Top Header list -->
+                <% if(authUser){ %>
+                <ul class="nav justify-content-end top-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mypage"><%=authUser%></a>
+                        <!--user 이름을 표기하고 싶음-->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/serviceInfo">서비스 안내</a>
+                    </li>
+                </ul>
+                <%}else{%>
+                <ul class="nav justify-content-end top-menu">
+                    <li class="nav-item">
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#login" style="color: #000;">로그인</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#login" style="color: #000;">회원가입</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#login" style="color: #000;">서비스 안내</button>
+                    </li>
+                </ul>
+                <%}%>
+                <!--<li class="nav-item dropdown">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">EN
+                        <span><i class="fa fa-angle-down"></i></span>
+                    </a>
+                    &lt;!&ndash; Dropdown list &ndash;&gt;
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">EN</a>
+                        <a class="dropdown-item" href="#">FR</a>
+                    </div>
+                </li>-->
+            </div>
+        </div>
+    </div>
+</section>

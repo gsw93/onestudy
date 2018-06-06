@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+
+<div class="container-fluid" id="login">
+
+    <div class="signup-content" >
+        <div class="real_content">
+            <!--<button class="signupgoogle form-control" id="signup-google" style="margin-top: 60px;">-->
+                <!--<span><img src="img/google_logo.png" alt=""></span>-->
+                <!--<p>Login with google</p>-->
+            <!--</button>-->
+
+            <button class="signupfacebook form-control" onclick="location.href='/auth/facebook'" id="signup-facebook">
+                <span><img src="img/fb-logo.png" alt=""></span>
+                <p>Login with facebook</p>
+            </button>
+
+            <!--<button class="signupnaver form-control" id="signup-naver">-->
+                <!--<span><img src="img/naver_logo.png" alt=""></span>-->
+                <!--<p>Login with naver</p>-->
+            <!--</button>-->
+            <hr>
+        </div>
+        <form action="/process/login" method="post" class="form-horizontal">
+            <div class="form-group">
+                <div class="real_content">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="username" class="form-control input-lg" id="email" placeholder="E-mail" required>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="login-set">
+                        <input type="checkbox">Save password
+                        <a href="">Forgot password ?</a>
+
+                        <input type="submit" class="login-sign-in form-control" value="Log in" id="sign-in">
+                        <hr>
+                    </div>
+
+                    <button type="button" onclick="location.href='register'" class="login-sign-up form-control" id="sign-up">Sign up</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

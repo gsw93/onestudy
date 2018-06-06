@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- SITE TITTLE -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Study - 스터디 매칭 서비스</title>
+
+  <!-- icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- PLUGINS CSS STYLE -->
+  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Select 2 -->
+  <link href="plugins/selectbox/select_option1.css" rel="stylesheet">
+  <!-- Owl Carousel -->
+  <link href="plugins/owl-carousel/assets/owl.carousel.min.css" rel="stylesheet" media="screen">
+  <!-- Owl Carousel Theme -->
+  <link href="plugins/owl-carousel/assets/owl.theme.green.min.css" rel="stylesheet" media="screen">
+  <!-- Fancy Box -->
+  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <!-- Datepicker -->
+  <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
+
+  <!-- CUSTOM CSS -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- FAVICON -->
+  <link href="img/favicon.png" rel="shortcut icon">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="body-wrapper">
+
+
+<!--=====================================
+=            Top Header Menu            =
+======================================-->
+
+<section class="top-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Top Header list -->
+                <ul class="nav justify-content-end top-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">로그인</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#"  data-toggle="dropdown">회원가입
+                            <!-- <span><i class="fa fa-angle-down"></i></span>-->
+                        </a>
+                        <!-- Dropdown list -->
+                        <!-- 
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                            <a class="dropdown-item" href="user-profile.html">User Profile</a>
+                            <a class="dropdown-item" href="login.html">Logout</a>
+                        </div>
+                         -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">서비스 안내</a>
+                    </li>
+                    <!--<li class="nav-item dropdown">
+                        <a class="nav-link" href="#"  data-toggle="dropdown">EN
+                            <span><i class="fa fa-angle-down"></i></span>
+                        </a>
+                        &lt;!&ndash; Dropdown list &ndash;&gt;
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">EN</a>
+                            <a class="dropdown-item" href="#">FR</a>
+                        </div>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--=============================
+=            Nav Bar            =
+==============================-->
+
+<nav class="navbar navbar-toggleable-md main-nav bg-light">
+    <!-- Container Start -->
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon fa fa-bars"></span>
+        </button>
+        <a class="navbar-brand p-0" href="index-v2.html">
+        <img alt="logo" src="./img/home/logo.png" width="150px">
+        </a>
+        <ul class="navbar-nav search-mobile">
+            <li class="nav-item dropdown search">
+                <!--<a class="nav-link pr-0 search-icon" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-search"></i>
+                </a>-->
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="input-group">
+                            <input type="text" class="form-control" id="search" placeholder="Search...">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+                </div>
+            </li>
+        </ul>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- Navigation List -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="study.html">스터디</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="master.html">마스터</a>
+                </li>
+                    <!-- Dropdown list -->
+                    <!--  <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="index.html">Home deals V1</a>
+                        <a class="dropdown-item" href="index-v2.html">Home deals v2</a>
+                    </div>
+                    -->
+                </li>
+                <li class="nav-item dropdown dropdown-slide ">
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            학생 <span><i class="fa fa-angle-down"></i></span>
+                        </a>
+                        <!-- Dropdown list -->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="category.html">우리끼리</a>
+                        <a class="dropdown-item" href="store.html">OWN Study</a>
+                        <!-- 
+                        <a class="dropdown-item" href="store-single.html">Store Single</a>
+                        <a class="dropdown-item" href="submit-coupon.html">Submit Coupon</a>
+                         -->
+                    </div>
+                    </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="blog.html">이벤트</a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide ">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        리뷰 <span><i class="fa fa-angle-down"></i></span>
+                    </a>
+                    <!-- Dropdown list -->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                        <a class="dropdown-item" href="user-profile.html">User Profile</a>
+                        <!-- 
+                        <a class="dropdown-item" href="submit-coupon.html">Submit Coupon</a>
+                        <a class="dropdown-item" href="login.html">Login</a>
+                         -->
+                    </div>
+                </li>
+                <!-- Search Icon -->
+                <!-- 
+                <li class="nav-item dropdown dropdown-slide search  active ">
+                    <a class="nav-link pr-0" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search" placeholder="Search...">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </li>
+                 -->
+            </ul>
+        </div>
+    </div>
+    <!-- Container End -->
+</nav>
+
+<!--==================================
+=            Store Coupon            =
+===================================-->
+<section class="store-coupon section">
+    <div class="category-select">
+        <div class="row selects">
+            <select class="form-control" style="height: 35px;">
+                <option value="지역">지역</option>
+                <option value="서울">서울</option>
+                <option value="경기">경기</option>
+            </select>
+            <select class="form-control" style="height: 35px;">
+                <option value="레벨">레벨</option>
+                <option value="고급">고급</option>
+                <option value="중급">중급</option>
+                <option value="초급">초급</option>
+            </select>
+            <select class="form-control" style="height: 35px;">
+                <option value="시간">시간</option>
+                <option value="오전">오전</option>
+                <option value="오후">오후</option>
+            </select>
+            <select class="form-control" style="height: 35px;">
+                <option value="시작">시작</option>
+            </select>
+            <ul>
+                <li>
+                    <a href="">검색</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<div class="container" style="margin-top: 20px;">
+    <div style="color:orange;">
+        9521명의 회원
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6" style="margin-top: 40px;">
+            <div class="block-cnt">
+                <div class="cnt">
+                    <div class="cnt_text">
+                        <a href="">
+                            <ul class="chat">
+                                <li><i class="fa fa-commenting-o" style="font-size:24px;color:#ffffff;"></i></li>
+                            </ul>
+                        </a>
+                        <h5 id="student_inform">홍길동<br>중학교 1학년(여)</h5>
+                        <p>충북 청주시 서원구</p> 
+                        <ul class="student_category">
+                            <li>수학</li>
+                            <li>영어</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="people-img" style="top: -15%;">
+                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" style="margin-top: 40px;">
+            <div class="block-cnt">
+                <div class="cnt">
+                    <div class="cnt_text">
+                        <a href="">
+                            <ul class="chat">
+                                <li><i class="fa fa-commenting-o" style="font-size:24px;color:#ffffff;"></i></li>
+                            </ul>
+                        </a>
+                        <h5 id="student_inform">홍길동<br>중학교 1학년(여)</h5>
+                        <p>충북 청주시 서원구</p> 
+                        <ul class="student_category">
+                            <li>수학</li>
+                            <li>영어</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="people-img" style="top: -15%;">
+                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" style="margin-top: 40px;">
+            <div class="block-cnt">
+                <div class="cnt">
+                    <div class="cnt_text">
+                        <a href="">
+                            <ul class="chat">
+                                <li><i class="fa fa-commenting-o" style="font-size:24px;color:#ffffff;"></i></li>
+                            </ul>
+                        </a>
+                        <h5 id="student_inform">홍길동<br>중학교 1학년(여)</h5>
+                        <p>충북 청주시 서원구</p> 
+                        <ul class="student_category">
+                            <li>수학</li>
+                            <li>영어</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="people-img" style="top: -15%;">
+                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" style="margin-top: 40px;">
+            <div class="block-cnt">
+                <div class="cnt">
+                    <div class="cnt_text">
+                        <a href="">
+                            <ul class="chat">
+                                <li><i class="fa fa-commenting-o" style="font-size:24px;color:#ffffff;"></i></li>
+                            </ul>
+                        </a>
+                        <h5 id="student_inform">홍길동<br>중학교 1학년(여)</h5>
+                        <p>충북 청주시 서원구</p> 
+                        <ul class="student_category">
+                            <li>수학</li>
+                            <li>영어회화</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="people-img" style="top: -15%;">
+                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+</section>
+
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer  section-sm">
+    <!-- Container Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <!-- About -->
+                <div class="block">
+                    <!-- footer logo -->
+                    <ul class="nav justify-content-start top-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">서비스안내</a>
+                        </li>
+                        <li class="nav-item" style="vertical-align: middle">
+                            <a class="nav-link" href="#">ONESTUDY 이용약관</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">개인정보처리방침</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Link list -->
+            <div class="col-lg-4 col-md-5">
+                <div class="block">
+                    <ul class="nav justify-content-end top-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img src="img/footer/f_01.png"> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img src="img/footer/f_02.png"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img src="img/footer/f_03.png"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer detail -->
+            <div class="col-lg-8 col-md-7">
+                <div class="block">
+                    <ul class="nav justify-content-start top-menu">
+                        <li class="">
+                            <a class="nav-content">· (주)픽셀아이 &emsp;</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-content">· 대표자 : 김영수 대표 &emsp;</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-content">· 사업자 등록번호 : 123 456 78950</a>
+                        </li>
+                    </ul>
+                    <ul class="nav justify-content-start top-menu" style="margin-top: -8px">
+                        <li class="nav-item">
+                            <a class="nav-content">충북 청주시 서원구 충대로 1 충북대학교 학연산공동기술연구원 579호 픽셀아이 &emsp;</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-content">개인정보관리책임자 : 김영수</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- App Link  -->
+            <div class="col-lg-4 col-md-5">
+                <div class="block">
+                    <ul class="nav justify-content-end top-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img src="./img/apps/appstore.png" width="100px"> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img src="./img/apps/googleplay.png" width="100px"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Copylight  -->
+            <div class="col-lg-8 col-md-7">
+                <div class="block">
+                    <ul class="nav justify-content-start top-menu">
+                        <li class="nav-item">
+                            <a class="nav-content">COPYRIGHTⓒ2018 ONESTUDY ALL RIGHT RESERVED.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container End -->
+</footer>
+
+<!-- CUPON MODAL -->
+<div class="modal fade cupon-modal" id="cupon" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="img/popular-offer/popular-offer-1.png" alt="Store Icon">
+        <h4>Free Shipping on orders over $100</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>Copy this promo code and paste when you checkout</h6>
+        <p class="coupon-code">eats-s79y5eqyueMHZ</p>
+        <form action="#">
+          <div class="form-group">
+            <label for="">Did it work?</label>
+            <div class="btn-group">
+              <div class="btn btn-transparent">
+                <i class="fa fa-smile-o"></i>
+              </div>
+              <div class="btn btn-transparent">
+                <i class="fa fa-frown-o"></i>
+              </div>
+              <div class="btn btn-transparent">
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <a href="#" class="btn btn-transparent">Back to store</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- JAVASCRIPTS -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+<script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="js/custom.js"></script>
+
+</body>
+
+</html>
+

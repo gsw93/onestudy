@@ -1,0 +1,144 @@
+// /*----------  FOOTER  ----------*/
+.footer {
+	padding-top: 120px;
+	background: #3C3E40;
+	// block common style
+	.block {
+		h4 {
+			color: $light;
+			font-size: 20px;
+			margin-bottom: 25px;
+		}
+		// about block
+		&.about {
+			margin-top: -20px;
+			margin-bottom: 25px;
+			img{
+				margin-bottom: 25px;
+			}
+			p{
+				line-height: 26px;
+			}
+			a {
+				&:hover {
+					text-decoration:underline;
+				}
+			}
+		}
+		ul {
+			li {
+				margin-bottom: 10px;
+				a{
+					display: block;
+					font-size: 14px;
+					color: #c7c7c7;
+					&:hover{
+						color: $primary-color;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+		// terms list
+		ul.terms-list{
+			margin-top: 10px;
+			li{
+				a{
+					padding-right:10px;
+				}
+			}
+		}
+		&:last-child {
+			@include tablet {
+				margin-bottom: 30px;
+			}
+		}
+	}
+	// block 2 common styles
+	.block-2{
+		padding: 18px 30px;
+		background: #46484A;
+		border-radius: 2px;
+		// app promotion
+		&.app-promotion{
+			display: flex;
+			margin-bottom: 20px;
+			p{
+				margin-left: 20px;
+				color: $light;
+			}
+		}
+		// discount coupon
+		&.discount-coupon{
+			p{
+				color: $light;
+				a{
+					color: $primary-color;
+				}
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+// /*----------  FOOTER BOTTOM  ----------*/
+.footer-bottom {
+	position: relative;
+	background: #363839;
+	padding: 25px 0;
+	@include mobile {
+		text-align: center;
+	}
+	// copyright
+	.copyright{
+		p{
+			color:$gray;
+			margin-bottom: 0;
+			a{
+				color: $gray;
+				&:hover{
+					color: $primary-color;
+				}
+			}
+		}
+	}
+	// to top button
+	.top-to{
+		position: absolute;
+	    top: -50px;
+	    width: 100%;
+    	display: flex;
+    	justify-content: center;
+	    a{
+			width: 0;
+			height: 0;
+		    border-style: solid;
+			border-width: 0 50px 50px 50px;
+			border-color: transparent transparent #363839 transparent;
+		    color: $light;
+		    display: flex;
+			justify-content: center;
+			i{
+				margin-top: 20px;
+			}
+			&:hover {
+				text-decoration: none;
+			}
+	    }
+	}
+}
+
+.social-media-icons{
+	text-align: center !important;
+	li{
+		display: inline-block;
+		a{
+			color: #848484;
+			padding: 0 20px;
+			&:hover{
+				color: $light !important;
+				text-decoration: none;
+			}
+		}
+	}
+}

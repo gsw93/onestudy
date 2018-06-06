@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>One Study - 스터디 매칭 서비스</title>
+    <!-- PLUGINS CSS STYLE -->
+    <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="body-wrapper">
+<!--=====================================
+=            Top Header Menu            =
+======================================-->
+<section class="top-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Top Header list -->
+                <% if(authUser){ %>
+                <ul class="nav justify-content-end top-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/myinfo"><%=authUser%></a>
+                        <!--user 이름을 표기하고 싶음-->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/serviceInfo">서비스 안내</a>
+                    </li>
+                </ul>
+                <%}else{%>
+                <ul class="nav justify-content-end top-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">회원가입</a>
+                        <!-- Dropdown list -->
+                        <!--
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                            <a class="dropdown-item" href="user-profile.html">User Profile</a>
+                            <a class="dropdown-item" href="login.html">Logout</a>
+                        </div>
+                         -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/serviceInfo">서비스 안내</a>
+                    </li>
+                </ul>
+                <%}%>
+                <!--<li class="nav-item dropdown">
+                    <a class="nav-link" href="#"  data-toggle="dropdown">EN
+                        <span><i class="fa fa-angle-down"></i></span>
+                    </a>
+                    &lt;!&ndash; Dropdown list &ndash;&gt;
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">EN</a>
+                        <a class="dropdown-item" href="#">FR</a>
+                    </div>
+                </li>-->
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,74 @@
+// Hero Section
+.category-hero{
+	padding: 40px 0;
+	// Cloth Icon Style
+	.media{
+		@include tablet {
+			-webkit-flex-wrap: wrap;
+			    -ms-flex-wrap: wrap;
+			        flex-wrap: wrap;
+		}
+		.image-content{
+			img{
+				padding: 30px;
+				background: $light;
+				-webkit-border-radius: 100%;
+				        border-radius: 100%;
+				border: 10px solid #e34e60;
+			}
+			@include tablet {
+				margin-bottom: 30px;
+				display: flex;
+				-webkit-justify-content: center;
+				        justify-content: center;
+				-webkit-flex-grow: 1;
+				        flex-grow: 1;
+				width: 100%;
+				
+			}	
+		}
+		.media-body{
+			margin-left: 30px;
+			@include tablet {
+				margin-left: 0;
+				text-align: center;
+				-webkit-flex-grow: 1;
+				        flex-grow: 1;
+				width: 100%;
+			}
+			// heading
+			h2{
+				font-size: 42px;
+				line-height: 40px;
+				color: $light;
+				font-weight: bold;
+			}
+			// description
+			p{
+				font-size: 20px;
+				line-height: 30px;
+				color: $light;	
+			}
+		}
+		.btn-content{
+			@include tablet {
+				-webkit-flex-grow: 1;
+				        flex-grow: 1;
+			    width: 100%;
+			    -webkit-justify-content: center;
+			            justify-content: center;	
+			}
+		}
+	}
+}
+
+// Client Slider
+.client-slider-02{
+	padding-top: 30px;
+}
+.offers{
+	padding-top: 55px;
+	.offer-btn{
+		margin-top: 20px;
+	}
+}

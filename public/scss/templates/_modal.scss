@@ -1,0 +1,91 @@
+.cupon-modal{
+  .modal-dialog{
+    max-width: 770px;
+    @include tablet{
+      max-width: 570px;
+    }
+
+    .modal-content{
+      .modal-header{
+        padding: 20px 80px;
+        justify-content: flex-start;
+        @include tablet{
+          padding: 20px;
+        }
+        @include mobile{
+          padding: 0 5px;
+        }
+        img{
+          margin-right: 20px;
+          border-radius: 3px;
+          box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+          border: 1px solid #ebeaea;
+          padding: 0 20px;
+          @include mobile-xs{
+            padding: 0;
+            width: 100px;
+          }
+        }
+        h2{
+          font-size: 24px;
+          @include mobile{
+            font-size: 20px;
+          }
+        }
+        .close{
+          position: relative;
+          span{
+            position: absolute;
+            top: -83px;
+            right: -65px;
+            @include tablet{
+              right: 0px;
+              // top: -87px;
+            }
+            @include mobile{
+              right: 115px;
+              top: -30px;
+            }
+            @include mobile-xs{
+              right: 0px;
+              top: -5
+            }
+          }
+        }
+      }
+      .modal-body{
+        padding: 55px 80px 50px;
+        @include tablet{
+          padding: 20px;
+        }
+        @include mobile{
+          padding: 10px;
+        }
+        h6{
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+        p{
+          width: 100%;
+          text-align: center;
+          line-height: 60px;
+          text-transform: uppercase;
+          background: #fff6f7;
+          border: 2px dashed #f95669;
+          border-radius: 3px;
+          margin-bottom: 40px;
+        }
+        .form-group{
+          label{
+            display: block;
+          }
+          a{
+            float: right;
+            margin-top: -5px;
+            padding: 15px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-toggleable-md main-nav bg-light">
+    <!-- Container Start -->
+    <div class="container" style="width: 95%;">
+        <button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon fa fa-bars"></span>
+        </button>
+        <a class="navbar-brand p-0" href="/">
+            <img alt="logo" src="./img/home/logo.png" width="170px">
+        </a>
+        <ul class="navbar-nav search-mobile">
+            <li class="nav-item dropdown search">
+                <a class="nav-link pr-0 search-icon" href="#" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    <i class="fa fa-search"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search" placeholder="Search...">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- Navigation List -->
+            <ul class="navbar-nav ml-auto">
+                <%if(authUser){%>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/study">스터디</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/master">마스터</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/student">학생</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/event">이벤트</a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/mypage">마이페이지</a>
+                    </li>
+                <%} else{%>
+                    <li class="nav-item">
+                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">스터디</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">마스터</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">학생</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">이벤트</button>
+                    </li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+    <!-- Container End -->
+</nav>
