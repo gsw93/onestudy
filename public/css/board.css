@@ -86,7 +86,7 @@
 -----------------------*/
 
 .category-select{
-    width: 70%;
+    width: 100%;
     background-color:rgba(204, 204, 204,0.5);
     margin:auto;
     display: block;
@@ -98,7 +98,7 @@
 }
 
 .selects select{
-    width: 17%;
+    width: 16%;
     font-size: 14px;
     float: left;
     margin:12.5px 1% 12.5px 1%;

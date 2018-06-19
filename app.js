@@ -41,7 +41,7 @@ var fs = require('fs');
 
 //세션 설정
 var store = new MongoDBStore({
-    uri: 'mongodb://35.189.135.181:27017/db',
+    uri: 'mongodb://127.0.0.1:27017/db',
     databaseName: 'db',
     collection: 'sessions'
 });
@@ -632,7 +632,7 @@ app.get('/serviceInfo', function (req, res) {
 //============================ 서버 시작 ============================
 
 var server = https.createServer(options, app);
-var port = 443;
+var port = 3001;
 server.listen(port, function () {
     console.log('https 서버가 시작되었습니다. 포트 : ' + port );
 });
