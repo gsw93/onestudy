@@ -43,7 +43,7 @@ module.exports = function (router, passport) {
 
                     console.log('요청 파라미터 : ' + id + ', ' + password + ', ' + nickname + ', ' + salt);
 
-                    var user = new UserModel({"id": id, "password": password, "nickname": nickname, "salt": salt});
+                    var user = new UserModel({"id": id, "password": password, "nickname": nickname, "salt": salt, "provider": 'onestudy'});
                     // save ()로 저장
                     user.save(function (err) {
                         if(err) {

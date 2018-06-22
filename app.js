@@ -89,9 +89,17 @@ usersRoute(app, passport);
 passportRoute(app, passport);
 //============================ 라우터 끝 ============================
 
-var server = https.createServer(options, app);
+var httpsServer = https.createServer(options, app);
+var httpServer = http.createServer(app);
+var httpPort = 80;
 
-server.listen(app.get('port'), function () {
-    console.log('https 서버가 시작되었습니다. 포트 : ' + app.get('port'));
+httpServer.listen(httpPort, function () {
+    console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);
     connectDB();
 });
+
+httpsServer.listen(app.get('port'), function () {
+    console.log('https 서버가 시작되었습니다. 포트 : ' + app.get('port'));
+});
+
+
