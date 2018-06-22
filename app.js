@@ -25,7 +25,7 @@ var multer = require('multer');
 var fs = require('fs');
 //세션 설정
 var store = new MongoDBStore({
-    uri: 'mongodb://127.0.0.1:27017/db',
+    uri: 'mongodb://35.189.135.181:27017/db',
     databaseName: 'db',
     collection: 'sessions'
 });
@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 // 라우터 객체 참조
 var router = express.Router();
 // 기본 속성 설정
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 443);
 // view engine 설정
 app.set('view engine', 'ejs');
 // views 폴더 위치 설정
