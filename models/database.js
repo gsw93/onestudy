@@ -6,10 +6,7 @@
 
 var mongoose = require('mongoose');
 var user_Schema = require('./userSchema');
-var studyboard_Schema = require('./studyboardSchema');
 var masterboard_Schema = require('./masterboardSchema');
-var master_Schema = require('./masterSchema');
-var student_Schema = require('./studentSchema');
 
 module.exports = function connectDB() { // mongoose db
 
@@ -29,14 +26,8 @@ module.exports = function connectDB() { // mongoose db
 
         var user = new user_Schema();
         console.log('UserModel 정의함.');
-        var studyboard = new studyboard_Schema();
-        console.log('StudyBoardModel 정의함.');
         var masterboard = new masterboard_Schema();
         console.log('MasterBoardModel 정의함.');
-        var master = new master_Schema();
-        console.log('MasterModel 정의함.');
-        var student = new student_Schema();
-        console.log('StudentModel 정의함.');
 
         return database;
     });

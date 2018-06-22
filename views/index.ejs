@@ -169,14 +169,12 @@
         </div>
         <div class="btn">
           <ul>
-            <%if(authUser){%>
+            <%if(!authMaster){%>
+              <%if(authUser){%>
               <li>
-                <a href="/apply">마스터 되기&nbsp; &rarr;</a>
+                <button type="button" class="btn-link" onclick="location.href='/apply'" style="color: #fefefe; font-size: 16px;">마스터 되기&nbsp; &rarr;</button>
               </li>
-            <%} else{%>
-              <li>
-                <button type="button" class="btn-link" data-toggle="modal" data-target="#login" style="color: #fefefe; font-size: 16px;">마스터 되기&nbsp; &rarr;</button>
-              </li>
+              <%}%>
             <%}%>
           </ul>
         </div>
@@ -308,7 +306,7 @@
 <div class="modal fade" role="dialog" id="signup" style="top: 10%;">
   <div class="modal-dialog signup-content" >
     <br><br>
-    <form action="/process/adduser" method="post" class="form-horizontal">
+    <form action="/process/register" method="post" class="form-horizontal">
 
       <div class="form-group">
         <img src="" alt="" style="width: 250px; display: block; margin: auto;">

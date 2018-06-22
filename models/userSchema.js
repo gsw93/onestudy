@@ -16,7 +16,13 @@ var UserSchema = new mongoose.Schema({
     updated_at: {type: Date, index: {unique: false}, 'default': moment().format()},
     provider: {type: String, default: ''},
     authToken: {type: String, default: ''},
-    sellercheck:{type:Boolean, default:false}
+    sellercheck:{type:Boolean, default:false},
+    name: {type: String},
+    age: {type: Number},
+    gender: {type: String},
+    photo: {type: String},
+    majors: {type: String},
+    phone: {type: String}
 });
 UserSchema.static('findById', function (username, callback) {
     return this.find({id:username}, callback);

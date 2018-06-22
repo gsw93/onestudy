@@ -4,7 +4,6 @@
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
-var MasterModel = mongoose.model("masters");
 var UserModel = mongoose.model("users");
 
 module.exports = (new FacebookStrategy({
@@ -14,39 +13,35 @@ module.exports = (new FacebookStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         console.log('passport의 facebook 호출 됌.');
-        console.log(profile);
 
         UserModel.findById(profile.id, function (err, user) {
+            console.log(profile);
             if (err)return done(err);
 
-            if (user.length <= 0) {
-                MasterModel.findById(profile.id, function (err, user) {
-                    if (err){
-                        return done(err);
-                    }
-                    if (user.length <= 0) {
-                        var myuser = new UserModel({
-                            id: profile.id,
-                            password: profile.password,
-                            nickname: profile.displayName,
-                            provider: 'facebook',
-                            facebook: profile._json
-                        });
-
-                        myuser.save(function (err) {
-                            if (err) console.log(err);
-                            UserModel.findById(profile.id, function (err, user) {
-                                if (user.length <= 0)return done(err);
-                                return done(err, user);
-                            });
-                        });
-                    } else {
-                        return done(err, user);
-                    }
+            if (user.length > 0){
+                console.log('등록된 유저 확인');
+                return done(null, user[0]);
+            } else{
+                console.log('신규 유저 생성');
+                var user = new UserModel({
+                    id: profile.id,
+                    password: profile.password,
+                    nickname: profile.displayName,
+                    provider: 'facebook',
+                    facebook: profile._json
                 });
-            } else {
-                return done(err, user);
+
+                user.save(function (err) {
+                    if(err) {
+                        console.log(err);
+                        throw err;
+                    }
+                    UserModel.findById(profile.id, function (err, user) {
+                        if (user.length <= 0)return done(err);
+                        return done(err, user[0]);
+                    });
+                });
             }
-        })
+        });
     })
 );

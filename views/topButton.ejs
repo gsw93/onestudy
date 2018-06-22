@@ -28,30 +28,25 @@
             <ul class="navbar-nav ml-auto">
                 <%if(authUser){%>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/study">스터디</a>
-                    </li>
-                    <li class="nav-item ">
                         <a class="nav-link" href="/master">마스터</a>
                     </li>
+                <%if(!authMaster){%>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/student">학생</a>
+                        <a class="nav-link" href="/apply">마스터 신청하기</a>
                     </li>
+                <%}%>
                     <li class="nav-item ">
                         <a class="nav-link" href="/event">이벤트</a>
                     </li>
-
                     <li class="nav-item ">
                         <a class="nav-link" href="/mypage">마이페이지</a>
                     </li>
                 <%} else{%>
                     <li class="nav-item">
-                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">스터디</button>
-                    </li>
-                    <li class="nav-item">
                         <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">마스터</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">학생</button>
+                        <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">마스터 신청하기</button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">이벤트</button>
