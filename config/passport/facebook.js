@@ -25,7 +25,6 @@ module.exports = (new FacebookStrategy({
                 console.log('신규 유저 생성');
                 var user = new UserModel({
                     id: profile.id,
-                    password: profile.password,
                     nickname: profile.displayName,
                     provider: 'facebook',
                     facebook: profile._json

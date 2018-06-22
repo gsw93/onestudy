@@ -96,6 +96,22 @@
     margin-top: 4px;
 }
 
+.signupkakao{
+    background-color: #FFE812;
+    color: white;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.signupkakao img{
+    width: 33px;
+    height:33px;
+    float: left;
+    margin-left:4px;
+}
+
+
 .signupnaver{
     background-color: #00C73C;
     color: white;

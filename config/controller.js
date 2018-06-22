@@ -4,6 +4,8 @@
 
 var localLogin = require('./passport/localLogin');
 var facebook = require('./passport/facebook');
+var naver = require('./passport/naver');
+var kakao = require('./passport/kakao');
 var mongoose = require('mongoose');
 var UserModel = mongoose.model("users");
 
@@ -31,6 +33,8 @@ module.exports = function(app, passport){
 
     passport.use(localLogin);
     passport.use(facebook);
+    passport.use(naver);
+    passport.use(kakao);
 
 };
 //============================ 로그인 기능 끝 ============================
