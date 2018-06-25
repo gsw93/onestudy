@@ -24,6 +24,7 @@
     <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
     <!-- Datepicker -->
     <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- CUSTOM CSS -->
     <link href="css/style.css" rel="stylesheet">
@@ -53,97 +54,119 @@
 <!--==================================
 =            Store Coupon            =
 ===================================-->
-<section class="store-coupon section">
-    <div class="category-select">
-        <div class="row selects">
-            <select class="form-control" style="height: 35px;">
-                <option value="지역">지역</option>
-                <option value="서울">서울</option>
-                <option value="경기">경기</option>
-            </select>
-            <select class="form-control" style="height: 35px;">
-                <option value="레벨">레벨</option>
-                <option value="고급">고급</option>
-                <option value="중급">중급</option>
-                <option value="초급">초급</option>
-            </select>
-            <select class="form-control" style="height: 35px;">
-                <option value="시간">시간</option>
-                <option value="오전">오전</option>
-                <option value="오후">오후</option>
-            </select>
-            <select class="form-control" style="height: 35px;">
-                <option value="시작">시작</option>
-            </select>
-            <ul>
-                <li>
-                    <a href="">검색</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="container" style="margin-top: 20px;">
-        <div class="row">
-            <div class="col-md-6" style="color:orange;">
-                <%= board.length %>명의 마스터
-            </div>
-            <%if(seller){%>
-            <div class="col-md-6" style="color:orange;">
-                <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
-            </div>
-            <%}%>
-        </div>
-        <div class="row">
-          <% if(board !== null){
-            for (var i=0; i< board.length; i++){ %>
-            <div class="col-lg-3 col-sm-6">
-                <div class="block-cnt">
-                    <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
-                    <ul>
-                        <li class="studyNum"></li>
-                    </ul>
-                    <script type="text/javascript">
-                      var max = <%- board[i].maxNum %>;
+<div>
+    <section class="store-coupon section w3-twothird ">
+        <div class="category-select" style="z-index: 100; position: relative;">
+            <div class="row selects">
+                <select class="form-control" style="height: 35px;">
+                    <option value="지역">지역(시)</option>
+                    <option value="청주">청주</option>
+                    <option value="세종">세종</option>
+                </select>
+                <select class="form-control" style="height: 35px;">
+                    <option value="지역">지역(구)</option>
+                    <option value="흥덕구">흥덕구</option>
+                    <option value="상당구">상당구</option>
+                </select>
+                <select class="form-control" style="height: 35px;">
+                    <option value="분야">분야</option>
+                    <option value="영어">영어</option>
+                    <option value="수학">수학</option>
+                </select>
+                <select class="form-control" style="height: 35px;">
+                    <option value="레벨">레벨</option>
+                    <option value="고급">고급</option>
+                    <option value="중급">중급</option>
+                    <option value="초급">초급</option>
+                </select>
 
-                      if(max==1){
-                        var a = document.getElementsByClassName('studyNum');
-                        a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
-                      }
-                      else {
-                        var a = document.getElementsByClassName('studyNum');
-                        a[<%- i %>].innerHTML = "1 : <%- board[i].maxNum %>";
-                      }
+                <ul>
+                    <li>
+                        <a href="">검색</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid" style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-6" style="color:orange;">
+                    <%= board.length %>명의 마스터
+                </div>
+                <%if(seller){%>
+                <div class="col-md-6" style="color:orange;">
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
+                </div>
+                <%}%>
+            </div>
+            <div class="row">
+              <% if(board !== null){
+                for (var i=0; i< board.length; i++){ %>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="block-cnt">
+                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
+                        <ul>
+                            <li class="studyNum"></li>
+                        </ul>
+                        <script type="text/javascript">
+                          var max = <%- board[i].maxNum %>;
 
-                    </script>
-                    <div class="cnt">
-                        <div class="cnt_text">
-                          <% i+1 %>
-                            <h5><a href="/masterView?id=<%=board[i]._id%>"><%= board[i].title %></a></h5>
-                            <p><% for(var n=0; n< board[i].category.length;n++){ %>
-                              <%= board[i].category[n] %> &nbsp; <% } %><br>
-                                <%= board[i].region %><br>
-                                <%= board[i].studyTerm %>주 진행 (시간 협의)</p>
-                            <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studyTerm %>회)</span>
+                          if(max==1){
+                            var a = document.getElementsByClassName('studyNum');
+                            a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
+                          }
+                          else {
+                            var a = document.getElementsByClassName('studyNum');
+                            a[<%- i %>].innerHTML = "1 : <%- board[i].maxNum %>";
+                          }
+
+                        </script>
+                        <div class="cnt">
+                            <div class="cnt_text">
+                              <% i+1 %>
+                                <h5><a href="/masterView?id=<%=board[i]._id%>"><%= board[i].title %></a></h5>
+                                <p><% for(var n=0; n< board[i].category.length;n++){ %>
+                                  <%= board[i].category[n] %> &nbsp; <% } %><br>
+                                    <%= board[i].region %><br>
+                                    <%= board[i].studyTerm %>주 진행 (시간 협의)</p>
+                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studyTerm %>회)</span>
+                            </div>
+                        </div>
+                        <div class="people-img">
+                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
                         </div>
                     </div>
-                    <div class="people-img">
-                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg"
-                             width="50px" height="50px">
-                    </div>
                 </div>
+                <% }} %>
             </div>
-            <% }} %>
         </div>
-    </div>
-</section>
-
+    </section>
+    <div id="googleMap" class="w3-sidebar w3-third" style="height:100%; right: 0; top: 0; overflow: hidden;"></div>
 
 <!--============================
 =            Footer            =
 =============================-->
 <%- include footer.ejs %>
 
+<script>
+    function myMap() {
+        var mapCanvas = document.getElementById("googleMap");
+        var myCenter = new google.maps.LatLng(36.6251, 127.45718299999999);
+        var marker = new google.maps.Marker({position:myCenter});
+        var mapOptions = {
+            center: myCenter,
+            zoom: 14
+        };
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        marker.setMap(map);
 
+        google.maps.event.addListener(marker,'click',function() {
+            map.setZoom(17);
+            map.setCenter(marker.getPosition());
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR5TC1oRGXf90Q7CZck3R78M-APCvL0Qo&callback=myMap"></script>
 <!-- JAVASCRIPTS -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>

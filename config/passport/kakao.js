@@ -9,7 +9,7 @@ var UserModel = mongoose.model("users");
 module.exports = (new KakaoStrategy({
             clientID: '2556ca4a34bc16cbbec37f86605283db',
             clientSecret: 'VlI9bMJv6RWSnY4DgBhlZ2761TqmSPiZ',
-            callbackURL: "https://localhost:3001/auth/kakao/callback"
+            callbackURL: "https://www.onestudy.co.kr/auth/kakao/callback"
         },
         function(accessToken, refreshToken, profile, done) {
             console.log('passport의 kakao 호출 됌.');

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<div id="googleMap" class="w3-sidebar w3-third" style="height:100%; right: 0;"></div>
+
+<script>
+    function myMap() {
+        var mapCanvas = document.getElementById("googleMap");
+        var myCenter = new google.maps.LatLng(36.6251, 127.45718299999999);
+        var marker = new google.maps.Marker({position:myCenter});
+        var mapOptions = {
+            center: myCenter,
+            zoom: 14
+        };
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        marker.setMap(map);
+
+        google.maps.event.addListener(marker,'click',function() {
+            map.setZoom(17);
+            map.setCenter(marker.getPosition());
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR5TC1oRGXf90Q7CZck3R78M-APCvL0Qo&callback=myMap"></script>
+</body>
+</html>
