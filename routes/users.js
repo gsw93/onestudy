@@ -25,6 +25,14 @@ module.exports = function (router, passport) {
         }
     });
 
+    router.route('/studentapply').get(function (req, res) {
+        if(req.user){
+            res.render('studentapply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+        } else{
+            res.render('login');
+        }
+    });
+
     router.route('/process/register').post(function (req, res) {
         console.log(req.body.username);
         UserModel.findById(req.body.username ,function (err, user) {
