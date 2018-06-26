@@ -25,7 +25,7 @@
     <!-- Datepicker -->
     <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
     <!-- CUSTOM CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/apply.css" rel="stylesheet">
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
 </head>
@@ -43,48 +43,48 @@
   =            Write contents            =
   ===================================-->
 
-    <div style="margin:70px 0;">
+    <div class="Applyform" style="margin:70px 0;">
       <form action="" method="post">
-      <h1 style="text-align:center">Student Profile</h1>
-      <div class="masterApply" style="width:35%;margin:auto;display:block;padding-top:30px;">
+      <h1>Student Profile</h1>
+      <div class="Apply">
         <div class="row form-group">
-          <label for="name" class="col-lg-2">이름</label>
-          <input type="text" name="name" class="col-lg-10 form-control" style="background-color:white;" required/>
+          <label for="name" class="col-lg-2 col-md-2 col-sm-2">이름</label>
+          <input type="text" name="name" class="col-lg-10 col-md-10 col-sm-10 form-control" required/>
         </div>
         <div class="row form-group">
-          <label for="age" class="col-lg-2">나이</label>
-          <input type="number" name="age" class="col-lg-10 form-control" style="background-color:white;" required/>
+          <label for="age" class="col-lg-2 col-md-2 col-sm-2">나이</label>
+          <input type="number" name="age" class="col-lg-10 col-md-10 col-sm-10 form-control" required/>
         </div>
         <div class="row form-group">
-          <label for="name" class="col-lg-2">성별</label>
-          <input type="radio" name="gender" class="col-lg-1" style="margin:20px 0;" value="남" checked required>
+          <label for="name" class="col-lg-2 col-md-2 col-sm-2">성별</label>
+          <input type="radio" name="gender" class="col-lg-1 col-md-1 col-sm-1 gender" value="남" checked required>
           <label for="남">남성</label>
-          <input type="radio" name="gender" class="col-lg-1" style="margin:20px 0;" value="여" required>
+          <input type="radio" name="gender" class="col-lg-1 col-md-1 col-sm-1 gender" value="여" required>
           <label for="여">여성</label>
         </div>
         <div class="row form-group">
-          <label for="phoneNumber" class="col-lg-2">휴대폰</label>
-          <input type="text" name="phoneNumber" class="col-lg-7 form-control" style="background-color:white;" required/>
-          <input type="button" name="findAddress" style="border-radius:30px;margin-left:10px;width:120px;color:white;background-color:gray;border-style:none;" value="인증">
+          <label for="phoneNumber" class="col-lg-2 col-md-2 col-sm-2">휴대폰</label>
+          <input type="tel" name="phoneNumber" id="phoneNumber" class="col-lg-7 col-md-7 col-sm-7 form-control" maxlength="13" required/>
+          <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" onclick="popup()" value="인증">
         </div>
         <div class="row form-group">
-          <label for="address" class="col-lg-2">주소</label>
-          <input type="text" class="col-lg-4 form-control" name="address1" style="background-color:white;" required/>
-          <input type="button" name="findAddress" style="border-radius:30px;margin-left:10px;width:120px;color:white;background-color:gray;border-style:none;" value="찾기">
+          <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>
+          <input type="text" class="col-lg-4 col-md-4 col-sm-4 form-control" name="address1" required/>
+          <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" value="찾기">
         </div>
-        <div class="row">
-            <span class="col-lg-2"></span>
-            <input type="text" class="col-lg-10 form-control" style="background-color:white;" name="address2">
+        <div class="row form-group">
+            <span class="col-lg-2 col-md-2 col-sm-2"></span>
+            <input type="text" class="col-lg-10 col-md-10 col-sm-10 form-control" name="address2">
         </div>
 
       <div class="row form-group" style="z-index: 100; position: relative;">
-          <label for="interested", class="col-lg-2" style="margin-top: 30px;">관심 &nbsp;분야</label>
-              <select class="form-control col-lg-5" style="height: 50px; margin: 20px 0">
+          <label for="interested" class="col-lg-2 col-md-2 col-sm-3">관심분야</label>
+              <select class="form-control col-lg-5 col-md-5 col-sm-4">
                   <option value="분야">분야</option>
                   <option value="영어">영어</option>
                   <option value="수학">수학</option>
               </select>
-              <select class="form-control col-lg-5" style="height: 50px; margin: 20px 0">
+              <select class="form-control col-lg-5 col-md-5 col-sm-4">
                   <option value="레벨">레벨</option>
                   <option value="고급">고급</option>
                   <option value="중급">중급</option>
@@ -100,6 +100,51 @@
 =============================-->
 <%- include footer.ejs %>
 <!-- JAVASCRIPTS -->
+<script type="text/javascript">
+
+function popup(){
+  var popup = window.open("","_blank","width=300,height=200");
+  popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
+}
+
+function autoHypenPhone(str){
+            str = str.replace(/[^0-9]/g, '');
+            var tmp = '';
+            if( str.length < 4){
+                return str;
+            }else if(str.length < 7){
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3);
+                return tmp;
+            }else if(str.length < 11){
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3, 3);
+                tmp += '-';
+                tmp += str.substr(6);
+                return tmp;
+            }else{
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3, 4);
+                tmp += '-';
+                tmp += str.substr(7);
+                return tmp;
+            }
+            return str;
+        }
+
+var cellPhone = document.getElementById('phoneNumber');
+cellPhone.onkeyup = function(event){
+        event = event || window.event;
+        var _val = this.value.trim();
+        this.value = autoHypenPhone(_val) ;
+}
+
+
+
+</script>
 <!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
