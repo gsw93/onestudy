@@ -273,6 +273,34 @@
     margin:5px 5px;
 }
 
+/* editor */
+
+.editor_cnt .title{
+  float: left;
+  text-align: center;
+  padding:0 5px;
+}
+.editor_cnt .block{
+  float:left;
+  margin-bottom: 20px;
+  min-height: 120px;
+}
+.editor_cnt .title h5,.editor_cnt .title h6{
+  background-color: #5b2900;
+  margin:0;
+  border-radius: 5px 5px;
+  color:#fff;
+  line-height: 50px;
+}
+
+.review_star {
+  text-align: center;
+  margin-top: -10px;
+  padding-bottom: 10px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
 /* writeStudy Form style */
 .registeration{
     border-top: 5px solid #ff9933;
@@ -298,7 +326,8 @@
 
 .form-group{
     width: 90%;
-    line-height: 50px;
+    line-height: 15px;
+    margin-bottom:5px;
 }
 
 .signbuttons{
@@ -327,22 +356,21 @@ input{
 
 .headerSign{
     color: #ff6600;
-    margin-bottom: 30px;
-    /* width: 90%; */
+    margin-bottom: 10px;
     font-weight: 800;
-    text-align: center;
 }
+
 .form-control{
     font-size: 15px;
     margin-right: 5px;
 }
 .darktext{
     font-weight: 700;
-    color: #ff9933;
+    /* color: #ff9933; */
+    color:#000000;
     margin-right:5%;
-    font-size: 18px;
+    font-size: 17px;
 }
-
 
 
 /* Student.ejs style */

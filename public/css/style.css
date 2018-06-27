@@ -519,7 +519,7 @@ button {
     font-size: 15px;
     letter-spacing: 1px;
     display: inline-block;
-    padding: 15px 30px;
+    padding: 15px 18px;
     text-transform: uppercase;
     font-weight: bold;
     border-radius: 3px;
@@ -548,9 +548,19 @@ button {
 
 .btn-transparent {
     background: transparent;
-    color: #f95669;
-    border: 1px solid #f95669;
+    color: #ff8000;
+    background-color: #ffffff;
+    border: 1px solid #ff8000;
+    border-radius: 25px;
+    position:absolute;
+    bottom:50px;
 }
+@media (max-width: 991px) {
+    .btn-transparent{
+        position: relative;
+    }
+}
+
 
 .btn-transparent-white {
     background: transparent;
@@ -2677,7 +2687,7 @@ img#ad_icon{
 }
 
 .store-coupon .block .media .media-body ul li a {
-    color: #f95669;
+    color: #ff8000;
 }
 
 .store-coupon .block .media .media-body p {
@@ -2694,7 +2704,7 @@ img#ad_icon{
         -ms-flex-positive: 1;
         flex-grow: 1;
         width: 100%;
-        text-align: center;
+        text-align: left;
     }
 }
 
