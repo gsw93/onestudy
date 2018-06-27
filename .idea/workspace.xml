@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fc24bdf7-1db0-4f1b-bf01-5a20ec051ac9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/userSchema.js" afterPath="$PROJECT_DIR$/models/userSchema.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/users.js" afterPath="$PROJECT_DIR$/routes/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/footer.ejs" afterPath="$PROJECT_DIR$/views/footer.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/master.ejs" afterPath="$PROJECT_DIR$/views/master.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/topButton.ejs" afterPath="$PROJECT_DIR$/views/topButton.ejs" />
     </list>
@@ -22,24 +20,30 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="master.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="master.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/master.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="94" column="35" lean-forward="true" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
+            <state relative-caret-position="494">
+              <caret line="143" column="84" lean-forward="true" selection-start-line="143" selection-start-column="84" selection-end-line="143" selection-end-column="84" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#5577#5583#0#HTML" expanded="true" />
+                <element signature="e#5846#5852#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="footer.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="footer.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/footer.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="32" column="92" lean-forward="true" selection-start-line="32" selection-start-column="92" selection-end-line="32" selection-end-column="92" />
-              <folding />
+            <state relative-caret-position="57">
+              <caret line="3" column="25" lean-forward="true" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+              <folding>
+                <element signature="n#style#0;n#footer#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,10 +81,22 @@
       <file leaf-file-name="topButton.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/topButton.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="topHeader.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/topHeader.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#section#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,16 +127,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-114">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userSchema.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/userSchema.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="32" column="35" lean-forward="false" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -228,9 +234,9 @@
         <option value="$PROJECT_DIR$/views/writeMaster.ejs" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/models/userSchema.js" />
+        <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/views/footer.ejs" />
         <option value="$PROJECT_DIR$/views/topButton.ejs" />
-        <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/views/master.ejs" />
       </list>
     </option>
@@ -402,19 +408,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\SW\WebstormProjects\onestudy\database" />
-      <recent name="C:\Users\SW\WebstormProjects\onestudy\views" />
-      <recent name="C:\Users\SW\WebstormProjects\onestudy\public\css" />
-      <recent name="C:\Users\SW\WebstormProjects\onestudy\public\images" />
-      <recent name="C:\Users\SW\WebstormProjects\onestudy\public\css\lib" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\SW\WebstormProjects\pixeleye\onestudy\views" />
       <recent name="C:\Users\SW\WebstormProjects\pixeleye\onestudy\routes" />
       <recent name="C:\Users\SW\WebstormProjects\pixeleye\onestudy\routes\passport" />
       <recent name="C:\Users\SW\WebstormProjects\onestudy" />
       <recent name="C:\Users\SW\WebstormProjects\onestudy\public\css" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SW\WebstormProjects\onestudy\database" />
+      <recent name="C:\Users\SW\WebstormProjects\onestudy\views" />
+      <recent name="C:\Users\SW\WebstormProjects\onestudy\public\css" />
+      <recent name="C:\Users\SW\WebstormProjects\onestudy\public\images" />
+      <recent name="C:\Users\SW\WebstormProjects\onestudy\public\css\lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -573,12 +579,12 @@
       <workItem from="1529887958088" duration="16277000" />
       <workItem from="1529934927942" duration="508000" />
       <workItem from="1529974262858" duration="9750000" />
-      <workItem from="1530059324792" duration="1150000" />
+      <workItem from="1530059324792" duration="2907000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="368840000" />
+    <option name="totallyTimeSpent" value="370597000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -704,17 +710,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/topHeader.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69806">
           <caret line="3674" column="13" lean-forward="false" selection-start-line="3674" selection-start-column="3" selection-end-line="3674" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -737,6 +737,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2375">
           <caret line="125" column="16" lean-forward="false" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -841,14 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/footer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="32" column="92" lean-forward="true" selection-start-line="32" selection-start-column="92" selection-end-line="32" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/apply.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-304">
@@ -870,16 +863,6 @@
         <state relative-caret-position="1349">
           <caret line="71" column="43" lean-forward="true" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/topButton.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
-          <folding>
-            <element signature="n#style#0;n#nav#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -909,10 +892,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/master.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="94" column="35" lean-forward="true" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
+        <state relative-caret-position="494">
+          <caret line="143" column="84" lean-forward="true" selection-start-line="143" selection-start-column="84" selection-end-line="143" selection-end-column="84" />
           <folding>
             <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#5577#5583#0#HTML" expanded="true" />
+            <element signature="e#5846#5852#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/topHeader.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/topButton.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#nav#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/footer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="25" lean-forward="true" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#footer#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
