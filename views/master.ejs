@@ -92,7 +92,7 @@
                 <div class="col-md-6" style="color:orange;">
                     <%= board.length %>명의 마스터
                 </div>
-                <%if(seller){%>
+                <%if(authMaster){%>
                 <div class="col-md-6" style="color:orange;">
                     <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
                 </div>
@@ -140,7 +140,7 @@
             </div>
         </div>
     </section>
-    <div id="googleMap" class="w3-sidebar w3-third" style="height:100%; right: 0; top: 0; overflow: hidden;"></div>
+    <div id="googleMap" class="w3-sidebar w3-third" style="height:100%; right: 0; top: 0;"></div>
 
 <!--============================
 =            Footer            =

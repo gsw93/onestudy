@@ -17,9 +17,9 @@ module.exports = function (router, passport) {
             res.render('login');
     });
 
-    router.route('/masterapply').get(function (req, res) {
+    router.route('/apply').get(function (req, res) {
         if(req.user){
-            res.render('masterapply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('apply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
         } else{
             res.render('login');
         }

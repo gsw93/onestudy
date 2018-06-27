@@ -1,6 +1,3 @@
-/**
- * Created by SW on 2018-05-25.
- */
 //============================ 모듈 설정 시작 ============================
 // Express 기본 모듈 불러오기
 var express = require('express')
@@ -97,7 +94,6 @@ httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);
     connectDB();
 });
-
 httpsServer.listen(app.get('port'), function () {
     console.log('https 서버가 시작되었습니다. 포트 : ' + app.get('port'));
 });

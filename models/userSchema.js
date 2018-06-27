@@ -22,7 +22,9 @@ var UserSchema = new mongoose.Schema({
     gender: {type: String},
     photo: {type: String},
     majors: {type: String},
-    phone: {type: String}
+    phone: {type: String},
+    address: {type: String},
+    interested: {type: String}
 });
 UserSchema.static('findById', function (username, callback) {
     return this.find({id:username}, callback);
