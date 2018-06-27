@@ -39,6 +39,7 @@
     <!-- CUSTOM CSS -->
     <link href="css/board.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
@@ -76,7 +77,6 @@
                 <div class="block">
                     <div class="media">
                         <!-- Store Icon -->
-                        <form action="/process/addboard" method="post" style="width:100%;margin:auto;display:block;">
                         <div class="row">
                         <div class="col-sm-5 col-md-5 col-lg-2 image-content d-flex align-self-center">
                             <img src="http://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/people-icon.png" style="margin:auto;display:block;width:100%;height:100%;" alt="pizza-hut">
@@ -138,11 +138,15 @@
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-2">
-                          <a href="/studentapply" style="width:100%;" class="btn btn-transparent">참여 신청하기</a>
+                            <%if(!authPhone){%>
+                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#login" style="width:100%;">참여 신청하기</button>
+                            <%} else {%>
+                            <a href="/studentapply" style="width:100%;" class="btn btn-transparent">참여 신청하기</a>
+                            <%}%>
                         </div>
                         </div>
                     </div>
-                    <!-- <a href="/studentapply" style="width:150px;background-color:orange;border:1px solid white;color:white;">참여하기</a> -->
+
                     <article style="margin:0;padding:10px;">
                         <div class="post-slider owl-carousel owl-theme" style="width: 100%;">
                             <div class="item"><a href="single-blog.html"> <img src="img/blog/post-2.jpg" style ="width: 100%;height: 250px;" alt="Slider-Img-01"></a></div>
@@ -150,49 +154,71 @@
                             <div class="item"><a href="single-blog.html"><img src="img/blog/post-2.jpg" style="width: 100%;height: 250px;" alt="Slider-Img-03"></a></div>
                         </div>
                     </article>
-                </div>
-                <div style="margin-top:50px;">
-                  <div class="editor_cnt">
-                    <div class="col-lg-2 title">
-                        <h5>Master 소개</h5>
-                    </div>
-                    <div class="col-lg-10 block">
-                      <%- board.masterInfo %>
-                    </div>
-                  </div>
-                  <div class="editor_cnt">
-                    <div class="col-lg-2 title">
-                        <h5>Study 소개</h5>
-                    </div>
-                    <div class="col-lg-10 block">
-                      <%- board.studyInfo %>
-                    </div>
-                  </div>
-                  <div class="editor_cnt">
-                    <div class="col-lg-2 title">
-                        <h6>스터디 장소</h6>
-                    </div>
-                    <div class="col-lg-10 block">
 
+                    <div class="col-md-12">
+                        <div class="editor_cnt">
+                            <div class="col-lg-2 title">
+                                <h5>Master 소개</h5>
+                            </div>
+                            <div class="col-lg-10 block">
+                                <%- board.masterInfo %>
+                            </div>
+                        </div>
+                        <div class="editor_cnt">
+                            <div class="col-lg-2 title">
+                                <h5>Study 소개</h5>
+                            </div>
+                            <div class="col-lg-10 block">
+                                <%- board.studyInfo %>
+                            </div>
+                        </div>
+                        <div class="editor_cnt">
+                            <div class="col-lg-2 title">
+                                <h6>스터디 장소</h6>
+                            </div>
+                            <div class="col-lg-10 block">
+
+                            </div>
+                        </div>
+                        <div class="editor_cnt">
+                            <div class="col-lg-2 title">
+                                <h6>마스터에 대한 후기</h6>
+                            </div>
+                            <div class="col-lg-10 block" style="padding: 25px 0px 30px 0">
+                                <div class="review_star">
+                                    스터디평점&nbsp;3.0&nbsp;<span class="starrr" data-rating='3'></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="editor_cnt">
-                    <div class="col-lg-2 title">
-                        <h6>마스터에 대한 후기</h6>
-                    </div>
-                    <div class="col-lg-10 block" style="padding: 25px 0px 30px 0">
-                      <div class="review_star">
-                        스터디평점&nbsp;3.0&nbsp;<span class="starrr" data-rating='3'></span>
-                      </div>
-                    </div>
-                  </div>
+
                 </div>
-                </form>
             </div>
         </div>
     </div>
     <!-- Container End -->
 </section>
+
+<div class="modal fade" role="dialog" id="login" style="top: 10%;">
+    <div class="modal-dialog signup-content" >
+            <br><br>
+        <form action="/process/participateStudy" method="post" class="form-horizontal">
+            <div class="form-group">
+                <div class="real_content">
+                    <h1>간단한 자기소개</h1>
+                    <small>마스터에게 하고 싶은 말을 써주세요</small>
+                    <div class="login-set">
+                        <textarea name="" rows="5" id="" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="login-set">
+                        <button type="submit" class="form-control btn btn-warning" id="sign-in">스터디 참여하기</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>
 
 <!--============================
 =            Footer            =

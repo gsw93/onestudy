@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var moment = require('moment');
 
 var MasterBoardSchema = mongoose.Schema({
+    id : String,
     title : String,
     author: String,
     category : Array,
@@ -21,7 +22,17 @@ var MasterBoardSchema = mongoose.Schema({
     studyInfo : String,
     masterReview : String,
     path : String,
-    count : {type:Number, default:0}
+    count : {type:Number, default:0},
+    studentList : [{
+        email : String,
+        name : String,
+        statue : Boolean,
+        phone : String
+    }]
+});
+
+MasterBoardSchema.static('findById', function (id, callback) {
+    return this.find({id:id}, callback);
 });
 
 module.exports = mongoose.model('masterboards', MasterBoardSchema);

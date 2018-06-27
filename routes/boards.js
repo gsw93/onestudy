@@ -13,6 +13,40 @@ var fs = require('fs');
 
 module.exports = function (router) {
 
+    router.route('/process/participateStudy').post(function (req, res) {
+        console.log('/process/participateStudy 호출됨.');
+        console.log(req.user);
+        MasterBoardModel
+
+
+        // var name = req.body.name;
+        // var age = req.body.age;
+        // var gender = req.body.gender;
+        // var photo = req.body.photo;
+        // var majors = req.body.majors;
+        // var phone = req.body.phone;
+        //
+        // console.log(req.session.passport);
+        // UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
+        //     if (err) return res.status(500).json({error: err});
+        //     if (!member) {
+        //         return res.send('마스터 등록에 실패했습니다.');
+        //     } else {
+        //         console.log(member);
+        //         member.name = name;
+        //         member.age = age;
+        //         member.gender = gender;
+        //         member.photo = photo;
+        //         member.majors = majors;
+        //         member.phone = phone;
+        //         member.sellercheck = true;
+        //         member.save(function (err) {
+        //             if (err)
+        //                 throw err;
+        //             req.session.passport.user.seller=true;
+        //             res.redirect('/');
+    });
+
     router.route('/master').get(function (req, res) {
         if(req.user){
             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
@@ -39,7 +73,7 @@ module.exports = function (router) {
                 if(err) throw err;
 
                 console.log('마스터 조회수 증가 및 게시글 출력');
-                res.render('masterView',{board:rawBoard, authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck});
+                res.render('masterView',{board:rawBoard, authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck, authPhone:req.user[0].phoneAuthCheck});
             });
         });
     });
