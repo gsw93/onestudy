@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>One Study - 스터디 매칭 서비스</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <!-- Include Editor style. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
@@ -170,7 +170,7 @@
                   </div>
                   <div class="editor_cnt">
                     <div class="col-lg-2 title">
-                        <h6>스터디 장소</h6>
+                        <h5>스터디 장소</h5>
                     </div>
                     <div class="col-lg-10 block">
 
@@ -182,7 +182,35 @@
                     </div>
                     <div class="col-lg-10 block" style="padding: 25px 0px 30px 0">
                       <div class="review_star">
-                        스터디평점&nbsp;3.0&nbsp;<span class="starrr" data-rating='3'></span>
+                        스터디평점&nbsp;<span><%= board.reviewstar %></span>&nbsp;
+                        <% var s=3;var i; for(i=1;i<=s;i++){ %>
+                        <span><i class="fas fa-star" style="color:#ff751a;"></i><% } %><% for(i;i<=5;i++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
+                      </div>
+                      <div class="row comment" style="width:100%;">
+                        <div class="col-lg-2 commentimg">
+                          <img src="https://i.pinimg.com/originals/be/f6/9e/bef69e9e253684fa4c7bdb8f745539cb.jpg" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
+                        </div>
+                        <div class="col-lg-10 commentcnt">
+                          <table>
+                            <tr>
+                              <td>권지용</td>
+                              <td>18.06.04 - 01:05</td>
+                              <td><i class="fas fa-star" style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3">스터디 정말 유익하고 좋았습니다.</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="comment_starrating" style="background-color:#e6e6e6;margin:20px;padding:25px;text-align:center;">
+                        <div class="starrr" data-rating='3'></div>
+                        <div>3.0</div>
+                      </div>
+                      <div class="comment_write">
+                        <textarea name="commentwrite" class="form-control col-lg-9" rows="2"
+                                  style="display: inline" placeholder="감사합니다."></textarea>
+                        <button type="button" name="button" class="btn col-lg-2" style="height:50">전송</button>
                       </div>
                     </div>
                   </div>

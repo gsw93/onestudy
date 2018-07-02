@@ -298,7 +298,12 @@
   margin-top: -10px;
   padding-bottom: 10px;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.starrr i{
+    color:#ff751a;
+    font-size: 25px;
 }
 
 /* writeStudy Form style */

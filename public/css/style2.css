@@ -2124,37 +2124,6 @@ article.single-post p {
   border-radius: 10px;
 }
 
-.review_star {
-  text-align: center;
-  margin-top: -10px;
-  padding-bottom: 10px;
-  width: 100%;
-  border-bottom: 1px solid black;
-}
-
-.commentStar {
-  margin: auto;
-  text-align: center;
-  height: 80px;
-  background-color: #e9e9e9;
-  width: 95%;
-  padding-top: 20px;
-  margin-top: 10px;
-}
-
-#commentParentText {
-  display: inline;
-  margin: 10px 0 0 20px;
-}
-
-#commentSubmit {
-  float: right;
-  margin-top: 18px;
-  margin-right: 20px;
-  height: 60px;
-
-}
-
 #study_info {
   height: 60px;
   width: 1%;
