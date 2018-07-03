@@ -189,6 +189,9 @@
                         <% var s=3;var i; for(i=1;i<=s;i++){ %>
                         <span><i class="fas fa-star" style="color:#ff751a;"></i><% } %><% for(i;i<=5;i++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
                       </div>
+                      <form id="replyAction" action="/process/comment" method="post">
+                        <% if(board.comments.length>0){ var commentsList = board.comments;%>
+                          <% for (var i =0;i< commentsList.length;i++){%>
                       <div class="row comment" style="width:100%;">
                         <div class="col-lg-2 commentimg">
                           <img src="https://i.pinimg.com/originals/be/f6/9e/bef69e9e253684fa4c7bdb8f745539cb.jpg" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
@@ -196,25 +199,77 @@
                         <div class="col-lg-10 commentcnt">
                           <table>
                             <tr>
-                              <td>권지용</td>
-                              <td>18.06.04 - 01:05</td>
-                              <td><i class="fas fa-star" style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"><i class="fas fa-star"  style="color:#ff751a;"></td>
+                              <td><%=commentsList[i].author%></td>
+                              <td id="comment_date[<%=i%>]"></td>
+                              <script>
+                              var i = new Date('<%- commentsList[i].comment_date %>');
+                              document.getElementById('comment_date[<%=i%>]').innerHTML = date_format2(i);
+                                function date_format2(dateValue){
+                                  var dd = dateValue.getDate();
+                                  var mm = dateValue.getMonth()+1;
+                                  var yyyy = dateValue.getFullYear();
+                                  var hh = dateValue.getHours();
+                                  var mimi = dateValue.getMinutes();
+                                  if(dd<10){
+                                    dd = '0'+dd;
+                                  }
+                                  if(mm<10){
+                                    mm = '0'+mm;
+                                  }
+                                  if(hh<10){
+                                    hh = '0'+hh;
+                                  }
+                                  if(mimi<10){
+                                    mimi = '0'+mimi;
+                                  }
+                                  return yyyy+'.'+mm+'.'+dd+' - '+hh+':'+mimi;
+                                }
+                              </script>
+                              <td>
+                                <% if(commentsList[i].star_rating=3.0){ %>
+                                <i class="fas fa-star" style="color:#ff751a;">
+                                <i class="fas fa-star"  style="color:#ff751a;">
+                                <i class="fas fa-star"  style="color:#ff751a;">
+                                <i class="fas fa-star"  style="color:#ff751a;">
+                                <i class="fas fa-star"  style="color:#ff751a;">
+                                <%} %>
+                              </td>
                             </tr>
                             <tr>
-                              <td colspan="3">스터디 정말 유익하고 좋았습니다.</td>
+                              <td colspan="3"><%=commentsList[i].contents%></td>
                             </tr>
                           </table>
                         </div>
                       </div>
-                      <div class="comment_starrating" style="background-color:#e6e6e6;margin:20px;padding:25px;text-align:center;">
-                        <div class="starrr" data-rating='3'></div>
+                      <%}}%>
+                      <div class="rating-stars" style="background-color:#e6e6e6;margin:20px;padding:25px;text-align:center;">
+                        <ul id='stars'>
+                          <li class='star' title='Poor' data-value='1'>
+                            <i class="fas fa-star"></i>
+                          </li>
+                          <li class='star' title='Fair' data-value='2'>
+                            <i class="fas fa-star"></i>
+                          </li>
+                          <li class='star' title='Good' data-value='3'>
+                            <i class="fas fa-star"></i>
+                          </li>
+                          <li class='star' title='Excellent' data-value='4'>
+                            <i class="fas fa-star"></i>
+                          </li>
+                          <li class='star' title='WOW!!!' data-value='5'>
+                            <i class="fas fa-star"></i>
+                          </li>
+                        </ul>
+                        <div class="starrr" data-rating='3' name='star_rating'></div>
                         <div>3.0</div>
                       </div>
                       <div class="comment_write">
-                        <textarea name="commentwrite" class="form-control col-lg-9" rows="2"
-                                  style="display: inline" placeholder="감사합니다."></textarea>
-                        <button type="button" name="button" class="btn col-lg-2" style="height:50">전송</button>
+                        <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
+                        <textarea name="contents" class="form-control col-lg-9" rows="2"
+                                  style="display: inline" placeholder="감사합니다."  /required></textarea>
+                        <button type="submit" name="button" class="btn col-lg-2" style="height:50">전송</button>
                       </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -228,12 +283,12 @@
     <div class="modal-dialog signup-content" >
             <br><br>
         <form action="/process/participateStudy" method="post" class="form-horizontal">
-            <div class="form-group">
+            <div class="form-group" style="margin:auto;display:block;">
                 <div class="real_content">
                     <h1>간단한 자기소개</h1>
                     <small>마스터에게 하고 싶은 말을 써주세요</small>
                     <div class="login-set">
-                        <textarea name="" rows="5" id="" style="width: 100%;"></textarea>
+                        <textarea name="" class="text"></textarea>
                     </div>
                     <div class="login-set">
                         <button type="submit" class="form-control btn btn-warning" id="sign-in">스터디 참여하기</button>
@@ -257,6 +312,68 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
 
 <!-- JAVASCRIPTS -->
+<script type="text/javascript">
+    $(function(){
+        $('textarea.text').froalaEditor({
+          key: 'bA2A8B8D7cD3F3C2C1G3A4C4B6C2D1vdbhA-21D-17eukD1wzB1C-22j==',
+          height: 100,
+          toolbarButtons: ['bold', 'italic', '|', 'indent', 'outdent', 'formatOL', 'formatUL', '|',
+        'insertLink', 'insertImage']
+        });
+      });
+      $(document).ready(function(){
+
+  /* 1. Visualizing things on Hover - See next part for action on click */
+  $('#stars li').on('mouseover', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+    // Now highlight all the stars that's not after the current hovered star
+    $(this).parent().children('li.star').each(function(e){
+      if (e < onStar) {
+        $(this).addClass('hover');
+      }
+      else {
+        $(this).removeClass('hover');
+      }
+    });
+
+  }).on('mouseout', function(){
+    $(this).parent().children('li.star').each(function(e){
+      $(this).removeClass('hover');
+    });
+  });
+
+
+  /* 2. Action to perform on click */
+  $('#stars li').on('click', function(){
+    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+    var stars = $(this).parent().children('li.star');
+
+    for (i = 0; i < stars.length; i++) {
+      $(stars[i]).removeClass('selected');
+    }
+
+    for (i = 0; i < onStar; i++) {
+      $(stars[i]).addClass('selected');
+    }
+
+    // JUST RESPONSE (Not needed)
+    var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+    var msg = "";
+    if (ratingValue > 1) {
+        msg = "Thanks! You rated this " + ratingValue + " stars.";
+    }
+    else {
+        msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+    }
+    responseMessage(msg);
+
+  });
+
+
+});
+</script>
+
 <!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>

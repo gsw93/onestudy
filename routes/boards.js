@@ -16,7 +16,6 @@ module.exports = function (router) {
     router.route('/process/participateStudy').post(function (req, res) {
         console.log('/process/participateStudy 호출됨.');
         console.log(req.user);
-        MasterBoardModel
 
 
         // var name = req.body.name;
@@ -58,6 +57,7 @@ module.exports = function (router) {
             res.render('login');
     });
 
+
     router.route('/writeMaster').get(function (req, res) {
         res.render('writeMaster',{authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck});
     });
@@ -77,6 +77,8 @@ module.exports = function (router) {
             });
         });
     });
+
+
 
     //============================ 마스터 게시글 추가 기능 시작 ============================
     //multer 미들웨어 사용 / 파일 제한 5개
@@ -112,6 +114,29 @@ module.exports = function (router) {
         })
 
     };
+
+    function addComment(id,author,contents,star_rating){
+      MasterBoardModel.findOne({_id:id},function(err,rawBoard){
+        if (err) {
+          throw err;
+        }
+        rawBoard.comments.push({id:id,author:author,contents:contents,star_rating:star_rating});
+        rawBoard.save(function(err){
+          if(err)throw err;
+          console.log('댓글 추가');
+        })
+      })
+    };
+    router.route('/process/comment').post(function (req, res) {
+        var reply_id=req.body.replyId;
+        var author = req.user[0].nickname;
+        var contents = req.body.contents;
+        var star_rating=req.body.star_rating;
+        addComment(reply_id,author,contents,star_rating);
+
+        res.redirect('/masterView?id='+req.body.replyId);
+    });
+
 
     router.route('/process/addboard').post(upload.array('photo',1), function (req, res) {
         console.log('/process/addboard 호출됨.');
