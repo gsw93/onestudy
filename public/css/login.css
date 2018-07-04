@@ -258,6 +258,14 @@
 }
 .login-set button{
     margin-top:10px;
+    color:#ff8000;
+}
+.login-set button:hover{
+    color:#fff;
+}
+#sign-in:focus{
+    color:#fff;
+    background-color: #ff8000;
 }
 
 .login-sign-up{

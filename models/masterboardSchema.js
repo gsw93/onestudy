@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 var moment = require('moment');
 
+
 var MasterBoardSchema = mongoose.Schema({
     id : String,
     title : String,
@@ -29,8 +30,16 @@ var MasterBoardSchema = mongoose.Schema({
         statue : {type:Boolean, default:false},
         phone : String,
         introduce : String
+    }],
+    comments: [{
+      id: String,
+      author:String,
+      comment_date: {type: Date, default: moment().format()},
+      contents : {type:String},
+      star_rating:{type:String}
     }]
 });
+
 
 MasterBoardSchema.static('findById', function (id, callback) {
     return this.find({_id:id}, callback);

@@ -6,7 +6,7 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-p, li, input, select, button {
+p, li:not(.star), input, select, button {
     font-family: "Lato", sans-serif;
     color: #222222;
     font-size: 14px;
@@ -632,7 +632,7 @@ button {
 }
 
 .btn-group .btn:focus {
-    color: #d0d0d0;
+    color: #ff8000;
 }
 
 .btn-group .btn-transparent {
@@ -652,7 +652,8 @@ button {
 }
 
 .btn:focus {
-    color: #f95669;
+    color: #ff8000;
+    border : 1px #ff8000 solid;
     box-shadow: none;
 }
 
