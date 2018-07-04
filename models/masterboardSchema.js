@@ -35,7 +35,7 @@ var MasterBoardSchema = mongoose.Schema({
       author:String,
       comment_date: {type: Date, default: moment().format()},
       contents : {type:String},
-      star_rating: Number
+      star_rating:{type:String}
     }]
 });
 
