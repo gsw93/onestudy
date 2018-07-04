@@ -29,6 +29,7 @@
     <!-- CUSTOM CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="css/login.css">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
@@ -39,6 +40,27 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .modal {
+            /*display: block; !* Hidden by default *!*/
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-dialog {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+    </style>
 
 </head>
 
@@ -55,7 +77,7 @@
 =            Store Coupon            =
 ===================================-->
 <div>
-    <section class="store-coupon section w3-twothird ">
+    <section class="store-coupon section w3-twothird" id="mySection">
         <div class="category-select" style="z-index: 100; position: relative;">
             <div class="row selects">
                 <select class="form-control" style="height: 35px;">
@@ -92,7 +114,7 @@
                 <div class="col-md-6" style="color:orange;">
                     <%= board.length %>명의 마스터
                 </div>
-                <%if(authMaster){%>
+                <%if(seller){%>
                 <div class="col-md-6" style="color:orange;">
                     <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
                 </div>
@@ -116,7 +138,7 @@
                             a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
                           }
                           else {
-                            var a = document.getElementsByClassName('studyNum');
+                            var a = doscument.getElementsByClassName('studyNum');
                             a[<%- i %>].innerHTML = "1 : <%- board[i].maxNum %>";
                           }
 
@@ -140,10 +162,29 @@
                 <% }} %>
             </div>
         </div>
+
+        <%if(!authUser.phoneAuthCheck){%>
+        <div class="modal" role="dialog" id="myModal" style="display:block;">
+            <div class="modal-dialog">
+                <br><br>
+                <h1>주소와 관심분야를 등록하시면 가까운 위치의 관심분야에 맞는 마스터를 쉽게 찾으실 수 있습니다.</h1>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" onclick="fade()" style="width: 100%;">다음에 등록하기</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" onclick="location.href='/studentapply'" style="width: 100%;">등록하러 가기</button>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <%}%>
+
     </section>
     <%- include footer.ejs %>
     <div id="googleMap" class="w3-sidebar w3-third" style="right: 0; top: 0;"></div>
-
 
 <script>
     function myMap() {
@@ -161,6 +202,15 @@
             map.setZoom(17);
             map.setCenter(marker.getPosition());
         });
+    }
+
+    function fade() {
+        var mymodal = document.getElementById('myModal');
+        mymodal.style.display = "none";
+        document.getElementById('googleMap').style.display = "none";
+        var section = document.getElementById('mySection');
+        section.classList.remove("w3-twothird");
+        section.classList.add("container");
     }
 </script>
 

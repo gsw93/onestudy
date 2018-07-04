@@ -138,7 +138,8 @@
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-2">
-                            <%if(!authPhone){%>
+                            <!--핸드폰 인증 기능 개발되면 !authPhone을 authPhone으로 바꿔 인증된 사람만 할 수 있게 수정해야함 !!-->
+                            <%if(!authUser.phoneAuthCheck){%>
                             <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#login" style="width:100%;">참여 신청하기</button>
                             <%} else {%>
                             <a href="/studentapply" style="width:100%;" class="btn btn-transparent">참여 신청하기</a>
@@ -227,13 +228,13 @@
 <div class="modal fade" role="dialog" id="login" style="top: 10%;">
     <div class="modal-dialog signup-content" >
             <br><br>
-        <form action="/process/participateStudy" method="post" class="form-horizontal">
+        <form action="/process/participateStudy?id=<%=board._id%>" method="post" class="form-horizontal">
             <div class="form-group">
                 <div class="real_content">
                     <h1>간단한 자기소개</h1>
                     <small>마스터에게 하고 싶은 말을 써주세요</small>
                     <div class="login-set">
-                        <textarea name="" rows="5" id="" style="width: 100%;"></textarea>
+                        <textarea name="selfIntroduction" rows="5" id="" style="width: 100%;"></textarea>
                     </div>
                     <div class="login-set">
                         <button type="submit" class="form-control btn btn-warning" id="sign-in">스터디 참여하기</button>
