@@ -12,7 +12,7 @@ module.exports = function (router, passport) {
 
     router.route('/mypage').get(function (req, res) {
         if (req.user)
-            res.render('mypage', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('mypage', {seller:req.session.passport.user.seller, authUser: req.user[0]});
         else
             res.render('login');
     });
@@ -27,7 +27,7 @@ module.exports = function (router, passport) {
 
     router.route('/studentapply').get(function (req, res) {
         if(req.user){
-            res.render('studentapply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('studentapply', {seller:req.session.passport.user.seller, authUser: req.user[0]});
         } else{
             res.render('login');
         }

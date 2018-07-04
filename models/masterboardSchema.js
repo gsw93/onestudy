@@ -27,8 +27,9 @@ var MasterBoardSchema = mongoose.Schema({
     studentList : [{
         email : String,
         name : String,
-        statue : Boolean,
-        phone : String
+        statue : {type:Boolean, default:false},
+        phone : String,
+        introduce : String
     }],
     comments: [{
       id: String,
@@ -41,7 +42,7 @@ var MasterBoardSchema = mongoose.Schema({
 
 
 MasterBoardSchema.static('findById', function (id, callback) {
-    return this.find({id:id}, callback);
+    return this.find({_id:id}, callback);
 });
 
 module.exports = mongoose.model('masterboards', MasterBoardSchema);

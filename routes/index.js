@@ -6,10 +6,10 @@ module.exports = function (router) {
     // 홈 화면
     router.route('/').get(function (req, res) {
         if (req.user) {
-            res.render('index', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('index', {authUser: req.user[0], seller: req.session.passport.user.seller});
         } else {
             console.log('비회원');
-            res.render('index', {authUser: null, authMaster: false});
+            res.render('index', {authUser: null, seller: false});
         }
     });
 
@@ -32,7 +32,7 @@ module.exports = function (router) {
     //이벤트 화면
     router.route('/event').get(function (req, res) {
         if(req.user)
-            res.render('event',{authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('event',{seller:req.session.passport.user.seller, authUser: req.user[0]});
         else
             res.render('login');
     });
@@ -40,7 +40,7 @@ module.exports = function (router) {
     //서비스 소개 화면
     router.route('/serviceInfo').get(function (req, res) {
         if(req.user)
-            res.render('serviceInfo',{authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('serviceInfo',{seller:req.session.passport.user.seller, authUser: req.user[0]});
         else
             res.render('serviceInfo',{authUser: null});
     });

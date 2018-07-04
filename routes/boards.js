@@ -13,37 +13,36 @@ var fs = require('fs');
 
 module.exports = function (router) {
 
+    // 스터디에 참여한 학생들 저장하기
+    // 스터디 참여하면 마이페이지로 리다이렉트 시키고 자신이 신청한 스터디 목록이 뜨게 하려고 했으나
+    // 마이페이지는 대대적인 수정이 필요해보임. 그래서 일단 보류
     router.route('/process/participateStudy').post(function (req, res) {
         console.log('/process/participateStudy 호출됨.');
         console.log(req.user);
-
-
-        // var name = req.body.name;
-        // var age = req.body.age;
-        // var gender = req.body.gender;
-        // var photo = req.body.photo;
-        // var majors = req.body.majors;
-        // var phone = req.body.phone;
-        //
-        // console.log(req.session.passport);
-        // UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
-        //     if (err) return res.status(500).json({error: err});
-        //     if (!member) {
-        //         return res.send('마스터 등록에 실패했습니다.');
-        //     } else {
-        //         console.log(member);
-        //         member.name = name;
-        //         member.age = age;
-        //         member.gender = gender;
-        //         member.photo = photo;
-        //         member.majors = majors;
-        //         member.phone = phone;
-        //         member.sellercheck = true;
-        //         member.save(function (err) {
-        //             if (err)
-        //                 throw err;
-        //             req.session.passport.user.seller=true;
-        //             res.redirect('/');
+        MasterBoardModel.findById(req.query.id ,function (err, board) {
+            var currentBoard = board[0];
+            if(err){
+                throw err;
+                console.log(err);
+            }
+            // 아이디 중복 제거 해야합니다!!
+            if(currentBoard){
+                var student = {
+                    "email": req.user[0].id,
+                    "name": req.user[0].name,
+                    "phone": req.user[0].phone,
+                    "introduce": req.body.selfIntroduction
+                };
+                currentBoard.studentList[currentBoard.studentList.length] = student;
+                console.log(currentBoard);
+                currentBoard.save(function (err) {
+                    if(err) {
+                        throw err;
+                    }
+                    res.redirect('/mypage');
+                });
+            }
+        });
     });
 
     router.route('/master').get(function (req, res) {
@@ -51,7 +50,7 @@ module.exports = function (router) {
             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
                 if(err) throw err;
                 console.log('마스터게시판 목록 출력');
-                res.render('master',{board:rawBoards,seller:req.session.passport.user.seller, authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+                res.render('master',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0]});
             })
         }  else
             res.render('login');
@@ -59,7 +58,7 @@ module.exports = function (router) {
 
 
     router.route('/writeMaster').get(function (req, res) {
-        res.render('writeMaster',{authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck});
+        res.render('writeMaster',{seller:req.session.passport.user.seller, authUser: req.user[0]});
     });
 
     router.route('/masterView').get(function (req, res) {
@@ -73,7 +72,7 @@ module.exports = function (router) {
                 if(err) throw err;
 
                 console.log('마스터 조회수 증가 및 게시글 출력');
-                res.render('masterView',{board:rawBoard, authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck, authPhone:req.user[0].phoneAuthCheck});
+                res.render('masterView',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
             });
         });
     });
@@ -100,8 +99,8 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database,title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, masterReview,path, callback) {
-        var masterboard = new MasterBoardModel({"title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"masterReview":masterReview,"path":path});
+    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, masterReview,path, callback) {
+        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"masterReview":masterReview,"path":path});
 
         masterboard.save(function (err) {
             if(err){
@@ -143,7 +142,8 @@ module.exports = function (router) {
         // var image = new FileModel();
         // console.log(fs.readFileSync(req.files));
         // image.img.data = fs.readFileSync(req.files);
-
+        console.log(req.user);
+        var id = req.user[0].id;
         var title = req.body.title;
         var author = req.body.author;
         var category = req.body.category;
@@ -199,7 +199,7 @@ module.exports = function (router) {
 
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,masterReview,path, function(err, result){
+            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,masterReview,path, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {
