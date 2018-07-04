@@ -25,7 +25,18 @@ var UserSchema = new mongoose.Schema({
     majors: {type: String},
     phone: {type: String},
     address: {type: String},
-    interested: {type: String} // 관심분야
+    interested: {type: String}, // 관심분야
+
+    //07_04 add by sehyeon
+    //location 좌표 저장, level 추가
+    level: {type: String},
+    location : {
+        type : {
+            type: String,
+            default: 'Point'
+        },
+        coordinates: [{type:Number}]
+    }
 });
 UserSchema.static('findById', function (username, callback) {
     return this.find({id:username}, callback);

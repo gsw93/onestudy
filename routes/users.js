@@ -27,7 +27,8 @@ module.exports = function (router, passport) {
 
     router.route('/studentapply').get(function (req, res) {
         if(req.user){
-            res.render('studentapply', {seller:req.session.passport.user.seller, authUser: req.user[0]});
+            //07_04 add studentapply->studentapply_GSH 변경
+            res.render('studentapply_GSH', {seller:req.session.passport.user.seller, authUser: req.user[0]});
         } else{
             res.render('login');
         }
@@ -93,6 +94,45 @@ module.exports = function (router, passport) {
                     if (err)
                         throw err;
                     req.session.passport.user.seller=true;
+                    res.redirect('/');
+                });
+            }
+        });
+    });
+    //07_04 add by sehyeon
+    //student submit part
+    router.route('/process/addstudent').post(function (req, res) {
+        console.log('/process/addstudent 호출됨.');
+        var name = req.body.name;
+        var age = req.body.age;
+        var gender = req.body.gender;
+        var phone = req.body.phoneNumber;
+        var address=req.body.address;
+        var locationX=req.body.x;
+        var locationY=req.body.y;
+        var interest = req.body.interest;
+        var level = req.body.level;
+
+        console.log(req.session.passport);
+        UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
+            if (err) return res.status(500).json({error: err});
+            if (!member) {
+                return res.send('학생 등록에 실패했습니다.');
+            } else {
+                console.log(member);
+                member.name = name;
+                member.age = age;
+                member.phone = phone;
+                member.gender = gender;
+                member.address=address;
+                member.interest = interest;
+                member.level = level;
+
+                member.location={type:'Point',coordinates:[locationX,locationY]};
+                member.phoneAuthCheck = true;
+                member.save(function (err) {
+                    if (err)
+                        throw err;
                     res.redirect('/');
                 });
             }

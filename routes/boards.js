@@ -50,7 +50,9 @@ module.exports = function (router) {
             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
                 if(err) throw err;
                 console.log('마스터게시판 목록 출력');
-                res.render('master',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0]});
+                console.log(req.user[0]);
+                //07_04 add master->master_GSH 변경
+                res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0]});
             })
         }  else
             res.render('login');
@@ -58,7 +60,8 @@ module.exports = function (router) {
 
 
     router.route('/writeMaster').get(function (req, res) {
-        res.render('writeMaster',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+        //07_04 add writeMaster->writeMaster_GSH 변경
+        res.render('writeMaster_GSH',{seller:req.session.passport.user.seller, authUser: req.user[0]});
     });
 
     router.route('/masterView').get(function (req, res) {
@@ -99,8 +102,8 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, masterReview,path, callback) {
-        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"masterReview":masterReview,"path":path});
+    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, masterReview,path,locationX,locationY, callback) {
+        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"masterReview":masterReview,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}});
 
         masterboard.save(function (err) {
             if(err){
@@ -147,7 +150,7 @@ module.exports = function (router) {
         var title = req.body.title;
         var author = req.body.author;
         var category = req.body.category;
-        var region = req.body.region;
+        var region = req.body.address;
         var deadline = req.body.deadline;
         var minNum = req.body.minNum;
         var maxNum = req.body.maxNum;
@@ -160,6 +163,11 @@ module.exports = function (router) {
         var studyInfo = req.body.studyInfo;
         var masterReview = req.body.masterReview;
         // var photo = req.body.photo;
+        //07_04 add by sehyeon
+        //location 좌표 입력 위한 추가
+        var locationX=req.body.x;
+        var locationY=req.body.y;
+
 
         var files = req.files;
 
@@ -199,7 +207,7 @@ module.exports = function (router) {
 
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,masterReview,path, function(err, result){
+            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,masterReview,path,locationX,locationY, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {

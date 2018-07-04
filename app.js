@@ -79,11 +79,15 @@ var indexRoute = require('./routes/index');
 var passportRoute = require('./routes/passport');
 var usersRoute = require('./routes/users');
 var boardsRoute = require('./routes/boards');
+//07_04 add by sehyeon
+var jusoRoute = require('./routes/juso_GSH');
 
 indexRoute(app);
 boardsRoute(app);
 usersRoute(app, passport);
 passportRoute(app, passport);
+//07_04 add by sehyeon
+jusoRoute(app);
 //============================ 라우터 끝 ============================
 
 var httpsServer = https.createServer(options, app);

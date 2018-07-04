@@ -37,7 +37,17 @@ var MasterBoardSchema = mongoose.Schema({
       comment_date: {type: Date, default: moment().format()},
       contents : {type:String},
       star_rating:{type:String}
-    }]
+    }],
+
+    //07_04 add by sehyeon
+    //location 좌표 저장, level 추가
+    location : {
+        type : {
+            type: String,
+            default: 'Point'
+        },
+        coordinates: [{type:Number}]
+    }
 });
 
 
