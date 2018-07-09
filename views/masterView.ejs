@@ -51,6 +51,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    </script>
+
 </head>
 
 <body class="body-wrapper">
@@ -191,8 +193,8 @@
                         <span><i class="fas fa-star" style="color:#ff751a;"></i><% } %><% for(i;i<=5;i++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
                       </div>
                       <form id="replyAction" action="/process/comment" method="post">
-                        <% if(board.comments.length>0){ var commentsList = board.comments;%>
-                          <% for (var i =0;i< commentsList.length;i++){%>
+                        <% if(board.comments.length>0){ var commentsList = board.comments;var temp=0;%>
+                          <% for (var i =0;i< commentsList.length;i++){ %>
                       <div class="row comment" style="width:100%;">
                         <div class="col-lg-2 commentimg">
                           <img src="https://i.pinimg.com/originals/be/f6/9e/bef69e9e253684fa4c7bdb8f745539cb.jpg" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
@@ -227,13 +229,11 @@
                                 }
                               </script>
                               <td>
-                                <% if(commentsList[i].star_rating="3.0"){ %>
+                                <% var a; for(a=0;a< commentsList[i].star_rating;a++){ %>
                                 <i class="fas fa-star" style="color:#ff751a;">
-                                <i class="fas fa-star"  style="color:#ff751a;">
-                                <i class="fas fa-star"  style="color:#ff751a;">
-                                <i class="fas fa-star"  style="color:#ff751a;">
-                                <i class="fas fa-star"  style="color:#ff751a;">
-                                <%} %>
+                                <%} for(a;a< 5; a++){ %>
+                                <i class="fas fa-star" style="color:#e6e6e6;">
+                                  <% } temp=temp+commentsList[i].star_rating;%>
                               </td>
                             </tr>
                             <tr>
@@ -243,6 +243,7 @@
                         </div>
                       </div>
                       <%}}%>
+
                       <div class="rating-stars" style="background-color:#e6e6e6;margin:20px;padding:25px;text-align:center;">
                         <ul id='stars'>
                           <li class='star' title='Poor' data-value='1'>
@@ -261,7 +262,9 @@
                             <i class="fas fa-star"></i>
                           </li>
                         </ul>
-                        <div id="rating_point" name="star_rating" value="0.0">0.0</div>
+                        <div id="rating_point" value="0.0">0.0</div>
+                        <input type="hidden" id="hidden_point" name="star_rating" value="">
+                        <input type="hidden" name="reviewstar" value="<%=temp%>">
                       </div>
                       <div class="comment_write">
                         <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
@@ -322,7 +325,6 @@
         });
       });
       $(document).ready(function(){
-        var point;
 
   /* 1. Visualizing things on Hover - See next part for action on click */
   $('#stars li').on('mouseover', function(){
@@ -369,10 +371,10 @@
   function responseMessage(msg) {
     $('#rating_point').fadeIn(200);
     $('#rating_point').html(msg);
-    $('#rating_point').attr("value",msg);
+    $('#hidden_point').attr("value",msg);
   }
-
 });
+
 </script>
 
 <!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->

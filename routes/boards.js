@@ -102,8 +102,8 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, masterReview,path,locationX,locationY, callback) {
-        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"masterReview":masterReview,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}});
+    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, reviewstar,path,locationX,locationY, callback) {
+        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}});
 
         masterboard.save(function (err) {
             if(err){
@@ -129,12 +129,22 @@ module.exports = function (router) {
         })
       })
     };
+    function updateStar(id,reviewstar){
+      var myquery = {_id:id};
+      var newvalue = {$set : {reviewstar:reviewstar}};
+      MasterBoardModel.updateOne(myquery,newvalue,function(err,res){
+        if(err) throw err;
+        console.log('리뷰 별점 변경');
+      })
+    }
     router.route('/process/comment').post(function (req, res) {
         var reply_id=req.body.replyId;
         var author = req.user[0].nickname;
         var contents = req.body.contents;
         var star_rating=req.body.star_rating;
+        var reviewstar=req.body.reviewstar;
         addComment(reply_id,author,contents,star_rating);
+        updateStar(reply_id,reviewstar);
 
         res.redirect('/masterView?id='+req.body.replyId);
     });
@@ -157,11 +167,10 @@ module.exports = function (router) {
         var studyTerm = req.body.studyTerm;
         // var major = req.body.major;
         // var career = req.body.career;
-        // var review_cnt = req.body.review_cnt;
         var price = req.body.price;
         var masterInfo = req.body.masterInfo;
         var studyInfo = req.body.studyInfo;
-        var masterReview = req.body.masterReview;
+        var reviewstar = req.body.reviewstar;
         // var photo = req.body.photo;
         //07_04 add by sehyeon
         //location 좌표 입력 위한 추가
@@ -207,7 +216,7 @@ module.exports = function (router) {
 
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,masterReview,path,locationX,locationY, function(err, result){
+            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,reviewstar,path,locationX,locationY, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {

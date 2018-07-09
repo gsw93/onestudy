@@ -21,7 +21,7 @@ var MasterBoardSchema = mongoose.Schema({
     price : {type:Number,min:1,max:100},
     masterInfo : String,
     studyInfo : String,
-    masterReview : String,
+    reviewstar : {type:Number,default:0},
     path : String,
     count : {type:Number, default:0},
     studentList : [{
@@ -36,7 +36,7 @@ var MasterBoardSchema = mongoose.Schema({
       author:String,
       comment_date: {type: Date, default: moment().format()},
       contents : {type:String},
-      star_rating:{type:String}
+      star_rating:Number
     }],
 
     //07_04 add by sehyeon
