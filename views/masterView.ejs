@@ -188,12 +188,15 @@
                     </div>
                     <div class="col-lg-10 block" style="padding: 25px 0px 30px 0">
                       <div class="review_star">
-                        스터디평점&nbsp;<span><%= board.reviewstar %></span>&nbsp;
-                        <% var s=3;var i; for(i=1;i<=s;i++){ %>
-                        <span><i class="fas fa-star" style="color:#ff751a;"></i><% } %><% for(i;i<=5;i++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
+                        <span>스터디평점</span>
+                        <span><%= board.reviewstar+'.0' %></span>
+                        <span>
+                          <% var temp=0;var s; for(s=0;s< board.reviewstar;s++){ %>
+                          <i class="fas fa-star" style="color:#ff751a;"></i><% } %>
+                          <% for(s;s< 5;s++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
                       </div>
                       <form id="replyAction" action="/process/comment" method="post">
-                        <% if(board.comments.length>0){ var commentsList = board.comments;var temp=0;%>
+                        <% if(board.comments.length>0){ var commentsList = board.comments;%>
                           <% for (var i =0;i< commentsList.length;i++){ %>
                       <div class="row comment" style="width:100%;">
                         <div class="col-lg-2 commentimg">
@@ -203,7 +206,7 @@
                           <table>
                             <tr>
                               <td><%=commentsList[i].author%></td>
-                              <td id="comment_date[<%=i%>]"></td>
+                              <td id="comment_date[<%=i%>]" style="font-size:13px;"></td>
                               <script>
                               var i = new Date('<%- commentsList[i].comment_date %>');
                               document.getElementById('comment_date[<%=i%>]').innerHTML = date_format2(i);
@@ -237,7 +240,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <td colspan="3"><%=commentsList[i].contents%></td>
+                              <td colspan="3" style="font-size:18px;color:gray;"><%=commentsList[i].contents%></td>
                             </tr>
                           </table>
                         </div>
@@ -264,13 +267,13 @@
                         </ul>
                         <div id="rating_point" value="0.0">0.0</div>
                         <input type="hidden" id="hidden_point" name="star_rating" value="">
-                        <input type="hidden" name="reviewstar" value="<%=temp%>">
+                        <input type="hidden" id="reviewstar" name="reviewstar" value="">
                       </div>
-                      <div class="comment_write">
+                      <div class="comment_write" style="margin:20px;">
                         <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
-                        <textarea name="contents" class="form-control col-lg-9" rows="2"
-                                  style="display: inline" placeholder="감사합니다."  /required></textarea>
-                        <button type="submit" name="button" class="btn col-lg-2" style="height:50">전송</button>
+                        <textarea name="contents" class="form-control" rows="2"
+                                  style="display: inline;width:80%;float:left;" placeholder="감사합니다."  /required></textarea>
+                        <button type="submit" name="button" class="btn" style="float:left;width:15%;">전송</button>
                       </div>
                       </form>
                     </div>
@@ -362,16 +365,25 @@
 
     // JUST RESPONSE (Not needed)
     var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-    var msg = "";
+    var msg;
     if (ratingValue >= 1) {
-        msg = ratingValue+'.0';
+        msg = ratingValue;
     }
     responseMessage(msg);
   });
   function responseMessage(msg) {
     $('#rating_point').fadeIn(200);
-    $('#rating_point').html(msg);
-    $('#hidden_point').attr("value",msg);
+    $('#rating_point').html(msg+'.0');
+    $('#hidden_point').attr("value",(msg+'.0'));
+    var temp = <%= temp%>;
+    var review_average;
+    if(<%- board.comments.length %> == 0){
+      review_average = (msg+temp);
+    }
+    else{
+      review_average = (msg+temp)/(<%= board.comments.length %>+1);
+    }
+    $('#reviewstar').attr("value",Math.round(review_average));
   }
 });
 
