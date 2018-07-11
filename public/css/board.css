@@ -283,8 +283,9 @@
 .editor_cnt .block{
   float:left;
   margin-bottom: 20px;
-  min-height: 240px;
+  min-height: 300px;
 }
+
 .editor_cnt .title h5,.editor_cnt .title h6{
   background-color: #5b2900;
   margin:0;
