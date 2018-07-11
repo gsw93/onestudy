@@ -283,7 +283,7 @@
 .editor_cnt .block{
   float:left;
   margin-bottom: 20px;
-  min-height: 120px;
+  min-height: 240px;
 }
 .editor_cnt .title h5,.editor_cnt .title h6{
   background-color: #5b2900;
@@ -335,6 +335,7 @@
 }
 .rating-stars ul#stars > li.star {
   display:inline-block;
+
 }
 
 /* Idle State of the stars */
@@ -377,9 +378,11 @@
 }
 
 .form-group{
+    font-size: 17px;
     width: 90%;
     line-height: 15px;
     margin-bottom:5px;
+    color:#595959;
 }
 
 .signbuttons{
@@ -407,9 +410,9 @@ input{
 }
 
 .headerSign{
-    color: #ff6600;
     margin-bottom: 10px;
     font-weight: 800;
+    font-size: 30px;
 }
 
 .form-control{
@@ -419,7 +422,7 @@ input{
 .darktext{
     font-weight: 700;
     /* color: #ff9933; */
-    color:#000000;
+    color:#737373;
     margin-right:5%;
     font-size: 17px;
 }

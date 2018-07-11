@@ -86,28 +86,27 @@
                             <!-- Description -->
                               <!-- PROFILE IMAGE -->
                               <div class="form-group">
-                                <h3 class="headerSign">마스터 정보</h3>
-                                <label for="title" class="darktext">제목</label>
-                                <input class="form-control" type="text" name="title" placeholder="TITLE" style="text-align:left;" required/>
+                                  <h2 class="headerSign" style="text-align:center;">마스터 스터디 등록</h2>
                               </div>
-                              <div class="form-group">
-                                <label for="image" class="darktext">스터디 대표 사진</label>
-                                <img id="blah" src="http://placehold.it/180" alt="your image" max-width="100px" height="80px"/>
-                                <input class="form-control" type="file" onchange="readURL(this);" name="photo" multiple>
+                              <div class="row form-group">
+                                <label for="title" class="col-lg-2 darktext">제목</label>
+                                <input class="col-lg-9 form-control" type="text" name="title" placeholder="TITLE" style="text-align:left;" required/>
                               </div>
-                              <div class="form-group">
-                                <label class="darktext" for="category">카테고리</label>
-                                <div class="form-control">
-                                  <input type="checkbox" id="chk_chg" name="category" value="컴퓨터"><span style="margin-right:5px;">컴퓨터</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="수학"><span style="margin-right:5px;">수학</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="영어"><span style="margin-right:5px;">영어</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="회화"><span style="margin-right:5px;">회화</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="취미"><span style="margin-right:5px;">취미</span>
+                              <div class="row form-group">
+                                <label for="image" class="col-lg-2 darktext" style="padding-right:0">스터디 대표 사진</label>
+                                <!-- <img id="blah" src="http://placehold.it/180" alt="your image" max-width="100px" height="80px"/> -->
+                                <input class="col-lg-9 form-control" type="file" onchange="readURL(this);" name="photo" multiple>
+                              </div>
+                              <div class="row form-group">
+                                <label class="col-lg-2 darktext" for="category">카테고리</label>
+                                <div class="col-lg-9 form-control">
+                                  <input type="checkbox" id="chk_chg" name="category" value="언어"><span style="margin-right:5px;">언어</span>
                                   <input type="checkbox" id="chk_chg" name="category" value="운동"><span style="margin-right:5px;">운동</span>
+                                  <input type="checkbox" id="chk_chg" name="category" value="취미/클래스"><span style="margin-right:5px;">취미/클래스</span>
                                 </div>
                               </div>
-                              <div class="form-group">
-                                <label class="darktext" for="region">스터디 장소</label>
+                              <div class="row form-group">
+                                <label class="col-lg-2 darktext" for="region">스터디 장소</label>
                                 <!--<input class="form-control col-md-8" type="text" name="region" placeholder="ADDRESS" style="text-align:left;" required/>
                                 <button type="button" class="btn btn-primary col-md-2">찾기</button>-->
                                 <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>

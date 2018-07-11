@@ -86,7 +86,7 @@
                         <div class="col-sm-7 col-md-7 col-lg-7 media-body" style="margin:10px 20px;">
                             <!-- <form action="/process/addboard" method="post"> -->
                             <!-- Heading -->
-                            <h3 class="headerSign"><%=board.title %></h3>
+                            <span class="headerSign"><%=board.title %></span>
                             <!-- Description -->
                             <div class="row">
                               <div class="col-lg-6 form-group">
@@ -134,8 +134,8 @@
                                 <span>&nbsp;<%=board.studyTerm%>주</span>
                               </div>
                               <div class="col-lg-6 form-group">
-                                <label for="price" class="darktext">금액<small style="color:gray;">(총)</small></label>
-                                <span>&nbsp;<%=board.price%>[만원]</span>
+                                <label for="price" class="darktext">수업료<small style="color:gray;">(총)</small></label>
+                                <span style="font-size:22px;font-weight: 700;color:#ff751a;">&nbsp;월 N회 <%=board.price%>만원</span>
                               </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                         <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
                         <textarea name="contents" class="form-control" rows="2"
                                   style="display: inline;width:80%;float:left;" placeholder="감사합니다."  /required></textarea>
-                        <button type="submit" name="button" class="btn" style="float:left;width:15%;">전송</button>
+                        <button type="submit" name="button" class="btn" style="background-color:#ff751a;color:#fff;float:left;width:15%;height:78px;">전송</button>
                       </div>
                       </form>
                     </div>
