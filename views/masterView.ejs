@@ -179,8 +179,7 @@
                     <div class="col-lg-2 title">
                         <h5>스터디 장소</h5>
                     </div>
-                    <div class="col-lg-10 block">
-                    </div>
+                    <div id="gMap" class="col-lg-10 block" style=""></div>
                   </div>
                   <div class="editor_cnt">
                     <div class="col-lg-2 title">
@@ -318,6 +317,24 @@
 
 <!-- JAVASCRIPTS -->
 <script type="text/javascript">
+
+    function myMap() {
+        var mapCanvas = document.getElementById("gMap");
+        var myCenter = new google.maps.LatLng(36.6251, 127.45718299999999);
+        var marker = new google.maps.Marker({position:myCenter});
+        var mapOptions = {
+            center: myCenter,
+            zoom: 14
+        };
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        marker.setMap(map);
+
+        google.maps.event.addListener(marker,'click',function() {
+            map.setZoom(17);
+            map.setCenter(marker.getPosition());
+        });
+    }
+
     $(function(){
         $('textarea.text').froalaEditor({
           key: 'bA2A8B8D7cD3F3C2C1G3A4C4B6C2D1vdbhA-21D-17eukD1wzB1C-22j==',
@@ -389,6 +406,7 @@
 </script>
 
 <!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR5TC1oRGXf90Q7CZck3R78M-APCvL0Qo&callback=myMap"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
 <script src="plugins/raty/jquery.raty-fa.js"></script>
