@@ -100,24 +100,26 @@
                               <div class="row form-group">
                                 <label class="col-lg-2 darktext" for="category">카테고리</label>
                                 <div class="col-lg-9 form-control">
-                                  <input type="checkbox" id="chk_chg" name="category" value="언어"><span style="margin-right:5px;">언어</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="운동"><span style="margin-right:5px;">운동</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="취미/클래스"><span style="margin-right:5px;">취미/클래스</span>
+                                  <input type="checkbox" id="chk_chg" name="category" value="언어"><span style="margin-right:50px;">언어</span>
+                                  <input type="checkbox" id="chk_chg" name="category" value="운동"><span style="margin-right:50px;">운동</span>
+                                  <input type="checkbox" id="chk_chg" name="category" value="취미/클래스"><span style="margin-right:50px;">취미/클래스</span>
                                 </div>
                               </div>
                               <div class="row form-group">
                                 <label class="col-lg-2 darktext" for="region">스터디 장소</label>
                                 <!--<input class="form-control col-md-8" type="text" name="region" placeholder="ADDRESS" style="text-align:left;" required/>
                                 <button type="button" class="btn btn-primary col-md-2">찾기</button>-->
+                              </div>
+                              <div class="row">
                                 <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>
-                                <input type="text" class="form-control col-md-8" id="address" name="address" required readonly/>
-                                <button type="button" class="btn btn-primary col-md-2" onclick="goPopup()">찾기</button>
-                                <input class="form-control col-md-8" type="hidden" id="entX" name="x" required readonly/>
-                                <input class="form-control col-md-8" type="hidden" id="entY" name="y" required readonly/>
+                                <input type="text" class="form-control col-lg-7" id="address" style="margin:0;" name="address" required readonly/>
+                                <button type="button" class="btn btn-primary col-lg-2"onclick="goPopup()">찾기</button>
+                                <input type="hidden" id="entX" name="x" required readonly/>
+                                <input type="hidden" id="entY" name="y" required readonly/>
                               </div>
                               <div class="form-group">
                                 <label class="darktext" for="deadline">모집기한<small style="color:gray;">(마감날짜)</small></label>
-                                <input type="date" name="deadline" id="datePicker" max="2022-12-31">
+                                <input type="text" name="deadline" id="datePicker" max="2022-12-31">
                                 <span style="margin-left:5%;">
                                   <label class="darktext">모집인원</label>
                                     <label class="control-label" for="minNum">최소</label>
@@ -197,11 +199,19 @@
                               }
                             });
 
+
                             var date = new Date();
                             date.setDate(date.getDate()+1);
-                            document.getElementById('datePicker').valueAsDate = date;
-                            document.getElementById('datePicker').setAttribute("min",date_format(date));
+                            // document.getElementById('datePicker').valueAsDate = date;
+                            // document.getElementById('datePicker').setAttribute("min",date_format(date));
 
+                            $("#datePicker").datepicker({
+                              dateFormat: 'yymmdd',
+                              changeMonth: true,
+                              minDate:-2,
+                              maxDate:"+3Y",
+                              changeYear: true
+                            });
                         });
                         function chkchk(form){
                           var arr_form = document.getElementsByName('category');

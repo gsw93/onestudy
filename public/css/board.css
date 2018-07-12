@@ -399,10 +399,7 @@
 }
 
 input{
-    border-top: none !important;
-    border-right: none !important;
-    border-left: none !important;
-    border-bottom: 1px dotted #ff9933 !important;
+    border: 1px solid gray !important;
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
@@ -416,10 +413,6 @@ input{
     font-size: 30px;
 }
 
-.form-control{
-    font-size: 15px;
-    margin-right: 5px;
-}
 .darktext{
     font-weight: 700;
     /* color: #ff9933; */
