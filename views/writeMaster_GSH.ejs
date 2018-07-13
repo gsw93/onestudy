@@ -81,23 +81,23 @@
                 <div class="block">
                     <div class="media">
                         <!-- Store Icon -->
-                        <form action="/process/addboard" method="post" enctype="multipart/form-data" style="width:100%" onsubmit="return chkchk(this);">
-                        <div class="media-body" style="margin:10px 50px;float:left">
+                        <div class="media-body" style="margin:20px 40px;float:left">
                             <!-- Description -->
+                            <form action="/process/addboard" method="post" enctype="multipart/form-data" style="width:100%" onsubmit="return chkchk(this);">
                               <!-- PROFILE IMAGE -->
                               <div class="form-group">
                                   <h2 class="headerSign" style="text-align:center;">마스터 스터디 등록</h2>
                               </div>
-                              <div class="row form-group">
+                              <div class="row">
                                 <label for="title" class="col-lg-2 darktext">제목</label>
                                 <input class="col-lg-9 form-control" type="text" name="title" placeholder="TITLE" style="text-align:left;" required/>
                               </div>
-                              <div class="row form-group">
+                              <div class="row">
                                 <label for="image" class="col-lg-2 darktext" style="padding-right:0">스터디 대표 사진</label>
                                 <!-- <img id="blah" src="http://placehold.it/180" alt="your image" max-width="100px" height="80px"/> -->
                                 <input class="col-lg-9 form-control" type="file" onchange="readURL(this);" name="photo" multiple>
                               </div>
-                              <div class="row form-group">
+                              <div class="row">
                                 <label class="col-lg-2 darktext" for="category">카테고리</label>
                                 <div class="col-lg-9 form-control">
                                   <input type="checkbox" id="chk_chg" name="category" value="언어"><span style="margin-right:50px;">언어</span>
@@ -105,57 +105,60 @@
                                   <input type="checkbox" id="chk_chg" name="category" value="취미/클래스"><span style="margin-right:50px;">취미/클래스</span>
                                 </div>
                               </div>
-                              <div class="row form-group">
+                              <div class="row">
                                 <label class="col-lg-2 darktext" for="region">스터디 장소</label>
                                 <!--<input class="form-control col-md-8" type="text" name="region" placeholder="ADDRESS" style="text-align:left;" required/>
                                 <button type="button" class="btn btn-primary col-md-2">찾기</button>-->
                               </div>
                               <div class="row">
-                                <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>
-                                <input type="text" class="form-control col-lg-7" id="address" style="margin:0;" name="address" required readonly/>
-                                <button type="button" class="btn btn-primary col-lg-2"onclick="goPopup()">찾기</button>
+                                <label for="address" class="col-lg-2 col-md-2 col-sm-2" style="font-size:14px;text-align:right;">주소</label>
+                                <input type="text" class="form-control col-lg-7 col-md-7 col-sm-7" id="address" style="margin:auto 0;" name="address" required readonly/>
+                                <button type="button" class="btn col-lg-2 col-md-2 col-sm-2" onclick="goPopup()" style="margin:auto 15px;height:35px;">찾기</button>
                                 <input type="hidden" id="entX" name="x" required readonly/>
                                 <input type="hidden" id="entY" name="y" required readonly/>
                               </div>
-                              <div class="form-group">
-                                <label class="darktext" for="deadline">모집기한<small style="color:gray;">(마감날짜)</small></label>
-                                <input type="text" name="deadline" id="datePicker" max="2022-12-31">
-                                <span style="margin-left:5%;">
-                                  <label class="darktext">모집인원</label>
-                                    <label class="control-label" for="minNum">최소</label>
-                                    <input type="number" name="minNum" min="1" value="1">
-                                    <label class="control-label" for="maxNum">최대</label>
-                                    <input type="number" name="maxNum" min="1" value="6">
-                                </span>
+                              <div class="row">
+                                  <label class="col-lg-2 darktext" for="deadline">모집기한</label>
+                                  <input type="text" class="col-lg-2" name="deadline" id="datePicker"  placeholder="달력" required>
+                                  <label class="col-lg-2 darktext" style="float:left;">모집인원</label>
+                                    <select class="col-lg-2 form-control" onchange="maxoption()" style="height:35px;margin:auto 5px;" id="minNum" name="minNum">
+                                      <option value="최소">최소</option>
+                                      <% var min=1;for(min;min< 100;min++){%>
+                                      <option value="<%=min%>"><%=min%></option>
+                                      <%}%>
+                                    </select>
+                                    <select class="col-lg-2 form-control" style="height:35px;margin:auto 5px;" id="maxNum" name="maxNum">
+                                      <option value="최대">최대</option>
+                                    </select>
                               </div>
-                              <div class="form-group">
-                                <label for="studyTerm" class="darktext">스터디 기간</label>
-                                <input type="number" name="studyTerm" min="1" value="1">&nbsp;주
-                              </div>
-                              <div class="form-group">
-                                <label for="price" class="darktext">금액<small style="color:gray;">(총)</small></label>
-                                <input type="number" name="price" min="0" max="100" style="width:150px;" required><span>만원</span>
+                              <div class="row">
+                                <label for="studyTerm" class="col-lg-2 darktext">스터디 기간</label>
+                                <input type="number" class="col-lg-2" name="studyTerm" min="1" value="1">
+                                <label for="price" class="col-lg-2 darktext">금액</label>
+                                <input type="number" class="col-lg-2" name="price" min="0" max="100" style="width:150px;" required><span style="margin:auto 5px;">만원</span>
                               </div>
                         </div>
                     </div>
                 </div>
                 <div style="margin-top: 50px;">
-                    <div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">
-                        <h5 style="margin:0;border:1px solid brown;border-radius: 5px 20px; background-color:brown;color:white;line-height: 50px;vertical-align: middle;">
-                            마스터 소개</h5>
+                  <div class="editor_cnt">
+                    <div class="col-lg-2 title">
+                        <h5>마스터 소개</h5>
                     </div>
-                    <div class="col-lg-10 block" style="float: left;">
+                    <div class="col-lg-10 block">
                       <textarea id="text1" class="text" name="masterInfo" required></textarea>
-			</div>
+                    </div>
+                  </div>
                 </div>
                 <div style="margin-top: 50px;">
-                    <div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">
-                        <h5 style="margin:0;border:1px solid brown;border-radius: 5px 20px; background-color:brown;color:white;line-height: 50px;vertical-align: middle;">
-                            스터디 소개</h5>
+                  <div class="editor_cnt">
+                    <div class="col-lg-2 title">
+                        <h5>스터디 소개</h5>
                     </div>
-                    <div class="col-lg-10 block" style="float: left;">
+                    <div class="col-lg-10 block">
                         <textarea id="text2" class="text" name="studyInfo" required></textarea>
                     </div>
+                  </div>
                 </div>
                 <input type="submit" id="button" value="저장" class="signbuttons">
                 </form>
@@ -177,6 +180,14 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
                     <script type="text/javascript">
                         $(function(){
+                            $("#datePicker").datepicker({
+                              dateFormat: 'yy-mm-dd',
+                              changeMonth: true,
+                              // currentText: date,
+                              minDate:0,
+                              maxDate:"+3Y",
+                              changeYear: true
+                            });
                             $('textarea.text').froalaEditor({
                               key: 'bA2A8B8D7cD3F3C2C1G3A4C4B6C2D1vdbhA-21D-17eukD1wzB1C-22j==',
                               height: 150,
@@ -186,33 +197,45 @@
 
                             $('form').on('submit', function (e) {
                               if ($('#text1').froalaEditor('core.isEmpty')) {
-                                e.preventDefault();
-                                $('#text1').froalaEditor('popups.show', 'aa', 300, 600, 200);
+                                // e.preventDefault();
+                                alert('마스터 소개를 입력하세요.');
 
                                 return false;
                               }
                               if ($('#text2').froalaEditor('core.isEmpty')) {
-                                e.preventDefault();
-                                alert('마스터 소개를 입력하세요.')
+                                // e.preventDefault();
+                                alert('마스터 소개를 입력하세요.');
 
                                 return false;
                               }
+                              var maxNum = document.getElementById('maxNum').selectedIndex;
+                              var max = document.getElementsByTagName("option")[maxNum].value;
+                              if(isNaN(max)==true){
+                                alert('최대 인원을 설정해주세요.');
+                                return false;
+                              }
+                              var minNum = document.getElementById('minNum').selectedIndex;
+                              var min = document.getElementsByTagName("option")[minNum].value;
+                              if(min=='최소'){
+                                alert('최소 인원을 설정해주세요.');
+                                return false;
+                              }
+                              
                             });
 
-
-                            var date = new Date();
-                            date.setDate(date.getDate()+1);
-                            // document.getElementById('datePicker').valueAsDate = date;
-                            // document.getElementById('datePicker').setAttribute("min",date_format(date));
-
-                            $("#datePicker").datepicker({
-                              dateFormat: 'yymmdd',
-                              changeMonth: true,
-                              minDate:-2,
-                              maxDate:"+3Y",
-                              changeYear: true
-                            });
                         });
+                        function maxoption(){
+                          var minNum = document.getElementById('minNum').selectedIndex;
+                          var min = document.getElementsByTagName("option")[minNum].value;
+                          if(min>0 && min<100){
+                            var maxNum = document.getElementById('maxNum');
+                            var options ="<option value='최대'>최대</option>";
+                            for(min;min<100;min++){
+                               options+="<option value='"+min+"'>"+min+"</option>";
+                            }
+                            maxNum.innerHTML = options;
+                          }
+                        }
                         function chkchk(form){
                           var arr_form = document.getElementsByName('category');
                           var num=0;
@@ -272,7 +295,6 @@
 <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
 <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
-<script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
 <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="js/custom.js"></script>
 

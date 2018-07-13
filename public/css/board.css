@@ -372,17 +372,12 @@
     text-align: center;
 }
 
-.checkboxGroup{
-    border:1px solid gray;
-    border-radius: 15px;
-    width: 100%;
-}
 
 .form-group{
     font-size: 17px;
     width: 90%;
     line-height: 15px;
-    margin-bottom:5px;
+    margin-bottom:35px;
     color:#595959;
 }
 
@@ -399,7 +394,7 @@
 }
 
 input{
-    border: 1px solid gray !important;
+    border: 1px solid rgba(0,0,0,.15) !important;
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
@@ -416,9 +411,12 @@ input{
 .darktext{
     font-weight: 700;
     /* color: #ff9933; */
-    color:#737373;
+    /* color:#737373; */
+    color:#000;
     margin-right:5%;
     font-size: 17px;
+    text-align:right;
+    padding-right: 0;
 }
 
 
