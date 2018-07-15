@@ -36,7 +36,9 @@ var UserSchema = new mongoose.Schema({
             default: 'Point'
         },
         coordinates: [{type:Number}]
-    }
+    },
+    //07_15 add by sehyeon
+    addressShort:{type:String}
 });
 UserSchema.static('findById', function (username, callback) {
     return this.find({id:username}, callback);

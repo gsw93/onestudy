@@ -11,6 +11,7 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
     //$("#roadAddrPart1").val(roadAddrPart1).change();
     //addrDetail=roadFullAddr;
     $("#address").val(roadFullAddr).change();
+    $("#siNm").val(siNm+' '+sggNm).change();
     //$("#roadAddrPart2").val(roadAddrPart2).change();
     Proj4js.reportError = function (msg) {
         alert(msg);
