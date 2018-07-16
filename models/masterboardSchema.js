@@ -52,9 +52,11 @@ var MasterBoardSchema = mongoose.Schema({
     regionShort : String
 });
 
+MasterBoardSchema.index({ location : '2dsphere'});
 
 MasterBoardSchema.static('findById', function (id, callback) {
     return this.find({_id:id}, callback);
 });
+
 
 module.exports = mongoose.model('masterboards', MasterBoardSchema);

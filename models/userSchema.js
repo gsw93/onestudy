@@ -40,6 +40,8 @@ var UserSchema = new mongoose.Schema({
     //07_15 add by sehyeon
     addressShort:{type:String}
 });
+UserSchema.index({ location : '2dsphere'});
+
 UserSchema.static('findById', function (username, callback) {
     return this.find({id:username}, callback);
 });
