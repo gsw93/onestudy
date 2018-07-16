@@ -49,11 +49,12 @@ module.exports = function (router, passport) {
                     var id = req.body.username;
                     var password = hash;
                     var nickname = req.body.nickname;
+                    var location={type:'Point',coordinates:[0,0]};
                     var salt = salt;
 
                     console.log('요청 파라미터 : ' + id + ', ' + password + ', ' + nickname + ', ' + salt);
 
-                    var user = new UserModel({"id": id, "password": password, "nickname": nickname, "salt": salt, "provider": 'onestudy'});
+                    var user = new UserModel({"id": id, "password": password, "nickname": nickname, "salt": salt, "provider": 'onestudy', "location":location});
                     // save ()로 저장
                     user.save(function (err) {
                         if(err) {
