@@ -47,13 +47,38 @@ module.exports = function (router) {
 
     router.route('/master').get(function (req, res) {
         if(req.user){
-            MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-                if(err) throw err;
-                console.log('마스터게시판 목록 출력');
-                console.log(req.user[0]);
-                //07_04 add master->master_GSH 변경
-                res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0]});
-            })
+            //07_15 add by sehyeon
+            if(req.user[0].location.coordinates[0])
+            {
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    MasterBoardModel.find({location: {
+                            $near : {
+                                $geometry : {
+                                    type: "Point",
+                                    coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
+                                }
+                            }
+                        },
+                        category:req.user[0].interested}).limit( 4 ).
+                    exec(function (err,interBoards){
+                        if(err) throw err;
+                        console.log('마스터게시판 목록 출력');
+                        //console.log(req.user[0]);
+                        console.log(interBoards);
+                        //07_04 add master->master_GSH 변경
+                        res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
+                    });
+                });
+            }
+            else {
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    if(err) throw err;
+                    console.log('마스터게시판 목록 출력');
+                    //console.log(req.user[0]);
+                    //07_04 add master->master_GSH 변경
+                    res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
+                });
+            }
         }  else
             res.render('login');
     });
@@ -102,8 +127,8 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, reviewstar,path,locationX,locationY, callback) {
-        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}});
+    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm, callback) {
+        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
 
         masterboard.save(function (err) {
             if(err){
@@ -177,7 +202,8 @@ module.exports = function (router) {
         //location 좌표 입력 위한 추가
         var locationX=req.body.x;
         var locationY=req.body.y;
-
+        //07_15 add by sehyeon
+        var siNm = req.body.siNm;
 
         var files = req.files;
 
@@ -217,7 +243,7 @@ module.exports = function (router) {
 
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,reviewstar,path,locationX,locationY, function(err, result){
+            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,reviewstar,path,locationX,locationY,siNm, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {

@@ -91,7 +91,7 @@
                             <div class="row">
                               <div class="col-lg-6 form-group">
                                 <label class="darktext">지역</label>
-                                <span style=""><%= board.region %></span>
+                                <span style=""><%= board.regionShort %></span>
                               </div>
                               <div class="col-lg-6 form-group">
                                 <label class="darktext">카테고리</label>
@@ -179,7 +179,7 @@
                     <div class="col-lg-2 title">
                         <h5>스터디 장소</h5>
                     </div>
-                    <div id="gMap" class="col-lg-10 block" style=""></div>
+                    <div id="gMap" class="col-lg-10 block" style="height:350px;"></div>
                   </div>
                   <div class="editor_cnt">
                     <div class="col-lg-2 title">
@@ -316,11 +316,13 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
 
 <!-- JAVASCRIPTS -->
-<script type="text/javascript">
 
+<script type="text/javascript">
+    var x=<%-board.location.coordinates[1]%>;
+    var y=<%-board.location.coordinates[0]%>;
     function myMap() {
         var mapCanvas = document.getElementById("gMap");
-        var myCenter = new google.maps.LatLng(36.6251, 127.45718299999999);
+        var myCenter = new google.maps.LatLng(x,y);
         var marker = new google.maps.Marker({position:myCenter});
         var mapOptions = {
             center: myCenter,
@@ -406,6 +408,8 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR5TC1oRGXf90Q7CZck3R78M-APCvL0Qo&callback=myMap"></script>
+
+
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
 <script src="plugins/raty/jquery.raty-fa.js"></script>
@@ -417,7 +421,9 @@
 <script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
 <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="js/custom.js"></script>
+    <script type="text/javascript">
 
+    </script>
 </body>
 
 </html>

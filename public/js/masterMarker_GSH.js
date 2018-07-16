@@ -43,7 +43,7 @@ function markingMap(map){
 
         var title = markerElem.title;
         //var name = markerElem.getAttribute('name');
-        var region = markerElem.region;
+        var region = markerElem.regionShort;
         var price = String(markerElem.price)+"0,000";
         var point = new google.maps.LatLng(
             parseFloat(markerElem.location.coordinates[1]),

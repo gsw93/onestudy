@@ -112,7 +112,7 @@ module.exports = function (router, passport) {
         var locationY=req.body.y;
         var interest = req.body.interest;
         var level = req.body.level;
-
+        var addressShort=req.body.siNm;
         console.log(req.session.passport);
         UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
             if (err) return res.status(500).json({error: err});
@@ -125,9 +125,10 @@ module.exports = function (router, passport) {
                 member.phone = phone;
                 member.gender = gender;
                 member.address=address;
-                member.interest = interest;
+                member.interested = interest;
                 member.level = level;
 
+                member.addressShort=addressShort;
                 member.location={type:'Point',coordinates:[locationX,locationY]};
                 member.phoneAuthCheck = true;
                 member.save(function (err) {

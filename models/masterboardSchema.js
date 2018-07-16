@@ -47,7 +47,9 @@ var MasterBoardSchema = mongoose.Schema({
             default: 'Point'
         },
         coordinates: [{type:Number}]
-    }
+    },
+    //07_15 add by sehyeon
+    regionShort : String
 });
 
 
