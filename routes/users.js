@@ -19,7 +19,7 @@ module.exports = function (router, passport) {
 
     router.route('/apply').get(function (req, res) {
         if(req.user){
-            res.render('apply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('masterapply', {seller:req.session.passport.user.seller, authUser: req.user[0]});
         } else{
             res.render('login');
         }
