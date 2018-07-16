@@ -132,6 +132,7 @@ module.exports = function (router) {
     function updateStar(id,reviewstar){
       var myquery = {_id:id};
       var newvalue = {$set : {reviewstar:reviewstar}};
+      console.log(newvalue);
       MasterBoardModel.updateOne(myquery,newvalue,function(err,res){
         if(err) throw err;
         console.log('리뷰 별점 변경');

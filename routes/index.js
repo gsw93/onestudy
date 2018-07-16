@@ -38,11 +38,18 @@ module.exports = function (router) {
     });
 
     //서비스 소개 화면
-    router.route('/serviceInfo').get(function (req, res) {
+    // router.route('/serviceInfo').get(function (req, res) {
+    //     if(req.user)
+    //         res.render('serviceInfo',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+    //     else
+    //         res.render('serviceInfo',{authUser: null});
+    // });
+
+    router.route('/temp').get(function (req, res) {
         if(req.user)
-            res.render('serviceInfo',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+            res.render('temp',{seller:req.session.passport.user.seller, authUser: req.user[0]});
         else
-            res.render('serviceInfo',{authUser: null});
+            res.render('temp',{authUser: null});
     });
 
     //에러 화면
