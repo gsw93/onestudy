@@ -403,11 +403,14 @@ input{
 }
 
 .headerSign{
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-weight: 800;
     font-size: 30px;
+    width:100%;
 }
-
+.media-body .row {
+  margin-bottom: 5px;
+}
 .darktext{
     font-weight: 700;
     /* color: #ff9933; */

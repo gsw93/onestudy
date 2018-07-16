@@ -85,7 +85,7 @@
                             <!-- Description -->
                             <form action="/process/addboard" method="post" enctype="multipart/form-data" style="width:100%" onsubmit="return chkchk(this);">
                               <!-- PROFILE IMAGE -->
-                              <div class="form-group">
+                              <div class="row">
                                   <h2 class="headerSign" style="text-align:center;">마스터 스터디 등록</h2>
                               </div>
                               <div class="row">
@@ -99,11 +99,16 @@
                               </div>
                               <div class="row">
                                 <label class="col-lg-2 darktext" for="category">카테고리</label>
-                                <div class="col-lg-9 form-control">
+                                <select class="col-lg-2 form-control" name="category" id="category" style="height:35px;margin:auto 0;font-size:14px;">
+                                  <option value="언어">언어</option>
+                                  <option value="운동">운동</option>
+                                  <option value="취미/클래스">취미/클래스</option>
+                                </select>
+                                <!-- <div class="col-lg-9 form-control">
                                   <input type="checkbox" id="chk_chg" name="category" value="언어"><span style="margin-right:50px;">언어</span>
                                   <input type="checkbox" id="chk_chg" name="category" value="운동"><span style="margin-right:50px;">운동</span>
                                   <input type="checkbox" id="chk_chg" name="category" value="취미/클래스"><span style="margin-right:50px;">취미/클래스</span>
-                                </div>
+                                </div> -->
                               </div>
                               <div class="row">
                                 <label class="col-lg-2 darktext" for="region">스터디 장소</label>
@@ -147,7 +152,7 @@
                         <h5>마스터 소개</h5>
                     </div>
                     <div class="col-lg-10 block">
-                      <textarea id="text1" class="text" name="masterInfo" required></textarea>
+                      <textarea id="text1" class="text" name="masterInfo"></textarea>
                     </div>
                   </div>
                 </div>
@@ -157,7 +162,7 @@
                         <h5>스터디 소개</h5>
                     </div>
                     <div class="col-lg-10 block">
-                        <textarea id="text2" class="text" name="studyInfo" required></textarea>
+                        <textarea id="text2" class="text" name="studyInfo"></textarea>
                     </div>
                   </div>
                 </div>
@@ -197,74 +202,75 @@
                             });
 
                             $('form').on('submit', function (e) {
+
                               if ($('#text1').froalaEditor('core.isEmpty')) {
-                                // e.preventDefault();
                                 alert('마스터 소개를 입력하세요.');
 
                                 return false;
                               }
+
                               if ($('#text2').froalaEditor('core.isEmpty')) {
-                                // e.preventDefault();
-                                alert('마스터 소개를 입력하세요.');
+                                alert('스터디 소개를 입력하세요.');
 
                                 return false;
                               }
-                              var maxNum = document.getElementById('maxNum').selectedIndex;
-                              var max = document.getElementsByTagName("option")[maxNum].value;
+
+                              var minNum = document.getElementById('minNum');
+                              var min = minNum.options[minNum.selectedIndex].value
+                              if(isNaN(min)==true){
+                                alert('최소 인원을 설정해주세요.');
+                                return false;
+                              }
+                              var maxNum = document.getElementById('maxNum');
+                              var max = maxNum.options[maxNum.selectedIndex].value;
                               if(isNaN(max)==true){
                                 alert('최대 인원을 설정해주세요.');
                                 return false;
                               }
-                              var minNum = document.getElementById('minNum').selectedIndex;
-                              var min = document.getElementsByTagName("option")[minNum].value;
-                              if(min=='최소'){
-                                alert('최소 인원을 설정해주세요.');
-                                return false;
-                              }
-                              
+
                             });
 
                         });
                         function maxoption(){
-                          var minNum = document.getElementById('minNum').selectedIndex;
-                          var min = document.getElementsByTagName("option")[minNum].value;
+                          var minNum = document.getElementById('minNum');
+                          var min = minNum.options[minNum.selectedIndex].value;
+                          var maxNum = document.getElementById('maxNum');
+                          var options ="<option value='최대'>최대</option>";
                           if(min>0 && min<100){
-                            var maxNum = document.getElementById('maxNum');
-                            var options ="<option value='최대'>최대</option>";
                             for(min;min<100;min++){
                                options+="<option value='"+min+"'>"+min+"</option>";
                             }
                             maxNum.innerHTML = options;
                           }
                         }
-                        function chkchk(form){
-                          var arr_form = document.getElementsByName('category');
-                          var num=0;
+                        // function chkchk(form){
+                        //   var arr_form = document.getElementsByName('category');
+                        //   var num=0;
+                        //
+                        //   for(var i =0;i<arr_form.length;i++){
+                        //     if(arr_form[i].checked){
+                        //       num++;
+                        //     }
+                        //   }
+                        //   if(!num){
+                        //     alert('카테고리 : 하나 이상 선택해주시기 바랍니다.');
+                        //     return false;
+                        //   }
+                        // }
 
-                          for(var i =0;i<arr_form.length;i++){
-                            if(arr_form[i].checked){
-                              num++;
-                            }
-                          }
-                          if(!num){
-                            alert('카테고리 : 하나 이상 선택해주시기 바랍니다.');
-                            return false;
-                          }
-                        }
-
-                        function date_format(dateValue){
-                          var dd = dateValue.getDate();
-                          var mm = dateValue.getMonth()+1;
-                          var yyyy = dateValue.getFullYear();
-
-                          if(dd<10){
-                            dd = '0'+dd;
-                          }
-                          if(mm<10){
-                            mm = '0'+mm;
-                          }
-                          return yyyy+'-'+mm+'-'+dd;
-                        }
+                        // function date_format(dateValue){
+                        //   var dd = dateValue.getDate();
+                        //   var mm = dateValue.getMonth()+1;
+                        //   var yyyy = dateValue.getFullYear();
+                        //
+                        //   if(dd<10){
+                        //     dd = '0'+dd;
+                        //   }
+                        //   if(mm<10){
+                        //     mm = '0'+mm;
+                        //   }
+                        //   return yyyy+'-'+mm+'-'+dd;
+                        // }
 
                         function readURL(input) {
                            if (input.files && input.files[0]) {
