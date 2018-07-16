@@ -118,7 +118,7 @@
                               <div class="row">
                                 <label for="address" class="col-lg-2 col-md-2 col-sm-2" style="font-size:14px;text-align:right;">주소</label>
                                 <input type="text" class="form-control col-lg-7 col-md-7 col-sm-7" id="address" style="margin:auto 0;" name="address" required readonly/>
-                                <button type="button" class="btn col-lg-2 col-md-2 col-sm-2" onclick="goPopup()" style="margin:auto 15px;height:35px;">찾기</button>
+                                <button type="button" class="col-lg-2 col-md-2 col-sm-2" id="findbtn" onclick="goPopup()" style="margin:auto 15px;height:35px;">찾기</button>
                                 <input type="hidden" id="entX" name="x" required readonly/>
                                 <input type="hidden" id="entY" name="y" required readonly/>
                                 <input type="hidden" id="siNm" name="siNm" required readonly/>
@@ -139,7 +139,11 @@
                               </div>
                               <div class="row">
                                 <label for="studyTerm" class="col-lg-2 darktext">스터디 기간</label>
-                                <input type="number" class="col-lg-2" name="studyTerm" min="1" value="1">
+                                <select class="col-lg-2 form-control" name="studyTerm" style="height:35px;margin:auto 0;font-size:14px;">
+                                  <%var term=1;for(term;term< 21;term++){%>
+                                  <option value="<%=term%>"><%=term%>주</option>
+                                  <%}%>
+                                </select>
                                 <label for="price" class="col-lg-2 darktext">금액</label>
                                 <input type="number" class="col-lg-2" name="price" min="0" max="100" style="width:150px;" required><span style="margin:auto 5px;">만원</span>
                               </div>

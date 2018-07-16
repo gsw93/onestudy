@@ -81,33 +81,22 @@
     <section class="store-coupon section w3-twothird" id="mySection">
         <div class="category-select" style="z-index: 100; position: relative;">
             <div class="row selects">
-                <select class="form-control" style="height: 35px;">
-                    <option value="지역">지역(시)</option>
+                <select class="col-lg-3 col-md-3 col-sm-6 form-control" style="height: 35px;" onchange="selectRegion1()" id="select_region">
+                    <option value="지역(1)">지역(1)</option>
                     <option value="청주">청주</option>
                     <option value="세종">세종</option>
                 </select>
-                <select class="form-control" style="height: 35px;">
-                    <option value="지역">지역(구)</option>
-                    <option value="흥덕구">흥덕구</option>
-                    <option value="상당구">상당구</option>
+                <select class="col-lg-3 col-md-3 col-sm-6 form-control" style="height: 35px;" id="select_region2">
+                    <option value="지역(2)">지역(2)</option>
                 </select>
-                <select class="form-control" style="height: 35px;">
+                <select class="col-lg-3 col-md-3 col-sm-6  form-control" style="height: 35px;">
                     <option value="분야">분야</option>
-                    <option value="영어">영어</option>
-                    <option value="수학">수학</option>
-                </select>
-                <select class="form-control" style="height: 35px;">
-                    <option value="레벨">레벨</option>
-                    <option value="고급">고급</option>
-                    <option value="중급">중급</option>
-                    <option value="초급">초급</option>
+                    <option value="언어">언어</option>
+                    <option value="운동">운동</option>
+                    <option value="취미/클래스">취미/클래스</option>
                 </select>
 
-                <ul>
-                    <li>
-                        <a href="">검색</a>
-                    </li>
-                </ul>
+                <input type="button" class="col-lg-2 col-md-2 col-sm-6" name="resetlist" value="검색" onclick="selectRegion()">
             </div>
         </div>
         <div class="container-fluid" style="margin-top: 20px;">
@@ -223,8 +212,7 @@
         <%if(!authUser.phoneAuthCheck){%>
         <div class="modal" role="dialog" id="myModal" style="display:block;">
             <div class="modal-dialog">
-                <br><br>
-                <h1>주소와 관심분야를 등록하시면 가까운 위치의 관심분야에 맞는 마스터를 쉽게 찾으실 수 있습니다.</h1>
+                <p style="text-align:center;font-size:25px;font-weight:650;margin-top:20px;"><strong style="color:orange;">주소와 관심분야</strong>를 등록하시면 <br>가까운 위치의 관심분야에 맞는 마스터를 <br>쉽게 찾으실 수 있습니다.</p>
                 <br><br>
                 <div class="row">
                     <div class="col-md-6">
@@ -271,6 +259,30 @@
         var section = document.getElementById('mySection');
         section.classList.remove("w3-twothird");
         section.classList.add("container");
+    }
+
+    function selectRegion1(){
+      var region = document.getElementById('select_region');
+      var option = region.options[region.selectedIndex].value;
+      var region2 = document.getElementById('select_region2');
+      var options="<option value='지역(2)'>지역(2)</option>";
+      if(option=='청주'){
+        options +="<option value='상당구'>상당구</option>";
+        options +="<option value='서원구'>서원구</option>";
+        options +="<option value='흥덕구'>흥덕구</option>";
+        options +="<option value='청원구'>청원구</option>";
+        region2.innerHTML = options;
+      }
+      if(option=='세종'){
+        options +="<option value='한솔동'>한솔동</option>";
+        options +="<option value='도담동'>도담동</option>";
+        options +="<option value='아름동'>아름동</option>";
+        options +="<option value='종촌동'>종촌동</option>";
+        options +="<option value='보람동'>보람동</option>";
+        options +="<option value='고운동'>고운동</option>";
+        options +="<option value='새롬동'>새롬동</option>";
+        region2.innerHTML = options;
+      }
     }
 </script>
 
