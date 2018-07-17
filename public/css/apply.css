@@ -716,6 +716,9 @@ input {
   margin:83px 0;
 }
 
+.Applyform .applycomplete{
+    height: 330px;
+}
 
 .Applyform h1{
   text-align:center;
@@ -752,12 +755,18 @@ input {
         padding-left:10px;
         padding-right:10px;
     }
+    .Applyform .applycomplete{
+        height: 380px;
+    }
 }
 @media (max-width: 970px) and (min-width:768px) {
     .Apply .row label {
         font-size: 16px;
         padding-left:10px;
         padding-right:10px;
+    }
+    .Applyform .applycomplete{
+        height: 350px;
     }
 }
 
@@ -771,6 +780,9 @@ input {
   .Apply .row .gender{
     margin: 20px 0;
     width:20%;
+  }
+  .Applyform .applycomplete{
+      height: 400px;
   }
 }
 /*

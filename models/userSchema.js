@@ -18,7 +18,7 @@ var UserSchema = new mongoose.Schema({
     authToken: {type: String, default: ''},
     sellercheck:{type:Boolean, default:false},
     phoneAuthCheck:{type: Boolean, default: false}, // 사용자도 서비스 이용할때에는 추가정보와 핸드폰 인증 최초 1회 받아야하는데 그거 체크하기 위함.
-    name: {type: String},
+    name: {type: String}, // 이 name 필드를 없애고 위에 nickname 필드를 name으로 바꿀 계획 !
     age: {type: Number},
     gender: {type: String},
     photo: {type: String},

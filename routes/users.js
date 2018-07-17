@@ -140,4 +140,53 @@ module.exports = function (router, passport) {
             }
         });
     });
+
+
+    //정식 오픈 전까지 마스터 받는 라우터입니다. 임시용입니다.by 순우
+    router.route('/process/earlymaster').post(function (req, res) {
+        console.log('/process/earlymaster 호출됨.');
+
+        UserModel.findById(req.body.email, function (err, user) {
+            if (err) {
+                throw err;
+                console.log(err);
+            }
+            if (user.length > 0) {
+                console.log('이미 등록된 사용자입니다.');
+                res.send('이미 등록된 사용자입니다.');
+            } else {
+                hasher({password: req.body.password}, function (err, pass, salt, hash) {
+                    var name = req.body.name;
+                    var email = req.body.email;
+                    var password = hash;
+                    var age = req.body.age;
+                    var gender = req.body.gender;
+                    var phone = req.body.phoneNumber;
+                    var salt = salt;
+                    var location={type:'Point',coordinates:[0,0]};
+
+                    var user = new UserModel({
+                        "id": email,
+                        "password": password,
+                        "nickname": name,
+                        "age": age,
+                        "gender": gender,
+                        "phone": phone,
+                        "salt": salt,
+                        "sellercheck": true,
+                        "provider": 'onestudy(earlyMaster)',
+                        "location": location
+                    });
+                    // save ()로 저장
+                    user.save(function (err) {
+                        if (err) {
+                            return err;
+                        }
+                        console.log("사용자 데이터 추가함.");
+                        return res.redirect('/RegisterMaster2');
+                    })
+                });
+            }
+        });
+    });
 };
