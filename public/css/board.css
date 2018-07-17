@@ -94,6 +94,7 @@
 
 .selects{
     margin:auto;
+    padding:12px 0;
     width:90%;
 }
 
@@ -101,22 +102,21 @@
     width: 16%;
     font-size: 14px;
     float: left;
-    margin:12.5px 1% 12.5px 1%;
+    margin:auto 1%;
     background-color: white;
 }
 
-.selects select:active{
+.selects select:focus{
     background-color: #ffffff;
-
 }
 
-.selects ul{
-    width: 17%;
+.selects input[type=button]{
     display: inline-block;
     height: 35px;
+    color:#fff;
     background-color:#663300;
     border-radius: 20px;
-    margin: 12.5px 2%;
+    margin: auto 0;
 }
 
 @media (max-width: 768px){
@@ -371,7 +371,15 @@
 .media-body input[type=text],input[type=number],input[type=date]{
     text-align: center;
 }
-
+#findbtn{
+  border-radius:30px;
+  color:#ffffff;
+  height:40px;
+  margin: 5px 10px 5px 10px;
+  vertical-align: middle;
+  background-color:gray;
+  border-style:none;
+}
 
 .form-group{
     font-size: 17px;
@@ -417,7 +425,7 @@ input{
     /* color:#737373; */
     color:#000;
     margin-right:5%;
-    font-size: 17px;
+    font-size: 18px;
     text-align:right;
     padding-right: 0;
 }
