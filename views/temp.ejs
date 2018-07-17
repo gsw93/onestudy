@@ -7,6 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>One Study - 스터디 매칭 서비스</title>
 
+    <style>
+        .img-wrapper .span1 {
+            font-size: 20px;
+        }
+
+        .img-wrapper .span2 {
+            font-size: 20px;
+        }
+
+        .img-wrapper .span3 {
+            font-size: 20px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .img-wrapper {
+                height: 850px;
+            }
+
+            .img-wrapper .span1 {
+                font-size: 12px;
+                top: 10px;
+                left: 25%;
+                position: absolute;
+            }
+
+            .img-wrapper .span2 {
+                font-size: 12px;
+                top: 10px;
+                left: 18%;
+                position: absolute;
+            }
+
+            .img-wrapper .span3 {
+                font-size: 12px;
+                top: 10px;
+                left: 10%;
+                position: absolute;
+            }
+        }
+    </style>
+
     <!-- PLUGINS CSS STYLE -->
     <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -39,163 +80,27 @@
 </head>
 
 <body class="body-wrapper">
-<!--=====================================
-=            Top Header Menu            =
-======================================-->
-<!--=============================
-=            Nav Bar            =
-==============================-->
-<!--===============================
-=            Container Area            =
-================================-->
-
-<!--<section class="best-deal section" style="background-color: #e6e6e6;">-->
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-            <!--&lt;!&ndash; Offer Tabs &ndash;&gt;-->
-            <!--<div class="col-lg-1"></div>-->
-            <!--<div class="block col-lg-3">-->
-                <!--<div class="block-bar"></div>-->
-                <!--<div class="title">-->
-                    <!--<h5><span>스터디</span>&nbsp;만들기</h5>-->
-                <!--</div>-->
-                <!--<div class="content">-->
-                    <!--<p>누구나 무료로<br>새로운 친구들과 스터디할 수 있다!<br>스터디 그룹의 리더가 되어보세요</p>-->
-                    <!--<div class="image">-->
-                        <!--<img src="./img/home/main_i_01.png">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="block col-lg-3">-->
-                <!--<div class="block-bar"></div>-->
-                <!--<div class="title">-->
-                    <!--<h5><span>마스터</span>&nbsp;찾기</h5>-->
-                <!--</div>-->
-                <!--<div class="content">-->
-                    <!--<p>1:1부터 1:N까지,<br>다양한 스터디를 할 수 있다!<br>자신의 마스터를 찾아보세요</p>-->
-                    <!--<div class="image">-->
-                        <!--<img src="./img/home/main_i_02.png">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="block col-lg-3">-->
-                <!--<div class="block-bar"></div>-->
-                <!--<div class="title">-->
-                    <!--<h5><span>학생</span>&nbsp;만나기</h5>-->
-                <!--</div>-->
-                <!--<div class="content">-->
-                    <!--<p>재능을 나눌<br>가까운 지역의 학생을 만날 수 있다!<br>자신의 학생을 찾아보세요</p>-->
-                    <!--<div class="image">-->
-                        <!--<img src="./img/home/main_i_03.png">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-lg-1"></div>-->
-            <!--&lt;!&ndash; SideBar &ndash;&gt;-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
-
-
-<!-- master section -->
     <div class="container">
-        <div style="display: block; margin: auto; position: relative;">
-            <img src="img/event.jpg" alt="" style="width: 100%; height: 100%;">
-            <!--<button class="btn btn-danger" style="top: 22%; left: 35%; position: absolute; width: 25%; height: 4%;">상세보기</button>-->
-            <!--<div class="master">-->
-                <!--<h1>-->
-                    <!--<span id="anyone">누구나 할 수 있다. </span><span style="color: #595959;"> 당신도 마스터다!</span>-->
-                <!--</h1>-->
-                <!--<a href="">지금 할인된 가격으로 마스터가 되어보세요</a><span>&nbsp;&gt;</span>-->
-                <!--<div class="img-part">-->
-                    <!--<img class="img1" src="./img/home/main_i_04.png">-->
-                    <!--&lt;!&ndash; <img class="img2" src="./img/home/main_i_05.png" style="bottom:30px;position:absolute;right: 15%;"> &ndash;&gt;-->
-                    <!--<div class="img-content">-->
-                        <!--<p>사람들에게 재능도 나누고,<br>수익도 더하고,<br>한 걸음 더 성장!</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="btn">-->
-                    <!--<ul>-->
-                        <!--<li>-->
-                            <!--<a href="/apply">마스터 되기&nbsp; &rarr;</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
+        <div class="img-wrapper" style="display: block; margin: auto; position: relative;">
+            <img src="img/nobutton.png" alt="" style="width: 100%; height: 100%;">
+            <button class="btn btn-danger" style="top: 22%; left: 33%; position: absolute; width: 30%; height: 4%;">
+                <span class="span1">상세보기</span>
+            </button>
+            <button class="btn btn-danger" style="top: 22%; left: 66%; position: absolute; width: 30%; height: 4%;">
+                <span class="span2">마스터 등록</span>
+            </button>
+            <button class="btn btn-default" style="background-color: white; top: 48%; left: 13%; position: absolute; width: 35%; height: 4%;">
+                <span class="span3">마스터 등록하기</span>
+            </button>
+            <button class="btn btn-default" style="background-color: white; top: 70%; left: 45%; position: absolute; width: 35%; height: 4%;">
+                <span class="span3">마스터 등록하기</span>
+            </button>
+            <button class="btn btn-default" style="background-color: white; top: 92%; left: 21%; position: absolute; width: 35%; height: 4%;">
+                <span class="span3">마스터 등록하기</span>
+            </button>
         </div>
     </div>
-
-<!-- advantage section -->
-<!--<section class="best-deal section" style="background-color: #e6e6e6;">-->
-    <!--<div class="container">-->
-        <!--<div class="advantage">-->
-            <!--<h1>우리 <span>ONE STUDY</span>는,</h1>-->
-            <!--<h5 style="font-weight: 550">당신과 꼭 맞는 마스터와 스터디를 연결해주는 오프라인 매칭 플랫폼입니다.</h5>-->
-            <!--<ul>-->
-                <!--<li>-->
-                    <!--<a href="">서비스 안내&nbsp; &rarr;</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-lg-1"></div>-->
-            <!--<div class="advantages col-lg-3 col-md-6">-->
-                <!--<div class="white_circle">-->
-                    <!--<div class="black_circle"><img src="./img/home/main_i_06.png" id="ad_icon"></div>-->
-                <!--</div>-->
-                <!--<div class="ad_ctn col-sm-12 col-md-12">-->
-                    <!--<h6>원스터디 한방 솔루션!</h6>-->
-                    <!--<p>불필요한 검색없이 여러 분야를 한번에<br>해결해준다! 다 따로 알아보지말고 <br>이젠, 원스터디로 한번에!!</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="advantages col-lg-3 col-md-6">-->
-                <!--<div class="white_circle">-->
-                    <!--<div class="black_circle"><img src="./img/home/main_i_07.png" id="ad_icon"></div>-->
-                <!--</div>-->
-                <!--<div class="ad_ctn col-sm-12 col-md-12">-->
-                    <!--<h6>부담스러운 매칭? 더이상은 NO!<br>1:1 채팅으로 편하게</h6>-->
-                    <!--<p>자신이 원하는 조건의 마스터와<br>원스터디만의 대화 매칭으로 <br>단둘이! 가볍게 대화해보자</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="advantages col-lg-3 col-md-6">-->
-                <!--<div class="white_circle">-->
-                    <!--<div class="black_circle"><img src="./img/home/main_i_08.png" id="ad_icon"></div>-->
-                <!--</div>-->
-                <!--<div class="ad_ctn col-sm-12 col-md-12">-->
-                    <!--<h6>뭉치면 힘이 2배</h6>-->
-                    <!--<p>나와 관심사가<br>비슷한 친구들을 만날 수 있다!<br>원스터디의 무료 스터디 찾기!</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-lg-1"></div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
-
-
-<!--<section class="best-deal section" style="background-color: #ffffff;">-->
-    <!--<div class="container">-->
-        <!--<div class="study">-->
-            <!--<h3><span>무료</span>로 스터디 그룹을 만들자!</h3>-->
-            <!--<h4>어려우면 마스터가 도와준다.</h4>-->
-            <!--<div class="study_ctn">-->
-                <!--<p>그동안 관심사가 비슷한 학생을 쉽게 만나기 힘들었던 어려움을 원스터디가 해결했습니다.<br>-->
-                    <!--가까운 주변 지역 친구들과 스터디를 시작해보세요!<br>-->
-                    <!--어려움이 생기면, 마스터에게 도움을 요청하세요.&nbsp;&nbsp;<a href="">마스터가 도와줄게요 &gt;</a>-->
-                <!--</p>-->
-            <!--</div>-->
-            <!--<ul>-->
-                <!--<li>-->
-                    <!--<a href="">스터디 만들기&nbsp; &rarr;</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
-
-
-<!--============================
-=            Footer            =
-=============================-->
+</body>
 
 
 <!-- JAVASCRIPTS -->
