@@ -55,7 +55,7 @@ module.exports = function (router) {
         res.render('RegisterMaster2');
     });
     router.route('/index2').get(function (req, res) {
-        res.render('index2',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+        res.render('index2');
     });
     //에러 화면
     router.route('/error').get(function (req, res) {
