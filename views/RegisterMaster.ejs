@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>One Study - 스터디 매칭 서비스</title>
 
     <!-- Include jQuery lib. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -26,11 +29,13 @@
     <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
     <!-- CUSTOM CSS -->
     <link href="css/apply.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
+
 </head>
-<body>
+<body class="body-wrapper">
   <!--=====================================
   =            Top Header Menu            =
   ======================================-->
@@ -55,7 +60,7 @@
         <div class="row">
           <label for="email" class="col-lg-2 col-md-2 col-sm-2">이메일</label>
           <input type="email" name="email" class="col-lg-10 col-md-10 col-sm-10 form-control" id="email" required/>
-          <p style="color:red;" class="col-lg-10" id="emailIncorrect">이메일 형식으로 작성해주세요.</p>
+          <p style="color:red;" class="col-lg-10" id="emailIncorrect" style="visibility: hidden;">이메일 형식으로 작성해주세요.</p>
         </div>
         <div class="row">
           <label for="password" class="col-lg-2 col-md-2 col-sm-2">비밀번호</label>
@@ -80,7 +85,7 @@
         <div class="row">
           <label for="phoneNumber" class="col-lg-2 col-md-2 col-sm-2">휴대폰</label>
           <input type="text" name="phoneNumber" id="phoneNumber" class="col-lg-10 col-md-10 col-sm-10 form-control" maxlength="13" required/>
-          <p style="color:red;" class="col-lg-10" id="phoneIncorrect">잘못된 번호입니다. 숫자만을 입력하세요.</p>
+          <p style="color:red;" class="col-lg-10" id="phoneIncorrect">잘못된 번호입니다.</p>
           <!-- <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" onclick="popup()" value="인증"> -->
         </div>
         <!-- <div class="form-group">
@@ -106,10 +111,10 @@
 <!-- JAVASCRIPTS -->
 <script type="text/javascript">
 
-function popup(){
-  var popup = window.open("","_blank","width=300,height=200");
-  popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
-}
+// function popup(){
+//   var popup = window.open("","_blank","width=300,height=200");
+//   popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
+// }
 
 function autoHypenPhone(str){
             str = str.replace(/[^0-9]/g, '');
@@ -209,6 +214,18 @@ $(function(){
     }
   }
 
+//휴대폰 숫자만 입력
+  var number2 = document.getElementById('phoneNumber');
+
+  number2.onkeydown = function(e){
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58)
+      || (e.keyCode == 8))) {
+        alert('숫자만 입력하세요.');
+        return false;
+    }
+  }
+
   //휴대폰 정규식
   $('#phoneIncorrect').hide();
   $('#phoneNumber').change(function(){
@@ -227,7 +244,7 @@ $(function(){
 
 
 </script>
-<!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
+<script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
 <script src="plugins/raty/jquery.raty-fa.js"></script>

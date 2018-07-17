@@ -2,6 +2,7 @@
     'use strict';
 
     $(document).on('ready', function () {
+        $('#demo').carousel({interval: 10000});
         // -----------------------------
         //  Client Slider
         // -----------------------------
@@ -85,7 +86,7 @@
          $('.favorite').click(function(){
             $.notify({
                 // options
-                message: 'Successfully Added to favorites!!!' 
+                message: 'Successfully Added to favorites!!!'
             },{
                 // settings
                 type: 'success'
@@ -94,13 +95,13 @@
         // function notify(){
         //     $.notify({
         //     // options
-        //     message: 'Successfully Added to favorites!!!' 
+        //     message: 'Successfully Added to favorites!!!'
         //     },{
         //     // settings
         //     type: 'success'
-        //     });    
-        // } 
-        
+        //     });
+        // }
+
         // -----------------------------
         // Coupon Type Select
         // -----------------------------
@@ -112,7 +113,7 @@
         });
         /***ON-LOAD***/
         jQuery(window).on('load', function () {
-            
+
         });
 
     });
