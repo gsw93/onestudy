@@ -47,12 +47,12 @@ module.exports = function (router) {
 
     router.route('/temp').get(function (req, res) {
         if(req.user)
-            res.render('temp',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+            res.render('temp');
         else
-            res.render('temp',{authUser: null});
+            res.render('temp');
     });
     router.route('/RegisterMaster').get(function (req, res) {
-        res.render('RegisterMaster',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+        res.render('RegisterMaster');
     });
     router.route('/index2').get(function (req, res) {
         res.render('index2',{seller:req.session.passport.user.seller, authUser: req.user[0]});
