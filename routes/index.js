@@ -54,6 +54,9 @@ module.exports = function (router) {
     router.route('/RegisterMaster').get(function (req, res) {
         res.render('RegisterMaster');
     });
+    router.route('/RegisterMaster2').get(function (req, res) {
+        res.render('RegisterMaster2');
+    });
     router.route('/index2').get(function (req, res) {
         res.render('index2',{seller:req.session.passport.user.seller, authUser: req.user[0]});
     });
