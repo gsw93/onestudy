@@ -722,7 +722,7 @@ input {
 }
 
 .Apply{
-  width:35%;
+  width:38%;
   margin:auto;
   display:block;
   padding-top:30px;
@@ -732,34 +732,40 @@ input {
         width:50%;
     }
 }
-.Apply .form-group .form-control{
+
+.Apply .row{
+  width:100%;
+  margin:0;
+}
+.Apply .row .form-control{
   background-color:#ffffff;
+  margin:5px auto;
 }
 
-.Apply .form-group label {
+.Apply .row label {
     font-size: 18px;
 }
 
 @media (max-width: 768px) {
-    .Apply .form-group label {
+    .Apply .row label {
         font-size: 12px;
         padding-left:10px;
         padding-right:10px;
     }
 }
 @media (max-width: 970px) and (min-width:768px) {
-    .Apply .form-group label {
+    .Apply .row label {
         font-size: 16px;
         padding-left:10px;
         padding-right:10px;
     }
 }
 
-.Apply .form-group .gender{
+.Apply .row .gender{
   margin: 20px 0;
 }
-
-.Apply .form-group input[type=button]{
+/*
+.Apply .row input[type=button]{
   border-radius:30px;
   color:#ffffff;
   height:40px;
@@ -767,7 +773,7 @@ input {
   vertical-align: middle;
   background-color:#595959;
   border-style:none;
-}
+} */
 
 .Apply input[type=submit]{
   width:150px;
@@ -777,6 +783,6 @@ input {
   background-color:#404040;
   border-style:none;
   font-size: 16px;
-  margin:auto;
+  margin:40px auto;
   display:block;
 }

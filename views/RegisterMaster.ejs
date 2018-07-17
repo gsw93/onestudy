@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Include jQuery lib. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- PLUGINS CSS STYLE -->
+    <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Select 2 -->
+    <link href="plugins/selectbox/select_option1.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link href="plugins/owl-carousel/assets/owl.carousel.min.css" rel="stylesheet" media="screen">
+    <!-- Owl Carousel Theme -->
+    <link href="plugins/owl-carousel/assets/owl.theme.green.min.css" rel="stylesheet" media="screen">
+    <!-- Fancy Box -->
+    <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+    <!-- Datepicker -->
+    <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="css/apply.css" rel="stylesheet">
+
+    <!-- FAVICON -->
+    <link href="img/favicon.png" rel="shortcut icon">
+</head>
+<body>
+  <!--=====================================
+  =            Top Header Menu            =
+  ======================================-->
+  <%- include topHeader.ejs %>
+  <!--=============================
+  =            Nav Bar            =
+  ==============================-->
+  <%- include topButton.ejs %>
+
+  <!--==================================
+  =            Write contents            =
+  ===================================-->
+
+    <div class="Applyform">
+      <form action="/process/addmaster" method="post">
+      <h1>Master Profile</h1>
+      <div class="Apply">
+        <div class="row">
+          <label for="name" class="col-lg-2 col-md-2 col-sm-2">이름</label>
+          <input type="text" name="name" class="col-lg-10 col-md-10 col-sm-10 form-control" required/>
+        </div>
+        <div class="row">
+          <label for="email" class="col-lg-2 col-md-2 col-sm-2">이메일</label>
+          <input type="email" name="email" class="col-lg-10 col-md-10 col-sm-10 form-control" id="email" required/>
+          <p style="color:red;" class="col-lg-10" id="emailIncorrect">이메일 형식으로 작성해주세요.</p>
+        </div>
+        <div class="row">
+          <label for="password" class="col-lg-2 col-md-2 col-sm-2">비밀번호</label>
+          <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password1" required/>
+          <label for="password2" class="col-lg-2 col-md-2 col-sm-2">확인</label>
+          <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password2" required/>
+          <p style="color:red;" class="col-lg-10" id="passwordRegex">숫자, 문자, 특수문자를 각 1개이상 포함하여 최소 8자리로 입력하세요.</p>
+          <p style="color:red;" class="col-lg-10" id="passwordIncorrect">비밀번호가 일치하지 않습니다!</p>
+          <p style="color:blue;" class="col-lg-10" id="passwordCorrect">비밀번호가 일치합니다.</p>
+        </div>
+        <div class="row">
+          <label for="age" class="col-lg-2 col-md-2 col-sm-2">나이</label>
+          <input type="number" name="age" class="col-lg-10 col-md-10 col-sm-10 form-control" id="age" required/>
+        </div>
+        <div class="row">
+          <label for="name" class="col-lg-2 col-md-2 col-sm-2">성별</label>
+          <input type="radio" name="gender" class="col-lg-1 col-md-1 col-sm-1 gender" value="남" checked required>
+          <label for="남">남성</label>
+          <input type="radio" name="gender" class="col-lg-1 col-md-1 col-sm-1 gender" value="여" required>
+          <label for="여">여성</label>
+        </div>
+        <div class="row">
+          <label for="phoneNumber" class="col-lg-2 col-md-2 col-sm-2">휴대폰</label>
+          <input type="text" name="phoneNumber" id="phoneNumber" class="col-lg-10 col-md-10 col-sm-10 form-control" maxlength="13" required/>
+          <p style="color:red;" class="col-lg-10" id="phoneIncorrect">잘못된 번호입니다. 숫자만을 입력하세요.</p>
+          <!-- <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" onclick="popup()" value="인증"> -->
+        </div>
+        <!-- <div class="form-group">
+          <label for="userImage">사진</label>
+          <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                  <input type="file" accept="image/png, image/jpeg, image/gif" id="imgInp">
+                </span>
+            </span>
+            <input id='urlname'type="text" class="form-control" readonly>
+            <img id='img-upload'/>
+        </div>
+        </div> -->
+        <input type="submit" name="save" value="저장&nbsp;&gt;">
+      </div>
+      </form>
+    </div>
+<!--============================
+=            Footer            =
+=============================-->
+<%- include footer.ejs %>
+<!-- JAVASCRIPTS -->
+<script type="text/javascript">
+
+function popup(){
+  var popup = window.open("","_blank","width=300,height=200");
+  popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
+}
+
+function autoHypenPhone(str){
+            str = str.replace(/[^0-9]/g, '');
+            var tmp = '';
+            if( str.length < 4){
+                return str;
+            }else if(str.length < 7){
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3);
+                return tmp;
+            }else if(str.length < 11){
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3, 3);
+                tmp += '-';
+                tmp += str.substr(6);
+                return tmp;
+            }else{
+                tmp += str.substr(0, 3);
+                tmp += '-';
+                tmp += str.substr(3, 4);
+                tmp += '-';
+                tmp += str.substr(7);
+                return tmp;
+            }
+            return str;
+        }
+
+var cellPhone = document.getElementById('phoneNumber');
+cellPhone.onkeyup = function(event){
+        event = event || window.event;
+        var _val = this.value.trim();
+        this.value = autoHypenPhone(_val) ;
+}
+
+
+$(function(){
+
+  //패스워드 정규식, 패스워드 일치여부
+  $('#passwordIncorrect').hide();
+  $('#passwordCorrect').hide();
+  $('#passwordRegex').hide();
+
+
+  $('#password1').change(function(){
+    var password1 = document.getElementById('password1').value;
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    if(regex.test(password1)==false){
+      $('#passwordRegex').show();
+      document.getElementById('password2').disabled=true;
+    }
+    else{
+      $('#passwordRegex').hide();
+      document.getElementById('password2').disabled=false;
+    }
+  });
+
+  $('#password2').change(function(){
+    var password1 = document.getElementById('password1').value;
+    var password2 = document.getElementById('password2').value;
+
+    if(password1==password2){
+      $('#passwordCorrect').show();
+      $('#passwordIncorrect').hide();
+    }
+    else{
+      $('#passwordIncorrect').show();
+      $('#passwordCorrect').hide();
+    }
+  })
+
+  //이메일 정규식
+  $('#emailIncorrect').hide();
+  $('#email').change(function(){
+    var email = document.getElementById('email').value;
+    var regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    if(regex.test(email)==false){
+      $('#emailIncorrect').show();
+      $('#email').focus();
+      document.getElementById('email').value = "";
+    }
+    else{
+      $('#emailIncorrect').hide();
+    }
+  })
+
+//나이 숫자만 입력
+  var number = document.getElementById('age');
+
+  number.onkeydown = function(e){
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58)
+      || (e.keyCode == 8))) {
+        alert('숫자만 입력하세요.');
+        return false;
+    }
+  }
+
+  //휴대폰 정규식
+  $('#phoneIncorrect').hide();
+  $('#phoneNumber').change(function(){
+    var phone = document.getElementById('phoneNumber').value;
+    var regex = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    if(regex.test(phone)==false){
+      $('#phoneIncorrect').show();
+      $('#phoneNumber').focus();
+    }
+    else{
+      $('#phoneIncorrect').hide();
+    }
+  })
+})
+
+
+
+</script>
+<!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+<script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
