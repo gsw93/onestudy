@@ -1534,7 +1534,7 @@ ul.pagination .active a {
 }
 
 .best-deal .master p{
-    font-size: 17px;
+    font-size: 19px;
     font-style: bold;
     margin-left: 5%;
     line-height: 58px;
@@ -1565,7 +1565,7 @@ ul.pagination .active a {
 
 @media (max-width: 518px ) {
     .best-deal .master p{
-        font-size: 70%;
+        font-size: 16px;
         line-height: 3;
     }
 }
@@ -1577,8 +1577,8 @@ ul.pagination .active a {
 }
 @media (min-width: 768px) {
     .best-deal .master p{
-        font-size: 90%;
-        line-height: 4;
+        font-size: 19px;
+        line-height: 3;
     }
 }
 
@@ -2870,10 +2870,10 @@ article {
     margin-bottom: 30px;
     border-radius: 2px;
 }
-
+/*
 article .image, article .video, article .post-slider {
     margin-bottom: 25px;
-}
+} */
 
 article img {
     width: 100%;
