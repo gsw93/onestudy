@@ -22,7 +22,7 @@ var multer = require('multer');
 var fs = require('fs');
 //세션 설정
 var store = new MongoDBStore({
-    url: 'mongodb://127.0.0.1:27017/db',
+    uri: 'mongodb://35.189.135.181:27017/db',
     databaseName: 'db',
     collection: 'sessions'
 });
@@ -46,7 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
     if(!req.secure){
-        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+         return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
     next();
 });
