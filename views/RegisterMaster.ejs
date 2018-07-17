@@ -31,21 +31,18 @@
     <link href="img/favicon.png" rel="shortcut icon">
 </head>
 <body>
-  <!--=====================================
-  =            Top Header Menu            =
-  ======================================-->
-  <%- include topHeader.ejs %>
-  <!--=============================
-  =            Nav Bar            =
-  ==============================-->
-  <%- include topButton.ejs %>
 
   <!--==================================
   =            Write contents            =
   ===================================-->
 
     <div class="Applyform">
-      <form action="/process/addmaster" method="post">
+        <div>
+            <a class="navbar-brand p-0" href="/">
+                <img alt="logo" src="./img/home/logo.png" width="170px">
+            </a>
+        </div>
+        <form action="/process/addmaster" method="post">
       <h1>Master Profile</h1>
       <div class="Apply">
         <div class="row">
@@ -99,10 +96,7 @@
       </div>
       </form>
     </div>
-<!--============================
-=            Footer            =
-=============================-->
-<%- include footer.ejs %>
+
 <!-- JAVASCRIPTS -->
 <script type="text/javascript">
 
