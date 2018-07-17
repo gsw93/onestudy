@@ -4,14 +4,14 @@
 
 module.exports = function (router) {
     // 홈 화면
-    router.route('/').get(function (req, res) {
-        if (req.user) {
-            res.render('index', {authUser: req.user[0], seller: req.session.passport.user.seller});
-        } else {
-            console.log('비회원');
-            res.render('index', {authUser: null, seller: false});
-        }
-    });
+    // router.route('/').get(function (req, res) {
+    //     if (req.user) {
+    //         res.render('index', {authUser: req.user[0], seller: req.session.passport.user.seller});
+    //     } else {
+    //         console.log('비회원');
+    //         res.render('index', {authUser: null, seller: false});
+    //     }
+    // });
 
     // 로그인 화면
     router.route('/login').get(function (req, res) {
@@ -45,11 +45,8 @@ module.exports = function (router) {
     //         res.render('serviceInfo',{authUser: null});
     // });
 
-    router.route('/temp').get(function (req, res) {
-        if(req.user)
-            res.render('temp');
-        else
-            res.render('temp');
+    router.route('/').get(function (req, res) {
+            res.render('index');
     });
     router.route('/RegisterMaster').get(function (req, res) {
         res.render('RegisterMaster');
