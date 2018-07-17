@@ -1,0 +1,264 @@
+nav .container {
+  width:100%;
+  text-align: center;
+}
+
+nav .container a#temp_logo{
+  margin: 10px auto;
+}
+
+.carousel-caption{
+  margin:auto auto;
+  height:255px;
+  padding:0;
+}
+
+.carousel-caption h1{
+  color:#fff;
+  font-size:45px;
+  font-weight:500;
+}
+
+.carousel-caption p{
+  color:#fff;
+  font-size:18px;
+}
+
+/*advantage section*/
+.best-deal .advantage2{
+    text-align: center;
+}
+
+.best-deal .advantage2 h1,h5{
+    font-weight: 550;
+}
+
+.best-deal .advantage2 span{
+    color:#ef6c00;
+}
+.btn_temp{
+  font-size: 15px;
+  border-radius:50px;
+  background-color:#5b2900;
+  color:#fff;
+  font-weight:500;
+}
+
+.block_title{
+  text-align:center;
+  font-size:19px;
+  font-weight:800;
+  background-color: #e6e6e6;
+  border-style: none;
+  padding:10px 0;
+  margin:auto;
+}
+
+.best-deal .block2{
+    margin: 15px;
+    padding : 2.5%;
+    background-color: #ffffff;
+}
+.best-deal .block2 img{
+    border: 1px #cccccc solid;
+}
+.blocks{
+  margin:auto;
+  margin-bottom:50px;
+  text-align:center;
+}
+.blocks h1{
+  font-weight:550;
+  font-size:45px;
+  word-wrap: break-word;
+  word-break: keep-all;
+}
+.blocks p{
+  font-size:17px;
+  font-weight:650;
+}
+
+.applycomplete{
+  height:250px;
+  margin:40px auto;
+  border:1px solid #cccccc;
+  background-color:#fff;
+}
+
+.applycomplete .box h4{
+  text-align:center;
+}
+.applycomplete .box h3{
+  margin-top:30px;
+  text-align:center;
+  font-weight:600;
+  font-size:30px;
+}
+
+.applycomplete .box{
+  margin:65px 0;
+}
+
+@media (max-width: 518px ) {
+  .applycomplete{
+    width:80%;
+  }
+  .applycomplete .box{
+    margin:55px 0;
+  }
+  .applycomplete .box h4{
+    font-size: 19px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+  .applycomplete .box h3{
+    font-size:25px;
+    margin-top:20px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+  #emailIncorrect,#passwordRegex,#passwordIncorrect,#passwordCorrect,#phoneIncorrect{
+    font-size: 12px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+  .carousel-item img{
+    width:100%;
+    height:auto;
+    max-height: 180px;
+  }
+  .carousel-caption{
+    height:90px;
+  }
+  .carousel-caption h1{
+    font-size:18px;
+  }
+  .carousel-caption p{
+    font-size:12px;
+  }
+  .best-deal{
+    padding: 50px 0;
+  }
+  .best-deal .advantage2{
+      text-align: center;
+  }
+
+  .best-deal .advantage2 h1{
+      font-weight: 600;
+      font-size: 24px;
+  }
+  .best-deal .advantage2 h5{
+      font-weight: 500;
+      font-size: 16px;
+  }
+  .ad_ctn{
+     margin:auto;
+     width: 75%;
+  }
+  .ad_ctn h6{
+     font-size: 14px;
+  }
+  .advantages{
+      margin-top:20px;
+  }
+  .advantages .white_circle{
+      width:80px;
+      height: 80px;
+  }
+
+  .black_circle{
+      width:45px;
+      height:45px;
+  }
+
+  img#ad_icon{
+    width:50%;
+    margin:25% 25%;
+  }
+  .best-deal .master h1{
+      font-weight: 600;
+      font-size: 22px;
+  }
+  .master_detail{
+    width:90%;
+    margin:auto;
+    font-size: 14px;
+    word-break: keep-all;
+    word-wrap: break-word;
+  }
+  .btn_temp{
+    font-size: 10px;
+    font-weight:500;
+  }
+  .best-deal .block2{
+      margin: 15px 80px;
+  }
+  .best-deal .block2 img{
+      border: 1px #cccccc solid;
+  }
+  .blocks h1{
+    font-weight:600;
+    font-size:20px;
+  }
+  .blocks p{
+    font-size:14px;
+    font-weight:500;
+  }
+  .blocks{
+    margin-bottom:15px;
+  }
+  .block_title{
+    font-size:14px;
+    font-weight:600;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 518px ) {
+  .applycomplete .box{
+    margin:60px 0;
+  }
+  .applycomplete .box h4{
+    font-size: 20px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+  .applycomplete .box h3{
+    font-size:28px;
+    margin-top:20px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+  .carousel-item img{
+    width:100%;
+    height:auto;
+    max-height: 250px;
+  }
+  .carousel-caption{
+    height:120px;
+  }
+  .carousel-caption h1{
+    font-size:25px;
+  }
+  .carousel-caption p{
+    font-size:14px;
+  }
+}
+
+@media (max-width: 1062px) {
+  .applycomplete .box{
+    margin:60px 0;
+  }
+  .applycomplete .box h4{
+    font-size: 22px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+  .applycomplete .box h3{
+    font-size:28px;
+    margin-top:20px;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+}

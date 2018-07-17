@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<<<<<<< HEAD
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Study - 스터디 매칭 서비스</title>
 
+=======
+>>>>>>> fde2a1f6cde441ee5fd8f50e6dfa934995b69867
     <!-- Include jQuery lib. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
@@ -22,15 +27,24 @@
     <link href="plugins/owl-carousel/assets/owl.theme.green.min.css" rel="stylesheet" media="screen">
     <!-- Fancy Box -->
     <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-    <!-- Datepicker -->
-    <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
     <!-- CUSTOM CSS -->
     <link href="css/apply.css" rel="stylesheet">
+    <link href="css/temp.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122487959-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-122487959-1');
+    </script>
 </head>
-<body>
+<body class="body-wrapper">
   <nav class="navbar navbar-toggleable-md main-nav bg-light" style="z-index: 100">
       <!-- Container Start -->
       <div class="container" style="width: 95%;">
@@ -58,7 +72,7 @@
               <p style="color:red;" class="col-lg-10" id="emailIncorrect">이메일 형식으로 작성해주세요.</p>
             </div>
             <div class="row">
-              <label for="password" class="col-lg-2 col-md-2 col-sm-2">비밀번호</label>
+              <label for="password" class="col-lg-2 col-md-2 col-sm-2" style="word-wrap:break-word;word-break:keep-all;">비밀 번호</label>
               <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password1" required/>
               <label for="password2" class="col-lg-2 col-md-2 col-sm-2">확인</label>
               <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password2" required/>
@@ -205,6 +219,17 @@ $(function(){
         return false;
     }
   }
+  //휴대폰 숫자만 입력
+    var number2 = document.getElementById('phoneNumber');
+
+    number2.onkeydown = function(e){
+      if(!((e.keyCode > 95 && e.keyCode < 106)
+        || (e.keyCode > 47 && e.keyCode < 58)
+        || (e.keyCode == 8))) {
+          alert('숫자만 입력하세요.');
+          return false;
+      }
+    }
 
   //휴대폰 정규식
   $('#phoneIncorrect').hide();
@@ -224,7 +249,8 @@ $(function(){
 
 
 </script>
-<!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
+
+<script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
 <script src="plugins/raty/jquery.raty-fa.js"></script>
