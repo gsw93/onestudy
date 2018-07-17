@@ -45,7 +45,6 @@ module.exports = function (router) {
     //         res.render('serviceInfo',{authUser: null});
     // });
 
-    // index 올리기용
     router.route('/temp').get(function (req, res) {
         if(req.user)
             res.render('temp');
