@@ -28,6 +28,7 @@
 
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/temp.css" rel="stylesheet">
   <link href="css/login.css" rel="stylesheet">
   <!-- FAVICON -->
   <link href="img/favicon.png" rel="shortcut icon">
@@ -43,8 +44,8 @@
 
   <nav class="navbar navbar-toggleable-md main-nav bg-light" style="z-index: 100">
       <!-- Container Start -->
-      <div class="container" style="width: 95%;">
-          <a class="navbar-brand p-0" href="temp"style="margin:10px auto;">
+      <div class="container">
+          <a class="navbar-brand p-0" href="temp" id="temp_logo">
               <img alt="logo" src="./img/home/logo.png" width="180px">
           </a>
       </div>
@@ -64,23 +65,23 @@
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="img/home/언어.png" alt="언어" width="100%">
-      <div class="carousel-caption" style="margin:auto auto;height:255px;padding:0;">
-        <h1 style="color:#fff;font-size:45px;font-weight:500;">어떤 언어를 배우고 싶나요?</h1>
-        <P style="color:#fff;font-size:18px;">ONE STUDY로 모든 배움을 한방에 찾아보세요!</P>
+      <div class="carousel-caption">
+        <h1>어떤 언어를 배우고 싶나요?</h1>
+        <P>ONE STUDY로 모든 배움을 한방에 찾아보세요!</P>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/home/운동.png" alt="운동" width="100%">
-      <div class="carousel-caption" style="margin:auto auto;height:255px;padding:0;">
-        <h1 style="color:#fff;font-size:45px;font-weight:500;">어떤 운동를 배우고 싶나요?</h1>
-        <P style="color:#fff;font-size:18px;">ONE STUDY로 모든 배움을 한방에 찾아보세요!</P>
+      <div class="carousel-caption">
+        <h1>어떤 운동를 배우고 싶나요?</h1>
+        <P>ONE STUDY로 모든 배움을 한방에 찾아보세요!</P>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/home/취미.png" alt="취미" width="100%">
-      <div class="carousel-caption" style="margin:auto auto;height:255px;padding:0;">
-        <h1 style="color:#fff;font-size:45px;font-weight:500;">어떤 취미를 배우고 싶나요?</h1>
-        <P style="color:#fff;font-size:18px;">ONE STUDY로 모든 배움을 한방에 찾아보세요!</P>
+      <div class="carousel-caption">
+        <h1>어떤 취미를 배우고 싶나요?</h1>
+        <P>ONE STUDY로 모든 배움을 한방에 찾아보세요!</P>
       </div>
     </div>
   </div>
@@ -104,9 +105,9 @@
 <!-- advantage section -->
 <section class="best-deal section" style="background-color: #e6e6e6;">
   <div class="container">
-    <div class="advantage">
+    <div class="advantage2">
       <h1>우리 <span style="font-weight:700;">ONE STUDY</span>는,</h1>
-      <h5 style="font-weight: 550">당신의 부족한 부분을 채워줄 마스터와 스터디를 연결해주는 오프라인 매칭 플랫폼입니다.</h5>
+      <h5>당신의 부족한 부분을 채워줄 마스터와 스터디를 연결해주는 오프라인 매칭 플랫폼입니다.</h5>
     </div>
     <div class="row">
       <div class="col-lg-1"></div>
@@ -151,8 +152,8 @@
         <h1>
           <span id="anyone">누구나 할 수 있다. </span><span style="color: #595959;"> 당신도 마스터다!</span>
         </h1>
-        <div style="text-decoration:underline;">지금 마스터로 등록하시면 마스터 코인 200,000원을 드립니다. (사용가능 기간:2019년 8월20일~10월31일)</div>
-        <div style="text-decoration:underline;margin-bottom:50px;">예상 매칭가격(1인당) : 5,000원이며 200,000원이 넘어가는 스터디는 1,000원씩 매칭 비용이 추가됩니다.</div>
+        <div style="text-decoration:underline;" class="master_detail">지금 마스터로 등록하시면 마스터 코인 200,000원을 드립니다. (사용가능 기간:2019년 8월20일~10월31일)</div>
+        <div style="text-decoration:underline;margin-bottom:50px;" class="master_detail">예상 매칭가격(1인당) : 5,000원이며 200,000원이 넘어가는 스터디는 1,000원씩 매칭 비용이 추가됩니다.</div>
         <div class="img-part">
           <img class="img1" src="./img/home/main_i_04.png">
           <!-- <img class="img2" src="./img/home/main_i_05.png" style="bottom:30px;position:absolute;right: 15%;"> -->
@@ -164,8 +165,8 @@
     </div>
     <div class="row" style="margin-top:50px;">
       <div style="width:100%;text-align:center;">
-        <button type="button" class="btn" onclick="location.href='/masterapply'" style=" font-size: 15px;margin-right:5%;border-radius:50px;background-color:#5b2900;color:#fff;font-weight:500;">마스터 되기&nbsp; &rarr;</button>
-        <button type="button" class="btn" onclick="location.href='/masterapply'" style=" font-size: 15px;border-radius:50px;background-color:#5b2900;color:#fff;font-weight:500;">마스터 작성가이드&nbsp; &rarr;</button>
+        <button type="button" class="btn btn_temp" onclick="location.href='/masterapply'" style="margin-right:5%;">마스터 되기&nbsp; &rarr;</button>
+        <button type="button" class="btn btn_temp" onclick="location.href='/masterapply'">마스터 작성가이드&nbsp; &rarr;</button>
       </div>
     </div>
   </div>
@@ -173,36 +174,31 @@
 
 <section class="best-deal section" style="background-color: #e6e6e6;">
   <div class="container">
-    <div class=""style="margin:auto;margin-bottom:50px;text-align:center;">
-      <h1 style="font-weight:550;font-size:45px;">
+    <div class="blocks">
+      <h1>
         <span style="color: #595959;">생활에 필요한 </span><span style="color:#ef6c00;">교육 전문 마스터 매칭</span>
       </h1>
-      <p style="font-size:17px;font-weight:650;">자신과 최단거리에 있는 마스터를 매칭 할 수 있는 시스템</p>
+      <p>자신과 최단거리에 있는 마스터를 매칭 할 수 있는 시스템</p>
     </div>
     <div class="row">
       <!-- Offer Tabs -->
       <div class="col-lg-1"></div>
-      <div class="block col-lg-3" style="padding:0;">
+      <div class="block2 col-lg-3 col-md-3" style="padding:0;">
         <img src="img/home/취미하단.png" width="100%" alt="">
+        <p class="block_title">취미</p>
       </div>
-      <div class="block col-lg-3" style="padding:0;">
+      <div class="block2 col-lg-3 col-md-3" style="padding:0;">
         <img src="img/home/언어하단.png" width="100%" alt="">
+        <p class="block_title">언어</p>
       </div>
-      <div class="block col-lg-3" style="padding:0;">
+      <div class="block2 col-lg-3 col-md-3" style="padding:0;">
         <img src="img/home/운동하단.png" width="100%" alt="">
+        <p class="block_title">운동</p>
       </div>
       <div class="col-lg-1"></div>
       <!-- SideBar -->
     </div>
-    <div class="row">
-      <!-- Offer Tabs -->
-      <div class="col-lg-1"></div>
-      <div class="col-lg-3" style="text-align:center;font-size:19px;font-weight:800;margin:0 15px;">취미</div>
-      <div class="col-lg-3" style="text-align:center;font-size:19px;font-weight:800;margin:0 15px;" >언어</div>
-      <div class="col-lg-3" style="text-align:center;font-size:19px;font-weight:800;margin:0 15px;" >운동</div>
-      <div class="col-lg-1"></div>
-      <!-- SideBar -->
-    </div>
+
   </div>
 </section>
 

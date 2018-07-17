@@ -748,7 +748,7 @@ input {
 
 @media (max-width: 768px) {
     .Apply .row label {
-        font-size: 12px;
+        font-size: 14px;
         padding-left:10px;
         padding-right:10px;
     }
@@ -763,6 +763,15 @@ input {
 
 .Apply .row .gender{
   margin: 20px 0;
+}
+@media (max-width: 518px ) {
+  .Applyform h1{
+    font-size: 32px;
+  }
+  .Apply .row .gender{
+    margin: 20px 0;
+    width:20%;
+  }
 }
 /*
 .Apply .row input[type=button]{

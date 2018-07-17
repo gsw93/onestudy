@@ -1564,9 +1564,21 @@ ul.pagination .active a {
 }
 
 @media (max-width: 518px ) {
+  .best-deal .master .img-content{
+    margin-top: 6px;
+      width: 45%;
+  }
+  .best-deal .master .img1{
+    margin-left: 5%;
+    width: 50%;
+  }
     .best-deal .master p{
-        font-size: 16px;
-        line-height: 3;
+        font-size: 12px;
+        line-height:2;
+        background-size: 30%;
+        margin-bottom: 0;
+        padding-bottom: 5px;
+        margin-right: 10px;
     }
 }
 @media (max-width: 768px) and (min-width: 518px ) {

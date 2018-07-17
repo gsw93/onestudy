@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Study - 스터디 매칭 서비스</title>
 
     <!-- Include jQuery lib. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -22,15 +24,14 @@
     <link href="plugins/owl-carousel/assets/owl.theme.green.min.css" rel="stylesheet" media="screen">
     <!-- Fancy Box -->
     <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-    <!-- Datepicker -->
-    <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
     <!-- CUSTOM CSS -->
     <link href="css/apply.css" rel="stylesheet">
+    <link href="css/temp.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
 </head>
-<body>
+<body class="body-wrapper">
   <nav class="navbar navbar-toggleable-md main-nav bg-light" style="z-index: 100">
       <!-- Container Start -->
       <div class="container" style="width: 95%;">
@@ -45,18 +46,18 @@
 
 <div class="Applyform">
           <h1>Master Profile</h1>
-          <div class="" style="height:250px;width:30%;margin:40px auto;border:1px solid #cccccc;background-color:#fff;">
-            <div class="" style="margin:65px 0;">
-              <h4 style="text-align:center;">마스터 등록이 되었습니다.<br>8월20일 정식 서비스가 진행 됩니다.</h4>
-              <h3 style="margin-top:30px;text-align:center;font-weight:600;font-size:30px;">8월20일 스터디를 등록해주세요.</h3>
+          <div class="col-lg-5 col-md-6 col-sm-6 applycomplete">
+            <div class="box">
+              <h4>마스터 등록이 되었습니다.<br>8월20일 정식 서비스가 진행 됩니다.</h4>
+              <h3>8월20일 스터디를 등록해주세요.</h3>
             </div>
           </div>
-          <input type="button" class="btn" name="" value="메인&nbsp;&nbsp;&gt;" style="width:150px;height:40px; border-radius:50px;background-color:gray;color:#fff;font-size:17px;margin:auto;display:block;">
+          <input type="button" onclick="location.href='/temp'" class="btn" name="" value="메인&nbsp;&nbsp;&gt;" style="width:150px;height:40px; border-radius:50px;background-color:gray;color:#fff;font-size:17px;margin:auto;display:block;">
 </div>
 
 <!-- JAVASCRIPTS -->
 
-<!--<script src="../public/plugins/jquery/jquery.min.js"></script>-->
+<script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
 <script src="plugins/raty/jquery.raty-fa.js"></script>
