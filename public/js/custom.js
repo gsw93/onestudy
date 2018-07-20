@@ -2,7 +2,7 @@
     'use strict';
 
     $(document).on('ready', function () {
-        $('#demo').carousel({interval: 10000});
+        $('#demo').carousel({interval: 4000});
         // -----------------------------
         //  Client Slider
         // -----------------------------
