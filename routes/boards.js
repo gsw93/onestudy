@@ -127,8 +127,8 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, title, author,category, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm, callback) {
-        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+    var addMasterBoard = function (database, id, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm, callback) {
+        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
 
         masterboard.save(function (err) {
             if(err){
@@ -186,6 +186,7 @@ module.exports = function (router) {
         var title = req.body.title;
         var author = req.body.author;
         var category = req.body.category;
+        var day = req.body.day;
         var region = req.body.address;
         var deadline = req.body.deadline;
         var minNum = req.body.minNum;
@@ -243,7 +244,7 @@ module.exports = function (router) {
 
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,id,title,author,category,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,reviewstar,path,locationX,locationY,siNm, function(err, result){
+            addMasterBoard(connectDB,id,title,author,category,day,region,deadline,minNum,maxNum,studyTerm,price, masterInfo, studyInfo,reviewstar,path,locationX,locationY,siNm, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {
