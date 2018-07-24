@@ -44,6 +44,9 @@
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
 
+    <!-- googlefont -->
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gamja+Flower|Gothic+A1:400,700|Nanum+Brush+Script|Nanum+Gothic:400,700,800|Nanum+Myeongjo:400,700,800|Nanum+Pen+Script|Poor+Story|Song+Myung|Sunflower:300,500,700&amp;subset=korean" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -95,20 +98,27 @@
                               <div class="row">
                                 <label for="image" class="col-lg-2 darktext" style="padding-right:0">스터디 대표 사진</label>
                                 <!-- <img id="blah" src="http://placehold.it/180" alt="your image" max-width="100px" height="80px"/> -->
-                                <input class="col-lg-9 form-control" type="file" onchange="readURL(this);" name="photo" multiple>
+                                <input class="col-lg-9 form-control" style="height:35px;margin :auto 0;" type="file" onchange="readURL(this);" name="photo" multiple>
                               </div>
                               <div class="row">
                                 <label class="col-lg-2 darktext" for="category">카테고리</label>
-                                <select class="col-lg-2 form-control" name="category" id="category" style="height:35px;margin:auto 0;font-size:14px;">
+                                <select class="col-lg-3 form-control" name="category" id="category" style="height:35px;margin:auto 0;font-size:14px;">
                                   <option value="언어">언어</option>
                                   <option value="운동">운동</option>
                                   <option value="취미/클래스">취미/클래스</option>
                                 </select>
-                                <!-- <div class="col-lg-9 form-control">
-                                  <input type="checkbox" id="chk_chg" name="category" value="언어"><span style="margin-right:50px;">언어</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="운동"><span style="margin-right:50px;">운동</span>
-                                  <input type="checkbox" id="chk_chg" name="category" value="취미/클래스"><span style="margin-right:50px;">취미/클래스</span>
-                                </div> -->
+                              </div>
+                              <div class="row">
+                                <label class="col-lg-2 darktext" for="day">요일</label>
+                                <div class="col-lg-9 form-control" style="height:35px;margin :auto 0;">
+                                  <input type="checkbox" id="chk_chg" name="day" value="월"><span style="margin-right:50px;">월</span>
+                                  <input type="checkbox" id="chk_chg" name="day" value="화"><span style="margin-right:50px;">화</span>
+                                  <input type="checkbox" id="chk_chg" name="day" value="수"><span style="margin-right:50px;">수</span>
+                                  <input type="checkbox" id="chk_chg" name="day" value="목"><span style="margin-right:50px;">목</span>
+                                  <input type="checkbox" id="chk_chg" name="day" value="금"><span style="margin-right:50px;">금</span>
+                                  <input type="checkbox" id="chk_chg" name="day" value="토"><span style="margin-right:50px;">토</span>
+                                  <input type="checkbox" id="chk_chg" name="day" value="일"><span style="margin-right:50px;">일</span>
+                                </div>
                               </div>
                               <div class="row">
                                 <label class="col-lg-2 darktext" for="region">스터디 장소</label>
@@ -119,33 +129,39 @@
                                 <label for="address" class="col-lg-2 col-md-2 col-sm-2" style="font-size:14px;text-align:right;">주소</label>
                                 <input type="text" class="form-control col-lg-7 col-md-7 col-sm-7" id="address" style="margin:auto 0;" name="address" required readonly/>
                                 <button type="button" class="col-lg-2 col-md-2 col-sm-2" id="findbtn" onclick="goPopup()" style="margin:auto 15px;height:35px;">찾기</button>
-                                <input type="hidden" id="entX" name="x" required readonly/>
+                                <input type="hidden" id="entX" value="" name="x"  required readonly/>
                                 <input type="hidden" id="entY" name="y" required readonly/>
                                 <input type="hidden" id="siNm" name="siNm" required readonly/>
                               </div>
                               <div class="row">
-                                  <label class="col-lg-2 darktext" for="deadline">모집기한</label>
-                                  <input type="text" class="col-lg-2" name="deadline" id="datePicker"  placeholder="달력" required>
-                                  <label class="col-lg-2 darktext" style="float:left;">모집인원</label>
-                                    <select class="col-lg-2 form-control" onchange="maxoption()" style="height:35px;margin:auto 5px;" id="minNum" name="minNum">
-                                      <option value="최소">최소</option>
-                                      <% var min=1;for(min;min< 100;min++){%>
-                                      <option value="<%=min%>"><%=min%></option>
-                                      <%}%>
-                                    </select>
-                                    <select class="col-lg-2 form-control" style="height:35px;margin:auto 5px;" id="maxNum" name="maxNum">
-                                      <option value="최대">최대</option>
-                                    </select>
-                              </div>
-                              <div class="row">
-                                <label for="studyTerm" class="col-lg-2 darktext">스터디 기간</label>
+                                <label for="studyTerm" class="col-lg-2 darktext" style="z-index:100;">스터디 기간</label>
                                 <select class="col-lg-2 form-control" name="studyTerm" style="height:35px;margin:auto 0;font-size:14px;">
-                                  <%var term=1;for(term;term< 21;term++){%>
+                                  <%var term=1;for(term;term< 15;term++){%>
                                   <option value="<%=term%>"><%=term%>주</option>
                                   <%}%>
                                 </select>
                                 <label for="price" class="col-lg-2 darktext">금액</label>
                                 <input type="number" class="col-lg-2" name="price" min="0" max="100" style="width:150px;" required><span style="margin:auto 5px;">만원</span>
+                              </div>
+                              <div class="row">
+                                  <label class="col-lg-2 darktext" for="deadline">시작 날짜</label>
+                                  <input type="text" class="col-lg-2" name="deadline" id="datePicker" style="z-index:50;" placeholder="달력" required>
+                                  <label for="" class="col-lg-2 darktext">횟수</label>
+                                  <input type="number" class="col-lg-2" name="studynum" id="studynum" min="1" max="7" style="width:150px;" required><span style="margin:auto 5px;">회(주)</span>
+                              </div>
+                              <div class="row">
+                                <label class="col-lg-2 darktext" style="float:left;">모집인원</label>
+                                  <select class="col-lg-2 form-control" onchange="maxoption()" style="height:35px;margin:auto 0;" id="minNum" name="minNum">
+                                    <option value="최소">최소</option>
+                                    <% var min=1;for(min;min< 11;min++){%>
+                                    <option value="<%=min%>"><%=min%></option>
+                                    <%}%>
+                                  </select>
+                                  <select class="col-lg-2 form-control" style="height:35px;margin:auto 10px;font-size: 14px;" id="maxNum">
+                                    <option value="최대">최대</option>
+                                  </select>
+                                  <input type="Number" class="col-lg-2" id="maxNum2" style="visibility:hidden;">
+                                  <input type="hidden" name="maxNum" id="max" value="">
                               </div>
                         </div>
                     </div>
@@ -166,7 +182,25 @@
                         <h5>스터디 소개</h5>
                     </div>
                     <div class="col-lg-10 block">
-                        <textarea id="text2" class="text" name="studyInfo"></textarea>
+                        <textarea id="text2" class="text" name="studyInfo">
+                          <h6 style="color:gray;text-align:center;">커리큘럼을 작성해주세요.</h6>
+                          <table class="text_table" style="width:100%;">
+                            <tbody>
+                            <tr>
+                              <th style="width: 25%;text-align : center;">1주차</th>
+                              <th style="width: 25%;text-align : center;">2주차</th>
+                              <th style="width: 25%;text-align : center;">3주차</th>
+                              <th style="width: 25%;text-align : center;">4주차</th>
+                            </tr>
+                            <tr>
+                              <td style="width: 25%;"></td>
+                              <td style="width: 25%;"></td>
+                              <td style="width: 25%;"></td>
+                              <td style="width: 25%;"></td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </textarea>
                     </div>
                   </div>
                 </div>
@@ -192,20 +226,63 @@
                         $(function(){
                             $("#datePicker").datepicker({
                               dateFormat: 'yy-mm-dd',
-                              changeMonth: true,
-                              // currentText: date,
+                              numberOfMonths: [1,2],
                               minDate:0,
-                              maxDate:"+3Y",
-                              changeYear: true
+                              maxDate:"+2M"
                             });
-                            $('textarea.text').froalaEditor({
+                            $('.text').froalaEditor({
                               key: 'bA2A8B8D7cD3F3C2C1G3A4C4B6C2D1vdbhA-21D-17eukD1wzB1C-22j==',
-                              height: 150,
+                              height: 240,
+                              language:'ko',
+                              fontFamily: {
+                                "'Nanum Gothic',sans-serif":'나눔고딕',
+                                "'Nanum Myeongjo',serif":'나눔명조',
+                                "'Sunflower',sans-serif":'Sunflower',
+                                "'Nanum Brush Script',cursive":'나눔 브러쉬 Script',
+                                "'Poor Story',cursive":'Poor Story',
+                                "'Nanum Pen Script',cursive":'나눔 펜 Script',
+                                "'Do Hyeon',sans-serif":'도현',
+                                "'Song Myung', serif":'Song Myung',
+                                "'Gothic A1', sans-serif":'Gothic A1',
+                                "'Black Han Sans', sans-serif":'Black Han Sans',
+                                "'Gamja Flower', cursive":'Gamja Flower'
+                              },
+                              fontFamilySelection: true,
                               scaytAutoload : true
-
                             });
 
+                            $('#maxNum').change(function(){
+                              var maxNum = document.getElementById('maxNum');
+                              var max = maxNum.options[maxNum.selectedIndex].value;
+                              if(max=='직접입력'){
+                                document.getElementById('maxNum2').style.visibility = "visible";
+                              }
+                              else{
+                                document.getElementById('maxNum2').style.visibility = "hidden";
+                                document.getElementById('max').value = max;
+                              }
+                            })
+                            $('#maxNum2').change(function(){
+                              var maxNum2 = document.getElementById('maxNum2').value;
+                              document.getElementById('max').value = maxNum2;
+                            })
                             $('form').on('submit', function (e) {
+
+                              var minNum = document.getElementById('minNum');
+                              var min = minNum.options[minNum.selectedIndex].value;
+                              if(isNaN(min)==true){
+                                alert('최소 인원을 설정해주세요.');
+                                $('#minNum').focus();
+                                return false;
+                              }
+                              var maxNum = document.getElementById('maxNum');
+                              var max = maxNum.options[maxNum.selectedIndex].value;
+                              if(max=='최대'){
+                                alert('최대 인원을 설정해주세요.');
+                                $('#maxNum').focus();
+                                return false;
+                              }
+
 
                               if ($('#text1').froalaEditor('core.isEmpty')) {
                                 alert('마스터 소개를 입력하세요.');
@@ -218,49 +295,53 @@
 
                                 return false;
                               }
-
-                              var minNum = document.getElementById('minNum');
-                              var min = minNum.options[minNum.selectedIndex].value
-                              if(isNaN(min)==true){
-                                alert('최소 인원을 설정해주세요.');
-                                return false;
+                              if(max=='직접입력'){
+                                var maxNum2 = document.getElementById('maxNum2').value;
+                                if(maxNum2<11){
+                                  alert('최대 : 11 이상으로 작성해주세요.');
+                                  $('#maxNum2').focus();
+                                  return false;
+                                }
+                                document.getElementById('maxNum').value = maxNum2;
+                                return ;
                               }
-                              var maxNum = document.getElementById('maxNum');
-                              var max = maxNum.options[maxNum.selectedIndex].value;
-                              if(isNaN(max)==true){
-                                alert('최대 인원을 설정해주세요.');
+                              var studynum = document.getElementById('studynum').value;
+                              if(studynum<1&&studynum>7){
+                                alert("횟수 : 7 이하로 작성해주세요.");
                                 return false;
                               }
 
                             });
 
                         });
+
                         function maxoption(){
                           var minNum = document.getElementById('minNum');
                           var min = minNum.options[minNum.selectedIndex].value;
                           var maxNum = document.getElementById('maxNum');
                           var options ="<option value='최대'>최대</option>";
-                          if(min>0 && min<100){
-                            for(min;min<100;min++){
+                          if(min>0 && min<11){
+                            for(min;min<11;min++){
                                options+="<option value='"+min+"'>"+min+"</option>";
                             }
+                            options+="<option value='직접입력'>직접입력</option>";
                             maxNum.innerHTML = options;
                           }
                         }
-                        // function chkchk(form){
-                        //   var arr_form = document.getElementsByName('category');
-                        //   var num=0;
-                        //
-                        //   for(var i =0;i<arr_form.length;i++){
-                        //     if(arr_form[i].checked){
-                        //       num++;
-                        //     }
-                        //   }
-                        //   if(!num){
-                        //     alert('카테고리 : 하나 이상 선택해주시기 바랍니다.');
-                        //     return false;
-                        //   }
-                        // }
+                        function chkchk(form){
+                          var arr_form = document.getElementsByName('day');
+                          var num=0;
+
+                          for(var i =0;i<arr_form.length;i++){
+                            if(arr_form[i].checked){
+                              num++;
+                            }
+                          }
+                          if(!num){
+                            alert('요일 : 하나 이상 선택해주시기 바랍니다.');
+                            return false;
+                          }
+                        }
 
                         // function date_format(dateValue){
                         //   var dd = dateValue.getDate();
@@ -308,7 +389,8 @@
 <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
 <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="js/custom.js"></script>
-
+<!-- froala editor language -->
+<script src="js/ko.js"></script>
 <!--07_04 add by sehyeon-->
 <script src="js/juso_GSH.js"></script>
 <script src="plugins/proj4js/proj4js-combined.js"></script>

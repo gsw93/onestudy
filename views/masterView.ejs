@@ -44,6 +44,9 @@
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
 
+    <!-- googlefont -->
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gamja+Flower|Gothic+A1:400,700|Nanum+Brush+Script|Nanum+Gothic:400,700,800|Nanum+Myeongjo:400,700,800|Nanum+Pen+Script|Poor+Story|Song+Myung|Sunflower:300,500,700&amp;subset=korean" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -135,7 +138,7 @@
                               </div>
                               <div class="col-lg-6 form-group">
                                 <label for="price" class="darktext">수업료<small style="color:gray;">(총)</small></label>
-                                <span style="font-size:22px;font-weight: 700;color:#ff751a;">&nbsp;월 N회 <%=board.price%>만원</span>
+                                <span style="font-size:22px;font-weight: 700;color:#ff751a;">&nbsp;주 <%=board.studynum%>회 <%=board.price%>만원</span>
                               </div>
                             </div>
                         </div>
@@ -338,12 +341,26 @@
     }
 
     $(function(){
-        $('textarea.text').froalaEditor({
-          key: 'bA2A8B8D7cD3F3C2C1G3A4C4B6C2D1vdbhA-21D-17eukD1wzB1C-22j==',
-          height: 100,
-          toolbarButtons: ['bold', 'italic', '|', 'indent', 'outdent', 'formatOL', 'formatUL', '|',
-        'insertLink', 'insertImage']
-        });
+      $('.text').froalaEditor({
+        key: 'bA2A8B8D7cD3F3C2C1G3A4C4B6C2D1vdbhA-21D-17eukD1wzB1C-22j==',
+        height: 240,
+        language:'ko',
+        fontFamily: {
+          "'Nanum Gothic',sans-serif":'나눔고딕',
+          "'Nanum Myeongjo',serif":'나눔명조',
+          "'Sunflower',sans-serif":'Sunflower',
+          "'Nanum Brush Script',cursive":'나눔 브러쉬 Script',
+          "'Poor Story',cursive":'Poor Story',
+          "'Nanum Pen Script',cursive":'나눔 펜 Script',
+          "'Do Hyeon',sans-serif":'도현',
+          "'Song Myung', serif":'Song Myung',
+          "'Gothic A1', sans-serif":'Gothic A1',
+          "'Black Han Sans', sans-serif":'Black Han Sans',
+          "'Gamja Flower', cursive":'Gamja Flower'
+        },
+        fontFamilySelection: true,
+        scaytAutoload : true
+      });
       });
       $(document).ready(function(){
 

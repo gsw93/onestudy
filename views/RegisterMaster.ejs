@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,6 +129,8 @@ function popup(){
   popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
 }
 
+
+
 function autoHypenPhone(str){
             str = str.replace(/[^0-9]/g, '');
             var tmp = '';
@@ -214,28 +217,67 @@ $(function(){
     }
   })
 
-//나이 숫자만 입력
+//나이,휴대폰 숫자만 입력
+
   var number = document.getElementById('age');
+  var number2 = document.getElementById('phoneNumber');
+  var android = navigator.userAgent.toLowerCase();
 
-  number.onkeydown = function(e){
-    if(!((e.keyCode > 95 && e.keyCode < 106)
-      || (e.keyCode > 47 && e.keyCode < 58)
-      || (e.keyCode == 8))) {
-//        alert('숫자만 입력하세요.');
-        return false;
-    }
-  }
-  //휴대폰 숫자만 입력
-    var number2 = document.getElementById('phoneNumber');
+  if(android.match(/android/g)!=null){
+    //나이 정규식
+    $('#age').change(function(){
+      var age = document.getElementById('age').value;
+      var regex = /^(\d{1,2})$/g; //숫자만
+      var regex2 = /^([0-9]*)[\.]+([0-9]*)$/; //소수점 체크
+      if(regex.test(age)==false){
+        $('#age').focus();
+        document.getElementById('age').value = "";
+        alert("올바른 형태의 나이를 작성해주세요.");
+      }
+      else if(regex2.test(age)==true){
+        $('#age').focus();
+        document.getElementById('age').value = "";
+        alert("올바른 형태의 나이를 작성해주세요.");
+      }
+    })
+  } else if (android.indexOf("iphone")>-1||android.indexOf("ipad")>-1||android.indexOf("ipod")>-1) {
+    //IOS 일때 처리
 
-    number2.onkeydown = function(e){
-      if(!((e.keyCode > 95 && e.keyCode < 106)
-        || (e.keyCode > 47 && e.keyCode < 58)
-        || (e.keyCode == 8))) {
-//          alert('숫자만 입력하세요.');
+    number.onkeydown = function(e){
+      if(!((e.keyCode > 47 && e.keyCode < 58)|| (e.keyCode == 8))) {
+          alert('숫자만 입력하세요.');
           return false;
       }
     }
+    number2.onkeydown = function(e){
+      if(!((e.keyCode > 47 && e.keyCode < 58)|| (e.keyCode == 8))) {
+          alert('숫자만 입력하세요.');
+          return false;
+      }
+    }
+
+  } else {//안드로이드, IOS 이외
+
+      number.onkeydown = function(e){
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+          || (e.keyCode > 47 && e.keyCode < 58)
+          || (e.keyCode == 8)|| (e.keyCode == 46)|| (e.keyCode == 37)|| (e.keyCode == 39))) {
+            alert('숫자만 입력하세요.');
+            return false;
+        }
+      }
+      number2.onkeydown = function(e){
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+          || (e.keyCode > 47 && e.keyCode < 58)
+          || (e.keyCode == 8)|| (e.keyCode == 46)|| (e.keyCode == 37)|| (e.keyCode == 39))) {
+            alert('숫자만 입력하세요.');
+            return false;
+        }
+      }
+    }
+
+
+
 
   //휴대폰 정규식
   $('#phoneIncorrect').hide();
@@ -251,7 +293,6 @@ $(function(){
     }
   })
 })
-
 
 
 </script>

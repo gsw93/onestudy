@@ -150,8 +150,9 @@
                                 <p><% for(var n=0; n< board[i].category.length;n++){ %>
                                   <%= board[i].category[n] %> &nbsp; <% } %><br>
                                     <%= board[i].region %><br>
-                                    <%= board[i].studyTerm %>주 진행 (시간 협의)</p>
-                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studyTerm %>회)</span>
+                                    <%= board[i].deadlin %> 시작<br>
+                                    <%= board[i].studyTerm %>주 진행</p>
+                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studynum %>회)</span>
                             </div>
                         </div>
                         <div class="people-img">

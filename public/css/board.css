@@ -274,6 +274,10 @@
 }
 
 /* editor */
+.text_table,.text_table th,.text_table td{
+  border:1px solid black;
+}
+
 
 .editor_cnt .title{
   float: left;
