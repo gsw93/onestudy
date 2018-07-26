@@ -22,13 +22,8 @@ var multer = require('multer');
 var fs = require('fs');
 //세션 설정
 var store = new MongoDBStore({
-<<<<<<< HEAD
     uri: 'mongodb://localhost:27017/db',
     // uri: 'mongodb://35.189.135.181/db',
-=======
-    // uri: 'mongodb://localhost:27017/db',
-    uri: 'mongodb://35.189.135.181/db',
->>>>>>> 18f104c807dc2ac8b42dc354996999f46f012a16
     databaseName: 'db',
     collection: 'sessions'
 });
@@ -59,8 +54,8 @@ app.use(function (req, res, next) {
 // 라우터 객체 참조
 var router = express.Router();
 // 기본 속성 설정
-// app.set('port', process.env.PORT || 3000);
-app.set('port', process.env.PORT || 443);
+app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 443);
 // view engine 설정
 app.set('view engine', 'ejs');
 // views 폴더 위치 설정
@@ -99,14 +94,9 @@ jusoRoute(app);
 
 var httpsServer = https.createServer(options, app);
 var httpServer = http.createServer(app);
-<<<<<<< HEAD
 
 var httpPort = 3001;
 // var httpPort = 80;
-=======
-// var httpPort = 3001;
-var httpPort = 80;
->>>>>>> 18f104c807dc2ac8b42dc354996999f46f012a16
 
 httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);
