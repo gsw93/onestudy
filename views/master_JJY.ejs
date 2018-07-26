@@ -82,80 +82,28 @@
 <div>
     <section class="store-coupon section w3-twothird" id="mySection">
         <div class="category-select" style="z-index: 100; position: relative;">
+          <form class="" action="/process/search" method="get" id="searchAction" name="searchAction">
             <div class="row selects">
-                <select class="col-lg-3 col-md-3 col-sm-6 form-control" style="height: 35px;" onchange="selectRegion1()" id="select_region">
+                <select class="col-lg-3 col-md-3 col-sm-12 form-control" name="select_region" style="height: 35px;" onchange="selectRegion1()" id="select_region">
                     <option value="지역(1)">지역(1)</option>
                     <option value="청주">청주</option>
                     <option value="세종">세종</option>
                 </select>
-                <select class="col-lg-3 col-md-3 col-sm-6 form-control" style="height: 35px;" id="select_region2">
+                <select class="col-lg-3 col-md-3 col-sm-12 form-control" name="select_region2" style="height: 35px;" id="select_region2">
                     <option value="지역(2)">지역(2)</option>
                 </select>
-                <select class="col-lg-3 col-md-3 col-sm-6  form-control" style="height: 35px;">
+                <select class="col-lg-3 col-md-3 col-sm-12  form-control" name="field" style="height: 35px;" id="field">
                     <option value="분야">분야</option>
                     <option value="언어">언어</option>
                     <option value="운동">운동</option>
                     <option value="취미/클래스">취미/클래스</option>
                 </select>
-
-                <input type="button" class="col-lg-2 col-md-2 col-sm-6" name="resetlist" value="검색" onclick="selectRegion()">
+                <input type="button" class="col-lg-2 col-md-2 col-sm-12" name="resetlist" value="검색" onclick="selectRegion()">
             </div>
+            </form>
         </div>
         <div class="container-fluid" style="margin-top: 20px;">
-            <%if(authUser.phoneAuthCheck){%>
-            <div class="row">
-                <div class="col-md-6" style="color:orange;">
-                    추천 마스터
-                </div>
-                <%if(seller){%>
-                <div class="col-md-6" style="color:orange;">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
-                </div>
-                <%}%>
-            </div>
-            <div class="row">
-                <% if(interboard !== null){
-                for (var i=0; i< interboard.length; i++){ %>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="block-cnt">
 
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
-                        <ul>
-                            <li class="studyNum"></li>
-                        </ul>
-
-                        <script type="text/javascript">
-                            var max = <%- interboard[i].maxNum %>;
-
-                            if(max==1){
-                                var a = document.getElementsByClassName('studyNum');
-                                a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
-                            }
-                            else {
-                                var a = document.getElementsByClassName('studyNum');
-                                a[<%- i %>].innerHTML = "1 : <%- interboard[i].maxNum %>";
-                            }
-
-                        </script>
-                        <div class="cnt">
-                            <div class="cnt_text">
-                                <% i+1 %>
-                                <h5><a href="/masterView?id=<%=interboard[i]._id%>"><%= interboard[i].title %></a></h5>
-                                <p><% for(var n=0; n< interboard[i].category.length;n++){ %>
-                                    <%= interboard[i].category[n] %> &nbsp; <% } %><br>
-                                    <%= interboard[i].regionShort %><br>
-                                    <%= interboard[i].studyTerm %>주 진행</p>
-                                <span id="master_term"><span id="master_money"><%= interboard[i].price %>만원</span>&nbsp;(주<%=interboard[i].studynum %>회)</span>
-                            </div>
-                        </div>
-                        <div class="people-img">
-                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
-                        </div>
-                    </div>
-                </div>
-                <% }} %>
-            </div>
-            <%}%>
             <div class="row">
                 <div class="col-md-6" style="color:orange;">
                     <%= board.length %>명의 마스터
@@ -170,15 +118,32 @@
             <div class="row">
               <% if(board !== null){
                 for (var i=0; i< board.length; i++){ %>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 list-item">
                     <div class="block-cnt">
-
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
+                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%" style="margin-bottom:10px;">
                         <ul>
-                            <li class="studyNum"></li>
+                          <li class="deadlineIcon" style="display:none;left:0;float:left;"></li>
+                          <li class="studyNum" style="float:right;"></li>
                         </ul>
 
                         <script type="text/javascript">
+                        var ddd = new Date('<%- board[i].deadline %>');
+                        var date = new Date();
+                        date.setDate(date.getDate()+7);
+
+                        if(ddd<date){
+                          var x = document.getElementsByClassName("deadlineIcon");
+                          x[<%- i%>].style.display = "block";
+                          x[<%- i%>].style.fontSize = "smaller";
+                          x[<%- i%>].style.backgroundColor = "red";
+                          x[<%- i%>].innerHTML = "마감임박";
+                        }
+                        else if(ddd>=date){
+                          var x = document.getElementsByClassName("deadlineIcon");
+                          x[<%- i%>].style.display = "block";
+                          x[<%- i%>].style.backgroundColor = "orange";
+                          x[<%- i%>].innerHTML = "모집중";
+                        }
                           var max = <%- board[i].maxNum %>;
 
                           if(max==1){
@@ -192,6 +157,9 @@
 
                         </script>
                         <div class="cnt">
+                          <div class="people-img">
+                              <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 90%; ">
+                          </div>
                             <div class="cnt_text">
                               <% i+1 %>
                                 <h5><a href="/masterView?id=<%=board[i]._id%>"><%= board[i].title %></a></h5>
@@ -199,30 +167,29 @@
                                   <%= board[i].category[n] %> &nbsp; <% } %><br>
                                     <%= board[i].regionShort %><br>
                                     <%= board[i].studyTerm %>주 진행</p>
-                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주&nbsp;<%=board[i].studynum %>회)</span>
-                                <span id="deadline[<%=i%>]" style="right:0;font-size:12px;"></span>
-                                <script>
-                                  var i = new Date('<%- board[i].deadline %>');
-                                  document.getElementById('deadline[<%=i%>]').innerHTML = date_format(i);
-                                  function date_format(dateValue){
-                                    var dd = dateValue.getDate();
-                                    var mm = dateValue.getMonth()+1;
-                                    var yyyy = dateValue.getFullYear();
+                                <div class="" >
+                                  <span id="deadline[<%=i%>]" style="font-size:12px;float:right;line-height:35px;"></span>
+                                  <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주&nbsp;<%=board[i].studynum %>회)</span>
+                                  <script>
+                                    var i = new Date('<%- board[i].deadline %>');
+                                    document.getElementById('deadline[<%=i%>]').innerHTML = date_format(i);
+                                    function date_format(dateValue){
+                                      var dd = dateValue.getDate();
+                                      var mm = dateValue.getMonth()+1;
+                                      var yyyy = dateValue.getFullYear();
 
-                                    if(dd<10){
-                                      dd = '0'+dd;
+                                      if(dd<10){
+                                        dd = '0'+dd;
+                                      }
+                                      if(mm<10){
+                                        mm = '0'+mm;
+                                      }
+                                      return mm+'/'+dd +'&nbsp;시작';
                                     }
-                                    if(mm<10){
-                                      mm = '0'+mm;
-                                    }
-                                    return mm+'/'+dd +'&nbsp;시작';
-                                  }
-                                </script>
+                                  </script>
+                                </div>
                             </div>
 
-                        </div>
-                        <div class="people-img">
-                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
                         </div>
                     </div>
                 </div>
@@ -250,7 +217,7 @@
 
     </section>
     <%- include footer.ejs %>
-    <div id="googleMap" class="w3-sidebar w3-third" style="right: 0; top: 0;min-height: 890px;"></div>
+    <div id="googleMap" class="w3-sidebar w3-third"></div>
 
 <script>
     //07_04 add by sehyeon
@@ -280,6 +247,20 @@
         var section = document.getElementById('mySection');
         section.classList.remove("w3-twothird");
         section.classList.add("container");
+    }
+    function selectRegion(){
+      if($('#select_region').val()=='지역(1)'){
+        alert('올바른 검색을 설정해주세요.');
+      }
+      else if($('#select_region2').val()=='지역(2)'){
+        alert('올바른 검색을 설정해주세요.');
+      }
+      else if($('#field').val()=='분야'){
+        alert('올바른 검색을 설정해주세요.');
+      }
+      else{
+        $('#searchAction').submit();
+      }
     }
 
     function selectRegion1(){
