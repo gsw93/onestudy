@@ -13,7 +13,7 @@ module.exports = function connectDB() { // mongoose db
 
     var database;
     // 데이터베이스 연결 정보
-    var databaseUrl = "mongodb://35.189.135.181/db";
+    var databaseUrl = "mongodb://localhost:27017/db";
 
     // 데이터베이스 연결
     console.log('데이터베이스 연결을 시도합니다.');
