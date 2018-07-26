@@ -33,7 +33,7 @@ var options = {
     cert: fs.readFileSync('./gogetssl/onestudycrt.pem')
 };
 //public 폴더를 static으로 오픈
-app.use(serveStatic(path.join(__dirname, './public')));
+app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(require('express-session')({
     secret: 'sad@*!lsd42scc',
     cookie: {
@@ -47,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
     if(!req.secure){
-        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+         return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
     next();
 });
@@ -77,7 +77,7 @@ var configPassport = require('./config/controller');
 configPassport(app, passport);
 //============================ 로그인 기능 끝 ============================
 
-var indexRoute = require('./routes/index_KSW');
+var indexRoute = require('./routes/index');
 var passportRoute = require('./routes/passport');
 var usersRoute = require('./routes/users');
 var boardsRoute = require('./routes/boards');
