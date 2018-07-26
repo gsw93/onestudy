@@ -84,6 +84,43 @@ module.exports = function (router) {
         }  else
             res.render('login');
     });
+    router.route('/master_jjy').get(function (req, res) {
+        if(req.user){
+            //07_15 add by sehyeon
+            if(req.user[0].location.coordinates[0])
+            {
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    MasterBoardModel.find({location: {
+                            $near : {
+                                $geometry : {
+                                    type: "Point",
+                                    coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
+                                }
+                            }
+                        },
+                        category:req.user[0].interested}).limit( 4 ).
+                    exec(function (err,interBoards){
+                        if(err) throw err;
+                        console.log('마스터게시판 목록 출력');
+                        //console.log(req.user[0]);
+                        console.log(interBoards);
+                        //07_04 add master->master_GSH 변경
+                        res.render('master_JJY',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
+                    });
+                });
+            }
+            else {
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    if(err) throw err;
+                    console.log('마스터게시판 목록 출력');
+                    //console.log(req.user[0]);
+                    //07_04 add master->master_GSH 변경
+                    res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
+                });
+            }
+        }  else
+            res.render('login');
+    });
 
 
     router.route('/writeMaster').get(function (req, res) {
@@ -176,6 +213,16 @@ module.exports = function (router) {
 
         res.redirect('/masterView?id='+req.body.replyId);
     });
+    //검색기능 부탁해 세현오빠ㅎㅎㅎㅎ
+    router.get('/process/search',function(req,res){
+      var select_region2 = req.param('select_region2');
+      var field = req.param('field');
+
+      MasterBoardModel.find({$or:[{regionShort:select_region2},{category:field}]}).sort({date:-1}).exec(function(err,searchRegion){
+        if(err) throw err;
+        res.render('master_JJY',{board:searchRegion, seller:req.session.passport.user.seller, authUser: req.user[0]});
+      })
+    })
 
 
     router.route('/process/addboard').post(upload.array('photo',1), function (req, res) {
