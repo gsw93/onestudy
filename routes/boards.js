@@ -48,9 +48,11 @@ module.exports = function (router) {
     router.route('/master').get(function (req, res) {
         if(req.user){
             //07_15 add by sehyeon
+
             if(req.user[0].location.coordinates[0])
             {
-                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                res.render('master_GSH',{board:null,seller:req.session.passport.user.seller, authUser: req.user[0],interboard:1});
+                /*MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
                     MasterBoardModel.find({location: {
                             $near : {
                                 $geometry : {
@@ -68,16 +70,18 @@ module.exports = function (router) {
                         //07_04 add master->master_GSH 변경
                         res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
                     });
-                });
+                });*/
             }
             else {
-                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                res.render('master_GSH',{board:null,seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
+
+                /*MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
                     if(err) throw err;
                     console.log('마스터게시판 목록 출력');
                     //console.log(req.user[0]);
                     //07_04 add master->master_GSH 변경
                     res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
-                });
+                });*/
             }
         }  else
             res.render('login');

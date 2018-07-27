@@ -7,7 +7,7 @@ var MasterBoardModel = mongoose.model("masterboards");
 module.exports = function (router) {
     //get
     router.route('/jusoPopup').get(function (req, res) {
-        res.render('juso_GSH',{inputYn:"",roadFullAddr:"",roadAddrPart1:"",roadAddrPart2:"",engAddr:"",jibunAddr:"",zipNo:"",addrDetail:"",admCd:"",rnMgtSn:"",
+        res.render('juso_GSH',{y:req.body,inputYn:"",roadFullAddr:"",roadAddrPart1:"",roadAddrPart2:"",engAddr:"",jibunAddr:"",zipNo:"",addrDetail:"",admCd:"",rnMgtSn:"",
             bdMgtSn:"",detBdNmList:"",bdNm:"",bdKdcd:"",siNm:"",sggNm:"",emdNm:"",liNm:"",rn:"",udrtYn:"",buldMnnm:"",buldSlno:"",mtYn:"",lnbrMnnm:"",lnbrSlno:"",emdNo:"",entX:"",entY:"",authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck});
     });
     //post
@@ -52,6 +52,24 @@ module.exports = function (router) {
                 res.send(board);
             else
                 res.send("nothing");
+        });
+    });
+    router.post('/map_change2',function (req,res) {
+        var smallx=req.body.smallx;
+        var smally=req.body.smally;
+        var bigx=req.body.bigx;
+        var bigy=req.body.bigy;
+        MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+            MasterBoardModel.find({location: {
+                    $geoWithin : {
+                        //$box : {type:"Point",coordinates:[[Number(smallx), Number(smally)],[Number(bigx), Number(bigy)]] }
+                        $box : [[Number(smally), Number(smallx)],[Number(bigy), Number(bigx)]]
+                    }
+                }}).
+            exec(function (err,interBoards){
+                if(err) throw err;
+                res.send(interBoards);
+            });
         });
     });
 };

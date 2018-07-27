@@ -32,48 +32,78 @@ function markingMap(map){
         center: new google.maps.LatLng(Lat, Lng),
         zoom: zoom
     });*/
+
     var myCenter = new google.maps.LatLng(x, y);
     var marker = new google.maps.Marker({position:myCenter});
     map.setZoom(zoom);
     map.setCenter(myCenter);
     marker.setMap(map);
-    var data=mapchange({region:checkRegion});
-    var infoWindow = new google.maps.InfoWindow;
-    Array.prototype.forEach.call(data,function (markerElem) {
+    google.maps.event.addListener(map, 'dragend', function() {
+        bounds=this.getBounds();
+        var bb,ff,fb,bf;
+        var bounds;
 
-        var title = markerElem.title;
-        //var name = markerElem.getAttribute('name');
-        var region = markerElem.regionShort;
-        var price = String(markerElem.price)+"0,000";
-        var point = new google.maps.LatLng(
-            parseFloat(markerElem.location.coordinates[1]),
-            parseFloat(markerElem.location.coordinates[0])
-        );
-        var infowincontent = document.createElement('div');
-        var strong = document.createElement('strong');
-        strong.textContent = title;
-        infowincontent.appendChild(strong);
-        infowincontent.appendChild(document.createElement('br'));
-        var text = document.createElement('text');
-        text.textContent = region;
-        infowincontent.appendChild(text);
-        var customLabel = {
-            price: {
-                label: price
-            }
-        };
-        var icon = customLabel['price'] || {};
-        var marker = new google.maps.Marker({
-            map: map,
-            position: point,
-            label: icon.label
+        fb = bounds.f.b;
+        ff = bounds.f.f;
+        bb = bounds.b.b;
+        bf = bounds.b.f;
+        var item={bigx:ff,smallx:fb,bigy:bf,smally:bb};
+        console.log(item);
+        var data=mapchange(item);
+        var infoWindow = new google.maps.InfoWindow;
+        Array.prototype.forEach.call(data,function (markerElem) {
+
+            var title = markerElem.title;
+            //var name = markerElem.getAttribute('name');
+            var region = markerElem.regionShort;
+            var price = String(markerElem.price)+"0,000";
+            var point = new google.maps.LatLng(
+                parseFloat(markerElem.location.coordinates[1]),
+                parseFloat(markerElem.location.coordinates[0])
+            );
+            var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = title;
+            infowincontent.appendChild(strong);
+            infowincontent.appendChild(document.createElement('br'));
+            var text = document.createElement('text');
+            text.textContent = region;
+            infowincontent.appendChild(text);
+            var customLabel = {
+                price: {
+                    label: price
+                }
+            };
+            var icon = customLabel['price'] || {};
+            var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label
+            });
+            marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+            });
+            marker.setMap(map);
+
+
+            tmpTag = '<div class="col-lg-3 col-sm-6">' +
+                '<div class="block-cnt">' +
+                '<img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">' +
+                '<ul>' +
+                '<li class="studyNum"></li>' +
+                '</ul>' +
+                '<script type="text/javascript"><a href="/menu_info/' + data[i]._id + '">\
+                        <li data-lat="' + data[i].address.x + '" data-lon="' + data[i].address.y + '" class="items__item">\
+                            <img src="' + data[i].image[0].image_url + '" alt="" class="items__img"/>\
+                            <h3 class="items__title">' + data[i].menu_name + '</h3>\
+                        </li>\
+                    </a>';
+
+            $("#items").append(tmpTag);
         });
-        marker.addListener('click', function() {
-            infoWindow.setContent(infowincontent);
-            infoWindow.open(map, marker);
-        });
-        marker.setMap(map);
     });
+
 }
 
 function mapchange(item) {
@@ -81,7 +111,7 @@ function mapchange(item) {
     $.ajax({
         method: "POST",
         type: "POST",
-        url: "/map_change",
+        url: "/map_change2",
         data: item,
         async:false,
         success: function (data) {

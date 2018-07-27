@@ -157,9 +157,11 @@
             </div>
             <%}%>
             <div class="row">
+                <%if(board !== null){%>
                 <div class="col-md-6" style="color:orange;">
                     <%= board.length %>명의 마스터
                 </div>
+                <%}%>
                 <%if(!authUser.phoneAuthCheck){%>
                 <%if(seller){%>
                 <div class="col-md-6" style="color:orange;">
