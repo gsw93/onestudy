@@ -51,8 +51,36 @@ module.exports = function (router) {
 
             if(req.user[0].location.coordinates[0])
             {
-                res.render('master_GSH',{board:null,seller:req.session.passport.user.seller, authUser: req.user[0],interboard:1});
-                /*MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                MasterBoardModel.find({location: {
+                        $near : {
+                            $geometry : {
+                                type: "Point",
+                                coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
+                            }
+                        }
+                    },
+                    category:req.user[0].interested}).limit( 4 ).exec(function (err,interBoards){
+                    if(err) throw err;
+                    console.log('마스터게시판 목록 출력');
+                    //console.log(req.user[0]);
+                    // console.log(interBoards);
+                    // console.log(rawBoards);
+                    //07_04 add master->master_GSH 변경
+                    res.render('master_GSH',{seller:req.session.passport.user.seller, authUser: req.user[0], interboard:interBoards});
+                });
+            }
+            else {
+                res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0], interboard:null});
+            }
+        }  else
+            res.render('login');
+    });
+    router.route('/master_jjy').get(function (req, res) {
+        if(req.user){
+            //07_15 add by sehyeon
+            if(req.user[0].location.coordinates[0])
+            {
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
                     MasterBoardModel.find({location: {
                             $near : {
                                 $geometry : {
@@ -68,25 +96,13 @@ module.exports = function (router) {
                         //console.log(req.user[0]);
                         console.log(interBoards);
                         //07_04 add master->master_GSH 변경
-                        res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
+                        res.render('master_JJY',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
                     });
-                });*/
-            }
-            else {
-                res.render('master_GSH',{board:null,seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
-
-                /*MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-                    if(err) throw err;
-                    console.log('마스터게시판 목록 출력');
-                    //console.log(req.user[0]);
-                    //07_04 add master->master_GSH 변경
-                    res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
-                });*/
+                });
             }
         }  else
             res.render('login');
     });
-
 
     router.route('/writeMaster').get(function (req, res) {
         //07_04 add writeMaster->writeMaster_GSH 변경
@@ -116,10 +132,10 @@ module.exports = function (router) {
 
     var storage = multer.diskStorage({
         destination: function (req,file, callback){
-            callback(null,'uploads')
+            callback(null,'public/uploads/board');
         },
         filename: function (req,file,callback){
-            callback(null,file.originalname + Date.now())
+            callback(null,file.originalname + Date.now());
         }
     });
 
@@ -131,8 +147,8 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm, callback) {
-        var masterboard = new MasterBoardModel({"id": id, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm, callback) {
+        var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
 
         masterboard.save(function (err) {
             if(err){
@@ -142,7 +158,7 @@ module.exports = function (router) {
 
             console.log("게시글 추가함.");
             callback(null, masterboard);
-        })
+        });
 
     };
 
@@ -178,6 +194,16 @@ module.exports = function (router) {
 
         res.redirect('/masterView?id='+req.body.replyId);
     });
+    //검색기능 부탁해 세현오빠ㅎㅎㅎㅎ
+    router.get('/process/search',function(req,res){
+      var select_region2 = req.param('select_region2');
+      var field = req.param('field');
+
+      MasterBoardModel.find({$or:[{regionShort:select_region2},{category:field}]}).sort({date:-1}).exec(function(err,searchRegion){
+        if(err) throw err;
+        res.render('master_JJY',{board:searchRegion, seller:req.session.passport.user.seller, authUser: req.user[0]});
+      })
+    })
 
 
     router.route('/process/addboard').post(upload.array('photo',1), function (req, res) {
@@ -187,6 +213,7 @@ module.exports = function (router) {
         // image.img.data = fs.readFileSync(req.files);
         console.log(req.user);
         var id = req.user[0].id;
+        var masterphoto = req.user[0].photo;
         var title = req.body.title;
         var author = req.body.author;
         var category = req.body.category;
@@ -230,7 +257,7 @@ module.exports = function (router) {
                 originalname = files[index].originalname;
                 filename = files[index].filename;
                 mimetype = files[index].mimetype;
-                path = files[index].path;
+                path = '/uploads/board/'+filename;
                 size = files[index].size;
             }
         } else {
@@ -239,7 +266,7 @@ module.exports = function (router) {
             originalname = files[index].originalname;
             filename = files[index].filename;
             mimetype = files[index].mimetype;
-            path = files[index].path;
+            path = '/uploads/board/'+filename;
             size = files[index].size;
         }
 
@@ -247,7 +274,7 @@ module.exports = function (router) {
 
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,id,title,author,category,day,region,deadline,minNum,maxNum,studyTerm,price,studynum, masterInfo, studyInfo,reviewstar,path,locationX,locationY,siNm, function(err, result){
+            addMasterBoard(connectDB,id,masterphoto,title,author,category,day,region,deadline,minNum,maxNum,studyTerm,price,studynum, masterInfo, studyInfo,reviewstar,path,locationX,locationY,siNm, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {

@@ -24,6 +24,8 @@ var fs = require('fs');
 var store = new MongoDBStore({
     uri: 'mongodb://localhost/db',
     //uri: 'mongodb://35.189.135.181/db',
+    uri: 'mongodb://localhost:27017/db',
+    // uri: 'mongodb://35.189.135.181/db',
     databaseName: 'db',
     collection: 'sessions'
 });
@@ -33,7 +35,7 @@ var options = {
     cert: fs.readFileSync('./gogetssl/onestudycrt.pem')
 };
 //public 폴더를 static으로 오픈
-app.use(serveStatic(path.join(__dirname, 'public')));
+app.use(serveStatic(path.join(__dirname, './public')));
 app.use(require('express-session')({
     secret: 'sad@*!lsd42scc',
     cookie: {
@@ -47,7 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
     if(!req.secure){
-         return res.redirect(['https://', req.get('Host'), req.url].join(''));
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
     next();
 });
@@ -55,6 +57,7 @@ app.use(function (req, res, next) {
 var router = express.Router();
 // 기본 속성 설정
 app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 443);
 // view engine 설정
 app.set('view engine', 'ejs');
 // views 폴더 위치 설정
@@ -76,7 +79,7 @@ var configPassport = require('./config/controller');
 configPassport(app, passport);
 //============================ 로그인 기능 끝 ============================
 
-var indexRoute = require('./routes/index');
+var indexRoute = require('./routes/index_KSW');
 var passportRoute = require('./routes/passport');
 var usersRoute = require('./routes/users');
 var boardsRoute = require('./routes/boards');
@@ -94,7 +97,8 @@ jusoRoute(app);
 var httpsServer = https.createServer(options, app);
 var httpServer = http.createServer(app);
 
-var httpPort = 80;
+var httpPort = 3001;
+// var httpPort = 80;
 
 httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);

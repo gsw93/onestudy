@@ -55,20 +55,30 @@
         <div class="row">
             <div class="col-lg-4 col-sm-12" style="margin-top: 1%; margin-right: 20px; background-color: white;">
                 <div class="block-cnt">
+                  <img src="<%- authUser.photo %>">
                     <div class="cnt">
-                        <div class="cnt_text" style="padding: 150px 0 60px 0; margin-right: 40px">
-                            <p align="right">이름 </p> <h4 align="center"></h4>
-                            <p align="right">지역 </p><h4></h4>
-                            <p align="right">인증 여부 </p> <h4 style="color: rgb(255, 128, 0); border-bottom: none;">비인증</h4>
-                            <p align="right">후기 </p> <h4 style="border-bottom: none"></h4>
-                            <ul class="create_study" id="create">
+                        <div class="cnt_text">
+                          <div class="row">
+                            <span class="col-lg-4">이름</span><span class="col-lg-8"><%=authUser.name%></span>
+                          </div>
+                            <p>이름</p><h5><%=authUser.name%></h5>
+                            <p>지역 </p><h6><%=authUser.addressShort%></h6>
+                            <p>인증 여부</p><h5 id="certification"></h5>
+                            <script type="text/javascript">
+                              var cert = document.getElementById('certification');
+                              //인증 여부에 따른 표시
+                              if(<%-authUser.phoneAuthCheck%>==false){
+                                cert.innerHTML = "비인증";
+                              }else{
+                                cert.innerHTML = "인증";
+                              }
+                            </script>
+                            <p>후기</p><a href="#" style="float:left;font-size:12px;line-height:30px;">후기보러가기</a>
+
+                            <!-- <ul class="create_study" id="create">
                                 <li><a href="#" style="color: white; text-decoration: none;">스터디 만들기</a></li>
-                            </ul>
+                            </ul> -->
                         </div>
-                    </div>
-                    <div class="profile-img">
-                        <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg"
-                             width="110px" height="110px">
                     </div>
                 </div>
             </div>

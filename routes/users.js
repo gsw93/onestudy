@@ -7,6 +7,16 @@ var mongoose = require('mongoose');
 var UserModel = mongoose.model("users");
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'public/uploads/user');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname + Date.now());
+    }
+});
+var upload = multer({ storage: storage });
 
 module.exports = function (router, passport) {
 
@@ -17,9 +27,9 @@ module.exports = function (router, passport) {
             res.render('login');
     });
 
-    router.route('/apply').get(function (req, res) {
+    router.route('/masterapply').get(function (req, res) {
         if(req.user){
-            res.render('apply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('masterapply', {seller:req.session.passport.user.seller, authUser: req.user[0]});
         } else{
             res.render('login');
         }
@@ -68,14 +78,14 @@ module.exports = function (router, passport) {
         });
     });
 
-    router.route('/process/addmaster').post(function (req, res) {
+    router.route('/process/addmaster').post(upload.single('userfile'), function (req, res) {
         console.log('/process/addmaster 호출됨.');
+        console.log(req.file);
         var name = req.body.name;
         var age = req.body.age;
         var gender = req.body.gender;
-        var photo = req.body.photo;
-        var majors = req.body.majors;
         var phone = req.body.phone;
+        var file = req.file;
 
         console.log(req.session.passport);
         UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
@@ -87,9 +97,9 @@ module.exports = function (router, passport) {
                 member.name = name;
                 member.age = age;
                 member.gender = gender;
-                member.photo = photo;
-                member.majors = majors;
+                member.photo = '/uploads/user/'+file.filename;
                 member.phone = phone;
+                member.phoneAuthCheck = true;
                 member.sellercheck = true;
                 member.save(function (err) {
                     if (err)

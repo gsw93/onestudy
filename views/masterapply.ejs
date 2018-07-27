@@ -45,7 +45,7 @@
   ===================================-->
 
     <div class="Applyform">
-      <form action="/process/addmaster" method="post">
+      <form action="/process/addmaster" method="post" enctype="multipart/form-data">
       <h1>Master Profile</h1>
       <div class="Apply">
         <div class="row form-group">
@@ -73,12 +73,12 @@
           <div class="input-group">
             <span class="input-group-btn">
                 <span class="btn btn-default btn-file">
-                  <input type="file" accept="image/png, image/jpeg, image/gif" id="imgInp">
+                  <input type="file" name="userfile" accept="image/png, image/jpeg, image/gif" id="imgInp">
                 </span>
             </span>
             <input id='urlname'type="text" class="form-control" readonly>
             <img id='img-upload'/>
-        </div>
+          </div>
         </div>
         <input type="submit" name="save" value="저장&nbsp;&gt;">
       </div>

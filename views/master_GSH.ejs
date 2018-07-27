@@ -119,7 +119,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="block-cnt">
 
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
+                        <img src="<%-interboard[i].path%>" style="width: 100%; height: 300px;">
                         <ul>
                             <li class="studyNum"></li>
                         </ul>
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                         <div class="people-img">
-                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
+                            <img src="<%-interboard[i].masterphoto%>" style="width: 90%; height: 50px;">
                         </div>
                     </div>
                 </div>
@@ -157,11 +157,11 @@
             </div>
             <%}%>
             <div class="row">
-                <%if(board !== null){%>
+                <%//if(board !== null){%>
                 <div class="col-md-6" style="color:orange;">
-                    <%= board.length %>명의 마스터
+                    <%= //board.length %>명의 마스터
                 </div>
-                <%}%>
+                <%//}%>
                 <%if(!authUser.phoneAuthCheck){%>
                 <%if(seller){%>
                 <div class="col-md-6" style="color:orange;">
@@ -169,66 +169,8 @@
                 </div>
                 <%}}%>
             </div>
-            <div class="row">
-              <% if(board !== null){
-                for (var i=0; i< board.length; i++){ %>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="block-cnt">
+            <div id="items" class="row">
 
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
-                        <ul>
-                            <li class="studyNum"></li>
-                        </ul>
-
-                        <script type="text/javascript">
-                          var max = <%- board[i].maxNum %>;
-
-                          if(max==1){
-                            var a = document.getElementsByClassName('studyNum');
-                            a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
-                          }
-                          else {
-                            var a = document.getElementsByClassName('studyNum');
-                            a[<%- i %>].innerHTML = "1 : <%- board[i].maxNum %>";
-                          }
-
-                        </script>
-                        <div class="cnt">
-                            <div class="cnt_text">
-                              <% i+1 %>
-                                <h5><a href="/masterView?id=<%=board[i]._id%>"><%= board[i].title %></a></h5>
-                                <p><% for(var n=0; n< board[i].category.length;n++){ %>
-                                  <%= board[i].category[n] %> &nbsp; <% } %><br>
-                                    <%= board[i].regionShort %><br>
-                                    <span id="deadline[<%=i%>]"></span> 시작<br>
-                                    <script>
-                                      var i = new Date('<%- board[i].deadline %>');
-                                      document.getElementById('deadline[<%=i%>]').innerHTML = date_format(i);
-                                      function date_format(dateValue){
-                                        var dd = dateValue.getDate();
-                                        var mm = dateValue.getMonth()+1;
-                                        var yyyy = dateValue.getFullYear();
-
-                                        if(dd<10){
-                                          dd = '0'+dd;
-                                        }
-                                        if(mm<10){
-                                          mm = '0'+mm;
-                                        }
-                                        return yyyy+'-'+mm+'-'+dd;
-                                      }
-                                    </script>
-                                    <%= board[i].studyTerm %>주 진행</p>
-                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studynum %>회)</span>
-                            </div>
-
-                        </div>
-                        <div class="people-img">
-                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
-                        </div>
-                    </div>
-                </div>
-                <% }} %>
             </div>
         </div>
 

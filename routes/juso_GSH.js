@@ -59,17 +59,14 @@ module.exports = function (router) {
         var smally=req.body.smally;
         var bigx=req.body.bigx;
         var bigy=req.body.bigy;
-        MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-            MasterBoardModel.find({location: {
-                    $geoWithin : {
-                        //$box : {type:"Point",coordinates:[[Number(smallx), Number(smally)],[Number(bigx), Number(bigy)]] }
-                        $box : [[Number(smally), Number(smallx)],[Number(bigy), Number(bigx)]]
-                    }
-                }}).
-            exec(function (err,interBoards){
-                if(err) throw err;
-                res.send(interBoards);
-            });
+        MasterBoardModel.find({location: {
+                $geoWithin : {
+                    $box : [[Number(smally), Number(smallx)],[Number(bigy), Number(bigx)]]
+                }
+            }}).
+        exec(function (err,boards){
+            if(err) throw err;
+            res.send(boards);
         });
     });
 };
