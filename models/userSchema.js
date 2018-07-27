@@ -22,7 +22,6 @@ var UserSchema = new mongoose.Schema({
     age: {type: Number},
     gender: {type: String},
     photo: {type: String},
-    majors: {type: String},
     phone: {type: String},
     address: {type: String},
     interested: {type: String}, // 관심분야
