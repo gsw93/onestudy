@@ -70,7 +70,7 @@ module.exports = function (router) {
                 });
             }
             else {
-                res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0], interboard:null});
+                res.render('master_GSH',{seller:req.session.passport.user.seller, authUser: req.user[0], interboard:null});
             }
         }  else
             res.render('login');

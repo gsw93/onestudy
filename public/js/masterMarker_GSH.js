@@ -35,9 +35,13 @@ function markingMap(map){
 
     var myCenter = new google.maps.LatLng(x, y);
     var marker = new google.maps.Marker({position:myCenter});
-    map.setZoom(zoom);
+
     map.setCenter(myCenter);
+    map.setZoom(zoom);
     marker.setMap(map);
+    google.maps.event.addListener(map, 'tilesloaded',function(){
+        changeMap(map.getBounds());
+    });
     google.maps.event.addListener(map, 'dragend',function(){
         changeMap(map.getBounds());
     });
