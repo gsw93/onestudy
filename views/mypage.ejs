@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>One Study - 스터디 매칭 서비스</title>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
     <!-- PLUGINS CSS STYLE -->
     <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -62,16 +64,24 @@
           <!-- 프로필 정보 -->
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
-              <img src="<%- authUser.photo %>">
+              <div class="profile-img">
+                <img src="" id="profile_photo" alt="profile_photo">
+                <a href="#">수정</a>
+              </div>
               <div class="cnt_text">
-                <div class="row" style="height:40px;">
-                  <div class="col-lg-4 col-md-4 col-sm-4">이름</div><div class="col-lg-8 col-md-8 col-sm-8"><h5><%=authUser.name%></h5></div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 label">이름</div>
+                  <div class="col-lg-7 col-md-7 col-sm-12"><h5><%=authUser.name%></h5></div>
                 </div>
-                <div class="row" style="height:40px;">
-                  <div class="col-lg-4 col-md-4 col-sm-4">지역</div><div class="col-lg-8 col-md-8 col-sm-8"><h6><%=authUser.addressShort%></h6></div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 label">지역</div>
+                  <div class="col-lg-7 col-md-7 col-sm-12"><h6><%=authUser.addressShort%></h6></div>
+                  <div class="col-lg-1 col-md-1 col-sm-12" style="padding:0;"><a href="#">수정</a></div>
                 </div>
-                <div class="row" style="height:40px;">
-                  <div class="col-lg-4 col-md-4 col-sm-4">인증 여부</div><div class="col-lg-8 col-md-8 col-sm-8"><h5 id="certification"></div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 label">인증 여부</div>
+                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 id="certification"></div>
+                  <div class="col-lg-4 col-md-4 col-sm-12" style="padding:0;display:none;" id="cert_a"><a href="#">인증하러가기</a></div>
                 </div>
                 <div class="row">
                   <ul class="create_study">
@@ -82,43 +92,91 @@
             </div>
           </div>
           <!-- 프로필 정보 끝 -->
-          <!-- 카테고리 수정 -->
+          <!-- 후기관리 -->
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
-              <div class="section-title">
-                  <h2>All Categories</h2>
-              </div>
-              <div class="row" style="margin-bottom:20px;">
-                  <!-- Category list -->
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-4" style="left: 25%">
-                      <div class="form-check">
-                          <input id="checkbox-1" class="checkbox-custom form-check-input" name="checkbox-1" type="checkbox">
-                          <label for="checkbox-1">
-                              취미
-                          </label>
-                      </div>
-                      <div class="form-check">
-                          <input id="checkbox-2" class="checkbox-custom form-check-input" name="checkbox-2" type="checkbox">
-                          <label for="checkbox-2">
-                              언어
-                          </label>
-                      </div>
-                      <div class="form-check">
-                          <input id="checkbox-3" class="checkbox-custom form-check-input" name="checkbox-1" type="checkbox">
-                          <label for="checkbox-3">
-                              운동
-                          </label>
-                      </div>
+              <div class="cnt_title">
+                  <h4>후기 관리</h4>
+                  <div class="option">
+                      <button type="button" class="btn_all">전체</button>
+                      <button type="button" class="btn_div">진행중</button>
+                      <button type="button" class="btn_div">종료</button>
                   </div>
-              </div>
-              <div class="row">
-                <div class="btn-categories">
-                    <a href="#" style="color: white; text-decoration: none;">수 정</a>
-                </div>
+                  <table class="table table-hover" style="margin-top: 30px;">
+                      <tbody style="font-size: 0.8rem;">
+                      <tr>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>3.0</td>
+                        <td>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>3.0</td>
+                        <td>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>3.0</td>
+                        <td>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>3.0</td>
+                        <td>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>3.0</td>
+                        <td>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
+                      </tr>
+                      </tbody>
+                  </table>
+                  <div class="text-center">
+                      <ul class="pagination">
+                          <li class="active"><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                      </ul>
+                  </div>
               </div>
             </div>
           </div>
-          <!-- 카테고리 수정 끝 -->
+          <!-- 후기관리 끝 -->
         </div>
         <div class="row">
           <!-- 스터디 관리 -->
@@ -238,22 +296,25 @@
         <div class="row">
           <!-- 프로필 정보 -->
           <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="block-cnt">
-              <img src="<%- authUser.photo %>">
+            <div class="block-cnt" style="padding:50px 0;">
+              <div class="profile-img">
+                <img src="" id="profile_photo2" alt="profile_photo">
+                <a href="#">수정</a>
+              </div>
               <div class="cnt_text">
-                <div class="row" style="height:40px;">
-                  <div class="col-lg-4">이름</div><div class="col-lg-8"><h5><%=authUser.name%></h5></div>
-                </div>
-                <div class="row" style="height:40px;">
-                  <div class="col-lg-4">지역</div><div class="col-lg-8"><h6><%=authUser.addressShort%></h6></div>
-                </div>
-                <div class="row" style="height:40px;">
-                  <div class="col-lg-4">인증 여부</div><div class="col-lg-8"><h5 id="certification"></div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 label">이름</div>
+                  <div class="col-lg-7 col-md-7 col-sm-12"><h5><%=authUser.name%></h5></div>
                 </div>
                 <div class="row">
-                  <ul class="create_study">
-                      <li><a href="#" style="color: white; text-decoration: none;">스터디 만들기</a></li>
-                  </ul>
+                  <div class="col-lg-4 col-md-4 col-sm-12 label">지역</div>
+                  <div class="col-lg-7 col-md-7 col-sm-12"><h6><%=authUser.addressShort%></h6></div>
+                  <div class="col-lg-1 col-md-1 col-sm-12" style="padding:0;"><a href="#">수정</a></div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 label">인증 여부</div>
+                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 id="certification2"></div>
+                  <div class="col-lg-4 col-md-4 col-sm-12" style="padding:0;display:none;" id="cert_a"><a href="#">인증하러가기</a></div>
                 </div>
               </div>
             </div>
@@ -265,7 +326,7 @@
               <div class="section-title">
                   <h2>All Categories</h2>
               </div>
-              <div class="row">
+              <div class="row" style="margin-bottom:20px;">
                   <!-- Category list -->
                   <div class="col-lg-4 col-md-4 col-sm-4 col-4" style="left: 25%">
                       <div class="form-check">
@@ -297,7 +358,7 @@
           </div>
           <!-- 카테고리 수정 끝 -->
         </div>
-        <div class="row" style="margin:20px 0;">
+        <div class="row">
           <!-- 스터디 관리 -->
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
@@ -358,41 +419,68 @@
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
               <div class="cnt_title">
-                  <h4>결제 내역</h4>
-                  <div class="option">
-                      <h4 style="float:left;width:auto;margin:0 5px;color:rgb(255, 128, 0);">200,000</h4><span style="float:left;bottom:0;font-weight:700;font-size:12px;">크레딧</span>
-                  </div>
+                  <h4>스터디 평가하기</h4>
                   <table class="table table-hover" style="margin-top: 30px;">
                       <tbody style="font-size: 0.8rem;">
-                      <tr style="background:rgba(191, 191, 191,0.5);">
-                        <th style="font-weight:800;text-align:center;">날짜</th>
-                        <th style="font-weight:800;text-align:center;">결제금액</th>
-                        <th style="font-weight:800;text-align:center;">크레딧</th>
-                        <th style="font-weight:800;text-align:center;">보너스 크레딧</th>
+                        <tr>
+                            <td>10.</td>
+                            <td colspan="2">원스터디 스터디명 출력</td>
+                            <td>18.06.04 - 01:05</td>
+                            <td>3.0
+                              <i class="fas fa-star" style="color:#ff751a;"></i>
+                              <i class="fas fa-star" style="color:#ff751a;"></i>
+                              <i class="fas fa-star" style="color:#ff751a;"></i>
+                              <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                              <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                            </td>
+                        </tr>
+                      <tr>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>18.06.04 - 01:05</td>
+                        <td>3.0
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
                       </tr>
                       <tr>
-                          <td style="text-align:center;">2018-04-01</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">5,000원</td>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>18.06.04 - 01:05</td>
+                        <td>3.0
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
                       </tr>
                       <tr>
-                          <td style="text-align:center;">2018-04-01</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">5,000원</td>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>18.06.04 - 01:05</td>
+                        <td>3.0
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
                       </tr>
                       <tr>
-                          <td style="text-align:center;">2018-04-01</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">5,000원</td>
-                      </tr>
-                      <tr>
-                          <td style="text-align:center;">2018-04-01</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">50,000원</td>
-                          <td style="text-align:center;">5,000원</td>
+                        <td>10.</td>
+                        <td colspan="2">원스터디 스터디명 출력</td>
+                        <td>18.06.04 - 01:05</td>
+                        <td>3.0
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#ff751a;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
+                        </td>
                       </tr>
                       </tbody>
                   </table>
@@ -431,6 +519,7 @@ function content(name,elmnt) {
         tablinks[i].style.backgroundColor = "";
     }
     document.getElementById(name).style.display = "block";
+    elmnt.style.backgroundColor = "rgb(255, 128, 0)";
 
 }
 // Get the element with id="defaultOpen" and click on it
@@ -438,11 +527,22 @@ document.getElementById("defaultOpen").click();
 
 //인증여부 구별
 var cert = document.getElementById('certification');
+var cert_a = document.getElementById('cert_a');
+var profile_photo_ma = document.getElementById('profile_photo');
+var profile_photo_st = document.getElementById('profile_photo2');
+var cert2 = document.getElementById('certification2');
 //인증 여부에 따른 표시
 if(<%-authUser.phoneAuthCheck%>==false){
   cert.innerHTML = "비인증";
+  cert2.innerHTML = "비인증";
+  cert_a.style.display ="block";
+  profile_photo_ma.src ="/img/home/main_i_05.png";
+  profile_photo_st.src ="/img/home/main_i_05.png";
 }else{
   cert.innerHTML = "인증";
+  cert2.innerHTML = "인증";
+  profile_photo_ma.src ="<%- authUser.photo %>";
+  profile_photo_st.src ="<%- authUser.photo %>";
 }
 </script>
 
