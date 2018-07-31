@@ -162,11 +162,11 @@
                                         <%= interboard[i].category[n] %> &nbsp; <% } %><br>
                                         <%= interboard[i].regionShort %><br>
                                         <%= interboard[i].studyTerm %>주 진행</p>
-                                    <span id="deadline[<%=i%>]" style="font-size:12px;float:right;line-height:35px;"></span>
+                                    <span id="inter_deadline[<%=i%>]" style="font-size:12px;float:right;line-height:35px;"></span>
                                     <span id="master_term"><span id="master_money"><%= interboard[i].price %>만원</span>&nbsp;(주<%=interboard[i].studynum %>회)</span>
                                     <script>
                                         var i = new Date('<%- interboard[i].deadline %>');
-                                        document.getElementById('deadline[<%=i%>]').innerHTML = date_format(i);
+                                        document.getElementById('inter_deadline[<%=i%>]').innerHTML = date_format(i);
                                         function date_format(dateValue){
                                             var dd = dateValue.getDate();
                                             var mm = dateValue.getMonth()+1;
