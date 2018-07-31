@@ -166,8 +166,9 @@
 .block-cnt ul li{
     border-radius: 15px;
     background-color: rgb(255, 128, 0);
-    width: 63px;
-    padding:5px;
+    width: 75px;
+
+    padding:8px;
     color: #ffffff;
 }
 
@@ -175,6 +176,7 @@
     background-color: white;
     width: 100%;
     overflow: auto;
+    min-height: 300px;
 }
 
 .cnt_text{
@@ -273,21 +275,59 @@
     background-color: white;
     position: absolute;
     right:37%;
-    top:39%;
+    top:35%;
 }
+
+.board_click:hover{
+    text-decoration: none;
+}
+
 #googleMap{
   min-height: 890px;
   right: 0; top: 0;
 }
+.master_imgBackground{
+  width:100%;
+  height:200px;
+}
+@media (min-width: 1200px) and (max-width: 1450px) {
+    .master_imgBackground{
+      width:100%;
+      height:110px;
+    }
 
-@media (min-width: 992px) and (max-width: 1100px) {
+    .block-cnt ul li{
+        width: 65px;
+        padding:5px;
+    }
+
     .people-img {
-        top:25%;
+        top:22%;
+        right:32%;
+        width: 35%;
+    }
+
+    .cnt{
+        min-height: 310px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .block-cnt ul li{
+        width: 60px;
+        padding:3px;
+    }
+
+    .people-img {
+        top:22%;
         right:32%;
         width: 35%;
     }
     .cnt_text #master_term{
         float:right;
+    }
+
+    .cnt{
+        min-height: 350px;
     }
 
     .cnt_text #master_term #master_money{
@@ -301,12 +341,20 @@
     .cnt_text h5{
         padding-top: 20px;
     }
+    .master_imgBackground{
+      width:100%;
+      height:130px;
+    }
 
 }
 
 @media (min-width: 768px) and (max-width: 991px){
     .people-img {
         top:37%;
+    }
+
+    .cnt{
+        min-height: 280px;
     }
     /* #googleMap{
       min-height: 400px;
@@ -323,8 +371,8 @@
 
 @media (min-width: 575px) and (max-width: 767px){
     .people-img {
-        left:90px;
-        right:90px;
+        right:32%;
+        width: 35%;
     }
 
     /* #googleMap{

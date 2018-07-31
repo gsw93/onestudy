@@ -48,29 +48,38 @@ module.exports = function (router) {
     router.route('/master').get(function (req, res) {
         if(req.user){
             //07_15 add by sehyeon
-
             if(req.user[0].location.coordinates[0])
             {
-                MasterBoardModel.find({location: {
-                        $near : {
-                            $geometry : {
-                                type: "Point",
-                                coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
+                    MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    MasterBoardModel.find({location: {
+                            $near : {
+                                $geometry : {
+                                    type: "Point",
+                                    coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
+                                }
                             }
-                        }
-                    },
-                    category:req.user[0].interested}).limit( 4 ).exec(function (err,interBoards){
-                    if(err) throw err;
-                    console.log('마스터게시판 목록 출력');
-                    //console.log(req.user[0]);
-                    // console.log(interBoards);
-                    // console.log(rawBoards);
-                    //07_04 add master->master_GSH 변경
-                    res.render('master_GSH',{seller:req.session.passport.user.seller, authUser: req.user[0], interboard:interBoards});
+                        },
+                        category:req.user[0].interested}).limit( 4 ).
+                    exec(function (err,interBoards){
+                        if(err) throw err;
+                        console.log('마스터게시판 목록 출력');
+                        //console.log(req.user[0]);
+                        // console.log(interBoards);
+                        // console.log(rawBoards);
+                        //07_04 add master->master_GSH 변경
+                        res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0], interboard:interBoards});
+                    });
                 });
             }
             else {
-                res.render('master_GSH',{seller:req.session.passport.user.seller, authUser: req.user[0], interboard:null});
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    if(err) throw err;
+                    console.log('마스터게시판 목록 출력');
+                    console.log('test: '+ rawBoards);
+                    //console.log(req.user[0]);
+                    //07_04 add master->master_GSH 변경
+                    res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0], interboard:null});
+                });
             }
         }  else
             res.render('login');
@@ -100,9 +109,19 @@ module.exports = function (router) {
                     });
                 });
             }
+            else {
+                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    if(err) throw err;
+                    console.log('마스터게시판 목록 출력');
+                    //console.log(req.user[0]);
+                    //07_04 add master->master_GSH 변경
+                    res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
+                });
+            }
         }  else
             res.render('login');
     });
+
 
     router.route('/writeMaster').get(function (req, res) {
         //07_04 add writeMaster->writeMaster_GSH 변경
