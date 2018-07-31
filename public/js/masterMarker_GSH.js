@@ -68,6 +68,15 @@ function changeMap(bounds) {
         var title = markerElem.title;
         //var name = markerElem.getAttribute('name');
         var region = markerElem.regionShort;
+        var boardpic = document.createElement('img');
+        var masterpic = document.createElement('img');
+        boardpic.className = "master_imgBackground";
+        boardpic.src = markerElem.path;
+        boardpic.style.marginBottom = "10px";
+        masterpic.src = markerElem.masterphoto;
+        masterpic.style.width = "90%";
+        masterpic.style.height = "50px";
+
         var price = String(markerElem.price) + "0,000";
         var point = new google.maps.LatLng(
             parseFloat(markerElem.location.coordinates[1]),
@@ -99,22 +108,25 @@ function changeMap(bounds) {
         markers.push(marker);
         marker.setMap(map);
 
-
         var tmpTag = '<div class="col-lg-3 col-md-6 col-sm-6 list-item">' +
             '<div class="block-cnt">' +
-            '<img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%" style="margin-bottom:10px;">' +
+            boardpic.outerHTML +
             '<ul>' +
             '<li class="deadlineIcon" style="display:none;left:0;float:left;"></li>' +
             '<li class="studyNum" style="float:right;"></li>' +
             '</ul>' +
             '<div class="cnt">' +
             '<div class="people-img">' +
-            '<img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 90%; ">' +
+            masterpic.outerHTML +
             '</div>' +
+
             '<div class="cnt_text">';
+
+        console.log(boardpic);
         //i++;
         tmpTag = tmpTag + '<h5><a href="/masterView?id=' + markerElem._id + '">' + title + '</a></h5>' +
             '<p>';
+
         for (var n = 0; n < markerElem.category.length; n++) {
             tmpTag = tmpTag + markerElem.category[n] + '&nbsp;'
         }
@@ -151,7 +163,7 @@ function changeMap(bounds) {
         }
         else {
             var a = document.getElementsByClassName('studyNum');
-            a[i].innerHTML = '1 : ' + markerElem.maxNum + '';
+            a[i].innerHTML = markerElem.minNum + ' : ' + markerElem.maxNum + '';
         }
         //var i = new Date(markerElem.deadline);
         document.getElementById('deadline[' + i + ']').innerHTML = date_format(ddd);

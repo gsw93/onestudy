@@ -119,7 +119,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="block-cnt">
 
-                        <img src="<%-interboard[i].path%>" style="width: 100%; height: 300px;">
+                        <img class="master_imgBackground" src="<%-interboard[i].path%>" style="margin-bottom:10px;">
                         <ul>
                             <li class="studyNum"></li>
                         </ul>
@@ -133,7 +133,7 @@
                             }
                             else {
                                 var a = document.getElementsByClassName('studyNum');
-                                a[<%- i %>].innerHTML = "1 : <%- interboard[i].maxNum %>";
+                                a[<%- i %>].innerHTML = "<%- interboard[i].minNum %> : <%- interboard[i].maxNum %>";
                             }
 
                         </script>
