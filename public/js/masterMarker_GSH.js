@@ -109,6 +109,7 @@ function changeMap(bounds) {
         marker.setMap(map);
 
         var tmpTag = '<div class="col-lg-3 col-md-6 col-sm-6 list-item">' +
+            '<a class="board_click" href="/masterView?id=' + markerElem._id + '">' +
             '<div class="block-cnt">' +
             boardpic.outerHTML +
             '<ul>' +
@@ -119,12 +120,10 @@ function changeMap(bounds) {
             '<div class="people-img">' +
             masterpic.outerHTML +
             '</div>' +
-
             '<div class="cnt_text">';
 
-        console.log(boardpic);
         //i++;
-        tmpTag = tmpTag + '<h5><a href="/masterView?id=' + markerElem._id + '">' + title + '</a></h5>' +
+        tmpTag = tmpTag + '<h5>' + title + '</h5>' +
             '<p>';
 
         for (var n = 0; n < markerElem.category.length; n++) {
@@ -136,7 +135,7 @@ function changeMap(bounds) {
             '<div class="" >' +
             '<span id="deadline[' + i + ']" style="font-size:12px;float:right;line-height:35px;"></span>' +
             '<span id="master_term"><span id="master_money">' + markerElem.price + '만원</span>&nbsp;(주&nbsp;' + markerElem.studynum + '회)</span>' +
-            '</div></div></div></div></div>';
+            '</div></div></div></div></a></div>';
         $("#items").append(tmpTag);
 
         var ddd = new Date(markerElem.deadline);
@@ -163,7 +162,7 @@ function changeMap(bounds) {
         }
         else {
             var a = document.getElementsByClassName('studyNum');
-            a[i].innerHTML = markerElem.minNum + ' : ' + markerElem.maxNum + '';
+            a[i].innerHTML = markerElem.minNum + ' : ' + markerElem.maxNum;
         }
         //var i = new Date(markerElem.deadline);
         document.getElementById('deadline[' + i + ']').innerHTML = date_format(ddd);
