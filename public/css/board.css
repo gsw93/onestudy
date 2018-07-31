@@ -279,16 +279,21 @@
   min-height: 890px;
   right: 0; top: 0;
 }
-#master_imgBackground{
+.master_imgBackground{
   width:100%;
   height:200px;
 }
 @media (min-width: 1200px) and (max-width: 1450px) {
-    #master_imgBackground{
+    .master_imgBackground{
       width:100%;
       height:110px;
     }
 
+    .people-img {
+        top:25%;
+        right:32%;
+        width: 35%;
+    }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
     .people-img {
@@ -311,7 +316,7 @@
     .cnt_text h5{
         padding-top: 20px;
     }
-    #master_imgBackground{
+    .master_imgBackground{
       width:100%;
       height:130px;
     }
