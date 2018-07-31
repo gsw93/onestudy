@@ -66,6 +66,8 @@ function changeMap(bounds) {
     }
     markers = [];
     $("#items").empty();
+    $("#mapcount").empty();
+    $("#mapcount").append(data.length);
     var i=0;
 
     Array.prototype.forEach.call(data,function (markerElem) {
