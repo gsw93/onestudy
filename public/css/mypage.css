@@ -3504,14 +3504,18 @@ article.single-post p {
     width: 100%;
     text-decoration: none;
 }
-
 .block-cnt {
     position: relative;
     padding:15px 20px;
-    min-height: 430px;
+    min-height: 435px;
     border:1px solid #d9d9d9;
     background-color: #fff;
     margin:20px 0;
+}
+
+.cnt_text .label {
+    text-align: right;
+    color: #8c8c8c;
 }
 
 .cnt_text ul {
@@ -3552,7 +3556,7 @@ article.single-post p {
   display:none;
 }
 .tablink{
-  background-color: rgb(255, 128, 0);
+  background-color: #ccc;
   color:white;
   height: 35px;
   border-radius: 50px;
@@ -3561,8 +3565,14 @@ article.single-post p {
 }
 .tablink:hover{
   background-color: white;
-  border:1px solid rgb(255, 128, 0);
-  color:black;
+  border:1.5px solid rgb(255, 128, 0);
+  color:rgb(255, 128, 0);
+  font-weight: 700;
+}
+.tablink.active{
+  background-color: rgb(255, 128, 0);
+  color:white;
+  font-weight: 700;
 }
 
 .cnt {
@@ -3574,22 +3584,21 @@ article.single-post p {
 .cnt_text {
     margin: auto;
     width: 80%;
-    padding:20px 0;
+    padding:5px 0;
 }
 
 .cnt_text h5 {
-    width: 90%;
+    width: 100%;
     border-bottom: 1px solid black;
     font-weight: 700;
 }
 .cnt_text h6 {
     font-size: 17px;
-    width: 90%;
+    width: 100%;
     border-bottom: 1px solid black;
     font-weight: 700;
-
 }
-.cnt_text h5#certification{
+.cnt_text h5#certification,.cnt_text h5#certification2{
     color:rgb(255, 128, 0);
     border-bottom: none;
     font-weight: bold;
@@ -3608,7 +3617,9 @@ article.single-post p {
     margin-bottom: 0;
     float:left;
 }
-
+.cnt_text .row{
+  margin:14px 0;
+}
 
 .cnt_text ul.chat {
     top: 5%;
@@ -3645,18 +3656,57 @@ article.single-post p {
     position: relative;
 }
 
-
-.block-cnt img {
+.profile-img{
+  text-align:center;
+  margin:20px 0;
+}
+.profile-img img {
     border-radius: 50%;
     width: 130px;
+    display: inline-block;
     height: 130px;
-    margin:20px auto;
-    display: block;
 }
+#master .profile-img a{
+  position: absolute;
+  top:140px;
+  display: inline-block;
+  text-decoration: underline;
+  color:#ccc;
+  font-size:14px;
+}
+#student .profile-img a{
+  position: absolute;
+  top:160px;
+  display: inline-block;
+  text-decoration: underline;
+  color:#ccc;
+  font-size:14px;
+}
+.cnt_text .col-lg-1 a, #cert_a a{
+  display: inline-block;
+  text-decoration: underline;
+  color:#ccc;
+  font-size:14px;
+}
+@media (min-width: 1200px) and (max-width: 1450px) {
+  .cnt_text h6 {
+      font-size: 15px;
+  }
 
-
-.category-list {
-    /*margin-left: 50%;*/
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .block-cnt {
+      min-height: 480px;
+  }
+  .cnt_text {
+      width: 100%;
+  }
+  .cnt_text .col-lg-1 a{
+    font-size:12px;
+  }
+  .cnt_text h6 {
+      font-size: 15px;
+  }
 }
 
 .fill {
