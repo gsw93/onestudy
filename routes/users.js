@@ -5,6 +5,7 @@
 
 var mongoose = require('mongoose');
 var UserModel = mongoose.model("users");
+var MasterBoardModel = mongoose.model("masterboards");
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 var multer = require('multer');
@@ -21,10 +22,15 @@ var upload = multer({ storage: storage });
 module.exports = function (router, passport) {
 
     router.route('/mypage').get(function (req, res) {
-        if (req.user)
-            res.render('mypage', {seller:req.session.passport.user.seller, authUser: req.user[0]});
-        else
-            res.render('login');
+      if(req.user){
+        var id = req.user[0].id;
+        MasterBoardModel.find({id:id},function(err,rawBoard){
+            if(err) throw err;
+            res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+        });
+      } else{
+          res.render('login');
+      }
     });
 
     router.route('/masterapply').get(function (req, res) {

@@ -43,7 +43,6 @@
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
-
     <!-- googlefont -->
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gamja+Flower|Gothic+A1:400,700|Nanum+Brush+Script|Nanum+Gothic:400,700,800|Nanum+Myeongjo:400,700,800|Nanum+Pen+Script|Poor+Story|Song+Myung|Sunflower:300,500,700&amp;subset=korean" rel="stylesheet">
 
@@ -81,8 +80,8 @@
                     <div class="media">
                         <!-- Store Icon -->
                         <div class="row" style="width:100%;">
-                        <div class="col-sm-5 col-md-5 col-lg-2 image-content d-flex align-self-center">
-                            <img src="<%- board.masterphoto %>" style="margin:auto;display:block;width:100%;height:100%;" alt="pizza-hut">
+                        <div class="col-sm-5 col-md-5 col-lg-2 image-content d-flex align-self-center" style="height:120px;">
+                          <img src="<%- board.masterphoto %>" style="margin:auto;display:block;width:100%;height:100% ;border-radius:50%;"  alt="master_profile">
                         </div>
                         <div class="col-sm-7 col-md-7 col-lg-7 media-body" style="margin:10px 20px;">
                             <!-- <form action="/process/addboard" method="post"> -->
@@ -200,7 +199,7 @@
                           <% for (var i =0;i< commentsList.length;i++){ %>
                       <div class="row comment" style="width:100%;">
                         <div class="col-lg-2 commentimg">
-                          <img src="https://i.pinimg.com/originals/be/f6/9e/bef69e9e253684fa4c7bdb8f745539cb.jpg" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
+                          <img src="<%- authUser.photo %>" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
                         </div>
                         <div class="col-lg-10 commentcnt">
                           <table>
@@ -423,7 +422,6 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR5TC1oRGXf90Q7CZck3R78M-APCvL0Qo&callback=myMap"></script>
-
 
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>
