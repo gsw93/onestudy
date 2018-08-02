@@ -65,7 +65,7 @@
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
               <div class="profile-img">
-                <img src="" id="profile_photo" alt="profile_photo">
+                <img src="" class="profile_photo" alt="profile_photo">
                 <a href="/masterapply">수정</a>
               </div>
               <div class="cnt_text">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 label">인증 여부</div>
-                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 id="certification"></div>
+                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 class="certification"></div>
                   <div class="col-lg-4 col-md-4 col-sm-12" style="padding:0;display:none;" id="cert_a"><a href="#">인증하러가기</a></div>
                 </div>
                 <div class="row">
@@ -104,7 +104,7 @@
                   for (var i=0; i< board.length; i++){ %>
                   <tr>
                     <td><%=i+1%></td>
-                    <td colspan="2"><%=board[i].title%></td>
+                    <td colspan="2"><a href="/masterView?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
                     <td><%=board[i].comments.length%>개</td>
                     <td><% var star = board[i].reviewstar;var x;%>
                       <% for(x=0;x< star;x++){%>
@@ -141,30 +141,55 @@
                       <button class="btn_div">종료</button>
                   </div>
               </div>
-
               <table class="table table-hover" style="margin-top: 30px;">
                   <tbody style="font-size: 0.8rem;">
                   <% if(board !== null && board.length!==0){
                   for (var i=0; i< board.length; i++){ %>
                   <tr>
                       <td><%=i+1%></td>
-                      <td colspan="2"><%=board[i].title%></td>
-                      <td>2018-04-01</td>
+                      <td colspan="2"><a href="/masterView?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
+                      <td style="text-align:right;" id="date<%=i%>"></td>
                       <td>
-                        <div style="background-color:rgb(255, 128, 0);border-radius:50px;width:auto;color:#fff;text-align:center;">진행중</div>
+                        <div class="study_state">진행중</div>
                         <!-- <div style="background-color:#ccc;border-radius:50px;width:auto;color:#fff;text-align:center;letter-spacing: 3px;">종료</div> -->
                         <!-- <div style="background-color:rgb(128,128,128);border-radius:50px;width:auto;color:#fff;text-align:center;letter-spacing: 3px;">신청</div> -->
                       </td>
+                      <script>
+                        var i = new Date('<%- board[i].deadline %>');
+                        document.getElementById('date<%=i%>').innerHTML = date_format(i);
+                        function date_format(dateValue){
+                          var dd = dateValue.getDate();
+                          var mm = dateValue.getMonth()+1;
+                          var yyyy = dateValue.getFullYear();
+
+                          if(dd<10){
+                            dd = '0'+dd;
+                          }
+                          if(mm<10){
+                            mm = '0'+mm;
+                          }
+                          return yyyy+'-'+mm+'-'+dd;
+                        }
+                        var date = new Date();
+                        // if(i>date){
+                        //   document.getElemzentsByClassName('study_state')[0].style.display="block";
+                        // }
+                      </script>
                   </tr>
                   <%}}%>
                   </tbody>
               </table>
               <div class="text-center">
-                  <ul class="pagination">
+                  <!-- <ul class="pagination">
                       <li class="active"><a href="#">1</a></li>
                       <li><a href="#">2</a></li>
                       <li><a href="#">3</a></li>
-                  </ul>
+                  </ul> -->
+              </div>
+              <div class="cnt_text">
+                <ul class="create_study">
+                    <li><a href="/writeMaster" style="color: white; text-decoration: none;">스터디 만들기</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -232,7 +257,7 @@
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt" style="padding:50px 0;">
               <div class="profile-img">
-                <img src="" id="profile_photo2" alt="profile_photo">
+                <img src="" class="profile_photo" alt="profile_photo">
                 <a href="#">수정</a>
               </div>
               <div class="cnt_text">
@@ -247,7 +272,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 label">인증 여부</div>
-                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 id="certification2"></div>
+                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 class="certification"></div>
                   <div class="col-lg-4 col-md-4 col-sm-12" style="padding:0;display:none;" id="cert_a"><a href="#">인증하러가기</a></div>
                 </div>
               </div>
@@ -259,35 +284,25 @@
             <div class="block-cnt">
               <div class="section-title">
                   <h2>All Categories</h2>
+                  <p>현재 관심분야 : <%=authUser.interested%></p>
               </div>
-              <div class="row" style="margin-bottom:20px;">
+              <form action="/process/categoryModify" class="category-select" method="post">
                   <!-- Category list -->
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-4" style="left: 25%">
-                      <div class="form-check">
-                          <input id="checkbox-1" class="checkbox-custom form-check-input" name="checkbox-1" type="checkbox">
-                          <label for="checkbox-1">
-                              취미
-                          </label>
-                      </div>
-                      <div class="form-check">
-                          <input id="checkbox-2" class="checkbox-custom form-check-input" name="checkbox-2" type="checkbox">
-                          <label for="checkbox-2">
-                              언어
-                          </label>
-                      </div>
-                      <div class="form-check">
-                          <input id="checkbox-3" class="checkbox-custom form-check-input" name="checkbox-1" type="checkbox">
-                          <label for="checkbox-3">
-                              운동
-                          </label>
-                      </div>
-                  </div>
-              </div>
+                    <div class="inputGroup">
+                       <input id="radio1" name="check_c" value="언어" type="radio"/>
+                       <label for="radio1">언어</label>
+                     </div>
+                     <div class="inputGroup">
+                       <input id="radio2" name="check_c" value="운동" type="radio"/>
+                       <label for="radio2">운동</label>
+                     </div><div class="inputGroup">
+                       <input id="radio3" name="check_c" value="취미/클래스" type="radio"/>
+                       <label for="radio3">취미/클래스</label>
+                     </div>
               <div class="row">
-                <div class="btn-categories">
-                    <a href="#" style="color: white; text-decoration: none;">수 정</a>
-                </div>
+                    <input type="submit" class="btn-categories" style="color: white; text-decoration: none;" name="button" value="수정">
               </div>
+              </form>
             </div>
           </div>
           <!-- 카테고리 수정 끝 -->
@@ -299,10 +314,10 @@
               <div class="cnt_title">
                   <h4>나의 스터디 관리</h4>
                   <div class="option">
-                      <button type="button" class="btn_all">전체</button>
-                      <button type="button" class="btn_div">신청</button>
-                      <button type="button" class="btn_div">진행중</button>
-                      <button type="button" class="btn_div">종료</button>
+                      <button class="btn_div active">전체</button>
+                      <button class="btn_div">모집중</button>
+                      <button class="btn_div">진행중</button>
+                      <button class="btn_div">종료</button>
                   </div>
                   <table class="table table-hover" style="margin-top: 30px;">
                       <tbody style="font-size: 0.8rem;">
@@ -310,31 +325,31 @@
                           <td>10.</td>
                           <td colspan="2">원스터디 스터디명 출력</td>
                           <td>2018-04-01</td>
-                          <td style="background-color:rgb(255, 128, 0);border-radius:50px;color:#fff;text-align:center;">진행중</td>
+                          <td><div class="study_state">진행중</div></td>
                       </tr>
                       <tr>
                           <td>10.</td>
                           <td colspan="2">원스터디 스터디명 출력</td>
                           <td>2018-04-01</td>
-                          <td style="background-color:rgb(255, 128, 0);border-radius:50px;color:#fff;text-align:center;">진행중</td>
+                          <td><div class="study_state">진행중</div></td>
                       </tr>
                       <tr>
                           <td>10.</td>
                           <td colspan="2">원스터디 스터디명 출력</td>
                           <td>2018-04-01</td>
-                          <td style="background-color:rgb(255, 128, 0);border-radius:50px;color:#fff;text-align:center;">진행중</td>
+                          <td><div class="study_state">진행중</div></td>
                       </tr>
                       <tr>
                           <td>10.</td>
                           <td colspan="2">원스터디 스터디명 출력</td>
                           <td>2018-04-01</td>
-                          <td style="background-color:rgb(255, 128, 0);border-radius:50px;color:#fff;text-align:center;">진행중</td>
+                          <td><div class="study_state">진행중</div></td>
                       </tr>
                       <tr>
                           <td>10.</td>
                           <td colspan="2">원스터디 스터디명 출력</td>
                           <td>2018-04-01</td>
-                          <td style="background-color:rgb(255, 128, 0);border-radius:50px;color:#fff;text-align:center;">진행중</td>
+                          <td><div class="study_state">진행중</div></td>
                       </tr>
                       </tbody>
                   </table>
@@ -460,23 +475,21 @@ function content(name,elmnt) {
 document.getElementById("defaultOpen").click();
 
 //인증여부 구별
-var cert = document.getElementById('certification');
+var cert = document.getElementsByClassName('certification');
 var cert_a = document.getElementById('cert_a');
-var profile_photo_ma = document.getElementById('profile_photo');
-var profile_photo_st = document.getElementById('profile_photo2');
-var cert2 = document.getElementById('certification2');
+var profile_photo = document.getElementsByClassName('profile_photo');
 //인증 여부에 따른 표시
 if(<%-authUser.phoneAuthCheck%>==false){
-  cert.innerHTML = "비인증";
-  cert2.innerHTML = "비인증";
+  cert[0].innerHTML = "비인증";
+  cert[1].innerHTML = "비인증";
   cert_a.style.display ="block";
-  profile_photo_ma.src ="/img/home/main_i_05.png";
-  profile_photo_st.src ="/img/home/main_i_05.png";
+  profile_photo[0].src ="/img/home/main_i_05.png";
+  profile_photo[1].src ="/img/home/main_i_05.png";
 }else{
-  cert.innerHTML = "인증";
-  cert2.innerHTML = "인증";
-  profile_photo_ma.src ="<%- authUser.photo %>";
-  profile_photo_st.src ="<%- authUser.photo %>";
+  cert[0].innerHTML = "인증";
+  cert[1].innerHTML = "인증";
+  profile_photo[0].src ="<%- authUser.photo %>";
+  profile_photo[1].src ="<%- authUser.photo %>";
 }
 
 // Get the container element
@@ -484,6 +497,7 @@ var btnContainer = document.getElementsByClassName("option");
 
 // Get all buttons with class="btn" inside the container
 var btns = btnContainer[0].getElementsByClassName("btn_div");
+var btns2 = btnContainer[2].getElementsByClassName("btn_div");
 var current = document.getElementsByClassName("btn_div active");
 
 // 스터디관리 btn active
@@ -493,9 +507,18 @@ for (var i = 0; i < 4; i++) {
     this.className += " active";
   });
 }
+// 학생 나의스터디관리 btn active
+for (var i = 0; i < 4; i++) {
+  btns2[i].addEventListener("click", function() {
+    current[1].className = current[1].className.replace(" active", "");
+    this.className += " active";
+  })
+}
+
+
 </script>
 
-
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>

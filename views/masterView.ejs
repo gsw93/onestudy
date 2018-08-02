@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-md-12 col-lg-2">
                             <!--핸드폰 인증 기능 개발되면 !authPhone을 authPhone으로 바꿔 인증된 사람만 할 수 있게 수정해야함 !!-->
-                            <%if(!authUser.phoneAuthCheck){%>
+                            <%if(authUser.phoneAuthCheck){%>
                             <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#login" style="width:100%;">참여 신청하기</button>
                             <%} else {%>
                             <a href="/studentapply" style="width:100%;" class="btn btn-transparent">참여 신청하기</a>

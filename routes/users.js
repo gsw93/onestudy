@@ -24,14 +24,37 @@ module.exports = function (router, passport) {
     router.route('/mypage').get(function (req, res) {
       if(req.user){
         var id = req.user[0].id;
+        var state = req.body.state;
+        console.log(state);
         MasterBoardModel.find({id:id},function(err,rawBoard){
             if(err) throw err;
             res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
         });
+        // MasterBoardModel.find({studentList.:id},function(err,rawBoard){
+        //     if(err) throw err;
+        //     res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+        // });
+
       } else{
           res.render('login');
       }
     });
+    router.route('/process/categoryModify').post(function(req,res){
+      var id = req.user[0].id;
+      var interested = req.body.check_c;
+      console.log(interested);
+      UserModel.findOne({id:id},function(err,rawBoard){
+        if(err) throw err;
+        var myquery = {id:id};
+        var newvalue =  {$set : {interested:interested}};
+        UserModel.updateOne(myquery,newvalue,function(err,res){
+          if(err) throw err;
+          console.log('카테고리 변경');
+        })
+        res.redirect('/mypage');
+        // res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+      })
+    })
 
     router.route('/masterapply').get(function (req, res) {
         if(req.user){
