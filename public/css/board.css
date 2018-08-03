@@ -164,7 +164,7 @@
 }
 
 .block-cnt ul li{
-    border-radius: 15px;
+    border-radius: 50px;
     background-color: rgb(255, 128, 0);
     width: 75px;
 
@@ -290,6 +290,16 @@
   width:100%;
   height:200px;
 }
+.gm-style-iw{
+  text-align: center;
+}
+#map-content{
+  width:270px;
+}
+#map-header p{
+  text-align:left;
+  color:rgb(128,128,128);
+}
 @media (min-width: 1200px) and (max-width: 1450px) {
     .master_imgBackground{
       width:100%;
@@ -310,13 +320,18 @@
     .cnt{
         min-height: 310px;
     }
+    #map-content{
+      width:200px;
+    }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
     .block-cnt ul li{
         width: 60px;
         padding:3px;
     }
-
+    #map-content{
+      width:200px;
+    }
     .people-img {
         top:22%;
         right:32%;

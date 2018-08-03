@@ -1604,7 +1604,7 @@ ul.pagination .active a {
 
 .block-cnt {
     position: relative;
-    padding:15px 20px;
+    padding:15px 30px;
     min-height: 435px;
     border:1px solid #d9d9d9;
     background-color: #fff;
@@ -1880,6 +1880,9 @@ input[type="radio"] {
   ul.create_study li {
       width: 60%;
   }
+  .study_state{
+    width:90%;
+  }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .block-cnt {
@@ -1897,11 +1900,15 @@ input[type="radio"] {
   .container{
     width:90%;
   }
+  .study_state{
+    width:90%;
+  }
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .container{
     width:80%;
   }
+
 }
 @media (max-width: 767px) {
   .container{
@@ -1909,6 +1916,15 @@ input[type="radio"] {
   }
   .cnt_title h4{
     font-size:1.2rem;
+  }
+  .study_state{
+    width:90%;
+  }
+  ul.create_study li {
+      width: 60%;
+  }
+  .cnt_text .label {
+      text-align: left;
   }
 }
 
