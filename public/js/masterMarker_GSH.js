@@ -34,7 +34,16 @@ function markingMap(map){
     });*/
 
     var myCenter = new google.maps.LatLng(x, y);
-    var marker = new google.maps.Marker({position:myCenter});
+    var marker = new google.maps.Marker({position:myCenter,animation: google.maps.Animation.DROP});
+    marker.addListener('click', toggleBounce);
+    
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
 
     map.setCenter(myCenter);
     map.setZoom(zoom);
@@ -49,6 +58,7 @@ function markingMap(map){
         changeMap(map.getBounds());
     });
 }
+
 var markers=[];
 function changeMap(bounds) {
     var bb,ff,fb,bf;
@@ -60,7 +70,7 @@ function changeMap(bounds) {
     bf = bounds.b.f;
     var item={bigx:ff,smallx:fb,bigy:bf,smally:bb};
     var data=mapchange(item);
-    var infoWindow = new google.maps.InfoWindow
+    var infoWindow = new google.maps.InfoWindow;
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
@@ -74,6 +84,7 @@ function changeMap(bounds) {
         var title = markerElem.title;
         //var name = markerElem.getAttribute('name');
         var region = markerElem.regionShort;
+        var category = markerElem.category;
         var boardpic = document.createElement('img');
         var masterpic = document.createElement('img');
         boardpic.className = "master_imgBackground";
@@ -88,24 +99,46 @@ function changeMap(bounds) {
             parseFloat(markerElem.location.coordinates[1]),
             parseFloat(markerElem.location.coordinates[0])
         );
-        var infowincontent = document.createElement('div');
-        var strong = document.createElement('strong');
-        strong.textContent = title;
-        infowincontent.appendChild(strong);
-        infowincontent.appendChild(document.createElement('br'));
-        var text = document.createElement('text');
-        text.textContent = region;
-        infowincontent.appendChild(text);
-        var customLabel = {
-            price: {
-                label: price
-            }
-        };
-        var icon = customLabel['price'] || {};
+        // var infowincontent = document.createElement('div');
+        // infowincontent.style.width = "200px";
+        // infowincontent.style.height = "300px";
+        // var strong = document.createElement('strong');
+        // strong.textContent = title;
+        // infowincontent.appendChild(strong);
+        // infowincontent.appendChild(document.createElement('br'));
+        // var text = document.createElement('text');
+        // text.textContent = region;
+        // infowincontent.appendChild(text);
+        // infowincontent.appendChild(document.createElement('br'));
+        // var text2 = document.createElement('text2');
+        // text2.textContent = category;
+        // infowincontent.appendChild(text2);
+        // infowincontent.appendChild(document.createElement('br'));
+        // var img = document.createElement('img');
+        // img.src = markerElem.path;
+        // img.style.width = "100%";
+        // img.style.height = "150px";
+        // infowincontent.appendChild(img);
+
+        var infowincontent = '<div id="map-content">'+
+        '<div id="map-header">'+
+        '<h4 style="font-weight:700;">'+title+'</h4><p>-&nbsp;'+region+'<br>-&nbsp;'+category+'</p></div>'+
+        '<div id="map-image">'+boardpic.outerHTML+'</div></div>'
+        var customLabel = price+'/'+category;
+        // var customLabel = {
+        //     price: {
+        //         label: price+"/"+category
+        //     }
+        // };
+        // var icon = customLabel['price'] || {};
+        var img = "img/map_icon.png";
         var marker = new google.maps.Marker({
             map: map,
             position: point,
-            label: icon.label
+            // icon:img,
+            // label: icon.label
+            label : customLabel
+            // icon : popup
         });
         marker.addListener('click', function () {
             infoWindow.setContent(infowincontent);
@@ -113,6 +146,7 @@ function changeMap(bounds) {
         });
         markers.push(marker);
         marker.setMap(map);
+
 
         var tmpTag = '<div class="col-lg-3 col-md-6 col-sm-6 list-item">' +
             '<a class="board_click" href="/masterView?id=' + markerElem._id + '">' +
