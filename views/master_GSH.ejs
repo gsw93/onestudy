@@ -44,6 +44,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
+        .map-top{
+            top:0;
+        }
         .modal {
             /*display: block; !* Hidden by default *!*/
             position: fixed; /* Stay in place */
@@ -135,6 +138,7 @@
 
                                 if(ddd<date){
                                     x[<%- i%>].style.display = "block";
+
                                     x[<%- i%>].style.fontSize = "smaller";
                                     x[<%- i%>].style.backgroundColor = "red";
                                     x[<%- i%>].innerHTML = "마감임박";
@@ -232,7 +236,7 @@
 
     </section>
     <%- include footer.ejs %>
-    <div id="googleMap" class="w3-sidebar w3-third" style="right: 0; top: 0;min-height: 890px;"></div>
+    <div id="googleMap" class="w3-sidebar w3-third" style="right: 0; top: 111px; min-height: 890px;"></div>
 
 <script>
     //07_04 add by sehyeon
@@ -253,6 +257,16 @@
             map.setZoom(17);
             map.setCenter(marker.getPosition());
         });*/
+    }
+
+    window.onscroll = function() {myFunction()};
+
+    function myFunction() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            document.getElementById("googleMap").style.top = 0;
+        } else {
+            document.getElementById("googleMap").style.top = "111px";
+        }
     }
 
     function fade() {
