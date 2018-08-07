@@ -34,9 +34,15 @@ function markingMap(map){
     });*/
 
     var myCenter = new google.maps.LatLng(x, y);
-    var marker = new google.maps.Marker({position:myCenter,animation: google.maps.Animation.DROP});
+    var myicon = {
+      url :'img/map_icon.svg',
+      scaledSize: new google.maps.Size(50, 50),
+      origin: new google.maps.Point(0, 0)
+      // anchor: new google.maps.Point(32,65)
+    };
+    var marker = new google.maps.Marker({position:myCenter,animation: google.maps.Animation.DROP,icon:myicon});
     marker.addListener('click', toggleBounce);
-    
+
     function toggleBounce() {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
@@ -81,6 +87,7 @@ function changeMap(bounds) {
     var i=0;
 
     Array.prototype.forEach.call(data,function (markerElem) {
+
         var title = markerElem.title;
         //var name = markerElem.getAttribute('name');
         var region = markerElem.regionShort;
@@ -99,6 +106,7 @@ function changeMap(bounds) {
             parseFloat(markerElem.location.coordinates[1]),
             parseFloat(markerElem.location.coordinates[0])
         );
+
         // var infowincontent = document.createElement('div');
         // infowincontent.style.width = "200px";
         // infowincontent.style.height = "300px";
@@ -124,22 +132,35 @@ function changeMap(bounds) {
         '<div id="map-header">'+
         '<h4 style="font-weight:700;">'+title+'</h4><p>-&nbsp;'+region+'<br>-&nbsp;'+category+'</p></div>'+
         '<div id="map-image">'+boardpic.outerHTML+'</div></div>'
-        var customLabel = price+'/'+category;
-        // var customLabel = {
-        //     price: {
-        //         label: price+"/"+category
+
+
+        var markericon = {
+          url :'img/map_icon.svg',
+          scaledSize: new google.maps.Size(50, 50),
+          origin: new google.maps.Point(0, 0)
+          // anchor: new google.maps.Point(32,65)
+        };
+
+        // var marker = new google.maps.Marker({
+        //     map: map,
+        //     position: point,
+        //     icon :styleicon,
+        //     label : {
+        //       text : customLabel,
+        //       color:'orange'
         //     }
-        // };
-        // var icon = customLabel['price'] || {};
-        var img = "img/map_icon.png";
-        var marker = new google.maps.Marker({
+        //     // label: icon.label
+        // });
+        var marker = new MarkerWithLabel({
             map: map,
             position: point,
-            // icon:img,
-            // label: icon.label
-            label : customLabel
-            // icon : popup
+            icon :markericon,
+            labelContent : '<div>'+price+'<br>'+category+'</div>',
+            labelAnchor: new google.maps.Point(40, 50),
+            labelClass: "my-custom-class-for-label", // the CSS class for the label
+            labelInBackground: true
         });
+
         marker.addListener('click', function () {
             infoWindow.setContent(infowincontent);
             infoWindow.open(map, marker);
@@ -209,6 +230,78 @@ function changeMap(bounds) {
         i = i + 1;
     });
 };
+function definePopupClass() {
+  /**
+   * A customized popup on the map.
+   * @param {!google.maps.LatLng} position
+   * @param {!Element} content
+   * @constructor
+   * @extends {google.maps.OverlayView}
+   */
+  Popup = function(position, content) {
+    this.position = position;
+
+    content.classList.add('popup-bubble-content');
+
+    var pixelOffset = document.createElement('div');
+    pixelOffset.classList.add('popup-bubble-anchor');
+    pixelOffset.appendChild(content);
+
+    this.anchor = document.createElement('div');
+    this.anchor.classList.add('popup-tip-anchor');
+    this.anchor.appendChild(pixelOffset);
+
+    // Optionally stop clicks, etc., from bubbling up to the map.
+    // this.stopEventPropagation();
+  };
+  // NOTE: google.maps.OverlayView is only defined once the Maps API has
+  // loaded. That is why Popup is defined inside initMap().
+  Popup.prototype = Object.create(google.maps.OverlayView.prototype);
+
+  /** Called when the popup is added to the map. */
+  Popup.prototype.onAdd = function() {
+    this.getPanes().floatPane.appendChild(this.anchor);
+  };
+
+  /** Called when the popup is removed from the map. */
+  Popup.prototype.onRemove = function() {
+    if (this.anchor.parentElement) {
+      this.anchor.parentElement.removeChild(this.anchor);
+    }
+  };
+
+  /** Called when the popup needs to draw itself. */
+  Popup.prototype.draw = function() {
+    var divPosition = this.getProjection().fromLatLngToDivPixel(this.position);
+    // Hide the popup when it is far out of view.
+    var display =
+        Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000 ?
+        'block' :
+        'none';
+
+    if (display === 'block') {
+      this.anchor.style.left = divPosition.x + 'px';
+      this.anchor.style.top = divPosition.y + 'px';
+    }
+    if (this.anchor.style.display !== display) {
+      this.anchor.style.display = display;
+    }
+  };
+
+  /** Stops clicks/drags from bubbling up to the map. */
+  // Popup.prototype.stopEventPropagation = function() {
+  //   var anchor = this.anchor;
+  //   anchor.style.cursor = 'auto';
+  //
+  //   ['click', 'dblclick', 'contextmenu', 'wheel', 'mousedown', 'touchstart',
+  //    'pointerdown']
+  //       .forEach(function(event) {
+  //         anchor.addEventListener(event, function(e) {
+  //           e.stopPropagation();
+  //         });
+  //       });
+  // };
+}
 function date_format(dateValue){
     var dd = dateValue.getDate();
     var mm = dateValue.getMonth()+1;
