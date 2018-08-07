@@ -650,6 +650,21 @@ input{
 }
 
 
+.my-custom-class-for-label {
+  width: 70px;
+  min-height: 40px;
+
+  border: 1px solid #ff6600;
+  border-radius: 5px;
+
+  background: #fff;
+  color: #ff6600;
+  text-align: center;
+  line-height: 20px;
+
+  font-weight: bold;
+  font-size: 12px;
+}
 /* student.ejs css */
 .modal-body{
   background-color:white;
