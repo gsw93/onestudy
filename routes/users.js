@@ -113,7 +113,7 @@ module.exports = function (router, passport) {
         var name = req.body.name;
         var age = req.body.age;
         var gender = req.body.gender;
-        var phone = req.body.phone;
+        var phone = req.body.phoneNumber;
         var file = req.file;
 
         console.log(req.session.passport);

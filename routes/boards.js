@@ -139,6 +139,7 @@ module.exports = function (router) {
                 if(err) throw err;
 
                 console.log('마스터 조회수 증가 및 게시글 출력');
+                console.log(rawBoard);
                 res.render('masterView',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
             });
         });
@@ -222,7 +223,7 @@ module.exports = function (router) {
         if(err) throw err;
         res.render('master_JJY',{board:searchRegion, seller:req.session.passport.user.seller, authUser: req.user[0]});
       })
-    })
+    });
 
 
     router.route('/process/addboard').post(upload.array('photo',1), function (req, res) {
@@ -310,6 +311,20 @@ module.exports = function (router) {
             res.write('<h1>데이터베이스 연결 실패</h1>');
             res.end();
         }
+    });
+
+    router.route('/payment').get(function (req, res) {
+        var id = req.param('id');
+
+        MasterBoardModel.findOne({_id:id},function(err,rawBoard){
+            if(err) throw err;
+            res.render('studyPay',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+        });
+
+    });
+
+    router.route('/payment2').get(function (req, res) {
+        res.render('studyCharge',{seller:req.session.passport.user.seller, authUser: req.user[0]});
     });
     //============================ 마스터 게시글 추가 기능 끝 ============================
 };
