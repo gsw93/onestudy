@@ -115,7 +115,7 @@
                 </div>
                 <%}if(seller){%>
                 <div class="col-md-6" style="color:orange;">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;">글 등록</button>
                 </div>
                 <%}%>
             </div>
@@ -168,6 +168,7 @@
                                     <p><% for(var n=0; n< interboard[i].category.length;n++){ %>
                                         <%= interboard[i].category[n] %> &nbsp; <% } %><br>
                                         <%= interboard[i].regionShort %><br>
+                                        <%= interboard[i].day %>요일 진행<br>
                                         <%= interboard[i].studyTerm %>주 진행</p>
                                     <span id="inter_deadline[<%=i%>]" style="font-size:12px;float:right;line-height:35px;"></span>
                                     <span id="master_term"><span id="master_money"><%= interboard[i].price %>만원</span>&nbsp;(주<%=interboard[i].studynum %>회)</span>
