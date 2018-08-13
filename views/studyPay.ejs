@@ -26,9 +26,9 @@
     <link href="plugins/datepicker/datepicker.min.css" rel="stylesheet">
 
     <!-- CUSTOM CSS -->
+    <link href="css/board.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/style2.css" rel="stylesheet">
-
+    <link href="css/login.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
@@ -196,55 +196,66 @@
                     </div>
                 </div>
                 <div style="margin-top: 50px;">
-                    <div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">
-                        <h5 style="margin:0;border:1px solid brown;border-radius: 5px 20px; background-color:brown;color:white;line-height: 50px;vertical-align: middle;">
-                            크레딧</h5>
-                    </div>
-                    <div class="col-lg-10 block" style="float: left; margin-bottom: 30px">
-                        <h2 class="credit">8&nbsp;크레딧</h2>
-                        <div class="credit_button">크레딧 충전</div>
-                    </div>
-                </div>
-                <div style="margin-top: 50px;">
-                    <div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">
-                        <h5 style="margin:0;border:1px solid brown;border-radius: 5px 20px; background-color:brown;color:white;line-height: 50px;vertical-align: middle;">
-                            결제</h5>
-                    </div>
-                    <div class="table">
-                        <div class="row header">
-                            <div class="cell">
-                                이름
-                            </div>
-                            <div class="cell">
-                                상태
-                            </div>
-                            <div class="cell">
-                                연락처
-                            </div>
-                            <div class="cell">
-                                크레딧
-                            </div>
+                    <div class="editor_cnt">
+                        <div class="col-lg-2 title">
+                            <h5>나의 크레딧</h5>
+                        </div>
+                        <div class="col-lg-10 block" style="margin: 0;">
+                            <h1 style="color: #ff751a; text-align: center; margin-top: 60px;">650,000&nbsp;<small style="font-size: 15px; color: gray;">크레딧</small></h1>
+                            <br>
+                            <button class="btn col-8 col-sm-6 col-md-4" onclick="location.href='/payment2'" style="margin: auto; display: block; background: gray; color: #fefefe;">크레딧 충전</button>
                         </div>
 
-                        <%if(board.studentList.length){%>
-                        <%for (var i=0; i< board.studentList.length; i++){%>
-                        <div class="row">
-                            <div class="cell" data-title="이름">
-                                <%=board.studentList[i].name%>
-                            </div>
-                            <div class="cell" data-title="상태">
-                                신청
-                            </div>
-                            <div class="cell" data-title="연락처">
-                                <%=board.studentList[i].phone%>
-                            </div>
-                            <div class="cell" data-title="크레딧">
-                                5,000
-                            </div>
+                        <div class="col-lg-2 title">
+                            <h5>결제</h5>
                         </div>
-                        <%}%>
-                        <%}%>
+
+                        <div class="table">
+                            <div class="row header">
+                                <div class="cell">
+                                    이름
+                                </div>
+                                <div class="cell">
+                                    상태
+                                </div>
+                                <div class="cell">
+                                    연락처
+                                </div>
+                                <div class="cell">
+                                    크레딧
+                                </div>
+                            </div>
+
+                            <%if(board.studentList.length){%>
+                            <%for (var i=0; i< board.studentList.length; i++){%>
+                            <div class="row">
+                                <div class="cell" data-title="이름">
+                                    <%=board.studentList[i].name%>
+                                </div>
+                                <div class="cell" data-title="상태">
+                                    신청
+                                </div>
+                                <div class="cell" data-title="연락처">
+                                    <%=board.studentList[i].phone%>
+                                </div>
+                                <div class="cell" data-title="크레딧">
+                                    5,000
+                                </div>
+                            </div>
+                            <%}%>
+                            <%}%>
+                        </div>
+                        <button class="btn btn-primary col-8 col-sm-6 col-md-4" style="margin: auto; display: block; font-size: large; margin-top: 70px; margin-bottom: 50px;">결 제 ></button>
+
                     </div>
+                    <!--<div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">-->
+                        <!--<h5 style="margin:0;border:1px solid brown;border-radius: 5px 20px; background-color:brown;color:white;line-height: 50px;vertical-align: middle;">-->
+                            <!--크레딧</h5>-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-10 block" style="float: left; margin-bottom: 30px">-->
+                        <!--<h2 class="credit">8&nbsp;크레딧</h2>-->
+                        <!--<div class="credit_button">크레딧 충전</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

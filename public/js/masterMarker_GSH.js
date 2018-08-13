@@ -96,7 +96,7 @@ function changeMap(bounds) {
         var boardpic = document.createElement('img');
         var masterpic = document.createElement('img');
         boardpic.className = "master_imgBackground";
-        boardpic.src = markerElem.path;
+        boardpic.src = markerElem.path[0];
         boardpic.style.marginBottom = "10px";
         masterpic.src = markerElem.masterphoto;
         masterpic.style.width = "90%";
