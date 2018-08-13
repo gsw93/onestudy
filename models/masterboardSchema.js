@@ -24,7 +24,9 @@ var MasterBoardSchema = mongoose.Schema({
     masterInfo : String,
     studyInfo : String,
     reviewstar : {type:Number,default:0},
-    path : String,
+    path : [{
+        type: String
+    }],
     masterphoto: String,
     count : {type:Number, default:0},
     studentList : [{

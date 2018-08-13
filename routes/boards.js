@@ -148,7 +148,7 @@ module.exports = function (router) {
 
 
     //============================ 마스터 게시글 추가 기능 시작 ============================
-    //multer 미들웨어 사용 / 파일 제한 5개
+    //multer 미들웨어 사용 / 파일 제한 3개
 
     var storage = multer.diskStorage({
         destination: function (req,file, callback){
@@ -162,8 +162,8 @@ module.exports = function (router) {
     var upload = multer({
         storage: storage,
         limits : {
-            files :5,
-            fileSize : 1024 * 1024 * 1024
+            files :3,
+            fileSize : 5 * 1024 * 1024
         }
     });
 
@@ -226,7 +226,7 @@ module.exports = function (router) {
     });
 
 
-    router.route('/process/addboard').post(upload.array('photo',1), function (req, res) {
+    router.route('/process/addboard').post(upload.array('photo',3), function (req, res) {
         console.log('/process/addboard 호출됨.');
         // var image = new FileModel();
         // console.log(fs.readFileSync(req.files));
@@ -259,7 +259,7 @@ module.exports = function (router) {
         var files = req.files;
 
         console.dir('#====업로드된 첫번째 파일 정보 ====#');
-        console.dir(req.files[0]);
+        console.dir(req.files);
         console.dir('#====#');
 
 
@@ -268,7 +268,7 @@ module.exports = function (router) {
             filename ='',
             mimetype = '',
             size =0,
-            path ='';
+            path = [{}];
 
         if (Array.isArray(files)){//배열에 들어가는 경우
             console.log("배열에 들어있는 파일 갯수 : %d",files.length);
@@ -277,7 +277,7 @@ module.exports = function (router) {
                 originalname = files[index].originalname;
                 filename = files[index].filename;
                 mimetype = files[index].mimetype;
-                path = '/uploads/board/'+filename;
+                path[index] = '/uploads/board/'+filename;
                 size = files[index].size;
             }
         } else {
@@ -286,11 +286,11 @@ module.exports = function (router) {
             originalname = files[index].originalname;
             filename = files[index].filename;
             mimetype = files[index].mimetype;
-            path = '/uploads/board/'+filename;
+            path[0] = '/uploads/board/'+filename;
             size = files[index].size;
         }
 
-        console.log('현재 파일 정보 : ' + originalname + ', ' + filename + ', ' + mimetype + ', ' + size + ', ' + path);
+        console.log('현재 파일의 이미지 목록 : ' + path[0] + ', ' + path[1] + ', ' + path[2]);
 
 
         if(connectDB!==null){
