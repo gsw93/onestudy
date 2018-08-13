@@ -20,7 +20,20 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 module.exports = function (router, passport) {
-
+    router.route('/process/sellerchange').post(function(req,res){
+      var seller = req.body.seller;
+      console.log('버튼 상태 : '+seller);
+        UserModel.find({id:req.user[0].id},function(err,res){
+          if(err) throw err;
+          var myquery = {id:req.user[0].id};
+          var newvalue =  {$set : {btnstate:seller}};
+          UserModel.updateOne(myquery,newvalue,function(err,res){
+            if(err) throw err;
+            console.log('버튼상태 추가');
+          })
+        })
+        res.redirect('/mypage');
+    })
     router.route('/mypage').get(function (req, res) {
       if(req.user){
         var id = req.user[0].id;

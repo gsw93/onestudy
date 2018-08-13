@@ -6,6 +6,7 @@ var connectDB = require('../models/database');
 var mongoose = require('mongoose');
 require('../models/database');
 var MasterBoardModel = mongoose.model("masterboards");
+var UserModel = mongoose.model("users");
 
 //파일업로드 multer
 var multer = require('multer');
@@ -35,6 +36,7 @@ module.exports = function (router) {
                 };
                 currentBoard.studentList[currentBoard.studentList.length] = student;
                 console.log(currentBoard);
+                updateStudy(req.user[0].id,req.query.id);
                 currentBoard.save(function (err) {
                     if(err) {
                         throw err;
@@ -44,7 +46,15 @@ module.exports = function (router) {
             }
         });
     });
-
+    function updateStudy(id,study_id){
+      var myquery = {id:id};
+      var newvalue = {$set : {mystudy:study_id}};
+      console.log(newvalue);
+      UserModel.updateOne(myquery,newvalue,function(err,res){
+        if(err) throw err;
+        console.log('마이스터디 추가');
+      })
+    }
     router.route('/master').get(function (req, res) {
         if(req.user){
             //07_15 add by sehyeon
