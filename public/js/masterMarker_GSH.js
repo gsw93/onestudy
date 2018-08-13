@@ -91,6 +91,7 @@ function changeMap(bounds) {
         var title = markerElem.title;
         //var name = markerElem.getAttribute('name');
         var region = markerElem.regionShort;
+        var day = markerElem.day;
         var category = markerElem.category;
         var boardpic = document.createElement('img');
         var masterpic = document.createElement('img');
@@ -130,7 +131,8 @@ function changeMap(bounds) {
 
         var infowincontent = '<div id="map-content">'+
         '<div id="map-header">'+
-        '<h4 style="font-weight:700;">'+title+'</h4><p>-&nbsp;'+region+'<br>-&nbsp;'+category+'</p></div>'+
+        '<h5 style="font-weight:700;">'+title+'</h5><p style="font-size:15px;">-&nbsp;'
+        +region+'<br>-&nbsp;'+category+'<br>-&nbsp;'+day+'</p></div>'+
         '<div id="map-image">'+boardpic.outerHTML+'</div></div>'
 
 
@@ -192,6 +194,7 @@ function changeMap(bounds) {
         }
         tmpTag = tmpTag + '<br>' +
             markerElem.regionShort + '<br>' +
+            markerElem.day + '요일 진행<br>' +
             markerElem.studyTerm + '주 진행</p>' +
             '<div class="" >' +
             '<span id="deadline[' + i + ']" style="font-size:12px;float:right;line-height:35px;"></span>' +
