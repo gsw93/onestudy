@@ -324,7 +324,8 @@ module.exports = function (router) {
     });
 
     router.route('/payment2').get(function (req, res) {
-        res.render('studyCharge',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+        res.render('priceTable',{seller:req.session.passport.user.seller, authUser: req.user[0]});
     });
+
     //============================ 마스터 게시글 추가 기능 끝 ============================
 };
