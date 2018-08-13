@@ -25,7 +25,8 @@ var UserSchema = new mongoose.Schema({
     phone: {type: String},
     address: {type: String},
     interested: {type: String}, // 관심분야
-
+    mystudy : {type:String},
+    btnstate : {type:String,default:'student'},
     //07_04 add by sehyeon
     //location 좌표 저장, level 추가
     level: {type: String},

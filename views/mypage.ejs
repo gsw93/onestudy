@@ -55,12 +55,12 @@
 <section class="store-coupon section">
     <div class="container">
       <div style="width:100%;text-align:right;">
-        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" id="defaultOpen" onclick="content('master',this)" name="button">마스터</button>
-        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="content('student',this)" name="button">학생</button>
+        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" id="defaultOpen" onclick="content('student',this)" name="button">학생</button>
+        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="content('master',this)" name="button">마스터</button>
       </div>
       <form class="" action="/process/sellerchange" method="post">
-        <input type="hidden" name="seller" value="master" id="seller_master">
-        <input type="hidden" name="seller" value="student" id="seller_student">
+        <input type="hidden" name="seller" value="student" id="seller">
+        <input type="submit" id="sellersubmit" value="" hidden>
       </form>
       <!-- 마스터 탭 -->
       <div class="tabcontent" id="master">
@@ -292,11 +292,16 @@
                        <label for="radio1">언어</label>
                      </div>
                      <div class="inputGroup">
-                       <input id="radio2" name="check_c" value="운동" type="radio"/>
-                       <label for="radio2">운동</label>
-                     </div><div class="inputGroup">
-                       <input id="radio3" name="check_c" value="취미/클래스" type="radio"/>
-                       <label for="radio3">취미/클래스</label>
+                       <input id="radio2" name="check_c" value="교육" type="radio"/>
+                       <label for="radio2">교육</label>
+                     </div>
+                     <div class="inputGroup">
+                       <input id="radio3" name="check_c" value="운동" type="radio"/>
+                       <label for="radio3">운동</label>
+                     </div>
+                     <div class="inputGroup">
+                       <input id="radio4" name="check_c" value="취미/클래스" type="radio"/>
+                       <label for="radio4">취미/클래스</label>
                      </div>
               <div class="row">
                     <input type="submit" class="btn-categories" style="color: white; text-decoration: none;" name="button" value="수정">
@@ -468,10 +473,21 @@ function content(name,elmnt) {
     }
     document.getElementById(name).style.display = "block";
     elmnt.style.backgroundColor = "rgb(255, 128, 0)";
+    if(name=='master'){
+        $('#seller').attr("value",'master');
+        // document.getElementById("sellersubmit").click();
+    }else{
+      $('#seller').attr("value",'student');
+      // document.getElementById("sellersubmit").click();
+    }
 
 }
+
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+
+// document.getElementById("sellersubmit").click();
 
 //인증여부 구별
 var cert = document.getElementsByClassName('certification');
