@@ -36,7 +36,7 @@ module.exports = function (router) {
                 };
                 currentBoard.studentList[currentBoard.studentList.length] = student;
                 console.log(currentBoard);
-                updateStudy(req.user[0].id,req.query.id);
+                updateStudy(req.user[0].id,req.query.id,currentBoard.title,currentBoard.deadline,currentBoard.reviewstar);
                 currentBoard.save(function (err) {
                     if(err) {
                         throw err;
@@ -46,9 +46,9 @@ module.exports = function (router) {
             }
         });
     });
-    function updateStudy(id,study_id){
+    function updateStudy(id,study_id,title,date,star){
       var myquery = {id:id};
-      var newvalue = {$set : {mystudy:study_id}};
+      var newvalue = {$set : {mystudy:{stduyid:study_id,title:title,deadline:date,reviewstar:star}}};
       console.log(newvalue);
       UserModel.updateOne(myquery,newvalue,function(err,res){
         if(err) throw err;
