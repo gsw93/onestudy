@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>One Study - 스터디 매칭 서비스</title>
-
+  <!-- Include jQuery lib. -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <!-- PLUGINS CSS STYLE -->
   <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
   <!-- Bootstrap -->
@@ -228,17 +229,17 @@
           <br><br>
           <button class="signupfacebook form-control" onclick="location.href='/auth/facebook'" id="signup-facebook">
             <span><img src="img/fb-logo.png" alt=""></span>
-            <p style="color: white; font-size: 18px;">Login with facebook</p>
+            <p style="color: white; font-size: 18px;">페이스북 로그인</p>
           </button>
 
           <button class="signupnaver form-control" onclick="location.href='/auth/naver'" id="signup-naver">
           <span><img src="img/naver_logo.png" alt=""></span>
-          <p style="color: white; font-size: 18px;">Login with naver</p>
+          <p style="color: white; font-size: 18px;">네이버 로그인</p>
           </button>
 
           <button class="signupkakao form-control" onclick="location.href='/auth/kakao'" id="signup-kakao">
             <span><img src="img/kakao-logo.png" alt=""></span>
-            <p style="color: white; font-size: 18px;">Login with kakao</p>
+            <p style="color: white; font-size: 18px;">카카오톡 로그인</p>
           </button>
           <hr>
         </div>
@@ -253,17 +254,17 @@
 
               <div class="input-group">
                 <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
-                <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required>
+                <input type="password" name="password" class="form-control input-lg" placeholder="비밀번호" required>
               </div>
 
+              <!-- <div class="login-set">
+                <a href="">비밀번호 분실?</a><br>
+              </div> -->
               <div class="login-set">
-                <a href="">Forgot password ?</a><br>
-              </div>
-              <div class="login-set">
-                <button type="submit" class="login-sign-in form-control" id="sign-in">Log In</button>
+                <button type="submit" class="login-sign-in form-control" id="sign-in">로그인</button>
               </div>
 
-              <button type="button" class="login-sign-up form-control" id="sign-up" data-dismiss="modal" data-toggle="modal" data-target="#signup">Sign up</button>
+              <button type="button" class="login-sign-up form-control" class="sign-up" data-dismiss="modal" data-toggle="modal" data-target="#signup">회원가입</button>
             </div>
           </div>
         </form>
@@ -281,31 +282,29 @@
       <div class="form-group">
         <img src="" alt="" style="width: 250px; display: block; margin: auto;">
         <div class="real_content">
-          <div class="input-group-s">
+
+          <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <input type="email" class="form-control" name="username" id="email2" placeholder="E-mail" required>
+            <!-- <span class="input-group-addon login-button"><a href="" id="nickname_link"></a></span> -->
           </div>
 
           <div class="input-group">
-            <input type="email" class="form-control" name="username" id="email" placeholder="E-mail" required>
-            <span class="input-group-addon login-button"><a href="" id="nickname_link"></a></span>
+            <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
+            <input type="password" class="form-control" name="password" id="password1" placeholder="비밀번호" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
+            <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인" required disabled>
           </div>
 
-          <div class="input-group-s">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-            <input type="password" class="form-control" id="password2" placeholder="Confirm Password" required>
-          </div>
-
-          <div class="input-group-s">
+          <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" name="nickname" id="nick_name" placeholder="닉네임" maxlength="8" required>
+            <!-- <span class="input-group-addon login-button"><a href="" id="nickname_link"></a></span> -->
           </div>
 
-          <div class="input-group">
-            <input type="text" class="form-control" name="nickname" id="nick_name" placeholder="Nickname" required>
-            <span class="input-group-addon login-button"><a href="" id="nickname_link"></a></span>
-          </div>
-
-          <button type="submit" class="signupfoodiy form-control">Sign Up</button>
+          <button type="submit" class="sign-up form-control">회원가입</button>
         </div>
       </div>
     </form>
@@ -320,8 +319,68 @@
 <%- include footer.ejs %>
 
 <!-- JAVASCRIPTS -->
+
+
 <script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    // 이메일정규식 로그인
+    $('#email').change(function(){
+      var email = document.getElementById('email').value;
+      var regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+      if(regex.test(email)==false){
+        $('#email').focus();
+        alert('이메일 형식으로 작성해주세요.');
+        document.getElementById('email').value = "";
+      }
+    })
+    // 이메일정규식 회원가입
+    $('#email2').change(function(){
+      var email = document.getElementById('email2').value;
+      var regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+      if(regex.test(email)==false){
+        $('#email2').focus();
+        alert('이메일 형식으로 작성해주세요.');
+        document.getElementById('email2').value = "";
+      }
+    })
+
+    // 비밀번호 정규식 회원가입
+    $('#password1').change(function(){
+      var password1 = document.getElementById('password1').value;
+      var password2 = document.getElementById('password2').value;
+      var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*_()#?&])[A-Za-z\d$@$!%*_()#?&]{8,}$/;
+      if(regex.test(password1)==false){
+        alert("숫자, 문자, 특수문자(@$!%^()*_#?)를 각 1개이상 포함하여 최소 8자리로 입력하세요.");
+        document.getElementById('password1').value = "";
+        document.getElementById('password2').disabled=true;
+      }
+      else if(password2!=""&&password1!=password2){
+        alert("비밀번호가 일치하지 않습니다!");
+        document.getElementById('password2').value = "";
+      }
+      if(regex.test(password1)==true){
+        document.getElementById('password2').disabled=false;
+      }
+      var value = $('#password1').val();
+      if(value==""){
+        $('#passwordCorrect').hide();
+        $('#passwordIncorrect').hide();
+      }
+    });
+
+    $('#password2').change(function(){
+      var password1 = document.getElementById('password1').value;
+      var password2 = document.getElementById('password2').value;
+      var value = $('#password2').val();
+      if(password2!=""&&password1!=password2){
+        document.getElementById('password2').value = "";
+        alert("비밀번호가 일치하지 않습니다!");
+      }
+    })
+})
+</script>
+
 <script src="plugins/tether/js/tether.min.js"></script>
 <script src="plugins/raty/jquery.raty-fa.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -329,11 +388,9 @@
 <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
 <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
-<script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
 <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="js/custom.js"></script>
+<!-- <script src="js/custom.js"></script> -->
 
 </body>
 
 </html>
-

@@ -55,15 +55,11 @@
 <section class="store-coupon section">
     <div class="container">
       <div style="width:100%;text-align:right;">
-        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" id="defaultOpen" onclick="content('student',this)" name="button">학생</button>
-        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="content('master',this)" name="button">마스터</button>
+        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="location.href='/mypage'" name="button">학생</button>
+        <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="content('master',this)" id="defaultOpen"  name="button">마스터</button>
       </div>
-      <!-- <form class="" action="/process/sellerchange" method="post"> -->
-        <input type="hidden" name="seller" value="student" id="seller">
-        <!-- <input type="submit" id="sellersubmit" value="" hidden> -->
-      <!-- </form> -->
       <!-- 마스터 탭 -->
-      <div class="tabcontent" id="master">
+      <div id="master">
         <div class="row">
           <!-- 프로필 정보 -->
           <div class="col-lg-6 col-md-12 col-sm-12">
@@ -151,14 +147,27 @@
                   for (var i=0; i< board.length; i++){ %>
                   <tr>
                       <td><%=i+1%></td>
-                      <td colspan="2"><a href="/masterView?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
+                      <td colspan="2"><a href="/payment?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
                       <td style="text-align:right;" id="date<%=i%>"></td>
                       <td>
-                        <div class="study_state">진행중</div>
-                        <!-- <div style="background-color:#ccc;border-radius:50px;width:auto;color:#fff;text-align:center;letter-spacing: 3px;">종료</div> -->
-                        <!-- <div style="background-color:rgb(128,128,128);border-radius:50px;width:auto;color:#fff;text-align:center;letter-spacing: 3px;">신청</div> -->
+                        <div class="study_state"></div>
                       </td>
                       <script>
+                      var today = new Date();
+                      var dead = new Date('<%- board[i].deadline %>');
+                      var term = new Date('<%- board[i].studyTerm %>');
+                      if(today<=dead){
+                        document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(89, 89, 89)';
+                      }
+                      if(dead<today && today<=(dead+term)){
+                        document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "진행중";
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(255, 128, 0)';
+                      }
+                      if(today>(dead+term)){
+                        document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
+                      }
                         var i = new Date('<%- board[i].deadline %>');
                         document.getElementById('date<%=i%>').innerHTML = date_format(i);
                         function date_format(dateValue){
@@ -249,207 +258,7 @@
         </div>
       </div>
       <!-- 마스터 탭 끝 -->
-      <!-- 학생 탭 -->
-      <div class="tabcontent" id="student">
-        <div class="row">
-          <!-- 프로필 정보 -->
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="block-cnt" style="padding:50px 0;">
-              <div class="profile-img">
-                <img src="" class="profile_photo" alt="profile_photo">
-                <a href="#">수정</a>
-              </div>
-              <div class="cnt_text">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-12 label">이름</div>
-                  <div class="col-lg-7 col-md-7 col-sm-12"><h5><%=authUser.name%></h5></div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-12 label">지역</div>
-                  <div class="col-lg-7 col-md-7 col-sm-12"><h6><%=authUser.addressShort%></h6></div>
-                  <div class="col-lg-1 col-md-1 col-sm-12" style="padding:0;"><a href="#">수정</a></div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-12 label">인증 여부</div>
-                  <div class="col-lg-4 col-md-4 col-sm-12"><h5 class="certification"></div>
-                  <div class="col-lg-4 col-md-4 col-sm-12" style="padding:0;display:none;" id="cert_a"><a href="#">인증하러가기</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 프로필 정보 끝 -->
-          <!-- 카테고리 수정 -->
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="block-cnt">
-              <div class="section-title">
-                  <h2>All Categories</h2>
-                  <p>현재 관심분야 : <%=authUser.interested%></p>
-              </div>
-              <form action="/process/categoryModify" class="category-select" method="post">
-                  <!-- Category list -->
-                    <div class="inputGroup">
-                       <input id="radio1" name="check_c" value="언어" type="radio"/>
-                       <label for="radio1">언어</label>
-                     </div>
-                     <div class="inputGroup">
-                       <input id="radio2" name="check_c" value="교육" type="radio"/>
-                       <label for="radio2">교육</label>
-                     </div>
-                     <div class="inputGroup">
-                       <input id="radio3" name="check_c" value="운동" type="radio"/>
-                       <label for="radio3">운동</label>
-                     </div>
-                     <div class="inputGroup">
-                       <input id="radio4" name="check_c" value="취미/클래스" type="radio"/>
-                       <label for="radio4">취미/클래스</label>
-                     </div>
-              <div class="row">
-                    <input type="submit" class="btn-categories" style="color: white; text-decoration: none;" name="button" value="수정">
-              </div>
-              </form>
-            </div>
-          </div>
-          <!-- 카테고리 수정 끝 -->
-        </div>
-        <div class="row">
-          <!-- 스터디 관리 -->
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="block-cnt">
-              <div class="cnt_title">
-                  <h4>나의 스터디 관리</h4>
-                  <div class="option">
-                      <button class="btn_div active">전체</button>
-                      <button class="btn_div">모집중</button>
-                      <button class="btn_div">진행중</button>
-                      <button class="btn_div">종료</button>
-                  </div>
-                  <table class="table table-hover" style="margin-top: 30px;">
-                      <tbody style="font-size: 0.8rem;">
-                      <tr>
-                          <td>10.</td>
-                          <td colspan="2">원스터디 스터디명</td>
-                          <td>2018-04-01</td>
-                          <td><div class="study_state">진행중</div></td>
-                      </tr>
-                      <tr>
-                          <td>10.</td>
-                          <td colspan="2">원스터디 스터디명</td>
-                          <td>2018-04-01</td>
-                          <td><div class="study_state">진행중</div></td>
-                      </tr>
-                      <tr>
-                          <td>10.</td>
-                          <td colspan="2">원스터디 스터디명</td>
-                          <td>2018-04-01</td>
-                          <td><div class="study_state">진행중</div></td>
-                      </tr>
-                      <tr>
-                          <td>10.</td>
-                          <td colspan="2">원스터디 스터디명</td>
-                          <td>2018-04-01</td>
-                          <td><div class="study_state">진행중</div></td>
-                      </tr>
-                      <tr>
-                          <td>10.</td>
-                          <td colspan="2">원스터디 스터디명</td>
-                          <td>2018-04-01</td>
-                          <td><div class="study_state">진행중</div></td>
-                      </tr>
-                      </tbody>
-                  </table>
-                  <div class="text-center">
-                      <ul class="pagination">
-                          <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                      </ul>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <!-- 스터디 관리 끝 -->
-          <!-- 스터디 평가  -->
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="block-cnt">
-              <div class="cnt_title">
-                  <h4>스터디 평가하기</h4>
-                  <table class="table table-hover" style="margin-top: 30px;">
-                      <tbody style="font-size: 0.8rem;">
-                        <tr>
-                            <td>10.</td>
-                            <td colspan="2">원스터디 스터디명 출력</td>
-                            <td>18.06.04 - 01:05</td>
-                            <td>3.0
-                              <i class="fas fa-star" style="color:#ff751a;"></i>
-                              <i class="fas fa-star" style="color:#ff751a;"></i>
-                              <i class="fas fa-star" style="color:#ff751a;"></i>
-                              <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                              <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                            </td>
-                        </tr>
-                      <tr>
-                        <td>10.</td>
-                        <td colspan="2">원스터디 스터디명 출력</td>
-                        <td>18.06.04 - 01:05</td>
-                        <td>3.0
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>10.</td>
-                        <td colspan="2">원스터디 스터디명 출력</td>
-                        <td>18.06.04 - 01:05</td>
-                        <td>3.0
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>10.</td>
-                        <td colspan="2">원스터디 스터디명 출력</td>
-                        <td>18.06.04 - 01:05</td>
-                        <td>3.0
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>10.</td>
-                        <td colspan="2">원스터디 스터디명 출력</td>
-                        <td>18.06.04 - 01:05</td>
-                        <td>3.0
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#ff751a;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                          <i class="fas fa-star" style="color:#e6e6e6;"></i>
-                        </td>
-                      </tr>
-                      </tbody>
-                  </table>
-                  <div class="text-center">
-                      <ul class="pagination">
-                          <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                      </ul>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <!-- 스터디 평가 끝 -->
-        </div>
-      </div>
+
     </div>
 </section>
 <!--============================
@@ -462,32 +271,16 @@
 
 //tab기능
 function content(name,elmnt) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
+    var i, tablinks;
+
     tablinks = document.getElementsByClassName("tablink");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].style.backgroundColor = "";
     }
-    document.getElementById(name).style.display = "block";
     elmnt.style.backgroundColor = "rgb(255, 128, 0)";
-    if(name=='master'){
-        $('#seller').attr("value",'master');
-        // document.getElementById("sellersubmit").click();
-    }else{
-      $('#seller').attr("value",'student');
-      // document.getElementById("sellersubmit").click();
-    }
-
 }
+document.getElementById('defaultOpen').click();
 
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
-// document.getElementById("sellersubmit").click();
 
 //인증여부 구별
 var cert = document.getElementsByClassName('certification');
@@ -496,15 +289,11 @@ var profile_photo = document.getElementsByClassName('profile_photo');
 //인증 여부에 따른 표시
 if(<%-authUser.phoneAuthCheck%>==false){
   cert[0].innerHTML = "비인증";
-  cert[1].innerHTML = "비인증";
   cert_a.style.display ="block";
   profile_photo[0].src ="/img/home/main_i_05.png";
-  profile_photo[1].src ="/img/home/main_i_05.png";
 }else{
   cert[0].innerHTML = "인증";
-  cert[1].innerHTML = "인증";
   profile_photo[0].src ="<%- authUser.photo %>";
-  profile_photo[1].src ="<%- authUser.photo %>";
 }
 
 // Get the container element
@@ -512,7 +301,6 @@ var btnContainer = document.getElementsByClassName("option");
 
 // Get all buttons with class="btn" inside the container
 var btns = btnContainer[0].getElementsByClassName("btn_div");
-var btns2 = btnContainer[2].getElementsByClassName("btn_div");
 var current = document.getElementsByClassName("btn_div active");
 
 // 스터디관리 btn active
@@ -522,13 +310,7 @@ for (var i = 0; i < 4; i++) {
     this.className += " active";
   });
 }
-// 학생 나의스터디관리 btn active
-for (var i = 0; i < 4; i++) {
-  btns2[i].addEventListener("click", function() {
-    current[1].className = current[1].className.replace(" active", "");
-    this.className += " active";
-  })
-}
+
 
 
 </script>

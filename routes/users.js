@@ -20,26 +20,21 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 module.exports = function (router, passport) {
-    router.route('/process/sellerchange').post(function(req,res){
-      var seller = req.body.seller;
-      console.log('버튼 상태 : '+seller);
-        UserModel.find({id:req.user[0].id},function(err,res){
-          if(err) throw err;
-          var myquery = {id:req.user[0].id};
-          var newvalue =  {$set : {btnstate:seller}};
-          UserModel.updateOne(myquery,newvalue,function(err,res){
-            if(err) throw err;
-            console.log('버튼상태 추가');
-          })
-        })
-        res.redirect('/mypage');
-    })
     router.route('/mypage').get(function (req, res) {
+      if(req.user){
+        var id = req.user[0].id;
+        res.render('mypage_student',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+
+      } else{
+          res.render('login');
+      }
+    });
+    router.route('/mypage2').get(function (req, res) {
       if(req.user){
         var id = req.user[0].id;
         MasterBoardModel.find({id:id},function(err,rawBoard){
             if(err) throw err;
-            res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+            res.render('mypage_master',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
         });
         // MasterBoardModel.find({studentList.:id},function(err,rawBoard){
         //     if(err) throw err;
