@@ -83,7 +83,7 @@
               <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password1" required/>
               <label for="password2" class="col-lg-2 col-md-2 col-sm-2">확인</label>
               <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password2" required/>
-              <p style="color:red;" class="col-lg-10" id="passwordRegex">숫자, 문자, 특수문자를 각 1개이상 포함하여 최소 8자리로 입력하세요.</p>
+              <p style="color:red;" class="col-lg-10" id="passwordRegex">숫자, 문자, 특수문자(@,$,!,%,^,(,),*,_,#,?)를 각 1개이상 포함하여 최소 8자리로 입력하세요.</p>
               <p style="color:red;" class="col-lg-10" id="passwordIncorrect">비밀번호가 일치하지 않습니다!</p>
               <p style="color:blue;" class="col-lg-10" id="passwordCorrect">비밀번호가 일치합니다.</p>
             </div>
@@ -177,14 +177,29 @@ $(function(){
 
   $('#password1').change(function(){
     var password1 = document.getElementById('password1').value;
-    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    var password2 = document.getElementById('password2').value;
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%^()*_#?&])[A-Za-z\d$@$!%^()*_#?&]{8,}$/;
     if(regex.test(password1)==false){
       $('#passwordRegex').show();
+      password2="";
       document.getElementById('password2').disabled=true;
     }
-    else{
+    if(regex.test(password1)==true){
       $('#passwordRegex').hide();
       document.getElementById('password2').disabled=false;
+    }
+    if(password2!=""&&password1!=password2){
+      $('#passwordIncorrect').show();
+      $('#passwordCorrect').hide();
+      password2 = "";
+    }
+    if(password1!=""&&password1==password2){
+      $('#passwordCorrect').show();
+      $('#passwordIncorrect').hide();
+    }
+    if(password1==""){
+      $('#passwordCorrect').hide();
+      $('#passwordIncorrect').hide();
     }
   });
 
@@ -196,10 +211,16 @@ $(function(){
       $('#passwordCorrect').show();
       $('#passwordIncorrect').hide();
     }
-    else{
+    if(password1!=""&&password2!=""&&password1!=password2){
       $('#passwordIncorrect').show();
       $('#passwordCorrect').hide();
+      password2 = "";
     }
+    if(password2==""){
+      $('#passwordCorrect').hide();
+      $('#passwordIncorrect').hide();
+    }
+
   })
 
   //이메일 정규식

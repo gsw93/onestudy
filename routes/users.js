@@ -37,8 +37,6 @@ module.exports = function (router, passport) {
     router.route('/mypage').get(function (req, res) {
       if(req.user){
         var id = req.user[0].id;
-        var state = req.body.state;
-        console.log(state);
         MasterBoardModel.find({id:id},function(err,rawBoard){
             if(err) throw err;
             res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
@@ -65,7 +63,6 @@ module.exports = function (router, passport) {
           console.log('카테고리 변경');
         })
         res.redirect('/mypage');
-        // res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
       })
     })
 
