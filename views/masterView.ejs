@@ -145,13 +145,13 @@
                 <div class="block">
                     <div class="media">
                         <!-- Store Icon -->
-                        <div class="row" style="width:100%;">
+                        <div class="row" style="width:100%;margin:auto;">
 
-                            <div class="col-sm-5 col-md-5 col-lg-2 image-content d-flex align-self-center" style="height:120px;">
+                            <div class="col-sm-5 col-md-5 col-lg-2 image-content d-flex align-self-center">
                               <img src="<%- board.masterphoto %>" style="margin:auto;display:block;width:100%;height:100% ;border-radius:50%;"  alt="master_profile">
                             </div>
 
-                            <div class="col-sm-7 col-md-7 col-lg-7 media-body" style="margin:10px 20px;">
+                            <div class="col-sm-12 col-md-7 col-lg-7 media-body">
                                 <!-- <form action="/process/addboard" method="post"> -->
                                 <!-- Heading -->
                                 <span class="headerSign"><%=board.title %></span>
@@ -315,10 +315,10 @@
                           <img src="<%- authUser.photo %>" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
                         </div>
                         <div class="col-lg-10 commentcnt">
-                          <table>
+                          <table style="width:100%;">
                             <tr>
                               <td><%=commentsList[i].author%></td>
-                              <td id="comment_date[<%=i%>]" style="font-size:13px;"></td>
+                              <td id="comment_date[<%=i%>]" style="font-size:13px;width:50px;"></td>
                               <script>
                               var i = new Date('<%- commentsList[i].comment_date %>');
                               document.getElementById('comment_date[<%=i%>]').innerHTML = date_format2(i);
@@ -352,7 +352,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <td colspan="3" style="font-size:18px;color:gray;"><%=commentsList[i].contents%></td>
+                              <td colspan="3" style="font-size:18px;color:gray;width:100%;"><%=commentsList[i].contents%></td>
                             </tr>
                           </table>
                         </div>
@@ -382,7 +382,7 @@
                       </div>
                       <div class="comment_write" style="margin:20px;">
                         <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
-                        <textarea name="contents" class="form-control" rows="2"
+                        <textarea name="contents" id="commentcontents" class="form-control" rows="2"
                                   style="display: inline;width:80%;float:left;" placeholder="감사합니다."  /required></textarea>
                         <button type="submit" name="button" class="btn" style="background-color:#ff751a;color:#fff;float:left;width:15%;height:78px;">전송</button>
                       </div>
@@ -449,6 +449,14 @@
             map.setCenter(marker.getPosition());
         });
     }
+    //본인글 본인이 후기 작성 금지
+    $('form#replyAction').on('submit', function (e) {
+      <%if(authUser.id==board.id){%>
+        alert("본인은 작성하실 수 없습니다.");
+        document.getElementById('commentcontents').value ="";
+        return false;
+      <%}%>
+    });
 
     $(function(){
       $('.text').froalaEditor({

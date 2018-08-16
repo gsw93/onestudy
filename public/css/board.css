@@ -24,16 +24,22 @@
         -webkit-box-flex: 1;
         -ms-flex-positive: 1;
         flex-grow: 1;
-        width: 100%;
+        width: 50%;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
         padding-bottom: 30px;
     }
 }
-
+#sign-in{
+  color:#eb9316;
+}
+.btn-warning:hover{
+  color:#fff;
+  background-color: orange;
+}
 .store-coupon .block .media .media-body {
-    margin: 0 75px;
+    margin:10px 20px;
     width: 100%;
 }
 
@@ -65,20 +71,28 @@
     letter-spacing: 0;
     margin: 20px 0;
 }
-
+@media (min-width: 768px) and (max-width: 991px) {
+  .store-coupon .block .media .media-body {
+      margin:10px 0;
+  }
+}
 @media (max-width: 768px) {
     .store-coupon .block .media .media-body {
         -webkit-box-flex: 1;
         -ms-flex-positive: 1;
         flex-grow: 1;
         width: 100%;
-        text-align: center;
+        text-align:  left;
+    }
+    .store-coupon .block .media .media-body {
+        margin:10px 0;
+        padding:0;
     }
 }
 
 @media (max-width: 480px) {
     .store-coupon .block .media .media-body {
-        margin: 0;
+        margin: 5px;
     }
 }
 /*-----------------------
