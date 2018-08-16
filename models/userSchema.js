@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
     name: {type: String}, // 이 name 필드를 없애고 위에 nickname 필드를 name으로 바꿀 계획 !
     age: {type: Number},
     gender: {type: String},
-    photo: {type: String},
+    photo: {type: String,default:''},
     phone: {type: String},
     address: {type: String},
     interested: {type: String}, // 관심분야

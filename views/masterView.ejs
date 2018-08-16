@@ -219,18 +219,19 @@
                         </div>
                     </div>
 
-                    <article style="margin:0;padding:10px;">
+                    <article style="margin:0;padding:5px;">
                         <div class="post-slider owl-carousel owl-theme" style="width: 100%;">
-                            <div class="item"><a href=""><img src="<%=board.path[0]%>" style ="width: 100%;height: 250px;" alt="Slider-Img-01"></a></div>
+                            <div class="item"><a href=""><img src="<%=board.path[0]%>" style ="width: 100%;height: 350px;" alt="Slider-Img-01"></a></div>
                             <%if(board.path.length > 1){%>
-                            <div class="item"><a href=""><img src="<%=board.path[1]%>" style="width: 100%;height: 250px;" alt="Slider-Img-02"></a></div>
-                            <div class="item"><a href=""><img src="<%=board.path[2]%>" style="width: 100%;height: 250px;" alt="Slider-Img-03"></a></div>
+                            <div class="item"><a href=""><img src="<%=board.path[1]%>" style="width: 100%;height: 350px;" alt="Slider-Img-02"></a></div>
+                            <div class="item"><a href=""><img src="<%=board.path[2]%>" style="width: 100%;height: 350px;" alt="Slider-Img-03"></a></div>
                             <%}%>
                         </div>
                     </article>
                 </div>
                 <div style="margin-top:50px;">
                   <div class="editor_cnt">
+                      <%if(authUser.id==board.id){%>
                       <div class="col-lg-2 title">
                           <h5>참여 인원</h5>
                       </div>
@@ -271,7 +272,7 @@
                               <%}%>
                           </div>
                       </a>
-
+                      <%}%>
                     <div class="col-lg-2 title">
                         <h5>Master 소개</h5>
                     </div>

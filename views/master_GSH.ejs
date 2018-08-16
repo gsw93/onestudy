@@ -111,9 +111,11 @@
                 <div class="col-md-6" style="color:orange;">
                     추천 마스터
                 </div>
-                <%}if(seller){%>
+                <%}if(seller){
+                  if(interboard.length==0){%>
+                  <div class="col-md-6"></div><%}%>
                 <div class="col-md-6" style="color:orange;">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;">글 등록</button>
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;margin-right:20px;">글 등록</button>
                 </div>
                 <%}%>
             </div>
@@ -207,8 +209,8 @@
                 <%}%>
                 <%if(!authUser.phoneAuthCheck){%>
                 <%if(seller){%>
-                <div class="col-md-6" style="color:orange;">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
+                <div class="col-md-6" style="color:orange;float:right;">
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm">글 등록</button>
                 </div>
                 <%}}%>
             </div>
@@ -217,17 +219,17 @@
             </div>
         </div>
 
-        <%if(!authUser.phoneAuthCheck){%>
+        <%if(!authUser.phoneAuthCheck||!authUser.location.coordinates[0]){%>
         <div class="modal" role="dialog" id="myModal" style="display:block;">
             <div class="modal-dialog">
-                <p style="text-align:center;font-size:25px;font-weight:650;margin-top:20px;"><strong style="color:orange;">주소와 관심분야</strong>를 등록하시면 <br>가까운 위치의 관심분야에 맞는 마스터를 <br>쉽게 찾으실 수 있습니다.</p>
+                <p style="text-align:center;font-size:25px;font-weight:650;margin-top:20px;"><strong style="color:#ef6c00;">주소와 관심분야</strong>를 등록하시면 <br>가까운 위치의 관심분야에 맞는 마스터를 <br>쉽게 찾으실 수 있습니다.</p>
                 <br><br>
                 <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-primary" onclick="fade()" style="width: 100%;">다음에 등록하기</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary" onclick="location.href='/studentapply'" style="width: 100%;">등록하러 가기</button>
+                    <!-- <div class="col-md-6">
+                        <button class="btn btn-primary" onclick="fade()" style="width: 100%;background-color:#5b2900;border:none;">다음에 등록하기</button>
+                    </div> -->
+                    <div class="col-md-6" style="margin:auto;">
+                        <button class="btn btn-primary" onclick="location.href='/studentapply'" style="width: 100%;background-color:#5b2900;border:none;">등록하러 가기</button>
                     </div>
                 </div>
                 <br><br>

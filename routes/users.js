@@ -111,7 +111,28 @@ module.exports = function (router, passport) {
             }
         });
     });
+    router.route('/process/profileModify').post(upload.single('userfile'), function (req, res) {
+        console.log('/process/profileModify 호출됨.');
+        console.log(req.file);
+        var file = req.file;
 
+        console.log(req.session.passport);
+        UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
+            if (err) return res.status(500).json({error: err});
+            if (!member) {
+                return res.send('사진 등록에 실패했습니다.');
+            } else {
+                console.log(member);
+                member.photo = '/uploads/user/'+file.filename;
+                member.save(function (err) {
+                    if (err)
+                        throw err;
+                    req.session.passport.user.seller=true;
+                    res.redirect('/mypage');
+                });
+            }
+        });
+    });
     router.route('/process/addmaster').post(upload.single('userfile'), function (req, res) {
         console.log('/process/addmaster 호출됨.');
         console.log(req.file);
@@ -128,7 +149,12 @@ module.exports = function (router, passport) {
                 return res.send('마스터 등록에 실패했습니다.');
             } else {
                 console.log(member);
-                member.name = name;
+                if(member.name){
+                  member.name = member.name;
+                }
+                else{
+                  member.name = name;
+                }
                 member.age = age;
                 member.gender = gender;
                 member.photo = '/uploads/user/'+file.filename;
@@ -139,7 +165,7 @@ module.exports = function (router, passport) {
                     if (err)
                         throw err;
                     req.session.passport.user.seller=true;
-                    res.redirect('/');
+                    res.redirect('/mypage2');
                 });
             }
         });
@@ -165,7 +191,12 @@ module.exports = function (router, passport) {
                 return res.send('학생 등록에 실패했습니다.');
             } else {
                 console.log(member);
-                member.name = name;
+                if(member.name){
+                  member.name = member.name;
+                }
+                else{
+                  member.name = name;
+                }
                 // member.age = age;
                 member.phone = phone;
                 // member.gender = gender;
@@ -179,7 +210,7 @@ module.exports = function (router, passport) {
                 member.save(function (err) {
                     if (err)
                         throw err;
-                    res.redirect('/');
+                    res.redirect('/master');
                 });
             }
         });

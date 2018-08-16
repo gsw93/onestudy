@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
 
 </head>
@@ -18,46 +19,46 @@
 
     <div class="signup-content" >
         <div class="real_content">
-            <!--<button class="signupgoogle form-control" id="signup-google" style="margin-top: 60px;">-->
-                <!--<span><img src="img/google_logo.png" alt=""></span>-->
-                <!--<p>Login with google</p>-->
-            <!--</button>-->
+          <button class="signupfacebook form-control" onclick="location.href='/auth/facebook'" id="signup-facebook">
+            <span><img src="img/fb-logo.png" alt=""></span>
+            <p style="color: white; font-size: 18px;">페이스북 로그인</p>
+          </button>
 
-            <button class="signupfacebook form-control" onclick="location.href='/auth/facebook'" id="signup-facebook">
-                <span><img src="img/fb-logo.png" alt=""></span>
-                <p>Login with facebook</p>
-            </button>
+          <button class="signupnaver form-control" onclick="location.href='/auth/naver'" id="signup-naver">
+          <span><img src="img/naver_logo.png" alt=""></span>
+          <p style="color: white; font-size: 18px;">네이버 로그인</p>
+          </button>
 
-            <!--<button class="signupnaver form-control" id="signup-naver">-->
-                <!--<span><img src="img/naver_logo.png" alt=""></span>-->
-                <!--<p>Login with naver</p>-->
-            <!--</button>-->
+          <button class="signupkakao form-control" onclick="location.href='/auth/kakao'" id="signup-kakao">
+            <span><img src="img/kakao-logo.png" alt=""></span>
+            <p style="color: white; font-size: 18px;">카카오톡 로그인</p>
+          </button>
+          <hr>
             <hr>
         </div>
         <form action="/process/login" method="post" class="form-horizontal">
-            <div class="form-group">
-                <div class="real_content">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" name="username" class="form-control input-lg" id="email" placeholder="E-mail" required>
-                    </div>
+          <div class="form-group">
+            <div class="real_content">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" name="username" class="form-control input-lg" id="email" placeholder="E-mail" required>
+              </div>
 
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required>
-                    </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
+                <input type="password" name="password" class="form-control input-lg" placeholder="비밀번호" required>
+              </div>
 
-                    <div class="login-set">
-                        <input type="checkbox">Save password
-                        <a href="">Forgot password ?</a>
+              <!-- <div class="login-set">
+                <a href="">비밀번호 분실?</a><br>
+              </div> -->
+              <div class="login-set">
+                <button type="submit" class="login-sign-in form-control" id="sign-in">로그인</button>
+              </div>
 
-                        <input type="submit" class="login-sign-in form-control" value="Log in" id="sign-in">
-                        <hr>
-                    </div>
-
-                    <button type="button" onclick="location.href='register'" class="login-sign-up form-control" id="sign-up">Sign up</button>
-                </div>
+              <button type="button" class="login-sign-up form-control" class="sign-up" onclick="location.href='register'">회원가입</button>
             </div>
+          </div>
         </form>
         </div>
     </div>

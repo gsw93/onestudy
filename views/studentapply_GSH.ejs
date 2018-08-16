@@ -47,26 +47,28 @@
     <div class="Applyform" style="margin:70px 0;">
       <form action="/process/addstudent" method="post">
       <h1>Student Profile</h1>
+      <%if(!seller){%>
       <div class="Apply">
         <div class="row form-group">
           <label for="name" class="col-lg-2 col-md-2 col-sm-2">이름</label>
           <input type="text" name="name" class="col-lg-10 col-md-10 col-sm-10 form-control" required/>
         </div>
-        <!--<div class="row form-group">-->
-          <!--<label for="age" class="col-lg-2 col-md-2 col-sm-2">나이</label>-->
-          <!--<input type="number" name="age" class="col-lg-10 col-md-10 col-sm-10 form-control" required/>-->
-        <!--</div>-->
-        <!--<div class="row form-group">-->
-          <!--<label for="name" class="col-lg-2 col-md-2 col-sm-2">성별</label>-->
-          <!--<input type="radio" name="gender" class="col-lg-1 col-md-1 col-sm-1 gender" value="남" checked required>-->
-          <!--<label for="남">남성</label>-->
-          <!--<input type="radio" name="gender" class="col-lg-1 col-md-1 col-sm-1 gender" value="여" required>-->
-          <!--<label for="여">여성</label>-->
-        <!--</div>-->
+        <div class="row form-group" style="z-index: 100; position: relative;">
+            <label for="interested" class="col-lg-2 col-md-2 col-sm-3">관심분야</label>
+                <select name="interest" class="form-control col-lg-5 col-md-5 col-sm-5">
+                    <option value="언어">언어</option>
+                    <option value="교육">교육</option>
+                    <option value="운동">운동</option>
+                    <option value="취미/클래스">취미/클래스</option>
+                </select>
+              <div class="col-lg-5">
+
+              </div>
+        </div>
         <div class="row form-group">
           <label for="phoneNumber" class="col-lg-2 col-md-2 col-sm-2">휴대폰</label>
-          <input type="tel" name="phoneNumber" id="phoneNumber" class="col-lg-7 col-md-7 col-sm-7 form-control" maxlength="13" required/>
-          <!-- <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" onclick="popup()" value="인증"> -->
+          <input type="tel" name="phoneNumber" id="phoneNumber" class="col-lg-7 col-md-7 col-sm-7 form-control" style="margin:auto 0" maxlength="13" required/>
+          <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2 btn" style="background-color:#b3b3b3;color:#fff;height:50px;margin:5px auto;" onclick="popup()" value="인증">
         </div>
         <!-- 07_04 add by sehyeon 주소 입력 부분 수정
         <div class="row form-group">
@@ -80,30 +82,49 @@
         </div>-->
           <div class="row form-group">
               <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>
-              <input type="text" class="form-control col-md-7" id="address" name="address" required readonly/>
-              <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" value="찾기" onclick="goPopup()">
+              <input type="text" class="col-lg-7 col-md-7 col-sm-7 form-control" id="address" style="margin:auto 0" name="address" required readonly/>
+              <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2 btn" style="background-color:#b3b3b3;color:#fff;height:50px;margin:5px auto;" value="찾기" onclick="goPopup()">
               <input class="form-control col-md-8" type="hidden" id="entX" name="x" required readonly/>
               <input class="form-control col-md-8" type="hidden" id="entY" name="y" required readonly/>
               <input class="form-control col-md-8" type="hidden" id="siNm" name="siNm" required readonly/>
           </div>
-      <div class="row form-group" style="z-index: 100; position: relative;">
-          <label for="interested" class="col-lg-2 col-md-2 col-sm-3">관심분야</label>
-              <select name="interest" class="form-control col-lg-5 col-md-5 col-sm-4">
-                  <option value="분야">분야</option>
-                  <option value="언어">언어</option>
-                  <option value="운동">운동</option>
-                  <option value="취미/클래스">취미/클래스</option>
-                  <option value="교육">교육</option>
-              </select>
-              <!--<select name="level" class="form-control col-lg-5 col-md-5 col-sm-4">-->
-                  <!--<option value="레벨">레벨</option>-->
-                  <!--<option value="고급">고급</option>-->
-                  <!--<option value="중급">중급</option>-->
-                  <!--<option value="초급">초급</option>-->
-              <!--</select>-->
+        <input type="submit" name="save" style="width:150px;height:40px;border-radius:30px;color:white;background-color:#404040;border-style:none;font-size:16px;margin:40px auto;display:block;" value="저장&nbsp;&gt;">
       </div>
-        <input type="submit" name="save" style="width:150px;height:40px;border-radius:30px;color:white;background-color:#404040;border-style:none;font-size:16px;margin:auto;display:block;" value="저장&nbsp;&gt;">
+      <%}%>
+      <% if(seller){%>
+      <div class="Apply">
+        <div class="row form-group" style="z-index: 100; position: relative;">
+            <label for="interested" class="col-lg-2 col-md-2 col-sm-3">관심분야</label>
+                <select name="interest" class="form-control col-lg-5 col-md-5 col-sm-5">
+                    <option value="언어">언어</option>
+                    <option value="교육">교육</option>
+                    <option value="운동">운동</option>
+                    <option value="취미/클래스">취미/클래스</option>
+                </select>
+              <div class="col-lg-5">
+              </div>
+        </div>
+        <!-- 07_04 add by sehyeon 주소 입력 부분 수정
+        <div class="row form-group">
+          <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>
+          <input type="text" class="col-lg-4 col-md-4 col-sm-4 form-control" name="address1" required/>
+          <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" value="찾기">
+        </div>
+        <div class="row form-group">
+            <span class="col-lg-2 col-md-2 col-sm-2"></span>
+            <input type="text" class="col-lg-10 col-md-10 col-sm-10 form-control" name="address2">
+        </div>-->
+          <div class="row form-group">
+              <label for="address" class="col-lg-2 col-md-2 col-sm-2">주소</label>
+              <input type="text" class="col-lg-7 col-md-7 col-sm-7 form-control" id="address" style="margin:auto 0" name="address" required readonly/>
+              <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2 btn" style="background-color:#b3b3b3;color:#fff;height:50px;margin:5px auto;" value="찾기" onclick="goPopup()">
+              <input class="form-control col-md-8" type="hidden" id="entX" name="x" required readonly/>
+              <input class="form-control col-md-8" type="hidden" id="entY" name="y" required readonly/>
+              <input class="form-control col-md-8" type="hidden" id="siNm" name="siNm" required readonly/>
+          </div>
+        <input type="submit" name="save" style="width:150px;height:40px;border-radius:30px;color:white;background-color:#404040;border-style:none;font-size:16px;margin:40px auto;display:block;" value="저장&nbsp;&gt;">
       </div>
+      <%}%>
       </form>
     </div>
 <!--============================

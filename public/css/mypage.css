@@ -1926,7 +1926,13 @@ input[type="radio"] {
       text-align: left;
   }
 }
-
+#profileModify{
+  background-color:#fff;
+  width:30%;
+  height: 250px;
+  margin:auto;
+  padding:15px;
+}
 .fill {
     height: 148px;
 }

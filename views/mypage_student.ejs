@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>One Study - 스터디 매칭 서비스</title>
-
+    <!-- Include jQuery lib. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <!-- PLUGINS CSS STYLE -->
@@ -52,11 +53,14 @@
 <!--==================================
 =            Store Coupon            =
 ===================================-->
+
 <section class="store-coupon section">
     <div class="container">
       <div style="width:100%;text-align:right;">
         <button type="button" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="content('student',this)" id="defaultOpen"  name="button">학생</button>
+        <%if(seller){%>
         <button type="submit" class="col-lg-1 col-md-2 col-sm-2 tablink" onclick="location.href='/mypage2'" name="button">마스터</button>
+        <%}%>
       </div>
 
       <!-- 학생 탭 -->
@@ -67,7 +71,7 @@
             <div class="block-cnt" style="padding:50px 0;">
               <div class="profile-img">
                 <img src="" class="profile_photo" alt="profile_photo">
-                <a href="#">수정</a>
+              <a href="#" data-toggle="modal" data-target="#profileModify" >수정</a>
               </div>
               <div class="cnt_text">
                 <div class="row">
@@ -123,6 +127,7 @@
         </div>
         <div class="row">
           <!-- 스터디 관리 -->
+          <% if(authUser.mystudy.length!==0){%>
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
               <div class="cnt_title">
@@ -135,8 +140,7 @@
                   </div>
                   <table class="table table-hover" style="margin-top: 30px;">
                       <tbody style="font-size: 0.8rem;">
-                        <% if(authUser.mystudy.length!==0){
-                        for (var i=0; i< authUser.mystudy.length; i++){ %>
+                        <%for (var i=0; i< authUser.mystudy.length; i++){ %>
                       <tr>
                           <td><%=i+1%></td>
                           <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i]._id%>"><%=authUser.mystudy[i].title%></a></td>
@@ -184,7 +188,7 @@
                             }
                           </script>
                       </tr>
-                      <%}}%>
+                      <%}%>
                       </tbody>
                   </table>
                   <div class="text-center">
@@ -197,16 +201,17 @@
               </div>
             </div>
           </div>
+          <%}%>
           <!-- 스터디 관리 끝 -->
           <!-- 스터디 평가  -->
+          <% if(authUser.mystudy.length!==0){%>
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
               <div class="cnt_title">
                   <h4>스터디 평가하기</h4>
                   <table class="table table-hover" style="margin-top: 30px;">
                       <tbody style="font-size: 0.8rem;">
-                        <% if(authUser.mystudy.length!==0){
-                        for (var i=0; i< authUser.mystudy.length; i++){ %>
+                        <%for (var i=0; i< authUser.mystudy.length; i++){ %>
                         <tr>
                             <td><%=i+1%></td>
                             <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i]._id%>"><%=authUser.mystudy[i].title%></a></td>
@@ -241,7 +246,7 @@
                               <% for(s;s< 5;s++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
                             </td>
                         </tr>
-                        <%}}%>
+                        <%}%>
                       </tbody>
                   </table>
                   <div class="text-center">
@@ -254,11 +259,30 @@
               </div>
             </div>
           </div>
+          <%}%>
           <!-- 스터디 평가 끝 -->
         </div>
       </div>
     </div>
 </section>
+<div class="modal fade" role="dialog" id="profileModify">
+      <div class="modal-dialog">
+        <form action="/process/profileModify" method="post" enctype="multipart/form-data">
+          <div class="row form-group">
+            <h4 style="margin:auto;font-weight:700;margin-bottom:20px;">사진</h4>
+            <div class="input-group">
+              <span class="input-group-btn" style="width:100%;">
+                  <span class="btn btn-default btn-file">
+                    <input type="file" name="userfile" accept="image/png, image/jpeg, image/gif" id="imgInp">
+                  </span>
+              </span>
+              <img id='img-upload'/>
+            </div>
+          </div>
+          <input type="submit" name="save" value="저장&nbsp;&gt;" style="margin:auto;display: block;height:35px;background-color: #ccc;color:#fff;border-radius: 50px;width:25%;border:none;font-size:16px;">
+        </form>
+    </div>
+</div>
 <!--============================
 =            Footer            =
 =============================-->
@@ -283,15 +307,19 @@ document.getElementById('defaultOpen').click();
 var cert = document.getElementsByClassName('certification');
 var cert_a = document.getElementById('cert_a');
 var profile_photo = document.getElementsByClassName('profile_photo');
+<%if(authUser.photo ==""){%>
+  profile_photo[0].src ="/img/home/main_i_05.png";
+<%} else{%>
+  profile_photo[0].src ="<%- authUser.photo %>";
+<%}%>
 //인증 여부에 따른 표시
 if(<%-authUser.phoneAuthCheck%>==false){
   cert[0].innerHTML = "비인증";
   cert_a.style.display ="block";
-  profile_photo[0].src ="/img/home/main_i_05.png";
 }else{
   cert[0].innerHTML = "인증";
-  profile_photo[0].src ="<%- authUser.photo %>";
 }
+
 
 // Get the container element
 var btnContainer = document.getElementsByClassName("option");

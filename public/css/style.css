@@ -781,6 +781,7 @@ input {
 .clients-slider .owl-nav [class*=owl-]:hover {
     background-color: transparent;
     color: #848484;
+
 }
 
 .clients-slider .owl-nav {
@@ -2957,7 +2958,7 @@ article .post-slider .owl-nav [class*=owl-] {
 }
 
 article .post-slider .owl-nav [class*=owl-]:hover {
-    background-color: #f95669;
+    background-color: orange;
 }
 
 article a h3 {
