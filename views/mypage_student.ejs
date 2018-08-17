@@ -80,8 +80,8 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 label">지역</div>
-                  <div class="col-lg-7 col-md-7 col-sm-12"><h6><%=authUser.addressShort%></h6></div>
-                  <div class="col-lg-1 col-md-1 col-sm-12" style="padding:0;"><a href="#">수정</a></div>
+                  <div class="col-lg-7 col-md-7 col-sm-12"><h6 id="add"><%=authUser.addressShort%></h6></div>
+                  <div class="col-lg-1 col-md-1 col-sm-12" style="padding:0;"><a onclick="goPopup()">수정</a></div>
                 </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 label">인증 여부</div>
@@ -353,7 +353,8 @@ for (var i = 0; i < 4; i++) {
 <script src="plugins/datepicker/bootstrap-datepicker.min.js"></script>
 <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="js/custom.js"></script>
-
+<script src="js/jusoFix_GSH.js"></script>
+<script src="plugins/proj4js/proj4js-combined.js"></script>
 </body>
 
 </html>

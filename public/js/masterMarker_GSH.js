@@ -15,19 +15,32 @@ function markingMap(map){
     var Lng="";
     var zoom="";
     //var myCenter = new google.maps.LatLng(x, y);
-    if(region.indexOf("세종특별")!=-1)
+    /*if(region.indexOf("세종특별")!=-1)
     {
         checkRegion="세종특별";
         Lat=36.552816;
         Lng=127.2737377;
         zoom=12;
     }
-    else  {
+    else if(region.indexOf("청주시")!=-1)  {
         checkRegion="청주시";
         Lat=36.6393449;
         Lng=127.4746804;
         zoom=13;
     }
+    else if(region.indexOf("대전광")!=-1)  {
+        checkRegion="대전광역시";
+        Lat=36.3718813;
+        Lng=127.3295013;
+        zoom=13;
+    }
+    else
+    {
+        checkRegion="천안시";
+        Lat=36.8211606;
+        Lng=127.1310738;
+        zoom=13;
+    }*/
     /*var map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(Lat, Lng),
         zoom: zoom

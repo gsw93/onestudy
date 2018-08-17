@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 require('../models/database');
 var MasterBoardModel = mongoose.model("masterboards");
+var UserModel = mongoose.model("users");
 
 //주소 api 처리 부분
 module.exports = function (router) {
@@ -67,6 +68,18 @@ module.exports = function (router) {
         exec(function (err,boards){
             if(err) throw err;
             res.send(boards);
+        });
+    });
+    router.post('/address_fix',function (req,res) {
+        var address=req.body.address;
+        var addressShort=req.body.siNm;
+        var x=req.body.x;
+        var y=req.body.y;
+        var location={type:'Point',coordinates:[x,y]};
+        UserModel.findOneAndUpdate({id:req.user[0].id},{address:address,addressShort:addressShort,location:location},function(err){
+            if(err) throw err;
+            //console.log(query);
+                res.send("clear");
         });
     });
 };
