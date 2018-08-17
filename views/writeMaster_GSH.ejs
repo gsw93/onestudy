@@ -177,7 +177,7 @@
                               </div>
                               <div class="row">
                                 <label for="image" class="col-lg-2 darktext" style="padding-right:0">스터디 대표 사진</label>
-                                <input class="col-lg-9 form-control" style="height:35px;margin :auto 0;" type="file" onchange="readURL(this);" name="photo" multiple>
+                                <input class="col-lg-9 form-control" id="main_pic" style="height:35px;margin :auto 0;" type="file" onchange="readURL(this);" name="photo" multiple>
                                 <label for="image" class="col-lg-2 darktext" style="padding-right:0">추가 사진</label>
                                 <input class="col-lg-9 form-control" style="height:35px;margin :auto 0;" type="file" onchange="readURL(this);" name="photo" multiple>
                                 <span class="col-lg-2 darktext"></span>
@@ -303,7 +303,6 @@
                                 return false;
                               }
 
-
                               if ($('#text1').froalaEditor('core.isEmpty')) {
                                 alert('마스터 소개를 입력하세요.');
 
@@ -351,6 +350,18 @@
                         function chkchk(form){
                           var arr_form = document.getElementsByName('day');
                           var num=0;
+                          var address = document.getElementById('address').value;
+                          var mainpic = document.getElementById('main_pic').value;
+
+                          if( address == "" || address == null || address == undefined || ( address != null && typeof address == "object" && !Object.keys(address).length ) ){
+                            alert('스터디 장소가 이루어질 대략적인 주소를 설정해주세요');
+                            return false;
+                          }
+
+                          if( mainpic == "" || mainpic == null || mainpic == undefined || ( mainpic != null && typeof mainpic == "object" && !Object.keys(mainpic).length ) ){
+                            alert('스터디를 대표할 메인 사진을 등록해주세요');
+                            return false;
+                          }
 
                           for(var i =0;i<arr_form.length;i++){
                             if(arr_form[i].checked){

@@ -45,7 +45,7 @@
   ===================================-->
 
     <div class="Applyform" style="margin:70px 0;">
-      <form action="/process/addstudent" method="post">
+      <form action="/process/addstudent" method="post" onsubmit="return addressRequired(this);">
       <h1>Student Profile</h1>
       <%if(!seller){%>
       <div class="Apply">
@@ -137,6 +137,15 @@
 function popup(){
   var popup = window.open("","_blank","width=300,height=200");
   popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
+}
+
+function addressRequired(form){
+    var address = document.getElementById('address').value;
+
+    if( address == "" || address == null || address == undefined || ( address != null && typeof address == "object" && !Object.keys(address).length ) ){
+        alert('스터디를 주로 할 장소를 입력해주세요');
+        return false;
+    }
 }
 
 function autoHypenPhone(str){

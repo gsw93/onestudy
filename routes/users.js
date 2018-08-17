@@ -157,7 +157,11 @@ module.exports = function (router, passport) {
                 }
                 member.age = age;
                 member.gender = gender;
-                member.photo = '/uploads/user/'+file.filename;
+                if(  member.photo == "" ||  member.photo == null ||  member.photo == undefined || (  member.photo != null && typeof  member.photo == "object" && !Object.keys( member.photo).length ) ){
+                    member.photo = '/img/home/main_i_05.png';
+                } else{
+                    member.photo = '/uploads/user/'+file.filename;
+                }
                 member.phone = phone;
                 member.phoneAuthCheck = true;
                 member.sellercheck = true;
@@ -165,7 +169,7 @@ module.exports = function (router, passport) {
                     if (err)
                         throw err;
                     req.session.passport.user.seller=true;
-                    res.redirect('/mypage2');
+                    res.redirect('/studentapply');
                 });
             }
         });
