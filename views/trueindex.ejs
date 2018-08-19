@@ -295,7 +295,7 @@
           </div>
           <div class="input-group">
             <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
-            <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인" required disabled>
+            <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인" required>
           </div>
 
           <div class="input-group">
@@ -353,14 +353,10 @@ $(function(){
       if(regex.test(password1)==false){
         alert("숫자, 문자, 특수문자(@$!%^()*_#?)를 각 1개이상 포함하여 최소 8자리로 입력하세요.");
         document.getElementById('password1').value = "";
-        document.getElementById('password2').disabled=true;
       }
       else if(password2!=""&&password1!=password2){
         alert("비밀번호가 일치하지 않습니다!");
         document.getElementById('password2').value = "";
-      }
-      if(regex.test(password1)==true){
-        document.getElementById('password2').disabled=false;
       }
       var value = $('#password1').val();
       if(value==""){

@@ -1927,11 +1927,17 @@ input[type="radio"] {
   }
 }
 #profileModify{
+  top:30%;
+}
+.modal-cnt{
   background-color:#fff;
   width:30%;
   height: 250px;
   margin:auto;
   padding:15px;
+}
+.modal-cnt form{
+  margin:20px auto;
 }
 .fill {
     height: 148px;

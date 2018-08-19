@@ -746,7 +746,7 @@ input {
 }
 .Apply .row .form-control{
   background-color:#ffffff;
-  margin:5px auto;
+  margin:5px 0;
 }
 
 .Apply .row label {

@@ -388,7 +388,7 @@
       min-height: 400px;
       background-color: #333;
       right:auto;
-      top:auto;
+      top:100%;
       overflow: hidden;
       position: fixed;
       bottom: 0;
@@ -402,8 +402,8 @@
         right:32%;
         width: 35%;
     }
-
-    /* #googleMap{
+/*
+    #googleMap{
       min-height: 400px;
       background-color: #333;
       right:auto;
@@ -419,9 +419,9 @@
 @media (max-width: 574px){
     .people-img{
         margin:auto;
-        top:51%;
+        top:35%;
     }
-    /* #googleMap{
+    #googleMap{
       min-height: 250px;
       background-color: #333;
       right:auto;
@@ -431,15 +431,15 @@
       bottom: 0;
       height:250px;
       width: 100%;
-    } */
+    }
 }
 
 @media (max-width: 380px){
     .people-img{
         margin:auto;
-        top:47%;
+        top:35%;
     }
-    /* #googleMap{
+    #googleMap{
       min-height: 250px;
       background-color: #333;
       right:auto;
@@ -449,7 +449,7 @@
       bottom: 0;
       height:250px;
       width: 100%;
-    } */
+    }
 }
 
 .people-img img{
@@ -457,7 +457,62 @@
     display: block;
     margin:5% 5%;
 }
+/* 지도 버튼 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #ff6600;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ff6600;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 /* editor */
 .text_table,.text_table th,.text_table td{
   border:1px solid black;

@@ -105,7 +105,7 @@
             </div>
         </div> -->
         <div class="container-fluid" style="margin-top: 20px;">
-            <%if(authUser.phoneAuthCheck){%>
+            <%if(authUser.phoneAuthCheck&&authUser.location.coordinates[0]){%>
             <div class="row">
                 <% if(interboard !== null && interboard.length!==0){ %>
                 <div class="col-md-6" style="color:orange;">
@@ -118,6 +118,16 @@
                     <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;margin-right:20px;">글 등록</button>
                 </div>
                 <%}%>
+            </div>
+            <div class="row">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <label class="switch" style="float:right;margin-right:20px;">
+                  <input type="checkbox" id="onoff" onclick="maponoff()" checked>
+                  <span class="slider round"></span>
+                </label>
+                <span id="maponoffContent" style="float:right;line-height:34px;font-weight: 700;margin-top:15px;margin-right: 10px;">지도 끄기</span>
+              </div>
             </div>
             <div class="row">
                 <% if(interboard !== null && interboard.length!==0){
@@ -261,7 +271,22 @@
             map.setCenter(marker.getPosition());
         });*/
     }
-
+    function maponoff(){
+      if(document.getElementById('onoff').checked){
+        document.getElementById('googleMap').style.display = "block";
+        var section = document.getElementById('mySection');
+        section.classList.add("w3-twothird");
+        section.classList.remove("container");
+        document.getElementById('maponoffContent').innerHTML = "지도 끄기";
+      }
+      else{
+        document.getElementById('googleMap').style.display = "none";
+        var section = document.getElementById('mySection');
+        section.classList.remove("w3-twothird");
+        section.classList.add("container");
+        document.getElementById('maponoffContent').innerHTML = "지도 켜기";
+      }
+    }
     window.onscroll = function() {myFunction()};
 
     function myFunction() {

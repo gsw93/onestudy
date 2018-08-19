@@ -170,11 +170,12 @@ module.exports = function (router, passport) {
                     if (err)
                         throw err;
                     req.session.passport.user.seller=true;
-                    if(  member.address == "" ||  member.address == null ||  member.address == undefined || (  member.address != null && typeof  member.address == "object" && !Object.keys( member.address).length ) ){
-                        res.redirect('/studentapply');
-                    } else{
-                        res.redirect('/mypage2');
-                    }
+                    res.redirect('/mypage2');
+                    // if(  member.address == "" ||  member.address == null ||  member.address == undefined || (  member.address != null && typeof  member.address == "object" && !Object.keys( member.address).length ) ){
+                    //     res.redirect('/studentapply');
+                    // } else{
+                    //     res.redirect('/mypage2');
+                    // }
                 });
 
 

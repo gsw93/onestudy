@@ -71,7 +71,7 @@
             <div class="block-cnt" style="padding:50px 0;">
               <div class="profile-img">
                 <img src="" class="profile_photo" alt="profile_photo">
-                <!--<a href="#" data-toggle="modal" data-target="#profileModify" >수정</a>-->
+                <a href="#" data-toggle="modal" data-target="#profileModify" >수정</a>
               </div>
               <div class="cnt_text">
                 <div class="row">
@@ -143,7 +143,7 @@
                         <%for (var i=0; i< authUser.mystudy.length; i++){ %>
                       <tr>
                           <td><%=i+1%></td>
-                          <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i]._id%>"><%=authUser.mystudy[i].title%></a></td>
+                          <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i].studyid%>"><%=authUser.mystudy[i].title%></a></td>
                           <td id="date[<%=i%>]"></td>
                           <script>
                           var i = new Date('<%- authUser.mystudy[i].deadline %>');
@@ -214,7 +214,7 @@
                         <%for (var i=0; i< authUser.mystudy.length; i++){ %>
                         <tr>
                             <td><%=i+1%></td>
-                            <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i]._id%>"><%=authUser.mystudy[i].title%></a></td>
+                            <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i].studyid%>"><%=authUser.mystudy[i].title%></a></td>
                             <td id="date2[<%=i%>]"></td>
                             <script>
                             var i = new Date('<%- authUser.mystudy[i].deadline %>');
@@ -266,7 +266,7 @@
     </div>
 </section>
 <div class="modal fade" role="dialog" id="profileModify">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-cnt">
         <form action="/process/profileModify" method="post" enctype="multipart/form-data">
           <div class="row form-group">
             <h4 style="margin:auto;font-weight:700;margin-bottom:20px;">사진</h4>

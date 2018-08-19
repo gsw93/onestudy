@@ -401,17 +401,18 @@
 <div class="modal fade" role="dialog" id="login" style="top: 10%;">
     <div class="modal-dialog signup-content" >
             <br><br>
-        <form action="/process/participateStudy?id=<%=board._id%>" method="post" class="form-horizontal">
+        <form action="/process/participateStudy?id=<%=board._id%>" id="studentaction" method="post" class="form-horizontal">
             <div class="form-group" style="margin:auto;">
                 <div class="real_content">
                     <h2 style="text-align: center;">간단한 자기소개</h2>
                     <p style="text-align:center; color:gray;">마스터에게 하고 싶은 말을 써주세요.</p>
                     <div class="login-set">
-                        <textarea name="selfIntroduction" rows="8" id="" style="width: 100%;"></textarea>
+                        <textarea name="selfIntroduction" rows="8" id="selfIntroduction" style="width: 100%;"></textarea>
                     </div>
                     <div class="login-set">
                         <button type="submit" class="form-control btn btn-warning" id="sign-in">스터디 참여하기</button>
                     </div>
+                    <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
                 </div>
             </div>
         </form>
@@ -456,6 +457,14 @@
       <%if(authUser.id==board.id){%>
         alert("본인은 작성하실 수 없습니다.");
         document.getElementById('commentcontents').value ="";
+        return false;
+      <%}%>
+    });
+    //본인글 본인 스터디 학생금지
+    $('form#studentaction').on('submit', function (e) {
+      <%if(authUser.id==board.id){%>
+        alert("본인은 작성하실 수 없습니다.");
+        document.getElementById('selfIntroduction').value ="";
         return false;
       <%}%>
     });
