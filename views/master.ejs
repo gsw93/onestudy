@@ -109,6 +109,7 @@
                 </ul>
             </div>
         </div>
+
         <div class="container-fluid" style="margin-top: 20px;">
             <div class="row">
                 <div class="col-md-6" style="color:orange;">
@@ -126,7 +127,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="block-cnt">
 
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
+                        <img src="<%- board[i].path %>" width="100%">
                         <ul>
                             <li class="studyNum"></li>
                         </ul>
@@ -150,8 +151,9 @@
                                 <p><% for(var n=0; n< board[i].category.length;n++){ %>
                                   <%= board[i].category[n] %> &nbsp; <% } %><br>
                                     <%= board[i].region %><br>
-                                    <%= board[i].studyTerm %>주 진행 (시간 협의)</p>
-                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studyTerm %>회)</span>
+                                    <%= board[i].deadlin %> 시작<br>
+                                    <%= board[i].studyTerm %>주 진행</p>
+                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studynum %>회)</span>
                             </div>
                         </div>
                         <div class="people-img">

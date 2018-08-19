@@ -781,6 +781,7 @@ input {
 .clients-slider .owl-nav [class*=owl-]:hover {
     background-color: transparent;
     color: #848484;
+
 }
 
 .clients-slider .owl-nav {
@@ -2659,9 +2660,20 @@ img#ad_icon{
         flex-wrap: wrap;
     }
 }
-
-@media (max-width: 768px) {
-    .store-coupon .block .media .image-content {
+.store-coupon .block .media .image-content {
+    height: 120px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .store-coupon .block .media .image-content {
+      height: 200px;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  .store-coupon .block .media .image-content {
+      height: 180px;
+      width:180px;
+  }
+    /* .store-coupon .block .media .image-content {
         -webkit-box-flex: 1;
         -ms-flex-positive: 1;
         flex-grow: 1;
@@ -2670,57 +2682,14 @@ img#ad_icon{
         -ms-flex-pack: center;
         justify-content: center;
         padding-bottom: 30px;
-    }
+    } */
 }
-
-.store-coupon .block .media .media-body {
-    margin: 0 75px;
-}
-
-.store-coupon .block .media .media-body h4 {
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-}
-
-.store-coupon .block .media .media-body ul li {
-    font-weight: bold;
-    font-size: 17px;
-    padding: 0 15px;
-    border-right: 1px solid #ebe9e9;
-}
-
-.store-coupon .block .media .media-body ul li:last-child {
-    border: none;
-}
-
-.store-coupon .block .media .media-body ul li a {
-    color: #ff8000;
-}
-
-.store-coupon .block .media .media-body p {
-    font-size: 14px;
-    line-height: 26px;
-    color: #848484;
-    letter-spacing: 0;
-    margin: 20px 0;
-}
-
-@media (max-width: 768px) {
-    .store-coupon .block .media .media-body {
-        -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        width: 100%;
-        text-align: left;
-    }
-}
-
 @media (max-width: 480px) {
-    .store-coupon .block .media .media-body {
-        margin: 0;
-    }
+  .store-coupon .block .media .image-content {
+      height: 250px;
+  }
 }
+
 
 @media (max-width: 768px) {
     .store-coupon .block .social-content {
@@ -2957,7 +2926,7 @@ article .post-slider .owl-nav [class*=owl-] {
 }
 
 article .post-slider .owl-nav [class*=owl-]:hover {
-    background-color: #f95669;
+    background-color: orange;
 }
 
 article a h3 {

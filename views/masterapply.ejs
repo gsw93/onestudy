@@ -45,7 +45,7 @@
   ===================================-->
 
     <div class="Applyform">
-      <form action="/process/addmaster" method="post">
+      <form action="/process/addmaster" method="post" enctype="multipart/form-data">
       <h1>Master Profile</h1>
       <div class="Apply">
         <div class="row form-group">
@@ -66,19 +66,18 @@
         <div class="row form-group">
           <label for="phoneNumber" class="col-lg-2 col-md-2 col-sm-2">휴대폰</label>
           <input type="text" name="phoneNumber" id="phoneNumber" class="col-lg-7 col-md-7 col-sm-7 form-control" maxlength="13" required/>
-          <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2" onclick="popup()" value="인증">
+          <input type="button" name="findAddress" class="col-lg-2 col-md-2 col-sm-2 btn" style="background-color:#b3b3b3;color:#fff;height:50px;margin:5px auto;" onclick="popup()" value="인증">
         </div>
-        <div class="form-group">
-          <label for="userImage">사진</label>
+        <div class="row form-group">
+          <label for="userImage" class="col-lg-2 col-md-2 col-sm-2">사진<small style="font-size:12px;">(선택사항)</small></label>
           <div class="input-group">
             <span class="input-group-btn">
                 <span class="btn btn-default btn-file">
-                  <input type="file" accept="image/png, image/jpeg, image/gif" id="imgInp">
+                  <input type="file" name="userfile" accept="image/png, image/jpeg, image/gif" id="imgInp">
                 </span>
             </span>
-            <input id='urlname'type="text" class="form-control" readonly>
             <img id='img-upload'/>
-        </div>
+          </div>
         </div>
         <input type="submit" name="save" value="저장&nbsp;&gt;">
       </div>

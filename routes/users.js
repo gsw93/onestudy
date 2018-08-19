@@ -5,21 +5,65 @@
 
 var mongoose = require('mongoose');
 var UserModel = mongoose.model("users");
+var MasterBoardModel = mongoose.model("masterboards");
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'public/uploads/user');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname + Date.now());
+    }
+});
+var upload = multer({ storage: storage });
 
 module.exports = function (router, passport) {
-
     router.route('/mypage').get(function (req, res) {
-        if (req.user)
-            res.render('mypage', {seller:req.session.passport.user.seller, authUser: req.user[0]});
-        else
-            res.render('login');
-    });
+      if(req.user){
+        var id = req.user[0].id;
+        res.render('mypage_student',{seller:req.session.passport.user.seller, authUser: req.user[0]});
 
-    router.route('/apply').get(function (req, res) {
+      } else{
+          res.render('login');
+      }
+    });
+    router.route('/mypage2').get(function (req, res) {
+      if(req.user){
+        var id = req.user[0].id;
+        MasterBoardModel.find({id:id},function(err,rawBoard){
+            if(err) throw err;
+            res.render('mypage_master',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+        });
+        // MasterBoardModel.find({studentList.:id},function(err,rawBoard){
+        //     if(err) throw err;
+        //     res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+        // });
+
+      } else{
+          res.render('login');
+      }
+    });
+    router.route('/process/categoryModify').post(function(req,res){
+      var id = req.user[0].id;
+      var interested = req.body.check_c;
+      console.log(interested);
+      UserModel.findOne({id:id},function(err,rawBoard){
+        if(err) throw err;
+        var myquery = {id:id};
+        var newvalue =  {$set : {interested:interested}};
+        UserModel.updateOne(myquery,newvalue,function(err,res){
+          if(err) throw err;
+          console.log('카테고리 변경');
+        })
+        res.redirect('/mypage');
+      })
+    })
+
+    router.route('/masterapply').get(function (req, res) {
         if(req.user){
-            res.render('apply', {authUser: req.user[0].nickname, authMaster:req.user[0].sellercheck});
+            res.render('masterapply', {seller:req.session.passport.user.seller, authUser: req.user[0]});
         } else{
             res.render('login');
         }
@@ -67,15 +111,36 @@ module.exports = function (router, passport) {
             }
         });
     });
+    router.route('/process/profileModify').post(upload.single('userfile'), function (req, res) {
+        console.log('/process/profileModify 호출됨.');
+        console.log(req.file);
+        var file = req.file;
 
-    router.route('/process/addmaster').post(function (req, res) {
+        console.log(req.session.passport);
+        UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
+            if (err) return res.status(500).json({error: err});
+            if (!member) {
+                return res.send('사진 등록에 실패했습니다.');
+            } else {
+                console.log(member);
+                member.photo = '/uploads/user/'+file.filename;
+                member.save(function (err) {
+                    if (err)
+                        throw err;
+                    req.session.passport.user.seller=true;
+                    res.redirect('/mypage');
+                });
+            }
+        });
+    });
+    router.route('/process/addmaster').post(upload.single('userfile'), function (req, res) {
         console.log('/process/addmaster 호출됨.');
+        console.log(req.file);
         var name = req.body.name;
         var age = req.body.age;
         var gender = req.body.gender;
-        var photo = req.body.photo;
-        var majors = req.body.majors;
-        var phone = req.body.phone;
+        var phone = req.body.phoneNumber;
+        var file = req.file;
 
         console.log(req.session.passport);
         UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
@@ -84,19 +149,34 @@ module.exports = function (router, passport) {
                 return res.send('마스터 등록에 실패했습니다.');
             } else {
                 console.log(member);
-                member.name = name;
+                if(member.name){
+                  member.name = member.name;
+                }
+                else{
+                  member.name = name;
+                }
                 member.age = age;
                 member.gender = gender;
-                member.photo = photo;
-                member.majors = majors;
+                if(  member.photo == "" ||  member.photo == null ||  member.photo == undefined || (  member.photo != null && typeof  member.photo == "object" && !Object.keys( member.photo).length ) ){
+                    member.photo = '/img/home/main_i_05.png';
+                } else{
+                    member.photo = '/uploads/user/'+file.filename;
+                }
                 member.phone = phone;
+                member.phoneAuthCheck = true;
                 member.sellercheck = true;
                 member.save(function (err) {
                     if (err)
                         throw err;
                     req.session.passport.user.seller=true;
-                    res.redirect('/');
+                    if(  member.address == "" ||  member.address == null ||  member.address == undefined || (  member.address != null && typeof  member.address == "object" && !Object.keys( member.address).length ) ){
+                        res.redirect('/studentapply');
+                    } else{
+                        res.redirect('/mypage2');
+                    }
                 });
+
+
             }
         });
     });
@@ -105,14 +185,14 @@ module.exports = function (router, passport) {
     router.route('/process/addstudent').post(function (req, res) {
         console.log('/process/addstudent 호출됨.');
         var name = req.body.name;
-        var age = req.body.age;
-        var gender = req.body.gender;
+        // var age = req.body.age;
+        // var gender = req.body.gender;
         var phone = req.body.phoneNumber;
         var address=req.body.address;
         var locationX=req.body.x;
         var locationY=req.body.y;
         var interest = req.body.interest;
-        var level = req.body.level;
+        // var level = req.body.level;
         var addressShort=req.body.siNm;
         console.log(req.session.passport);
         UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
@@ -121,13 +201,18 @@ module.exports = function (router, passport) {
                 return res.send('학생 등록에 실패했습니다.');
             } else {
                 console.log(member);
-                member.name = name;
-                member.age = age;
+                if(member.name){
+                  member.name = member.name;
+                }
+                else{
+                  member.name = name;
+                }
+                // member.age = age;
                 member.phone = phone;
-                member.gender = gender;
+                // member.gender = gender;
                 member.address=address;
                 member.interested = interest;
-                member.level = level;
+                // member.level = level;
 
                 member.addressShort=addressShort;
                 member.location={type:'Point',coordinates:[locationX,locationY]};
@@ -135,7 +220,7 @@ module.exports = function (router, passport) {
                 member.save(function (err) {
                     if (err)
                         throw err;
-                    res.redirect('/');
+                    res.redirect('/master');
                 });
             }
         });

@@ -35,6 +35,8 @@
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
 
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,6 +44,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
+        .map-top{
+            top:0;
+        }
         .modal {
             /*display: block; !* Hidden by default *!*/
             position: fixed; /* Stay in place */
@@ -79,7 +84,7 @@
 ===================================-->
 <div>
     <section class="store-coupon section w3-twothird" id="mySection">
-        <div class="category-select" style="z-index: 100; position: relative;">
+        <!-- <div class="category-select" style="z-index: 100; position: relative;">
             <div class="row selects">
                 <select class="col-lg-3 col-md-3 col-sm-6 form-control" style="height: 35px;" onchange="selectRegion1()" id="select_region">
                     <option value="지역(1)">지역(1)</option>
@@ -98,128 +103,133 @@
 
                 <input type="button" class="col-lg-2 col-md-2 col-sm-6" name="resetlist" value="검색" onclick="selectRegion()">
             </div>
-        </div>
+        </div> -->
         <div class="container-fluid" style="margin-top: 20px;">
             <%if(authUser.phoneAuthCheck){%>
             <div class="row">
+                <% if(interboard !== null && interboard.length!==0){ %>
                 <div class="col-md-6" style="color:orange;">
                     추천 마스터
                 </div>
-                <%if(seller){%>
+                <%}if(seller){
+                  if(interboard.length==0){%>
+                  <div class="col-md-6"></div><%}%>
                 <div class="col-md-6" style="color:orange;">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;margin-right:20px;">글 등록</button>
                 </div>
                 <%}%>
             </div>
             <div class="row">
-                <% if(interboard !== null){
+                <% if(interboard !== null && interboard.length!==0){
                 for (var i=0; i< interboard.length; i++){ %>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="block-cnt">
+                <div class="col-lg-3 col-md-6 col-sm-6 list-item">
+                    <a class="board_click" href="/masterView?id=<%=interboard[i]._id%>">
+                        <div class="block-cnt">
+                            <img class="master_imgBackground" src="<%-interboard[i].path[0]%>" style="margin-bottom:10px;">
+                            <ul>
+                                <li class="inter_deadlineIcon" style="display:none;left:0;float:left;"></li>
+                                <li class="inter_studyNum" style="float:right;"></li>
+                            </ul>
 
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
-                        <ul>
-                            <li class="studyNum"></li>
-                        </ul>
+                            <script type="text/javascript">
+                                var ddd = new Date('<%- interboard[i].deadline %>');
+                                var date = new Date();
+                                var x = document.getElementsByClassName("inter_deadlineIcon");
 
-                        <script type="text/javascript">
-                            var max = <%- interboard[i].maxNum %>;
+                                date.setDate(date.getDate()+7);
 
-                            if(max==1){
-                                var a = document.getElementsByClassName('studyNum');
-                                a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
-                            }
-                            else {
-                                var a = document.getElementsByClassName('studyNum');
-                                a[<%- i %>].innerHTML = "1 : <%- interboard[i].maxNum %>";
-                            }
+                                if(ddd<date){
+                                    x[<%- i%>].style.display = "block";
 
-                        </script>
-                        <div class="cnt">
-                            <div class="cnt_text">
-                                <% i+1 %>
-                                <h5><a href="/masterView?id=<%=interboard[i]._id%>"><%= interboard[i].title %></a></h5>
-                                <p><% for(var n=0; n< interboard[i].category.length;n++){ %>
-                                    <%= interboard[i].category[n] %> &nbsp; <% } %><br>
-                                    <%= interboard[i].regionShort %><br>
-                                    <%= interboard[i].studyTerm %>주 진행 (시간 협의)</p>
-                                <span id="master_term"><span id="master_money"><%= interboard[i].price %>만원</span>&nbsp;(주<%=interboard[i].studyTerm %>회)</span>
+                                    x[<%- i%>].style.fontSize = "smaller";
+                                    x[<%- i%>].style.backgroundColor = "red";
+                                    x[<%- i%>].innerHTML = "마감임박";
+                                }
+                                else if(ddd>=date){
+                                    x[<%- i%>].style.display = "block";
+                                    x[<%- i%>].style.backgroundColor = "orange";
+                                    x[<%- i%>].innerHTML = "모집중";
+                                }
+                                var max = <%- interboard[i].maxNum %>;
+
+                                if(max===1){
+                                    var a = document.getElementsByClassName('inter_studyNum');
+                                    a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
+                                }
+                                else {
+                                    var a = document.getElementsByClassName('inter_studyNum');
+                                    a[<%- i %>].innerHTML = "<%- interboard[i].minNum %> : <%- interboard[i].maxNum %>";
+                                }
+                            </script>
+                            <div class="cnt">
+                                <div class="cnt_text">
+                                    <% i+1 %>
+                                    <h5><%= interboard[i].title %></h5>
+                                    <p><% for(var n=0; n< interboard[i].category.length;n++){ %>
+                                        <%= interboard[i].category[n] %> &nbsp; <% } %><br>
+                                        <%= interboard[i].regionShort %><br>
+                                        <%= interboard[i].day %>요일 진행<br>
+                                        <%= interboard[i].studyTerm %>주 진행</p>
+                                    <span id="inter_deadline[<%=i%>]" style="font-size:12px;float:right;line-height:35px;"></span>
+                                    <span id="master_term"><span id="master_money"><%= interboard[i].price %>만원</span>&nbsp;(주<%=interboard[i].studynum %>회)</span>
+                                    <script>
+                                        var i = new Date('<%- interboard[i].deadline %>');
+                                        document.getElementById('inter_deadline[<%=i%>]').innerHTML = date_format(i);
+                                        function date_format(dateValue){
+                                            var dd = dateValue.getDate();
+                                            var mm = dateValue.getMonth()+1;
+                                            var yyyy = dateValue.getFullYear();
+
+                                            if(dd<10){
+                                                dd = '0'+dd;
+                                            }
+                                            if(mm<10){
+                                                mm = '0'+mm;
+                                            }
+                                            return mm+'/'+dd +'&nbsp;시작';
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="people-img">
+                                <img src="<%-interboard[i].masterphoto%>" style="width: 90%; height: 50px;">
                             </div>
                         </div>
-                        <div class="people-img">
-                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <% }} %>
             </div>
             <%}%>
+            <br><hr><br>
             <div class="row">
+                <%if(board !== null){%>
                 <div class="col-md-6" style="color:orange;">
-                    <%= board.length %>명의 마스터
+                    <%= board.length %>명 중 <inline id="mapcount"></inline>명의 마스터
                 </div>
+                <%}%>
                 <%if(!authUser.phoneAuthCheck){%>
                 <%if(seller){%>
-                <div class="col-md-6" style="color:orange;">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;">글 등록</button>
+                <div class="col-md-6" style="color:orange;float:right;">
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm">글 등록</button>
                 </div>
                 <%}}%>
             </div>
-            <div class="row">
-              <% if(board !== null){
-                for (var i=0; i< board.length; i++){ %>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="block-cnt">
+            <div id="items" class="row">
 
-                        <img src="https://static.pexels.com/photos/301920/pexels-photo-301920.jpeg" width="100%">
-                        <ul>
-                            <li class="studyNum"></li>
-                        </ul>
-
-                        <script type="text/javascript">
-                          var max = <%- board[i].maxNum %>;
-
-                          if(max==1){
-                            var a = document.getElementsByClassName('studyNum');
-                            a[<%- i %>].innerHTML = "1&nbsp;:&nbsp;1";
-                          }
-                          else {
-                            var a = document.getElementsByClassName('studyNum');
-                            a[<%- i %>].innerHTML = "1 : <%- board[i].maxNum %>";
-                          }
-
-                        </script>
-                        <div class="cnt">
-                            <div class="cnt_text">
-                              <% i+1 %>
-                                <h5><a href="/masterView?id=<%=board[i]._id%>"><%= board[i].title %></a></h5>
-                                <p><% for(var n=0; n< board[i].category.length;n++){ %>
-                                  <%= board[i].category[n] %> &nbsp; <% } %><br>
-                                    <%= board[i].regionShort %><br>
-                                    <%= board[i].studyTerm %>주 진행 (시간 협의)</p>
-                                <span id="master_term"><span id="master_money"><%= board[i].price %>만원</span>&nbsp;(주<%=board[i].studyTerm %>회)</span>
-                            </div>
-                        </div>
-                        <div class="people-img">
-                            <img src="http://alivecampus.com/wp-content/uploads/2013/06/shhhhh-quiet-everyone-study-wallpaper.jpg" style="width: 50px; height: 50px;">
-                        </div>
-                    </div>
-                </div>
-                <% }} %>
             </div>
         </div>
 
-        <%if(!authUser.phoneAuthCheck){%>
+        <%if(!authUser.phoneAuthCheck||!authUser.location.coordinates[0]){%>
         <div class="modal" role="dialog" id="myModal" style="display:block;">
             <div class="modal-dialog">
-                <p style="text-align:center;font-size:25px;font-weight:650;margin-top:20px;"><strong style="color:orange;">주소와 관심분야</strong>를 등록하시면 <br>가까운 위치의 관심분야에 맞는 마스터를 <br>쉽게 찾으실 수 있습니다.</p>
+                <p style="text-align:center;font-size:25px;font-weight:650;margin-top:20px;"><strong style="color:#ef6c00;">주소와 관심분야</strong>를 등록하시면 <br>가까운 위치의 관심분야에 맞는 마스터를 <br>쉽게 찾으실 수 있습니다.</p>
                 <br><br>
                 <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-primary" onclick="fade()" style="width: 100%;">다음에 등록하기</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary" onclick="location.href='/studentapply'" style="width: 100%;">등록하러 가기</button>
+                    <!-- <div class="col-md-6">
+                        <button class="btn btn-primary" onclick="fade()" style="width: 100%;background-color:#5b2900;border:none;">다음에 등록하기</button>
+                    </div> -->
+                    <div class="col-md-6" style="margin:auto;">
+                        <button class="btn btn-primary" onclick="location.href='/studentapply'" style="width: 100%;background-color:#5b2900;border:none;">등록하러 가기</button>
                     </div>
                 </div>
                 <br><br>
@@ -229,7 +239,7 @@
 
     </section>
     <%- include footer.ejs %>
-    <div id="googleMap" class="w3-sidebar w3-third" style="right: 0; top: 0;"></div>
+    <div id="googleMap" class="w3-sidebar w3-third"></div>
 
 <script>
     //07_04 add by sehyeon
@@ -250,6 +260,16 @@
             map.setZoom(17);
             map.setCenter(marker.getPosition());
         });*/
+    }
+
+    window.onscroll = function() {myFunction()};
+
+    function myFunction() {
+        if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
+            document.getElementById("googleMap").style.top = 0;
+        } else {
+            document.getElementById("googleMap").style.top = "111px";
+        }
     }
 
     function fade() {
@@ -287,6 +307,7 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR5TC1oRGXf90Q7CZck3R78M-APCvL0Qo&callback=myMap"></script>
+<script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
 <!-- JAVASCRIPTS -->
 
 <script src="plugins/jquery/jquery.min.js"></script>

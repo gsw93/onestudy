@@ -1,6 +1,6 @@
 <nav class="navbar navbar-toggleable-md main-nav bg-light" style="z-index: 100">
     <!-- Container Start -->
-    <div class="container" style="width: 95%;">
+    <div class="container" style="width: 80%;">
         <button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -30,14 +30,14 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="/master">마스터</a>
                     </li>
-                <%if(!seller){%>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/apply">마스터 신청하기</a>
-                    </li>
-                <%}%>
-                    <li class="nav-item ">
+                    <%if(!seller){%>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/masterapply">마스터 신청하기</a>
+                        </li>
+                    <%}%>
+                    <!-- <li class="nav-item ">
                         <a class="nav-link" href="/event">이벤트</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item ">
                         <a class="nav-link" href="/mypage">마이페이지</a>
                     </li>
@@ -48,9 +48,9 @@
                     <li class="nav-item">
                         <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">마스터 신청하기</button>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#login" style="color: #000;">이벤트</button>
-                    </li>
+                    </li> -->
                 <%}%>
             </ul>
         </div>

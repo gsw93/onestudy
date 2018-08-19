@@ -2,12 +2,13 @@
 var mongoose = require('mongoose');
 require('../models/database');
 var MasterBoardModel = mongoose.model("masterboards");
+var UserModel = mongoose.model("users");
 
 //주소 api 처리 부분
 module.exports = function (router) {
     //get
     router.route('/jusoPopup').get(function (req, res) {
-        res.render('juso_GSH',{inputYn:"",roadFullAddr:"",roadAddrPart1:"",roadAddrPart2:"",engAddr:"",jibunAddr:"",zipNo:"",addrDetail:"",admCd:"",rnMgtSn:"",
+        res.render('juso_GSH',{y:req.body,inputYn:"",roadFullAddr:"",roadAddrPart1:"",roadAddrPart2:"",engAddr:"",jibunAddr:"",zipNo:"",addrDetail:"",admCd:"",rnMgtSn:"",
             bdMgtSn:"",detBdNmList:"",bdNm:"",bdKdcd:"",siNm:"",sggNm:"",emdNm:"",liNm:"",rn:"",udrtYn:"",buldMnnm:"",buldSlno:"",mtYn:"",lnbrMnnm:"",lnbrSlno:"",emdNo:"",entX:"",entY:"",authUser:req.user[0].nickname, authMaster:req.user[0].sellercheck});
     });
     //post
@@ -52,6 +53,33 @@ module.exports = function (router) {
                 res.send(board);
             else
                 res.send("nothing");
+        });
+    });
+    router.post('/map_change2',function (req,res) {
+        var smallx=req.body.smallx;
+        var smally=req.body.smally;
+        var bigx=req.body.bigx;
+        var bigy=req.body.bigy;
+        MasterBoardModel.find({location: {
+                $geoWithin : {
+                    $box : [[Number(smally), Number(smallx)],[Number(bigy), Number(bigx)]]
+                }
+            }}).
+        exec(function (err,boards){
+            if(err) throw err;
+            res.send(boards);
+        });
+    });
+    router.post('/address_fix',function (req,res) {
+        var address=req.body.address;
+        var addressShort=req.body.siNm;
+        var x=req.body.x;
+        var y=req.body.y;
+        var location={type:'Point',coordinates:[x,y]};
+        UserModel.findOneAndUpdate({id:req.user[0].id},{address:address,addressShort:addressShort,location:location},function(err){
+            if(err) throw err;
+            //console.log(query);
+                res.send("clear");
         });
     });
 };

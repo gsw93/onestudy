@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>One Study - 스터디 매칭 서비스</title>
+  <title>마스터 등록</title>
+  <meta name="description" content="지금 마스터 등록하시고 20만 크레딧 받아가세요!">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="마스터 등록">
+  <meta property="og:description" content="지금 마스터 등록하시고 20만 크레딧 받아가세요!">
+  <meta property="og:image" content="img/thumbnail.png">
+  <meta property="og:url" content="https://www.onestudy.co.kr/RegisterMaster">
+  <link rel="canonical" href="https://www.onestudy.co.kr/RegisterMaster">
 
     <!-- Include jQuery lib. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -29,7 +37,7 @@
     <link href="css/temp.css" rel="stylesheet">
 
     <!-- FAVICON -->
-    <link href="img/favicon.png" rel="shortcut icon">
+    <link href="img/onestudyfavicon.png" rel="shortcut icon">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122487959-1"></script>
@@ -58,6 +66,8 @@
 
     <form action="/process/earlymaster" method="post" style="margin-top: 80px;">
           <h1>Master Profile</h1>
+          <br>
+          <h5>지금 등록시 <u>20만 크레딧</u>을 드립니다</h5>
           <div class="Apply">
             <div class="row">
               <label for="name" class="col-lg-2 col-md-2 col-sm-2">이름</label>
@@ -73,7 +83,7 @@
               <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password1" required/>
               <label for="password2" class="col-lg-2 col-md-2 col-sm-2">확인</label>
               <input type="password" name="password" class="col-lg-4 col-md-4 col-sm-10 form-control" id="password2" required/>
-              <p style="color:red;" class="col-lg-10" id="passwordRegex">숫자, 문자, 특수문자를 각 1개이상 포함하여 최소 8자리로 입력하세요.</p>
+              <p style="color:red;" class="col-lg-10" id="passwordRegex">숫자, 문자, 특수문자(@$!%^()*_#?)를 각 1개이상 포함하여 최소 8자리로 입력하세요.</p>
               <p style="color:red;" class="col-lg-10" id="passwordIncorrect">비밀번호가 일치하지 않습니다!</p>
               <p style="color:blue;" class="col-lg-10" id="passwordCorrect">비밀번호가 일치합니다.</p>
             </div>
@@ -119,6 +129,8 @@ function popup(){
   popup.document.write("<p>인증번호를 입력하세요.</p><br><div class='form-group'><input type='text' class='form-control' /required> <input type='button' value='확인'></div>");
 }
 
+
+
 function autoHypenPhone(str){
             str = str.replace(/[^0-9]/g, '');
             var tmp = '';
@@ -157,6 +169,7 @@ cellPhone.onkeyup = function(event){
 
 $(function(){
 
+
   //패스워드 정규식, 패스워드 일치여부
   $('#passwordIncorrect').hide();
   $('#passwordCorrect').hide();
@@ -165,29 +178,53 @@ $(function(){
 
   $('#password1').change(function(){
     var password1 = document.getElementById('password1').value;
-    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    var password2 = document.getElementById('password2').value;
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*_()#?&])[A-Za-z\d$@$!%*_()#?&]{8,}$/;
     if(regex.test(password1)==false){
       $('#passwordRegex').show();
+      $('#password2').val("");
+      $('#passwordCorrect').hide();
+      $('#passwordIncorrect').hide();
       document.getElementById('password2').disabled=true;
     }
-    else{
+    if(regex.test(password1)==true){
       $('#passwordRegex').hide();
       document.getElementById('password2').disabled=false;
+    }
+    if(password2!=""&&password1!=password2){
+      $('#passwordIncorrect').show();
+      $('#passwordCorrect').hide();
+        document.getElementById('password2').value = "";
+    }
+    if(password1!=""&&password1==password2){
+      $('#passwordCorrect').show();
+      $('#passwordIncorrect').hide();
+    }
+    var value = $('#password1').val();
+    if(value==""){
+      $('#passwordCorrect').hide();
+      $('#passwordIncorrect').hide();
     }
   });
 
   $('#password2').change(function(){
     var password1 = document.getElementById('password1').value;
     var password2 = document.getElementById('password2').value;
-
+    var value = $('#password2').val();
     if(password1==password2){
       $('#passwordCorrect').show();
       $('#passwordIncorrect').hide();
     }
-    else{
+    if(password2!=""&&password1!=password2){
+      document.getElementById('password2').value = "";
       $('#passwordIncorrect').show();
       $('#passwordCorrect').hide();
     }
+    else if(value==""){
+      $('#passwordCorrect').hide();
+      $('#passwordIncorrect').hide();
+    }
+
   })
 
   //이메일 정규식
@@ -205,28 +242,67 @@ $(function(){
     }
   })
 
-//나이 숫자만 입력
+//나이,휴대폰 숫자만 입력
+
   var number = document.getElementById('age');
+  var number2 = document.getElementById('phoneNumber');
+  var android = navigator.userAgent.toLowerCase();
 
-  number.onkeydown = function(e){
-    if(!((e.keyCode > 95 && e.keyCode < 106)
-      || (e.keyCode > 47 && e.keyCode < 58)
-      || (e.keyCode == 8))) {
-        alert('숫자만 입력하세요.');
-        return false;
-    }
-  }
-  //휴대폰 숫자만 입력
-    var number2 = document.getElementById('phoneNumber');
+  if(android.match(/android/g)!=null){
+    //나이 정규식
+    $('#age').change(function(){
+      var age = document.getElementById('age').value;
+      var regex = /^(\d{1,2})$/g; //숫자만
+      var regex2 = /^([0-9]*)[\.]+([0-9]*)$/; //소수점 체크
+      if(regex.test(age)==false){
+        $('#age').focus();
+        document.getElementById('age').value = "";
+        alert("올바른 형태의 나이를 작성해주세요.");
+      }
+      else if(regex2.test(age)==true){
+        $('#age').focus();
+        document.getElementById('age').value = "";
+        alert("올바른 형태의 나이를 작성해주세요.");
+      }
+    })
+  } else if (android.indexOf("iphone")>-1||android.indexOf("ipad")>-1||android.indexOf("ipod")>-1) {
+    //IOS 일때 처리
 
-    number2.onkeydown = function(e){
-      if(!((e.keyCode > 95 && e.keyCode < 106)
-        || (e.keyCode > 47 && e.keyCode < 58)
-        || (e.keyCode == 8))) {
+    number.onkeydown = function(e){
+      if(!((e.keyCode > 47 && e.keyCode < 58)|| (e.keyCode == 8))) {
           alert('숫자만 입력하세요.');
           return false;
       }
     }
+    number2.onkeydown = function(e){
+      if(!((e.keyCode > 47 && e.keyCode < 58)|| (e.keyCode == 8))) {
+          alert('숫자만 입력하세요.');
+          return false;
+      }
+    }
+
+  } else {//안드로이드, IOS 이외
+
+      number.onkeydown = function(e){
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+          || (e.keyCode > 47 && e.keyCode < 58)
+          || (e.keyCode == 8)|| (e.keyCode == 46)|| (e.keyCode == 37)|| (e.keyCode == 39))) {
+            alert('숫자만 입력하세요.');
+            return false;
+        }
+      }
+      number2.onkeydown = function(e){
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+          || (e.keyCode > 47 && e.keyCode < 58)
+          || (e.keyCode == 8)|| (e.keyCode == 46)|| (e.keyCode == 37)|| (e.keyCode == 39))) {
+            alert('숫자만 입력하세요.');
+            return false;
+        }
+      }
+    }
+
+
+
 
   //휴대폰 정규식
   $('#phoneIncorrect').hide();
@@ -236,13 +312,13 @@ $(function(){
     if(regex.test(phone)==false){
       $('#phoneIncorrect').show();
       $('#phoneNumber').focus();
+      document.getElementById('phoneNumber').value = "";
     }
     else{
       $('#phoneIncorrect').hide();
     }
   })
 })
-
 
 
 </script>

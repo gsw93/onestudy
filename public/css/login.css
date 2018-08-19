@@ -14,15 +14,6 @@
     margin: auto;
 }
 
-.login-sign-in{
-    background-color: #EEEEEE;
-    border-color: white;
-    color: black;
-    height: 35px;
-    font-size: 18px;
-    border-radius: 8px;
-}
-
 .login-set{
     margin-top:10px;
 }
@@ -36,25 +27,15 @@
     margin-top:10px;
 }
 
-.login-sign-up{
-    background-color: #EEEEEE;
-    border-color: white;
-    color: black;
-    height: 35px;
-    font-size: 18px;
-    border-radius: 8px;
+
+.input-group{
+  height: 45px;
+  margin-bottom:5px;
+}
+input[type="email"],input[type="password"],input[type="text"]{
+  height: 45px;
 }
 
-.signupfoodiy{
-    background-color: pink;
-    border-color: pink;
-    color: black;
-    height: 40px;
-    font-size: 20px;
-    border-radius: 8px;
-    margin-bottom:10px;
-    margin-top:30px;
-}
 
 .signupgoogle{
     background-color: white;
@@ -221,30 +202,14 @@
     }
 }
 
-/*.signupform {*/
-    /*margin-top: 20px;*/
-/*}*/
-#alert-messageIn{
-  display:none;
-}
-#login{
-    margin-top:40px;
-}
-
-#foodiylogo{
-    width: 250px;
-    display: block;
-    margin: auto;
-}
-
-
 .login-sign-in{
-    background-color: #EEEEEE;
+    background-color: rgb(89, 89, 89);
     border-color: white;
-    color: black;
-    height: 35px;
-    font-size: 18px;
-    border-radius: 8px;
+    color: #fff;
+    height: 45px;
+    font-size: 16px;
+    border-radius: 50px;
+    margin-bottom:7px;
 }
 
 .login-set{
@@ -256,36 +221,37 @@
 .login-set input{
     float: left;
 }
-.login-set button{
+/* .login-set button{
     margin-top:10px;
     color:#ff8000;
-}
+} */
 .login-set button:hover{
     color:#fff;
 }
-#sign-in:focus{
-    color:#fff;
-    background-color: #ff8000;
+#sign-in:focus,.sign-up:focus{
+    color:#4d4d4d;
+    background-color: #fff;
+    font-style: bold;
+    border:1px solid #4d4d4d;
 }
+
 
 .login-sign-up{
-    background-color: #EEEEEE;
+    background-color: rgb(89, 89, 89);
     border-color: white;
-    color: black;
-    height: 35px;
-    font-size: 18px;
-    border-radius: 8px;
+    color: #fff;
+    height: 45px;
+    font-size: 16px;
+    border-radius: 50px;
 }
-
-.signupfoodiy{
-    background-color: pink;
-    border-color: pink;
-    color: black;
-    height: 40px;
-    font-size: 20px;
-    border-radius: 8px;
-    margin-bottom:10px;
-    margin-top:30px;
+.sign-up{
+    margin-top: 10px;
+    background-color: rgb(89, 89, 89);
+    border-color: white;
+    color: #fff;
+    height: 45px;
+    font-size: 16px;
+    border-radius: 50px;
 }
 
 .signupgoogle{
@@ -314,6 +280,8 @@
     color: white;
     font-size: 18px;
     height: 45px;
+    margin-bottom: 5px;
+    border:none;
     border-radius: 8px;
 }
 
@@ -332,9 +300,11 @@
 }
 
 .signupkakao{
+  border:none;
     background-color: #FFE812;
     color: white;
     height: 45px;
+    margin-bottom: 5px;
     font-size: 18px;
     border-radius: 8px;
 }
@@ -355,7 +325,9 @@
     background-color: #00C73C;
     color: white;
     height: 45px;
+    margin-bottom: 5px;
     font-size: 18px;
+    border:none;
     border-radius: 8px;
 }
 

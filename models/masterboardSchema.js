@@ -10,7 +10,8 @@ var MasterBoardSchema = mongoose.Schema({
     id : String,
     title : String,
     author: String,
-    category : Array,
+    category : String,
+    day : Array,
     board_date: {type: Date, default: moment().format()},
     region : String,
     deadline : {type: Date, default: moment().format()},
@@ -19,10 +20,14 @@ var MasterBoardSchema = mongoose.Schema({
     currentNum : {type:Number, default:0},
     studyTerm : {type:Number, min:1},
     price : {type:Number,min:1,max:100},
+    studynum : Number,
     masterInfo : String,
     studyInfo : String,
     reviewstar : {type:Number,default:0},
-    path : String,
+    path : [{
+        type: String
+    }],
+    masterphoto: String,
     count : {type:Number, default:0},
     studentList : [{
         email : String,
