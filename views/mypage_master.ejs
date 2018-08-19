@@ -266,7 +266,8 @@
 
 <div class="modal fade" role="dialog" id="profileModify">
       <div class="modal-dialog">
-        <form action="/process/profileModify" method="post" enctype="multipart/form-data">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <form action="/process/profileModify" method="post" enctype="multipart/form-data" onsubmit="return modified_func(this);">
           <div class="row form-group">
             <h4 style="margin:auto;font-weight:700;margin-bottom:20px;">사진</h4>
             <div class="input-group">
@@ -302,11 +303,19 @@ function content(name,elmnt) {
 }
 document.getElementById('defaultOpen').click();
 
+function modified_func(form) {
+    var modified_profile = document.getElementById('imgInp').value;
+    if( modified_profile == "" || modified_profile == null || modified_profile == undefined || ( modified_profile != null && typeof modified_profile == "object" && !Object.keys(modified_profile).length ) ){
+        alert('변경할 프로필 사진을 등록해주세요');
+        return false;
+    }
+}
 
 //인증여부 구별
 var cert = document.getElementsByClassName('certification');
 var cert_a = document.getElementById('cert_a');
 var profile_photo = document.getElementsByClassName('profile_photo');
+
 //인증 여부에 따른 표시
 if(<%-authUser.phoneAuthCheck%>==false){
   cert[0].innerHTML = "비인증";

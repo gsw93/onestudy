@@ -157,7 +157,8 @@ module.exports = function (router, passport) {
                 }
                 member.age = age;
                 member.gender = gender;
-                if(  member.photo == "" ||  member.photo == null ||  member.photo == undefined || (  member.photo != null && typeof  member.photo == "object" && !Object.keys( member.photo).length ) ){
+                if(  file == "" ||  file == null ||  file == undefined || (  file != null && typeof  file == "object" && !Object.keys( file).length ) ){
+                    console.log('########### : ' + member.photo);
                     member.photo = '/img/home/main_i_05.png';
                 } else{
                     member.photo = '/uploads/user/'+file.filename;

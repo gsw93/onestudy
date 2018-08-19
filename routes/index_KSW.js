@@ -4,7 +4,7 @@
 
 module.exports = function (router) {
     // 홈 화면
-    router.route('/home').get(function (req, res) {
+    router.route('/').get(function (req, res) {
         if (req.user) {
             res.render('trueindex', {authUser: req.user[0], seller: req.session.passport.user.seller});
         } else {
@@ -30,12 +30,12 @@ module.exports = function (router) {
     });
 
     //이벤트 화면
-    router.route('/event').get(function (req, res) {
-        if(req.user)
-            res.render('event',{seller:req.session.passport.user.seller, authUser: req.user[0]});
-        else
-            res.render('login');
-    });
+    // router.route('/event').get(function (req, res) {
+    //     if(req.user)
+    //         res.render('event',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+    //     else
+    //         res.render('login');
+    // });
 
     //서비스 소개 화면
     // router.route('/serviceInfo').get(function (req, res) {
@@ -45,7 +45,7 @@ module.exports = function (router) {
     //         res.render('serviceInfo',{authUser: null});
     // });
 
-    router.route('/').get(function (req, res) {
+    router.route('/event').get(function (req, res) {
         res.render('index');
     });
     router.route('/RegisterMaster').get(function (req, res) {
