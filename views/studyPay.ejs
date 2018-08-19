@@ -236,16 +236,17 @@
                                     신청
                                 </div>
                                 <div class="cell" data-title="연락처">
-                                    <%=board.studentList[i].phone%>
+                                    010-XXXX-XXXX
+                                    <!--<%=board.studentList[i].phone%>-->
                                 </div>
                                 <div class="cell" data-title="크레딧">
-                                    5,000
+                                    <%=(2000+(board.price*200))%>
                                 </div>
                             </div>
                             <%}%>
                             <%}%>
                         </div>
-                        <button class="btn btn-primary col-8 col-sm-6 col-md-4" style="margin: auto; display: block; font-size: large; margin-top: 70px; margin-bottom: 50px;">결 제 ></button>
+                        <button class="btn btn-primary col-8 col-sm-6 col-md-4" data-toggle="modal" data-target="#myModal" style="margin: auto; display: block; font-size: large; margin-top: 70px; margin-bottom: 50px;">결 제 ></button>
 
                     </div>
                     <!--<div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">-->
@@ -261,6 +262,26 @@
         </div>
     </div>
     <!-- Container End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog" style="top: 150px;">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 style="text-align: center; padding: 50px 10px;"><bold><%=(2000+(board.price*200))*board.studentList.length%></bold> 크레딧이 차감됩니다.</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">뒤로가기</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='/payment3?id=<%=board._id%>'">결제하기</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
 </section>
 
 <!--============================

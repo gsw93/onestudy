@@ -235,7 +235,6 @@
                       <div class="col-lg-2 title">
                           <h5>참여 인원</h5>
                       </div>
-                      <a href="/payment?id=<%=board._id%>">
                           <div class="table">
                               <div class="row header">
                                   <div class="cell">
@@ -262,17 +261,20 @@
                                                   신청
                                               </div>
                                               <div class="cell" data-title="연락처">
-                                                  <%=board.studentList[i].phone%>
+                                                  <!--<%=board.studentList[i].phone%>-->
+                                                  010-XXXX-XXXX
                                               </div>
                                               <div class="cell" data-title="크레딧">
-                                                  5,000
+                                                  <%=(2000+(board.price*200))%>
                                               </div>
                                       </div>
                                   <%}%>
                               <%}%>
                           </div>
-                      </a>
+                      <button class="btn btn-primary col-sm-12" onclick="location.href='/payment?id=<%=board._id%>'">결제하기 ></button>
+                      <br><br><br>
                       <%}%>
+
                     <div class="col-lg-2 title">
                         <h5>Master 소개</h5>
                     </div>

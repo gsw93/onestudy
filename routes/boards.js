@@ -34,6 +34,7 @@ module.exports = function (router) {
                     "phone": req.user[0].phone,
                     "introduce": req.body.selfIntroduction
                 };
+
                 currentBoard.studentList[currentBoard.studentList.length] = student;
                 console.log(currentBoard);
                 updateStudy(req.user[0].id,req.query.id,currentBoard.title,currentBoard.deadline,currentBoard.reviewstar);
@@ -328,7 +329,19 @@ module.exports = function (router) {
 
         MasterBoardModel.findOne({_id:id},function(err,rawBoard){
             if(err) throw err;
+            console.log(rawBoard.studentList)
             res.render('studyPay',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
+        });
+
+    });
+
+    router.route('/payment3').get(function (req, res) {
+        var id = req.param('id');
+
+        MasterBoardModel.findOne({_id:id},function(err,rawBoard){
+            if(err) throw err;
+            console.log(rawBoard.studentList)
+            res.render('studyPay2',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
         });
 
     });
