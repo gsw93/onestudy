@@ -9,7 +9,7 @@ var UserModel = mongoose.model("users");
 module.exports = (new NaverStrategy({
         clientID: 'cCdRfBjCIIIPqOXYOyLq',
         clientSecret: 'AEDh4B0iGW',
-        callbackURL: "https://www.onestudy.co.kr/auth/naver/callback"
+        callbackURL: "https://wwww.onestudy.co.kr/auth/naver/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         console.log('passport의 naver 호출 됌.');
@@ -22,12 +22,14 @@ module.exports = (new NaverStrategy({
                 console.log('등록된 유저 확인');
                 return done(null, user[0]);
             } else{
+                var location={type:'Point',coordinates:[0,0]};
                 console.log('신규 유저 생성');
                 var user = new UserModel({
-                    id: profile.id,
-                    nickname: profile.displayName,
-                    provider: 'naver',
-                    naver: profile._json
+                    "id": profile.id,
+                    "nickname": profile.displayName,
+                    "location":location,
+                    "provider": 'naver',
+                    "naver": profile._json
                 });
 
                 user.save(function (err) {
