@@ -4,7 +4,7 @@
 
 module.exports = function (router) {
     // 홈 화면
-    router.route('/index2').get(function (req, res) {
+    router.route('/').get(function (req, res) {
         if (req.user) {
             res.render('index', {authUser: req.user[0], seller: req.session.passport.user.seller});
         } else {
@@ -45,7 +45,7 @@ module.exports = function (router) {
     //         res.render('serviceInfo',{authUser: null});
     // });
 
-    router.route('/').get(function (req, res) {
+    router.route('/event').get(function (req, res) {
         res.render('event_index');
     });
     router.route('/RegisterMaster').get(function (req, res) {
@@ -68,4 +68,3 @@ module.exports = function (router) {
     });
 
 };
-

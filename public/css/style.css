@@ -553,6 +553,7 @@ button {
 @media (max-width: 991px) {
     .btn-transparent{
         position: relative;
+        bottom:20px;
     }
 }
 
@@ -2659,35 +2660,6 @@ img#ad_icon{
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     }
-}
-.store-coupon .block .media .image-content {
-    height: 120px;
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .store-coupon .block .media .image-content {
-      height: 200px;
-  }
-}
-@media (min-width: 480px) and (max-width: 768px) {
-  .store-coupon .block .media .image-content {
-      height: 180px;
-      width:180px;
-  }
-    /* .store-coupon .block .media .image-content {
-        -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        width: 100%;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        padding-bottom: 30px;
-    } */
-}
-@media (max-width: 480px) {
-  .store-coupon .block .media .image-content {
-      height: 250px;
-  }
 }
 
 
