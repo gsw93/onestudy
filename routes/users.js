@@ -14,10 +14,12 @@ var storage = multer.diskStorage({
         callback(null, 'public/uploads/user');
     },
     filename: function (req, file, callback) {
-        callback(null, file.originalname + Date.now());
+        callback(null, Date.now()+file.originalname);
     }
 });
 var upload = multer({ storage: storage });
+var Thumbnail = require('thumbnail');
+var thumbnail = new Thumbnail('./public/uploads/user',  './public/uploads/userThumb');
 
 module.exports = function (router, passport) {
     router.route('/mypage').get(function (req, res) {
@@ -122,14 +124,17 @@ module.exports = function (router, passport) {
             if (!member) {
                 return res.send('사진 등록에 실패했습니다.');
             } else {
-                console.log(member);
-                member.photo = '/uploads/user/'+file.filename;
-                member.save(function (err) {
-                    if (err)
-                        throw err;
-                    req.session.passport.user.seller=true;
-                    res.redirect('/mypage');
-                });
+                thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
+                    console.log('########### : ' + member.photo);
+                    member.photo = '/uploads/userThumb/'+thumb2;
+                    console.log('########### : ' + member.photo);
+                    member.save(function (err) {
+                        if (err)
+                            throw err;
+                        req.session.passport.user.seller=true;
+                        res.redirect('/mypage');
+                    });
+                })
             }
         });
     });
@@ -158,10 +163,17 @@ module.exports = function (router, passport) {
                 member.age = age;
                 member.gender = gender;
                 if(  file == "" ||  file == null ||  file == undefined || (  file != null && typeof  file == "object" && !Object.keys( file).length ) ){
+                    thumbnail.ensureThumbnail('main_i_05.png', 130, 130, function(err, thumb1){
                     console.log('########### : ' + member.photo);
-                    member.photo = '/img/home/main_i_05.png';
+                    member.photo = '/uploads/userThumb/'+thumb1;
+                    console.log('########### : ' + member.photo);
+                    })
                 } else{
-                    member.photo = '/uploads/user/'+file.filename;
+                    thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
+                        console.log('########### : ' + member.photo);
+                        member.photo = '/uploads/userThumb/'+thumb2;
+                        console.log('########### : ' + member.photo);
+                    })
                 }
                 member.phone = phone;
                 member.phoneAuthCheck = true;
@@ -171,14 +183,7 @@ module.exports = function (router, passport) {
                         throw err;
                     req.session.passport.user.seller=true;
                     res.redirect('/completeMaster');
-                    // if(  member.address == "" ||  member.address == null ||  member.address == undefined || (  member.address != null && typeof  member.address == "object" && !Object.keys( member.address).length ) ){
-                    //     res.redirect('/studentapply');
-                    // } else{
-                    //     res.redirect('/mypage2');
-                    // }
                 });
-
-
             }
         });
     });
