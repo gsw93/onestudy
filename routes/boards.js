@@ -7,10 +7,13 @@ var mongoose = require('mongoose');
 require('../models/database');
 var MasterBoardModel = mongoose.model("masterboards");
 var UserModel = mongoose.model("users");
+var async = require('async');
 
 //파일업로드 multer
 var multer = require('multer');
 var fs = require('fs');
+var Thumbnail = require('thumbnail');
+var thumbnail = new Thumbnail('./public/uploads/board',  './public/uploads/boardThumb');
 
 module.exports = function (router) {
 
@@ -184,7 +187,7 @@ module.exports = function (router) {
             callback(null,'public/uploads/board');
         },
         filename: function (req,file,callback){
-            callback(null,file.originalname + Date.now());
+            callback(null,Date.now()+file.originalname);
         }
     });
 
@@ -196,19 +199,80 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm, callback) {
-        var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,thumb,locationX,locationY, siNm, callback) {
 
-        masterboard.save(function (err) {
-            if(err){
-                callback(err, null);
-                return;
-            }
+        var thumbnail_list = '';
+        var thumbnail_slider = '';
+        //
+        // console.log("thumb 확인해보자 ! : " + thumb.length);
+        // console.log("path 확인해보자 ! : " + path);
+        //
+        // if(thumb.length<2){
+        // thumbnail.ensureThumbnail(thumb[0], 943, 350, function(err, thumb1){
+        //     if(err) console.error(err);
+        //     console.log('첫번째 썸'+thumb1);
+        //     thumbnail_slider[0] = '/uploads/boardThumb/'+thumb1;
+        //     console.log("첫번째 슬라이더: "+thumbnail_slider[0]);
+        // });} else if(thumb.length<3){
+        // thumbnail.ensureThumbnail(thumb[0], 943, 350, function(err, thumb1){
+        //     if(err) console.error(err);
+        //     console.log('첫번째 썸'+thumb1);
+        //     thumbnail_slider[0] = '/uploads/boardThumb/'+thumb1;
+        //     console.log("첫번째 슬라이더: "+thumbnail_slider[0]);
+        //
+        //     thumbnail.ensureThumbnail(thumb[1], 943, 350, function(err, thumb2){
+        //         if(err) console.error(err);
+        //         console.log('두번째 썸'+thumb2);
+        //         thumbnail_slider[1] = '/uploads/boardThumb/'+thumb2;
+        //         console.log("두번째 슬라이더: "+thumbnail_slider[1]);
+        //     })
+        // });
+        // } else {
+        //     thumbnail.ensureThumbnail(thumb[0], 943, 350, function (err, thumb1) {
+        //         if (err) console.error(err);
+        //         console.log('첫번째 썸' + thumb1);
+        //         thumbnail_slider[0] = '/uploads/boardThumb/' + thumb1;
+        //         console.log("첫번째 슬라이더: " + thumbnail_slider[0]);
+        //
+        //         thumbnail.ensureThumbnail(thumb[1], 943, 350, function (err, thumb2) {
+        //             if (err) console.error(err);
+        //             console.log('두번째 썸' + thumb2);
+        //             thumbnail_slider[1] = '/uploads/boardThumb/' + thumb2;
+        //             console.log("두번째 슬라이더: " + thumbnail_slider[1]);
+        //
+        //             thumbnail.ensureThumbnail(thumb[2], 943, 350, function (err, thumb3) {
+        //                 if (err) console.error(err);
+        //                 console.log('세번째 썸' + thumb3);
+        //                 thumbnail_slider[2] = '/uploads/boardThumb/' + thumb3;
+        //                 console.log("세번째 슬라이더: " + thumbnail_slider[2]);
+        //             });
+        //         });
+        //     });
+        // }
 
-            console.log("게시글 추가함.");
-            callback(null, masterboard);
+        thumbnail.ensureThumbnail(thumb[0], 345, 200, function(err, thumb1){
+            thumbnail.ensureThumbnail(thumb[0], 943, 350, function(err, thumb2){
+                if(err) console.error(err);
+                thumbnail_slider = '/uploads/boardThumb/'+thumb2;
+                thumbnail_list = '/uploads/boardThumb/'+thumb1;
+
+                console.log("리스트: "+thumbnail_list);
+                console.log("슬라이더: "+thumbnail_slider);
+
+                var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"thumb":thumb,"thumbnail_list":thumbnail_list,"thumbnail_slider":thumbnail_slider,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+
+                console.log('#####check point#####');
+
+                masterboard.save(function (err) {
+                    if(err){
+                        callback(err, null);
+                        return;
+                    }
+                    console.log("게시글 추가함.");
+                    callback(null, masterboard);
+                });
+            });
         });
-
     };
 
     function addComment(id,author,contents,star_rating){
@@ -222,7 +286,8 @@ module.exports = function (router) {
           console.log('댓글 추가');
         })
       })
-    };
+    }
+
     function updateStar(id,reviewstar){
       var myquery = {_id:id};
       var newvalue = {$set : {reviewstar:reviewstar}};
@@ -284,20 +349,19 @@ module.exports = function (router) {
         var locationY=req.body.y;
         //07_15 add by sehyeon
         var siNm = req.body.siNm;
-
         var files = req.files;
 
         console.dir('#====업로드된 첫번째 파일 정보 ====#');
         console.dir(req.files);
         console.dir('#====#');
 
-
         //현재 파일 정보를 저장할 변수 선언
         var originalname ='',
             filename ='',
             mimetype = '',
             size =0,
-            path = [{}];
+            path = [{}],
+            thumb = [{}];
 
         if (Array.isArray(files)){//배열에 들어가는 경우
             console.log("배열에 들어있는 파일 갯수 : %d",files.length);
@@ -308,22 +372,24 @@ module.exports = function (router) {
                 mimetype = files[index].mimetype;
                 path[index] = '/uploads/board/'+filename;
                 size = files[index].size;
+                thumb[index] = files[index].filename;
             }
         } else {
             console.log("파일 갯수 : 1");
 
-            originalname = files[index].originalname;
-            filename = files[index].filename;
-            mimetype = files[index].mimetype;
+            originalname = files[0].originalname;
+            filename = files[0].filename;
+            mimetype = files[0].mimetype;
             path[0] = '/uploads/board/'+filename;
-            size = files[index].size;
+            size = files[0].size;
+            thumb[0] = files[0].filename;
         }
 
         console.log('현재 파일의 이미지 목록 : ' + path[0] + ', ' + path[1] + ', ' + path[2]);
-
+        console.log(files);
 
         if(connectDB!==null){
-            addMasterBoard(connectDB,id,masterphoto,title,author,category,day,region,deadline,minNum,maxNum,studyTerm,price,studynum, masterInfo, studyInfo,reviewstar,path,locationX,locationY,siNm, function(err, result){
+            addMasterBoard(connectDB,id,masterphoto,title,author,category,day,region,deadline,minNum,maxNum,studyTerm,price,studynum, masterInfo, studyInfo,reviewstar, path, thumb,locationX,locationY,siNm, function(err, result){
                 if (err) { throw err; }
 
                 if (result) {

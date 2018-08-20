@@ -436,14 +436,13 @@
         position: absolute;
         z-index: 5;
         top:-57px;
-        right:-8%;
+        right:0;
     }
     #writeBtn{
         position: absolute;
         z-index: 5;
         top: -50px;
         left: -65%;
-        height: 50px;
     }
 }
 
