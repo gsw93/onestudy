@@ -170,7 +170,7 @@ module.exports = function (router, passport) {
                     if (err)
                         throw err;
                     req.session.passport.user.seller=true;
-                    res.redirect('/mypage2');
+                    res.redirect('/completeMaster');
                     // if(  member.address == "" ||  member.address == null ||  member.address == undefined || (  member.address != null && typeof  member.address == "object" && !Object.keys( member.address).length ) ){
                     //     res.redirect('/studentapply');
                     // } else{

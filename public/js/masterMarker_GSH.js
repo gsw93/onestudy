@@ -142,11 +142,12 @@ function changeMap(bounds) {
         // img.style.height = "150px";
         // infowincontent.appendChild(img);
 
-        var infowincontent = '<div id="map-content">'+
+        var infowincontent = '<a href="/masterView?id=' + markerElem._id + '">' +
+            '<div id="map-content">'+
         '<div id="map-header">'+
         '<h5 style="font-weight:700;">'+title+'</h5><p style="font-size:15px;">-&nbsp;'
         +region+'<br>-&nbsp;'+category+'<br>-&nbsp;'+day+'</p></div>'+
-        '<div id="map-image">'+boardpic.outerHTML+'</div></div>'
+        '<div id="map-image">'+boardpic.outerHTML+'</div></div></a>'
 
 
         var markericon = {

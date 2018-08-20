@@ -717,7 +717,7 @@ input {
 }
 
 .Applyform .applycomplete{
-    height: 330px;
+    height: 165px;
 }
 
 .Applyform h1{
@@ -760,7 +760,7 @@ input {
         padding-right:10px;
     }
     .Applyform .applycomplete{
-        height: 380px;
+        height: 200px;
     }
 }
 @media (max-width: 970px) and (min-width:768px) {
@@ -770,7 +770,7 @@ input {
         padding-right:10px;
     }
     .Applyform .applycomplete{
-        height: 350px;
+        height: 200px;
     }
 }
 
@@ -786,7 +786,7 @@ input {
     width:20%;
   }
   .Applyform .applycomplete{
-      height: 400px;
+      height: 200px;
   }
 }
 /*

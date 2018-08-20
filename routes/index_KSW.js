@@ -4,12 +4,12 @@
 
 module.exports = function (router) {
     // 홈 화면
-    router.route('/').get(function (req, res) {
+    router.route('/index2').get(function (req, res) {
         if (req.user) {
-            res.render('trueindex', {authUser: req.user[0], seller: req.session.passport.user.seller});
+            res.render('index', {authUser: req.user[0], seller: req.session.passport.user.seller});
         } else {
             console.log('비회원');
-            res.render('trueindex', {authUser: null, seller: false});
+            res.render('index', {authUser: null, seller: false});
         }
     });
 
@@ -45,8 +45,8 @@ module.exports = function (router) {
     //         res.render('serviceInfo',{authUser: null});
     // });
 
-    router.route('/event').get(function (req, res) {
-        res.render('index');
+    router.route('/').get(function (req, res) {
+        res.render('event_index');
     });
     router.route('/RegisterMaster').get(function (req, res) {
         res.render('RegisterMaster');
@@ -54,9 +54,14 @@ module.exports = function (router) {
     router.route('/RegisterMaster2').get(function (req, res) {
         res.render('RegisterMaster2');
     });
-    router.route('/index2').get(function (req, res) {
-        res.render('index2');
-    });
+    // router.route('/index2').get(function (req, res) {
+    //     if (req.user) {
+    //         res.render('index2', {authUser: req.user[0], seller: req.session.passport.user.seller});
+    //     } else {
+    //         console.log('비회원');
+    //         res.render('index2', {authUser: null, seller: false});
+    //     }
+    // });
     //에러 화면
     router.route('/error').get(function (req, res) {
         res.render('error');

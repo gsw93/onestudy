@@ -422,15 +422,28 @@
         top:35%;
     }
     #googleMap{
-      min-height: 250px;
+      /*min-height: 250px;*/
       background-color: #333;
       right:auto;
       top:auto;
       overflow: hidden;
       position: fixed;
       bottom: 0;
-      height:250px;
+      /*height:250px;*/
       width: 100%;
+    }
+    #onoffBtn{
+        position: absolute;
+        z-index: 5;
+        top:-57px;
+        right:-8%;
+    }
+    #writeBtn{
+        position: absolute;
+        z-index: 5;
+        top: -50px;
+        left: -65%;
+        height: 50px;
     }
 }
 
@@ -440,14 +453,14 @@
         top:35%;
     }
     #googleMap{
-      min-height: 250px;
+      /*min-height: 400px;*/
       background-color: #333;
       right:auto;
       top:auto;
       overflow: hidden;
       position: fixed;
       bottom: 0;
-      height:250px;
+      /*height:400px;*/
       width: 100%;
     }
 }

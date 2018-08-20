@@ -368,5 +368,9 @@ module.exports = function (router) {
         res.render('priceTable',{seller:req.session.passport.user.seller, authUser: req.user[0]});
     });
 
+    router.route('/completeMaster').get(function (req, res) {
+        res.render('completeMaster',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+    });
+
     //============================ 마스터 게시글 추가 기능 끝 ============================
 };

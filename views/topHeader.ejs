@@ -12,9 +12,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">로그아웃</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/index2">서비스 안내</a>
-                    </li>
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="/index2">서비스 안내</a>-->
+                    <!--</li>-->
                 </ul>
                 <%}else{%>
                 <ul class="nav justify-content-end top-menu">
@@ -24,9 +24,9 @@
                     <li class="nav-item">
                         <button type="button" class="btn-link" data-toggle="modal" data-target="#signup" style="color: #000;">회원가입</button>
                     </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn-link" data-toggle="modal" data-target="#login" style="color: #000;">서비스 안내</button>
-                    </li>
+                    <!--<li class="nav-item">-->
+                        <!--<button type="button" class="btn-link" data-toggle="modal" data-target="#login" style="color: #000;">서비스 안내</button>-->
+                    <!--</li>-->
                 </ul>
                 <%}%>
                 <!--<li class="nav-item dropdown">
@@ -43,3 +43,94 @@
         </div>
     </div>
 </section>
+
+<!-- login modal -->
+
+<div class="modal fade" role="dialog" id="login" style="top: 10%;">
+    <div class="modal-dialog signup-content" >
+        <div class="real_content">
+            <br><br>
+            <button class="signupfacebook form-control" onclick="location.href='/auth/facebook'" id="signup-facebook">
+                <span><img src="img/fb-logo.png" alt=""></span>
+                <p style="color: white; font-size: 18px;">페이스북 로그인</p>
+            </button>
+
+            <button class="signupnaver form-control" onclick="location.href='/auth/naver'" id="signup-naver">
+                <span><img src="img/naver_logo.png" alt=""></span>
+                <p style="color: white; font-size: 18px;">네이버 로그인</p>
+            </button>
+
+            <button class="signupkakao form-control" onclick="location.href='/auth/kakao'" id="signup-kakao">
+                <span><img src="img/kakao-logo.png" alt=""></span>
+                <p style="color: white; font-size: 18px;">카카오톡 로그인</p>
+            </button>
+            <hr>
+        </div>
+
+        <form action="/process/login" method="post" class="form-horizontal">
+            <div class="form-group">
+                <div class="real_content">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="username" class="form-control input-lg" id="email" placeholder="E-mail" required>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
+                        <input type="password" name="password" class="form-control input-lg" placeholder="비밀번호" required>
+                    </div>
+
+                    <!-- <div class="login-set">
+                      <a href="">비밀번호 분실?</a><br>
+                    </div> -->
+                    <div class="login-set">
+                        <button type="submit" class="login-sign-in form-control" id="sign-in">로그인</button>
+                    </div>
+
+                    <button type="button" class="login-sign-up form-control" class="sign-up" data-dismiss="modal" data-toggle="modal" data-target="#signup">회원가입</button>
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>
+
+<!-- register modal -->
+
+<div class="modal fade" role="dialog" id="signup" style="top: 10%;">
+    <div class="modal-dialog signup-content">
+        <br><br>
+        <form action="/process/register" method="post" class="form-horizontal">
+
+            <div class="form-group">
+                <img src="" alt="" style="width: 250px; display: block; margin: auto;">
+                <div class="real_content">
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input type="email" class="form-control" name="username" id="email2" placeholder="E-mail" required>
+                        <!-- <span class="input-group-addon login-button"><a href="" id="nickname_link"></a></span> -->
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
+                        <input type="password" class="form-control" name="password" id="password1" placeholder="비밀번호" required>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="material-icons" style="font-size:16px">lock</i></span>
+                        <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인" required>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="nickname" id="nick_name" placeholder="닉네임" maxlength="8" required>
+                        <!-- <span class="input-group-addon login-button"><a href="" id="nickname_link"></a></span> -->
+                    </div>
+
+                    <button type="submit" class="sign-up form-control">회원가입</button>
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>

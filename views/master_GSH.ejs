@@ -114,20 +114,18 @@
                 <%}if(seller){
                   if(interboard.length==0){%>
                   <div class="col-md-6"></div><%}%>
-                <div class="col-md-6" style="color:orange;">
+                <div class="col-md-6" style="color:orange;" id="writeBtn">
                     <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;margin-right:20px;">글 등록</button>
                 </div>
                 <%}%>
-            </div>
-            <div class="row">
-              <div class="col-md-6"></div>
-              <div class="col-md-6">
-                <label class="switch" style="float:right;margin-right:20px;">
-                  <input type="checkbox" id="onoff" onclick="maponoff()" checked>
-                  <span class="slider round"></span>
-                </label>
-                <span id="maponoffContent" style="float:right;line-height:34px;font-weight: 700;margin-top:15px;margin-right: 10px;">지도 끄기</span>
-              </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" id="onoffBtn">
+                    <label class="switch" style="float:right;margin-right:20px;">
+                        <input type="checkbox" id="onoff" onclick="maponoff()" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="maponoffContent" style="float:right;line-height:34px;font-weight: 900;margin-top:15px;margin-right: 10px;">지도 끄기</span>
+                </div>
             </div>
             <div class="row">
                 <% if(interboard !== null && interboard.length!==0){
