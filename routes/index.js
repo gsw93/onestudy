@@ -61,5 +61,8 @@ module.exports = function (router) {
     router.route('/error').get(function (req, res) {
         res.render('error');
     });
-
+    // 이용약관
+    router.route('/Accessterms').get(function (req, res) {
+        res.render('Accessterms');
+    });
 };

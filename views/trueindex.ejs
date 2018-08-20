@@ -285,7 +285,6 @@
 </div>
 
 <!-- register modal -->
-
 <div class="modal fade" role="dialog" id="signup" style="top: 10%;">
   <div class="modal-dialog signup-content">
     <br><br>
@@ -370,6 +369,7 @@ $(function(){
         alert("비밀번호가 일치하지 않습니다!");
         document.getElementById('password2').value = "";
       }
+
       var value = $('#password1').val();
       if(value==""){
         $('#passwordCorrect').hide();

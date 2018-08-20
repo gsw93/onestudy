@@ -115,7 +115,7 @@
                   if(interboard.length==0){%>
                   <div class="col-md-6"></div><%}%>
                 <div class="col-md-6" style="color:orange;" id="writeBtn">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;background-color:#ff6600;border:none;margin-right:20px;">글 등록</button>
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;width:150px;border:none;margin-right:20px;">글 등록</button>
                 </div>
                 <%}%>
                 <!--<div class="col-md-6"></div>-->
@@ -212,7 +212,7 @@
             <div class="row">
                 <%if(board !== null){%>
                 <div class="col-md-6" style="color:orange;">
-                    <%= board.length %>명 중 <inline id="mapcount"></inline>명의 마스터
+                    전체 <%= board.length %>개 중 <inline id="mapcount"></inline>개의 스터디가 검색되었습니다.
                 </div>
                 <%}%>
                 <%if(!authUser.phoneAuthCheck){%>
