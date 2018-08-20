@@ -513,15 +513,14 @@
     #onoffBtn{
         position: absolute;
         z-index: 5;
-        top:-57px;
-        right:-8%;
+        top:-52px;
+        right:-5%;
     }
     #writeBtn{
         position: absolute;
         z-index: 5;
-        top: -50px;
-        left: -65%;
-        height: 50px;
+        top: -45px;
+        left: -45%;
     }
 }
 
