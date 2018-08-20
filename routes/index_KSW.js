@@ -68,11 +68,21 @@ module.exports = function (router) {
     });
     // 이용약관
     router.route('/Accessterms').get(function (req, res) {
+      if(req.user){
         res.render('Accessterms',{authUser: req.user[0], seller: req.session.passport.user.seller});
+      }
+        else{
+          res.render('login');
+        }
     });
     // 개인정보처리방침
     router.route('/PersonalData').get(function (req, res) {
+      if(req.user){
         res.render('PersonalData',{authUser: req.user[0], seller: req.session.passport.user.seller});
+      }
+        else{
+          res.render('login');
+        }
     });
 
 };
