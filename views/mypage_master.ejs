@@ -149,8 +149,8 @@
                   <tr>
                       <td><%=i+1%></td>
                       <td colspan="2"><a href="/payment?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
-                      <td style="text-align:right;" id="date<%=i%>"></td>
-                      <td>
+                      <td style="text-align:right;width:100px;" id="date<%=i%>"></td>
+                      <td style="width:80px;">
                         <div class="study_state"></div>
                       </td>
                       <script>
@@ -205,7 +205,7 @@
           <%}%>
           <!-- 스터디 관리 끝 -->
           <!-- 결제내역  -->
-          <div class="col-lg-6 col-md-12 col-sm-12">
+          <!-- <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
               <div class="cnt_title">
                   <h4>결제 내역</h4>
@@ -255,7 +255,7 @@
                   </ul>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- 결제내역 끝 -->
         </div>
       </div>

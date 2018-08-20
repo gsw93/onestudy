@@ -191,7 +191,7 @@
                               </div>
                               <div class="row">
                                   <label class="col-lg-2 darktext" for="deadline">시작 날짜</label>
-                                  <input type="text" class="col-lg-2" name="deadline" id="datePicker" value="<%=board.deadline%>" style="z-index:50;" placeholder="달력" required>
+                                  <input type="text" class="col-lg-2" name="deadline" id="datePicker" style="z-index:50;" placeholder="달력" required>
                                   <label for="" class="col-lg-2 darktext">횟수</label>
                                   <input type="number" class="col-lg-2" name="studynum" id="studynum" value="<%=board.studynum%>" min="1" max="7" style="width:150px;" required><span style="margin:auto 5px;">회(주)</span>
                               </div>
@@ -435,20 +435,21 @@
                             return false;
                           }
                         }
+                        var deadline = new Date('<%=board.deadline%>');
+                        document.getElementById('datePicker').value = date_format(deadline);
+                        function date_format(dateValue){
+                          var dd = dateValue.getDate();
+                          var mm = dateValue.getMonth()+1;
+                          var yyyy = dateValue.getFullYear();
 
-                        // function date_format(dateValue){
-                        //   var dd = dateValue.getDate();
-                        //   var mm = dateValue.getMonth()+1;
-                        //   var yyyy = dateValue.getFullYear();
-                        //
-                        //   if(dd<10){
-                        //     dd = '0'+dd;
-                        //   }
-                        //   if(mm<10){
-                        //     mm = '0'+mm;
-                        //   }
-                        //   return yyyy+'-'+mm+'-'+dd;
-                        // }
+                          if(dd<10){
+                            dd = '0'+dd;
+                          }
+                          if(mm<10){
+                            mm = '0'+mm;
+                          }
+                          return yyyy+'-'+mm+'-'+dd;
+                        }
 
                         function readURL(input) {
                            if (input.files && input.files[0]) {

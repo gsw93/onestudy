@@ -66,5 +66,13 @@ module.exports = function (router) {
     router.route('/error').get(function (req, res) {
         res.render('error');
     });
+    // 이용약관
+    router.route('/Accessterms').get(function (req, res) {
+        res.render('Accessterms',{authUser: req.user[0], seller: req.session.passport.user.seller});
+    });
+    // 개인정보처리방침
+    router.route('/PersonalData').get(function (req, res) {
+        res.render('PersonalData',{authUser: req.user[0], seller: req.session.passport.user.seller});
+    });
 
 };
