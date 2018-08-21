@@ -37,72 +37,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <style>
-        .table {
-            margin: 0 0 40px 0;
-            width: 100%;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            display: table;
-        }
-        @media screen and (max-width: 580px) {
-            .table {
-                display: block;
-            }
-        }
 
-        .table .row {
-            display: table-row;
-            background: #f6f6f6;
-        }
-        .table .row:nth-of-type(odd) {
-            background: #e9e9e9;
-        }
-        .table .row.header {
-            font-weight: 900;
-            color: #ffffff;
-            background: #ff751a;
-        }
-
-        @media screen and (max-width: 580px) {
-            .table .row {
-                padding: 14px 0 7px;
-                display: block;
-            }
-            .table .row.header {
-                padding: 0;
-                height: 6px;
-                display: none;
-            }
-            .table .row.header .cell {
-                display: none;
-            }
-            .table .row .cell {
-                margin-bottom: 10px;
-            }
-            .table .row .cell:before {
-                margin-bottom: 3px;
-                content: attr(data-title);
-                min-width: 98px;
-                font-size: 10px;
-                line-height: 10px;
-                font-weight: bold;
-                text-transform: uppercase;
-                color: #969696;
-                display: block;
-            }
-        }
-
-        .table .cell {
-            padding: 6px 12px;
-            display: table-cell;
-        }
-        @media screen and (max-width: 580px) {
-            .table .cell {
-                padding: 2px 16px;
-                display: block;
-            }
-        }
-    </style>
 </head>
 
 <body class="body-wrapper">
@@ -200,54 +135,52 @@
                         <div class="col-lg-2 title">
                             <h5>나의 크레딧</h5>
                         </div>
-                        <div class="col-lg-10 block" style="margin: 0;">
-                            <h1 style="color: #ff751a; text-align: center; margin-top: 60px;">650,000&nbsp;<small style="font-size: 15px; color: gray;">크레딧</small></h1>
+                        <div class="col-lg-10 block">
+                            <h1 style="color: #ff751a; text-align: center; margin-top: 60px;"><%=authUser.credit%>&nbsp;<small style="font-size: 15px; color: gray;">크레딧</small></h1>
                             <br>
                             <button class="btn col-8 col-sm-6 col-md-4" onclick="location.href='/payment2'" style="margin: auto; display: block; background: gray; color: #fefefe;">크레딧 충전</button>
+                            <p style="text-align: center;color:#666;margin-top:10px;">* 이벤트 기간에는 무료입니다.</p>
                         </div>
 
                         <div class="col-lg-2 title">
                             <h5>결제</h5>
                         </div>
 
-                        <div class="table">
-                            <div class="row header">
-                                <div class="cell">
-                                    이름
-                                </div>
-                                <div class="cell">
-                                    상태
-                                </div>
-                                <div class="cell">
-                                    연락처
-                                </div>
-                                <div class="cell">
-                                    크레딧
-                                </div>
-                            </div>
-
-                            <%if(board.studentList.length){%>
-                            <%for (var i=0; i< board.studentList.length; i++){%>
-                            <div class="row">
-                                <div class="cell" data-title="이름">
-                                    <%=board.studentList[i].name%>
-                                </div>
-                                <div class="cell" data-title="상태">
-                                    신청
-                                </div>
-                                <div class="cell" data-title="연락처">
-                                    010-XXXX-XXXX
-                                    <!--<%=board.studentList[i].phone%>-->
-                                </div>
-                                <div class="cell" data-title="크레딧">
-                                    <%=(2000+(board.price*200))%>
-                                </div>
-                            </div>
-                            <%}%>
-                            <%}%>
+                        <div class="col-lg-10 block">
+                          <table class="table applypeople">
+                            <thead>
+                              <tr>
+                                <th>이름</th>
+                                <th>상태</th>
+                                <th>연락처</th>
+                                <th>크래딧</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <%if(board.studentList.length){%>
+                                  <%for (var i=0; i< board.studentList.length; i++){%>
+                              <tr>
+                                <td id="name"></td>
+                                <script type="text/javascript">
+                                  var name = "<%=board.studentList[i].name%>";
+                                  document.getElementById('name').innerHTML = name.substr(0,1) +"XX";
+                                </script>
+                                <%if(!board.studentList[i].statue){%>
+                                  <td>신청</td>
+                                  <td>010-XXXX-XXXX</td>
+                                  <td><%=(2000+(board.price*200))%></td>
+                                <%} else{%>
+                                  <td>결제완료</td>
+                                  <td><%=board.studentList[i].phone%></td>
+                                  <td style="text-decoration: line-through;color:#808080;"><%=(2000+(board.price*200))%></td>
+                                <%}%>
+                              </tr>
+                                  <%}%>
+                              <%}%>
+                            </tbody>
+                          </table>
+                          <button class="btn btn-primary col-sm-3 paybtn" onclick="location.href='/payment3?id=<%=board._id%>'">결제하기 ></button>
                         </div>
-                        <button class="btn btn-primary col-8 col-sm-6 col-md-4" data-toggle="modal" data-target="#myModal" style="margin: auto; display: block; font-size: large; margin-top: 70px; margin-bottom: 50px;">결 제 ></button>
-
                     </div>
                     <!--<div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">-->
                         <!--<h5 style="margin:0;border:1px solid brown;border-radius: 5px 20px; background-color:brown;color:white;line-height: 50px;vertical-align: middle;">-->
@@ -306,4 +239,3 @@
 </body>
 
 </html>
-

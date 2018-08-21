@@ -30,7 +30,7 @@
     <!-- CUSTOM CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link href="css/temp.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
@@ -108,19 +108,19 @@
             <%if(authUser.phoneAuthCheck&&authUser.location.coordinates[0]){%>
             <div class="row">
                 <% if(interboard !== null && interboard.length!==0){ %>
-                <div class="col-md-6" style="color:orange;">
+                <div class="col-md-6" style="color:orange;" id="recommendmaster">
                     추천 마스터
                 </div>
                 <%}if(seller){
                   if(interboard.length==0){%>
                   <div class="col-md-6"></div><%}%>
-                <div class="col-md-6" style="color:orange;" id="writeBtn">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;width:150px;border:none;margin-right:20px;">글 등록</button>
+                <div class="col-md-6" id="writeBtn">
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" id="writeBtnstyle">글 등록</button>
                 </div>
                 <%}%>
                 <!--<div class="col-md-6"></div>-->
                 <div class="col-md-12" id="onoffBtn">
-                    <label class="switch" style="float:right;margin-right:20px;">
+                    <label class="switch" style="float:right;margin-right:20px;margin-top: 15px;">
                         <input type="checkbox" id="onoff" onclick="maponoff()" checked>
                         <span class="slider round"></span>
                     </label>
@@ -143,15 +143,21 @@
                                 var ddd = new Date('<%- interboard[i].deadline %>');
                                 var date = new Date();
                                 var x = document.getElementsByClassName("inter_deadlineIcon");
-
+                                var today = new Date(); //오늘
+                                var term = new Date('<%- interboard[i].deadline %>'); // 스터기기간
                                 date.setDate(date.getDate()+7);
-
-                                if(ddd<date){
+                                term.setDate(term.getDate()+(<%=interboard[i].studyTerm%>*7));
+                                if (today<=ddd&& ddd < date) {
                                     x[<%- i%>].style.display = "block";
-
                                     x[<%- i%>].style.fontSize = "smaller";
                                     x[<%- i%>].style.backgroundColor = "red";
                                     x[<%- i%>].innerHTML = "마감임박";
+                                }
+                                else if(term<today){
+                                  x[<%- i%>].style.display = "block";
+                                  x[<%- i%>].style.fontSize = "smaller";
+                                  x[<%- i%>].style.backgroundColor = " #a6a6a6";
+                                  x[<%- i%>].innerHTML = "종료";
                                 }
                                 else if(ddd>=date){
                                     x[<%- i%>].style.display = "block";
@@ -200,7 +206,7 @@
                                 </div>
                             </div>
                             <div class="people-img">
-                                <img src="<%-interboard[i].masterphoto%>" style="width: 90%; height: 50px;">
+                                <img src="<%-interboard[i].masterphoto%>" class="master_img">
                             </div>
                         </div>
                     </a>
@@ -259,7 +265,22 @@
         //var marker = new google.maps.Marker({position:myCenter});
         var mapOptions = {
             center: myCenter,
-            zoom: 14
+            zoom: 14,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.BOTTOM_CENTER
+            },
+            zoomControl: true,
+            scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            },
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: google.maps.ControlPosition.LEFT_BOTTOM
+            },
         };
         map = new google.maps.Map(mapCanvas, mapOptions);
         //marker.setMap(map);
