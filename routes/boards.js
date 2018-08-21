@@ -208,20 +208,20 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,file,locationX,locationY, siNm, callback) {
+    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,filename,originalname,locationX,locationY, siNm, callback) {
 
         var thumbnail_list = '';
 
-        console.log('여기까지 나오나 ?' + path);
-
-        thumbnail.ensureThumbnail(file.filename, 345, 200, function(err, thumb1){
+        thumbnail.ensureThumbnail(filename, 345, 200, function(err, thumb1){
             if(err) console.error(err);
             thumbnail_list = '/uploads/boardThumb/'+thumb1;
 
             console.log("리스트: "+thumbnail_list);
             console.log("슬라이더: "+path);
+            console.log("filename: "+filename);
+            console.log("originalname: "+originalname);
 
-            var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"thumbnail_list":thumbnail_list,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+            var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"originalname":originalname,"thumbnail_list":thumbnail_list,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
 
             console.log('#####check point#####');
 
@@ -235,15 +235,7 @@ module.exports = function (router) {
             });
         });
     };
-    function modifyMasterBoard(id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm){
-      var myquery = {id:id};
-      var newvalue = {$set : {masterphoto: masterphoto, title: title, author: author,category:category,day:day, region: region, deadline:deadline, minNum:minNum,maxNum:maxNum,studyTerm:studyTerm,price:price,studynum:studynum,masterInfo:masterInfo, studyInfo: studyInfo,reviewstar:reviewstar,path:path,location:{type:'Point',coordinates:[locationX,locationY]}, regionShort:siNm}};
-      console.log(newvalue);
-      MasterBoardModel.updateOne(myquery,newvalue,function(err,res){
-        if(err) throw err;
-        console.log('게시글 변경');
-      })
-    }
+
     function addComment(id,author,contents,star_rating){
       MasterBoardModel.findOne({_id:id},function(err,rawBoard){
         if (err) {
@@ -288,7 +280,6 @@ module.exports = function (router) {
       })
     });
 
-
     router.route('/process/addboard').post(upload.array('photo',3), function (req, res) {
         console.log('/process/addboard 호출됨.');
         console.log(req.user);
@@ -321,9 +312,10 @@ module.exports = function (router) {
         console.dir(req.files);
         console.dir('#====#');
 
+
         //현재 파일 정보를 저장할 변수 선언
-        var originalname = '',
-            filename = '',
+        var originalname = [{}],
+            filename = [{}],
             mimetype = '',
             size = 0,
             path = [{}];
@@ -334,23 +326,22 @@ module.exports = function (router) {
         var thumbnail_func = function (index) {
             thumbnail.ensureThumbnail(files[index].filename, 943, 350, function (err, thumb) {
                 path[index] = '/uploads/boardThumb/' + thumb;
-                console.log('현재 파일의 이미지 목록 : ' + path[index]);
             });
         };
 
         for (var index = 0; index < files.length; index++) {
-            originalname = files[index].originalname;
-            filename = files[index].filename;
+            originalname[index] = files[index].originalname;
+            filename[index] = files[index].filename;
             mimetype = files[index].mimetype;
             thumbnail_func(index);
             size = files[index].size;
         }
-
         setTimeout(function () {
-            console.log('현재 파일의 이미지 목록2 : ' + path[0] + ', ' + path[1] + ', ' + path[2]);
-
+            console.log('@@@@@@@@@@@@@@@'+filename);
+            console.log('@@@@@@@@@@@@@@@'+originalname);
+            console.log('@@@@@@@@@@@@@@@'+path);
             if (connectDB !== null) {
-                addMasterBoard(connectDB, id, masterphoto, title, author, category, day, region, deadline, minNum, maxNum, studyTerm, price, studynum, masterInfo, studyInfo, reviewstar, path, files[0], locationX, locationY, siNm, function (err, result) {
+                addMasterBoard(connectDB, id, masterphoto, title, author, category, day, region, deadline, minNum, maxNum, studyTerm, price, studynum, masterInfo, studyInfo, reviewstar, path, filename[0], originalname,locationX, locationY, siNm, function (err, result) {
                     if (err) {
                         throw err;
                     }
@@ -371,6 +362,16 @@ module.exports = function (router) {
             }
         }, 500);
     });
+
+    function modifyMasterBoard(id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,locationX,locationY, siNm){
+        var myquery = {id:id};
+        var newvalue = {$set : {masterphoto: masterphoto, title: title, author: author,category:category,day:day, region: region, deadline:deadline, minNum:minNum,maxNum:maxNum,studyTerm:studyTerm,price:price,studynum:studynum,masterInfo:masterInfo, studyInfo: studyInfo,reviewstar:reviewstar,path:path,location:{type:'Point',coordinates:[locationX,locationY]}, regionShort:siNm}};
+        console.log(newvalue);
+        MasterBoardModel.updateOne(myquery,newvalue,function(err,res){
+            if(err) throw err;
+            console.log('게시글 변경');
+        })
+    }
 
     router.route('/process/ModifywriteMaster').post(upload.array('photo',3), function (req, res) {
         console.log('/process/ModifywriteMaster 호출됨.');
