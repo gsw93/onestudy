@@ -27,11 +27,7 @@ var MasterBoardSchema = mongoose.Schema({
     path : [{
         type: String
     }],
-    thumb : [{
-        type: String
-    }],
     thumbnail_list : String,
-    thumbnail_slider : String,
     masterphoto: String,
     count : {type:Number, default:0},
     studentList : [{
