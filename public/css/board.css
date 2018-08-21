@@ -363,13 +363,16 @@
 
 .people-img{
     border-radius: 50%;
-    width: 25%;
+    width: 60px;
     background-color: white;
     position: absolute;
     right:37%;
     top:35%;
 }
-
+.master_img{
+  height: 50px;
+  width:50px;
+}
 .board_click:hover{
     text-decoration: none;
 }
@@ -392,6 +395,9 @@
   text-align:left;
   color:rgb(128,128,128);
 }
+#mySection{
+  min-height: 670px;
+}
 @media (min-width: 1200px) and (max-width: 1450px) {
     .master_imgBackground{
       width:100%;
@@ -406,7 +412,6 @@
     .people-img {
         top:22%;
         right:32%;
-        width: 35%;
     }
 
     .cnt{
@@ -415,11 +420,16 @@
     #map-content{
       width:200px;
     }
+
+
 }
 @media (min-width: 992px) and (max-width: 1200px) {
     .block-cnt ul li{
         width: 60px;
         padding:3px;
+    }
+    #mySection{
+      min-height: 1050px;
     }
     #map-content{
       width:200px;
@@ -427,7 +437,6 @@
     .people-img {
         top:22%;
         right:32%;
-        width: 35%;
     }
     .cnt_text #master_term{
         float:right;
@@ -478,7 +487,6 @@
 @media (min-width: 575px) and (max-width: 767px){
     .people-img {
         right:32%;
-        width: 35%;
     }
 /*
     #googleMap{
@@ -497,7 +505,12 @@
 @media (max-width: 574px){
     .people-img{
         margin:auto;
-        top:35%;
+        top:32%;
+        width:80px;
+    }
+    .master_img{
+      height: 70px;
+      width:70px;
     }
     #googleMap{
       /*min-height: 250px;*/
@@ -528,6 +541,11 @@
     .people-img{
         margin:auto;
         top:35%;
+        width:70px;
+    }
+    .master_img{
+      height: 60px;
+      width:60px;
     }
     #googleMap{
       /*min-height: 400px;*/
@@ -545,7 +563,7 @@
 .people-img img{
     border-radius: 50%;
     display: block;
-    margin:5% 5%;
+    margin:5px 5px;
 }
 /* 지도 버튼 */
 .switch {
