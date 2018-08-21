@@ -23,7 +23,34 @@ nav .container a#temp_logo{
   color:#fff;
   font-size:18px;
 }
+.navbar-toggleable-md > .container {
+    width:80%;
 
+}
+@media (max-width: 480px) {
+    .navbar-toggleable-md > .container {
+        padding-left: 25px;
+        padding-right: 25px;
+        width:95%;
+        margin:auto;
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 768px) {
+    .main-nav .navbar-nav .nav-item .nav-link {
+        padding-left: 0px;
+        padding-right: 09px;
+        text-align: center;
+        color:#fff;
+    }
+
+    .main-nav{
+        padding-bottom: 0;
+    }
+    #navbarNavDropdown{
+      background-color: #de7b26;
+    }
+}
 /*advantage section*/
 .best-deal .advantage2{
     text-align: center;

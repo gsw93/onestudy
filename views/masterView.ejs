@@ -40,6 +40,7 @@
     <link href="css/board.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
+    <link href="css/temp.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
@@ -190,12 +191,22 @@
                           <tbody>
                             <%if(board.studentList.length){%>
                                 <%for (var i=0; i< board.studentList.length; i++){%>
-                            <tr>
-                              <td><%=board.studentList[i].name%></td>
-                              <td>신청</td>
-                              <td>010-XXXX-XXXX</td>
-                              <td><%=(2000+(board.price*200))%></td>
-                            </tr>
+                                  <tr>
+                                    <td id="name"></td>
+                                    <script type="text/javascript">
+                                      var name = "<%=board.studentList[i].name%>";
+                                      document.getElementById('name').innerHTML = name.substr(0,1) +"XX";
+                                    </script>
+                                    <%if(!board.studentList[i].statue){%>
+                                      <td>신청</td>
+                                      <td>010-XXXX-XXXX</td>
+                                      <td><%=(2000+(board.price*200))%></td>
+                                    <%} else{%>
+                                      <td>결제완료</td>
+                                      <td><%=board.studentList[i].phone%></td>
+                                      <td style="text-decoration: line-through;color:#808080;"><%=(2000+(board.price*200))%></td>
+                                    <%}%>
+                                  </tr>
                                 <%}%>
                             <%}%>
                           </tbody>

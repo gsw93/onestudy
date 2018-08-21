@@ -747,6 +747,15 @@ ul.pagination .active a {
     .main-nav .navbar-nav .nav-item .nav-link {
         padding-left: 0px;
         padding-right: 09px;
+        text-align: center;
+        color:#fff;
+    }
+    .main-nav{
+        padding-bottom: 0;
+    }
+    #navbarNavDropdown{
+      margin-top: 10px;
+      background-color: #de7b26;
     }
 }
 
@@ -898,13 +907,16 @@ ul.pagination .active a {
     padding: 10px 60px 10px 10px;
     text-transform: capitalize;
 }
-
+.navbar-toggleable-md > .container {
+    width:80%;
+}
 @media (max-width: 480px) {
     .navbar-toggleable-md > .container {
         margin-right: 0;
         margin-left: 0;
         padding-left: 25px;
         padding-right: 25px;
+        width:95%;
     }
 }
 

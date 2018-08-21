@@ -25,7 +25,7 @@ var UserSchema = new mongoose.Schema({
     phone: {type: String},
     address: {type: String},
     interested: {type: String}, // 관심분야
-    credit: {type: Number},
+    credit: {type: Number,default:0},
     mystudy : [{
       studyid : {type:String},
       title : String,

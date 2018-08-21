@@ -30,7 +30,7 @@
     <!-- CUSTOM CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link href="css/temp.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/favicon.png" rel="shortcut icon">
@@ -120,7 +120,7 @@
                 <%}%>
                 <!--<div class="col-md-6"></div>-->
                 <div class="col-md-12" id="onoffBtn">
-                    <label class="switch" style="float:right;margin-right:20px;">
+                    <label class="switch" style="float:right;margin-right:20px;margin-top: 15px;">
                         <input type="checkbox" id="onoff" onclick="maponoff()" checked>
                         <span class="slider round"></span>
                     </label>
@@ -143,15 +143,21 @@
                                 var ddd = new Date('<%- interboard[i].deadline %>');
                                 var date = new Date();
                                 var x = document.getElementsByClassName("inter_deadlineIcon");
-
+                                var today = new Date(); //오늘
+                                var term = new Date('<%- interboard[i].deadline %>'); // 스터기기간
                                 date.setDate(date.getDate()+7);
-
-                                if(ddd<date){
+                                term.setDate(term.getDate()+(<%=interboard[i].studyTerm%>*7));
+                                if (today<=ddd&& ddd < date) {
                                     x[<%- i%>].style.display = "block";
-
                                     x[<%- i%>].style.fontSize = "smaller";
                                     x[<%- i%>].style.backgroundColor = "red";
                                     x[<%- i%>].innerHTML = "마감임박";
+                                }
+                                else if(term<today){
+                                  x[<%- i%>].style.display = "block";
+                                  x[<%- i%>].style.fontSize = "smaller";
+                                  x[<%- i%>].style.backgroundColor = " #a6a6a6";
+                                  x[<%- i%>].innerHTML = "종료";
                                 }
                                 else if(ddd>=date){
                                     x[<%- i%>].style.display = "block";

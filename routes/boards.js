@@ -469,7 +469,7 @@ module.exports = function (router) {
         });
 
     });
-
+    //미결제 중인 학생만 결제
     router.route('/payment3').get(function (req, res) {
         var id = req.param('id');
 
