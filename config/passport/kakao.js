@@ -22,12 +22,14 @@ module.exports = (new KakaoStrategy({
                 console.log('등록된 유저 확인');
                 return done(null, user[0]);
             } else{
+                var location={type:'Point',coordinates:[0,0]};
                 console.log('신규 유저 생성');
                 var user = new UserModel({
-                    id: profile.id,
-                    nickname: profile.displayName,
-                    provider: 'kakao',
-                    kakao: profile._json
+                    "id": profile.id,
+                    "nickname": profile.displayName,
+                    "location":location,
+                    "provider": 'kakao',
+                    "kakao": profile._json
                 });
 
                 user.save(function (err) {
