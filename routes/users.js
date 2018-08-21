@@ -163,11 +163,7 @@ module.exports = function (router, passport) {
                 member.age = age;
                 member.gender = gender;
                 if(  file == "" ||  file == null ||  file == undefined || (  file != null && typeof  file == "object" && !Object.keys( file).length ) ){
-                    thumbnail.ensureThumbnail('main_i_05.png', 130, 130, function(err, thumb1){
-                    console.log('########### : ' + member.photo);
-                    member.photo = '/uploads/userThumb/'+thumb1;
-                    console.log('########### : ' + member.photo);
-                    })
+                    member.photo = '/img/home/main_i_05.png';
                 } else{
                     thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
                         console.log('########### : ' + member.photo);

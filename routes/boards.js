@@ -208,78 +208,30 @@ module.exports = function (router) {
         }
     });
 
-    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,thumb,locationX,locationY, siNm, callback) {
+    var addMasterBoard = function (database, id, masterphoto, title, author,category,day, region, deadline, minNum, maxNum, studyTerm, price,studynum, masterInfo, studyInfo, reviewstar,path,file,locationX,locationY, siNm, callback) {
 
         var thumbnail_list = '';
-        var thumbnail_slider = '';
-        //
-        // console.log("thumb 확인해보자 ! : " + thumb.length);
-        // console.log("path 확인해보자 ! : " + path);
-        //
-        // if(thumb.length<2){
-        // thumbnail.ensureThumbnail(thumb[0], 943, 350, function(err, thumb1){
-        //     if(err) console.error(err);
-        //     console.log('첫번째 썸'+thumb1);
-        //     thumbnail_slider[0] = '/uploads/boardThumb/'+thumb1;
-        //     console.log("첫번째 슬라이더: "+thumbnail_slider[0]);
-        // });} else if(thumb.length<3){
-        // thumbnail.ensureThumbnail(thumb[0], 943, 350, function(err, thumb1){
-        //     if(err) console.error(err);
-        //     console.log('첫번째 썸'+thumb1);
-        //     thumbnail_slider[0] = '/uploads/boardThumb/'+thumb1;
-        //     console.log("첫번째 슬라이더: "+thumbnail_slider[0]);
-        //
-        //     thumbnail.ensureThumbnail(thumb[1], 943, 350, function(err, thumb2){
-        //         if(err) console.error(err);
-        //         console.log('두번째 썸'+thumb2);
-        //         thumbnail_slider[1] = '/uploads/boardThumb/'+thumb2;
-        //         console.log("두번째 슬라이더: "+thumbnail_slider[1]);
-        //     })
-        // });
-        // } else {
-        //     thumbnail.ensureThumbnail(thumb[0], 943, 350, function (err, thumb1) {
-        //         if (err) console.error(err);
-        //         console.log('첫번째 썸' + thumb1);
-        //         thumbnail_slider[0] = '/uploads/boardThumb/' + thumb1;
-        //         console.log("첫번째 슬라이더: " + thumbnail_slider[0]);
-        //
-        //         thumbnail.ensureThumbnail(thumb[1], 943, 350, function (err, thumb2) {
-        //             if (err) console.error(err);
-        //             console.log('두번째 썸' + thumb2);
-        //             thumbnail_slider[1] = '/uploads/boardThumb/' + thumb2;
-        //             console.log("두번째 슬라이더: " + thumbnail_slider[1]);
-        //
-        //             thumbnail.ensureThumbnail(thumb[2], 943, 350, function (err, thumb3) {
-        //                 if (err) console.error(err);
-        //                 console.log('세번째 썸' + thumb3);
-        //                 thumbnail_slider[2] = '/uploads/boardThumb/' + thumb3;
-        //                 console.log("세번째 슬라이더: " + thumbnail_slider[2]);
-        //             });
-        //         });
-        //     });
-        // }
 
-        thumbnail.ensureThumbnail(thumb[0], 345, 200, function(err, thumb1){
-            thumbnail.ensureThumbnail(thumb[0], 943, 350, function(err, thumb2){
-                if(err) console.error(err);
-                thumbnail_slider = '/uploads/boardThumb/'+thumb2;
-                thumbnail_list = '/uploads/boardThumb/'+thumb1;
+        console.log('여기까지 나오나 ?' + path);
 
-                console.log("리스트: "+thumbnail_list);
-                console.log("슬라이더: "+thumbnail_slider);
+        thumbnail.ensureThumbnail(file.filename, 345, 200, function(err, thumb1){
+            if(err) console.error(err);
+            thumbnail_list = '/uploads/boardThumb/'+thumb1;
 
-                var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"thumb":thumb,"thumbnail_list":thumbnail_list,"thumbnail_slider":thumbnail_slider,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+            console.log("리스트: "+thumbnail_list);
+            console.log("슬라이더: "+path);
 
-                console.log('#####check point#####');
+            var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"thumbnail_list":thumbnail_list,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
 
-                masterboard.save(function (err) {
-                    if(err){
-                        callback(err, null);
-                        return;
-                    }
-                    console.log("게시글 추가함.");
-                    callback(null, masterboard);
-                });
+            console.log('#####check point#####');
+
+            masterboard.save(function (err) {
+                if(err){
+                    callback(err, null);
+                    return;
+                }
+                console.log("게시글 추가함.");
+                callback(null, masterboard);
             });
         });
     };
@@ -339,9 +291,6 @@ module.exports = function (router) {
 
     router.route('/process/addboard').post(upload.array('photo',3), function (req, res) {
         console.log('/process/addboard 호출됨.');
-        // var image = new FileModel();
-        // console.log(fs.readFileSync(req.files));
-        // image.img.data = fs.readFileSync(req.files);
         console.log(req.user);
         var id = req.user[0].id;
         var masterphoto = req.user[0].photo;
@@ -355,74 +304,72 @@ module.exports = function (router) {
         var maxNum = req.body.maxNum;
         var studyTerm = req.body.studyTerm;
         var price = req.body.price;
-        var studynum =req.body.studynum;
+        var studynum = req.body.studynum;
         var masterInfo = req.body.masterInfo;
         var studyInfo = req.body.studyInfo;
         var reviewstar = req.body.reviewstar;
         // var photo = req.body.photo;
         //07_04 add by sehyeon
         //location 좌표 입력 위한 추가
-        var locationX=req.body.x;
-        var locationY=req.body.y;
+        var locationX = req.body.x;
+        var locationY = req.body.y;
         //07_15 add by sehyeon
         var siNm = req.body.siNm;
         var files = req.files;
 
-        console.dir('#====업로드된 첫번째 파일 정보 ====#');
+        console.dir('#====업로드된 파일 정보 ====#');
         console.dir(req.files);
         console.dir('#====#');
 
         //현재 파일 정보를 저장할 변수 선언
-        var originalname ='',
-            filename ='',
+        var originalname = '',
+            filename = '',
             mimetype = '',
-            size =0,
-            path = [{}],
-            thumb = [{}];
+            size = 0,
+            path = [{}];
 
-        if (Array.isArray(files)){//배열에 들어가는 경우
-            console.log("배열에 들어있는 파일 갯수 : %d",files.length);
+        // if (Array.isArray(files)){//배열에 들어가는 경우
+        //     console.log("배열에 들어있는 파일 갯수 : %d",files.length);
 
-            for (var index = 0; index < files.length; index++){
-                originalname = files[index].originalname;
-                filename = files[index].filename;
-                mimetype = files[index].mimetype;
-                path[index] = '/uploads/board/'+filename;
-                size = files[index].size;
-                thumb[index] = files[index].filename;
+        var thumbnail_func = function (index) {
+            thumbnail.ensureThumbnail(files[index].filename, 943, 350, function (err, thumb) {
+                path[index] = '/uploads/boardThumb/' + thumb;
+                console.log('현재 파일의 이미지 목록 : ' + path[index]);
+            });
+        };
+
+        for (var index = 0; index < files.length; index++) {
+            originalname = files[index].originalname;
+            filename = files[index].filename;
+            mimetype = files[index].mimetype;
+            thumbnail_func(index);
+            size = files[index].size;
+        }
+
+        setTimeout(function () {
+            console.log('현재 파일의 이미지 목록2 : ' + path[0] + ', ' + path[1] + ', ' + path[2]);
+
+            if (connectDB !== null) {
+                addMasterBoard(connectDB, id, masterphoto, title, author, category, day, region, deadline, minNum, maxNum, studyTerm, price, studynum, masterInfo, studyInfo, reviewstar, path, files[0], locationX, locationY, siNm, function (err, result) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    if (result) {
+                        res.redirect('/master');
+                    }
+                    else {    // 결과 객체가 없으면 실패 응답 전송
+                        res.writeHead('200', {'Content-Type': 'text/html; charset=utf8 '});
+                        res.write('<h1>게시물 추가 실패</h1>');
+                        res.end();
+                    }
+                })
+            } else {    // 데이터베이스 객체가 초기화되지 않은 경우 실패 응답 전송
+                res.writeHead('200', {'Content-Type': 'text/html; charset=utf8 '});
+                res.write('<h1>데이터베이스 연결 실패</h1>');
+                res.end();
             }
-        } else {
-            console.log("파일 갯수 : 1");
-
-            originalname = files[0].originalname;
-            filename = files[0].filename;
-            mimetype = files[0].mimetype;
-            path[0] = '/uploads/board/'+filename;
-            size = files[0].size;
-            thumb[0] = files[0].filename;
-        }
-
-        console.log('현재 파일의 이미지 목록 : ' + path[0] + ', ' + path[1] + ', ' + path[2]);
-        console.log(files);
-
-        if(connectDB!==null){
-            addMasterBoard(connectDB,id,masterphoto,title,author,category,day,region,deadline,minNum,maxNum,studyTerm,price,studynum, masterInfo, studyInfo,reviewstar, path, thumb,locationX,locationY,siNm, function(err, result){
-                if (err) { throw err; }
-
-                if (result) {
-                    res.redirect('/master');
-                }
-                else {    // 결과 객체가 없으면 실패 응답 전송
-                    res.writeHead('200', { 'Content-Type':'text/html; charset=utf8 '});
-                    res.write('<h1>게시물 추가 실패</h1>');
-                    res.end();
-                }
-            })
-        } else {    // 데이터베이스 객체가 초기화되지 않은 경우 실패 응답 전송
-            res.writeHead('200', { 'Content-Type':'text/html; charset=utf8 '});
-            res.write('<h1>데이터베이스 연결 실패</h1>');
-            res.end();
-        }
+        }, 500);
     });
 
     router.route('/process/ModifywriteMaster').post(upload.array('photo',3), function (req, res) {
