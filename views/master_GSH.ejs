@@ -108,14 +108,14 @@
             <%if(authUser.phoneAuthCheck&&authUser.location.coordinates[0]){%>
             <div class="row">
                 <% if(interboard !== null && interboard.length!==0){ %>
-                <div class="col-md-6" style="color:orange;">
+                <div class="col-md-6" style="color:orange;" id="recommendmaster">
                     추천 마스터
                 </div>
                 <%}if(seller){
                   if(interboard.length==0){%>
                   <div class="col-md-6"></div><%}%>
-                <div class="col-md-6" style="color:orange;" id="writeBtn">
-                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" style="float: right;width:150px;border:none;margin-right:20px;">글 등록</button>
+                <div class="col-md-6" id="writeBtn">
+                    <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" id="writeBtnstyle">글 등록</button>
                 </div>
                 <%}%>
                 <!--<div class="col-md-6"></div>-->
@@ -259,7 +259,22 @@
         //var marker = new google.maps.Marker({position:myCenter});
         var mapOptions = {
             center: myCenter,
-            zoom: 14
+            zoom: 14,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.BOTTOM_CENTER
+            },
+            zoomControl: true,
+            scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            },
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: google.maps.ControlPosition.LEFT_BOTTOM
+            },
         };
         map = new google.maps.Map(mapCanvas, mapOptions);
         //marker.setMap(map);

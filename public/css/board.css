@@ -398,6 +398,12 @@
 #mySection{
   min-height: 670px;
 }
+#writeBtnstyle{
+  float: right;
+  width:150px;
+  border:none;
+  margin-right:20px;
+}
 @media (min-width: 1200px) and (max-width: 1450px) {
     .master_imgBackground{
       width:100%;
@@ -523,17 +529,26 @@
       /*height:250px;*/
       width: 100%;
     }
+    #recommendmaster{
+      margin-top: 20px;
+    }
+    #mySection{
+      min-height: 300px;
+    }
     #onoffBtn{
         position: absolute;
         z-index: 5;
         top:-52px;
-        right:-5%;
+        right:0;
     }
     #writeBtn{
         position: absolute;
         z-index: 5;
         top: -45px;
-        left: -45%;
+        left: -55%;
+    }
+    #writeBtnstyle{
+      width:120px;
     }
 }
 
@@ -547,8 +562,9 @@
       height: 60px;
       width:60px;
     }
+
     #googleMap{
-      /*min-height: 400px;*/
+      min-height: 400px;
       background-color: #333;
       right:auto;
       top:auto;
@@ -557,6 +573,24 @@
       bottom: 0;
       /*height:400px;*/
       width: 100%;
+    }
+    #recommendmaster{
+      margin-top: 20px;
+    }
+    #onoffBtn{
+        position: absolute;
+        z-index: 5;
+        top:-52px;
+        right:0;
+    }
+    #writeBtn{
+        position: absolute;
+        z-index: 5;
+        top: -45px;
+        left: -55%;
+    }
+    #writeBtnstyle{
+      width:100px;
     }
 }
 
