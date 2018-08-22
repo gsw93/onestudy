@@ -274,7 +274,7 @@ module.exports = function (router) {
 
     router.route('/upload_image').post(function (req, res) {
         // Store file.
-        FroalaEditor.Image.upload(req, '/froala/', function (err, data) {
+        FroalaEditor.Image.upload(req, '/froala/images/', function (err, data) {
             // Return data.
             if (err) {
                 return res.send(JSON.stringify(err));
@@ -292,6 +292,27 @@ module.exports = function (router) {
             res.send(data);
         });
     });
+
+    // router.route('/upload_video').post(function (req, res) {
+    //     // Store file.
+    //     FroalaEditor.Video.upload(req, '/froala/videos/', function (err, data) {
+    //         // Return data.
+    //         if (err) {
+    //             return res.send(JSON.stringify(err));
+    //         }
+    //         var thishost = req.protocol + '://' + req.get('host');
+    //         console.log("thishost = " + thishost);
+    //         var fullurl = thishost + data.link;
+    //         console.log("fullurl = " + fullurl);
+    //         // update the original data.link that contained only
+    //         // the URI to the complete URL that includes hostname
+    //         data.link = fullurl;
+    //         console.log("Modified data = " + JSON.stringify(data));
+    //
+    //         console.log(data);
+    //         res.send(data);
+    //     });
+    // });
 
     router.route('/process/addboard').post(upload.array('photo',3), function (req, res) {
         console.log('/process/addboard 호출됨.');
