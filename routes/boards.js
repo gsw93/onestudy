@@ -14,6 +14,8 @@ var multer = require('multer');
 var fs = require('fs');
 var Thumbnail = require('thumbnail');
 var thumbnail = new Thumbnail('./public/uploads/board',  './public/uploads/boardThumb');
+require('../public/plugins/froala/js/plugins/image.min.js');
+var FroalaEditor = require('../public/plugins/froala/js/froala_editor.min');
 
 module.exports = function (router) {
 
@@ -280,6 +282,23 @@ module.exports = function (router) {
       })
     });
 
+    // ###### 에디터 이미지 ######
+
+    // router.route('/upload_image').post(function (req, res) {
+    //     // Store file.
+    //     FroalaEditor.Image.upload(req, 'public/uploads/board', function (err, data) {
+    //         // Return data.
+    //         if (err) {
+    //             return res.send(JSON.stringify(err));
+    //         }
+    //         console.log(data);
+    //         res.send(data);
+    //         // console.dir('#====업로드된 파일 정보 ====#');
+    //         // console.dir(data);
+    //         // console.dir('#====#');
+    //     });
+    // });
+
     router.route('/process/addboard').post(upload.array('photo',3), function (req, res) {
         console.log('/process/addboard 호출됨.');
         console.log(req.user);
@@ -307,11 +326,11 @@ module.exports = function (router) {
         //07_15 add by sehyeon
         var siNm = req.body.siNm;
         var files = req.files;
+        // var masterInfopic = [{}];
 
-        console.dir('#====업로드된 파일 정보 ====#');
-        console.dir(req.files);
-        console.dir('#====#');
-
+        // console.dir('#====업로드된 파일 정보 ====#');
+        // console.dir(req.files);
+        // console.dir('#====#');
 
         //현재 파일 정보를 저장할 변수 선언
         var originalname = [{}],
@@ -337,9 +356,6 @@ module.exports = function (router) {
             size = files[index].size;
         }
         setTimeout(function () {
-            console.log('@@@@@@@@@@@@@@@'+filename);
-            console.log('@@@@@@@@@@@@@@@'+originalname);
-            console.log('@@@@@@@@@@@@@@@'+path);
             if (connectDB !== null) {
                 addMasterBoard(connectDB, id, masterphoto, title, author, category, day, region, deadline, minNum, maxNum, studyTerm, price, studynum, masterInfo, studyInfo, reviewstar, path, filename[0], originalname,locationX, locationY, siNm, function (err, result) {
                     if (err) {

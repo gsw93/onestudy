@@ -164,7 +164,6 @@ module.exports = function (router, passport) {
         var gender = req.body.gender;
         var phone = req.body.phoneNumber;
         var file = req.file;
-        var filename = file.filename;
 
         console.log(req.session.passport);
         UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
@@ -185,10 +184,16 @@ module.exports = function (router, passport) {
                 member.phoneAuthCheck = true;
                 member.sellercheck = true;
 
-                if(  filename == "" ||  filename == null || filename == undefined || ( filename != null && typeof filename == "object" && !Object.keys(filename).length ) ){
+                if(  file == "" ||  file == null || file == undefined || ( file != null && typeof file == "object" && !Object.keys(file).length ) ){
                     member.photo = '/img/home/main_i_05.png';
+                    member.save(function (err) {
+                        if (err)
+                            throw err;
+                        req.session.passport.user.seller=true;
+                        res.redirect('/completeMaster');
+                    });
                 } else{
-                    thumbnail.ensureThumbnail(filename, 130, 130, function(err, thumb2){
+                    thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
                         member.photo = '/uploads/userThumb/'+thumb2;
                         console.log('########### : ' + member.photo);
                         member.save(function (err) {

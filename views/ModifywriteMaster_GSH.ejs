@@ -42,7 +42,7 @@
     <link href="css/style.css" rel="stylesheet">
 
     <!-- FAVICON -->
-    <link href="img/favicon.png" rel="shortcut icon">
+    <link href="img/onestudyfavicon.png" rel="shortcut icon">
 
     <!-- googlefont -->
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gamja+Flower|Gothic+A1:400,700|Nanum+Brush+Script|Nanum+Gothic:400,700,800|Nanum+Myeongjo:400,700,800|Nanum+Pen+Script|Poor+Story|Song+Myung|Sunflower:300,500,700&amp;subset=korean" rel="stylesheet">
@@ -244,12 +244,18 @@
                               </div>
                               <div class="row">
                                 <label for="image" class="col-lg-2 darktext" style="padding-right:0">스터디 대표 사진</label>
-                                <input class="col-lg-6 form-control" id="main_pic" style="height:35px;margin :auto 0;" type="file" onchange="readURL(this);" name="photo" multiple>
-                                  <span class="col-lg-3"><a href="<%=board.path[0]%>"><%=board.originalname[0]%></a></span>
+                                <input class="col-lg-5 form-control" id="main_pic" style="height:35px;margin :auto 0;" type="file" onchange="readURL(this);" name="photo" multiple>
+                                  <span class="col-lg-4"><a href="<%=board.path[0]%>"><%=board.originalname[0]%></a></span>
                                   <label for="image" class="col-lg-2 darktext" style="padding-right:0">추가 사진</label>
-                                <input class="col-lg-7 form-control" style="height:35px;margin :auto 0;" class="photo1" type="file" onchange="readURL(this);" name="photo" multiple>
+                                <input class="col-lg-5 form-control" style="height:35px;margin :auto 0;" class="photo1" type="file" onchange="readURL(this);" name="photo" multiple>
+                                  <%if(board.path.length>1){%>
+                                  <span class="col-lg-4"><a href="<%=board.path[1]%>"><%=board.originalname[1]%></a></span>
+                                  <%}%>
                                 <span class="col-lg-2 darktext"></span>
-                                <input class="col-lg-7 form-control" style="height:35px;margin :auto 0;" class="photo1" type="file" onchange="readURL(this);" name="photo" multiple>
+                                <input class="col-lg-5 form-control" style="height:35px;margin :auto 0;" class="photo1" type="file" onchange="readURL(this);" name="photo" multiple>
+                                  <%if(board.path.length>2){%>
+                                  <span class="col-lg-4"><a href="<%=board.path[2]%>"><%=board.originalname[2]%></a></span>
+                                  <%}%>
                                 <script type="text/javascript">
 
                                 </script>
@@ -418,11 +424,6 @@
 
                           if( address == "" || address == null || address == undefined || ( address != null && typeof address == "object" && !Object.keys(address).length ) ){
                             alert('스터디 장소가 이루어질 대략적인 주소를 설정해주세요');
-                            return false;
-                          }
-
-                          if( mainpic == "" || mainpic == null || mainpic == undefined || ( mainpic != null && typeof mainpic == "object" && !Object.keys(mainpic).length ) ){
-                            alert('스터디를 대표할 메인 사진을 등록해주세요');
                             return false;
                           }
 
