@@ -11,7 +11,7 @@ var hasher = bkfd2Password();
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, 'public/froala/user');
+        callback(null, 'public/uploads/user');
     },
     filename: function (req, file, callback) {
         callback(null, Date.now()+file.originalname);
@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var Thumbnail = require('thumbnail');
-var thumbnail = new Thumbnail('./public/froala/user',  './public/froala/userThumb');
+var thumbnail = new Thumbnail('./public/uploads/user',  './public/uploads/userThumb');
 
 module.exports = function (router, passport) {
     router.route('/mypage').get(function (req, res) {
@@ -126,7 +126,7 @@ module.exports = function (router, passport) {
             } else {
                 thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
                     console.log('########### : ' + member.photo);
-                    member.photo = '/froala/userThumb/'+thumb2;
+                    member.photo = '/uploads/userThumb/'+thumb2;
                     console.log('########### : ' + member.photo);
                     member.save(function (err) {
                         if (err)
@@ -144,7 +144,7 @@ module.exports = function (router, passport) {
             } else {
                 thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
                     console.log('########### : ' + board.masterphoto);
-                    board.masterphoto = '/froala/userThumb/'+thumb2;
+                    board.masterphoto = '/uploads/userThumb/'+thumb2;
                     console.log('########### : ' + board.masterphoto);
                     board.save(function (err) {
                         if (err)
@@ -194,7 +194,7 @@ module.exports = function (router, passport) {
                     });
                 } else{
                     thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
-                        member.photo = '/froala/userThumb/'+thumb2;
+                        member.photo = '/uploads/userThumb/'+thumb2;
                         console.log('########### : ' + member.photo);
                         member.save(function (err) {
                             if (err)
