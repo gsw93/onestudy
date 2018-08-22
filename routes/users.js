@@ -164,6 +164,7 @@ module.exports = function (router, passport) {
         var gender = req.body.gender;
         var phone = req.body.phoneNumber;
         var file = req.file;
+        var filename = file.filename;
 
         console.log(req.session.passport);
         UserModel.findOne({ id : req.session.passport.user.email }, function(err, member) {
@@ -180,24 +181,24 @@ module.exports = function (router, passport) {
                 }
                 member.age = age;
                 member.gender = gender;
-                if(  file == "" ||  file == null ||  file == undefined || (  file != null && typeof  file == "object" && !Object.keys( file).length ) ){
-                    member.photo = '/img/home/main_i_05.png';
-                } else{
-                    thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
-                        console.log('########### : ' + member.photo);
-                        member.photo = '/uploads/userThumb/'+thumb2;
-                        console.log('########### : ' + member.photo);
-                    })
-                }
                 member.phone = phone;
                 member.phoneAuthCheck = true;
                 member.sellercheck = true;
-                member.save(function (err) {
-                    if (err)
-                        throw err;
-                    req.session.passport.user.seller=true;
-                    res.redirect('/completeMaster');
-                });
+
+                if(  filename == "" ||  filename == null || filename == undefined || ( filename != null && typeof filename == "object" && !Object.keys(filename).length ) ){
+                    member.photo = '/img/home/main_i_05.png';
+                } else{
+                    thumbnail.ensureThumbnail(filename, 130, 130, function(err, thumb2){
+                        member.photo = '/uploads/userThumb/'+thumb2;
+                        console.log('########### : ' + member.photo);
+                        member.save(function (err) {
+                            if (err)
+                                throw err;
+                            req.session.passport.user.seller=true;
+                            res.redirect('/completeMaster');
+                        });
+                    })
+                }
             }
         });
     });

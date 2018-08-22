@@ -28,6 +28,9 @@ var MasterBoardSchema = mongoose.Schema({
         type: String
     }],
     thumbnail_list : String,
+    originalname : [{
+        type: String
+    }],
     masterphoto: String,
     count : {type:Number, default:0},
     studentList : [{
