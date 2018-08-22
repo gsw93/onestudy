@@ -245,6 +245,7 @@
     <!-- Include Editor JS files. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
                     <script type="text/javascript">
+
                         $(function(){
                             $("#datePicker").datepicker({
                               dateFormat: 'yy-mm-dd',
@@ -270,8 +271,9 @@
                                 "'Gamja Flower', cursive":'Gamja Flower'
                               },
                               fontFamilySelection: true,
-                              scaytAutoload : true
-//                              imageUploadURL: '/upload_image'
+                              scaytAutoload : true,
+                              imageUploadURL: '/upload_image',
+                              imageMaxSize: 5 * 1024 * 1024
                             });
 
                             $('#maxNum').change(function(){
@@ -425,6 +427,8 @@
 <!--07_04 add by sehyeon-->
 <script src="js/juso_GSH.js"></script>
 <script src="plugins/proj4js/proj4js-combined.js"></script>
+<script src="https://rawgit.com/froala/wysiwyg-editor/master/js/froala_editor.pkgd.min.js"></script>
+<script src="https://rawgit.com/froala/wysiwyg-editor/master/js/plugins/image.min.js"></script>
 
 </body>
 

@@ -36,6 +36,8 @@ var options = {
 };
 //public 폴더를 static으로 오픈
 app.use(serveStatic(path.join(__dirname, './public')));
+app.use('/froala', express.static('froala'));
+
 app.use(require('express-session')({
     secret: 'sad@*!lsd42scc',
     cookie: {

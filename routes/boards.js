@@ -15,7 +15,7 @@ var fs = require('fs');
 var Thumbnail = require('thumbnail');
 var thumbnail = new Thumbnail('./public/uploads/board',  './public/uploads/boardThumb');
 require('../public/plugins/froala/js/plugins/image.min.js');
-var FroalaEditor = require('../public/plugins/froala/js/froala_editor.min');
+var FroalaEditor = require('../node_modules/wysiwyg-editor-node-sdk');
 
 module.exports = function (router) {
 
@@ -43,18 +43,7 @@ module.exports = function (router) {
                 currentBoard.studentList[currentBoard.studentList.length] = student;
                 currentBoard.currentNum++;
                 console.log(currentBoard);
-                // UserModel.findById(req.user[0].id,function(err,users){
-                //   if(err){
-                //       throw err;
-                //       console.log(err);
-                //   }
-                //   var mystudy = {
-                //     "studyid" : req.body.replyId,
-                //     "title" : currentBoard.title,
-                //     "deadline" : currentBoard.deadline,
-                //     "reviewstar" : currentBoard.reviewstar
-                //   }
-                // })
+
                 updateStudy(req.user[0].id,currentBoard._id,currentBoard.title,currentBoard.deadline,currentBoard.studyTerm,currentBoard.reviewstar);
                 currentBoard.save(function (err) {
                     if(err) {
@@ -283,22 +272,26 @@ module.exports = function (router) {
       })
     });
 
-    // ###### 에디터 이미지 ######
+    router.route('/upload_image').post(function (req, res) {
+        // Store file.
+        FroalaEditor.Image.upload(req, '/froala/', function (err, data) {
+            // Return data.
+            if (err) {
+                return res.send(JSON.stringify(err));
+            }
+            var thishost = req.protocol + '://' + req.get('host');
+            console.log("thishost = " + thishost);
+            var fullurl = thishost + data.link;
+            console.log("fullurl = " + fullurl);
+            // update the original data.link that contained only
+            // the URI to the complete URL that includes hostname
+            data.link = fullurl;
+            console.log("Modified data = " + JSON.stringify(data));
 
-    // router.route('/upload_image').post(function (req, res) {
-    //     // Store file.
-    //     FroalaEditor.Image.upload(req, 'public/uploads/board', function (err, data) {
-    //         // Return data.
-    //         if (err) {
-    //             return res.send(JSON.stringify(err));
-    //         }
-    //         console.log(data);
-    //         res.send(data);
-    //         // console.dir('#====업로드된 파일 정보 ====#');
-    //         // console.dir(data);
-    //         // console.dir('#====#');
-    //     });
-    // });
+            console.log(data);
+            res.send(data);
+        });
+    });
 
     router.route('/process/addboard').post(upload.array('photo',3), function (req, res) {
         console.log('/process/addboard 호출됨.');
