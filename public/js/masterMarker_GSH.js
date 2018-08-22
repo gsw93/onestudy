@@ -215,6 +215,18 @@ function changeMap(bounds) {
             '</div></div></div></div></a></div>';
         $("#items").append(tmpTag);
 
+        var max = markerElem.maxNum;
+
+        if (max === 1) {
+            var a = document.getElementsByClassName('studyNum');
+            a[i].innerHTML = "1&nbsp;:&nbsp;1";
+        }
+        else {
+            var a = document.getElementsByClassName('studyNum');
+            a[i].innerHTML = markerElem.minNum + ' : ' + markerElem.maxNum;
+        }
+        var currentNum =markerElem.currentNum;
+
         var ddd = new Date(markerElem.deadline); //스터디시작 날짜
         var date = new Date(); //오늘 +7일
         var today = new Date(); //오늘
@@ -228,7 +240,7 @@ function changeMap(bounds) {
             x[i].style.backgroundColor = "red";
             x[i].innerHTML = "마감임박";
         }
-        else if(term<today){
+        if(term<today||currentNum==max){
           var x = document.getElementsByClassName("deadlineIcon");
           x[i].style.display = "block";
           x[i].style.fontSize = "smaller";
@@ -241,16 +253,7 @@ function changeMap(bounds) {
             x[i].style.backgroundColor = "orange";
             x[i].innerHTML = "모집중";
         }
-        var max = markerElem.maxNum;
 
-        if (max === 1) {
-            var a = document.getElementsByClassName('studyNum');
-            a[i].innerHTML = "1&nbsp;:&nbsp;1";
-        }
-        else {
-            var a = document.getElementsByClassName('studyNum');
-            a[i].innerHTML = markerElem.minNum + ' : ' + markerElem.maxNum;
-        }
         //var i = new Date(markerElem.deadline);
         document.getElementById('deadline[' + i + ']').innerHTML = date_format(ddd);
         i = i + 1;

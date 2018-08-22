@@ -30,7 +30,10 @@
 
     <!-- CUSTOM CSS -->
     <link href="css/mypage.css" rel="stylesheet">
-    <link href="css/temp.css" rel="stylesheet">
+    <!-- HEADER CSS -->
+    <link href="css/nav.css" rel="stylesheet">
+    <!-- FOOTER CSS -->
+    <link href="css/footer.css" rel="stylesheet">
 
     <!-- FAVICON -->
     <link href="img/onestudyfavicon.png" rel="shortcut icon">
@@ -172,21 +175,22 @@
                           </script>
                           <td><div class="study_state"></div></td>
                           <script>
-                            var today = new Date();
-                            var dead = new Date('<%- authUser.mystudy[i].deadline %>');
-                            var term = new Date('<%- authUser.mystudy[i].studyTerm %>');
-                            if(today<=dead){
-                              document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
-                              document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(89, 89, 89)';
-                            }
-                            if(dead<today && today<=(dead+term)){
-                              document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "진행중";
-                              document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(255, 128, 0)';
-                            }
-                            if(today>(dead+term)){
-                              document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
-                              document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
-                            }
+                          var today = new Date();
+                          var dead = new Date('<%- authUser.mystudy[i].deadline %>');
+                          var term = new Date('<%- authUser.mystudy[i].deadline %>');
+                          term.setDate(term.getDate()+(<%=authUser.mystudy[i].studyTerm%>*7));
+                          if(today<=dead){
+                            document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
+                            document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(89, 89, 89)';
+                          }
+                          if(dead<today && today<=term){
+                            document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "진행중";
+                            document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(255, 128, 0)';
+                          }
+                          if(today>term){
+                            document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
+                            document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
+                          }
                           </script>
                       </tr>
                       <%}%>
