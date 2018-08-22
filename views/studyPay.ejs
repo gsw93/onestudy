@@ -162,10 +162,10 @@
                               <%if(board.studentList.length){%>
                                   <%for (var i=0; i< board.studentList.length; i++){%>
                               <tr>
-                                <td id="name"></td>
+                                <td class="name"></td>
                                 <script type="text/javascript">
                                   var name = "<%=board.studentList[i].name%>";
-                                  document.getElementById('name').innerHTML = name.substr(0,1) +"XX";
+                                  document.getElementsByClassName('name')[<%=i%>].innerHTML = name.substr(0,1) +"XX";
                                 </script>
                                 <%if(!board.studentList[i].statue){%>
                                   <td>신청</td>
@@ -181,7 +181,7 @@
                               <%}%>
                             </tbody>
                           </table>
-                          <button class="btn btn-primary col-sm-3 paybtn" onclick="location.href='/payment3?id=<%=board._id%>'">결제하기 ></button>
+                          <button class="btn btn-primary col-sm-3 paybtn" data-toggle="modal" data-target="#myModal">결제하기 ></button>
                         </div>
                     </div>
                     <!--<div class="col-lg-2" style="float: left;text-align: center;padding:0 5px;">-->
@@ -201,15 +201,28 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog" style="top: 150px;">
         <div class="modal-dialog">
-
+          <form class="" action="/process/pay" method="post" id="payprocess">
+            <input type="hidden" name="id" value="<%=board._id%>">
+          </form>
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content" style="padding:10px;">
+                <div class="modal-header">
+                  <h6>· 보유 크레딧 : <span style="margin:0 10px;"><%=authUser.credit%> 크레딧</span></h6>
+                </div>
+                <div class="modal-header">
+                  <h6>· 결제 크레딧 : <span style="margin:0 10px;text-decoration: line-through;color:#808080;">
+                    <%var total=0;
+                    for(var i=0;i< board.studentList.length; i++){
+                      if(!board.studentList[i].statue){
+                        total++;}}%>
+                    <%=(2000+(board.price*200))*total%></span>&nbsp;0 크레딧</h6>
+                </div>
                 <div class="modal-body">
-                    <h3 style="text-align: center; padding: 50px 10px;"><bold><%=(2000+(board.price*200))*board.studentList.length%></bold> 크레딧이 차감됩니다.</h3>
+                    <h3 style="text-align: center; padding: 50px 10px;"><bold>0</bold> 크레딧이 차감됩니다.</h3>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">뒤로가기</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='/payment3?id=<%=board._id%>'">결제하기</button>
+                    <button type="submit" class="btn btn-default" form="payprocess">결제하기</button>
                 </div>
             </div>
 

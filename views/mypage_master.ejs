@@ -151,8 +151,8 @@
               <table class="table table-hover" style="margin-top: 30px;">
                   <tbody style="font-size: 0.8rem;">
                   <%for (var i=0; i< board.length; i++){ %>
-                  <tr>
-                      <td><%=i+1%></td>
+                  <tr><%var s=i+1;%>
+                      <td><%=s%></td>
                       <td colspan="2"><a href="/payment?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
                       <td style="text-align:right;width:100px;" id="date<%=i%>"></td>
                       <td style="width:80px;">
@@ -161,16 +161,20 @@
                       <script>
                       var today = new Date();
                       var dead = new Date('<%- board[i].deadline %>');
-                      var term = new Date('<%- board[i].studyTerm %>');
+                      var term = new Date('<%- board[i].deadline %>');
+                      term.setDate(term.getDate()+(<%=board[i].studyTerm%>*7));
+                      var currentNum = <%= board[i].currentNum%>
+                      var max = <%= board[i].currentNum%>
+
                       if(today<=dead){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
                         document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(89, 89, 89)';
                       }
-                      if(dead<today && today<=(dead+term)){
+                      if((dead<today && today<=term)||currentNum==max){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "진행중";
                         document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(255, 128, 0)';
                       }
-                      if(today>(dead+term)){
+                      if(today>term){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
                         document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                       }

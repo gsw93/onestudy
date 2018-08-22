@@ -153,12 +153,23 @@
                                 <%if(authUser.id==board.id){%>
                                 <button type="button" class="btn btn-transparent" onclick="location.href='/ModifywriteMaster?id=<%=board._id%>'" style="width:100%;">수정하기</button>
                                 <%} else{ var flag=0; %>
-                                  <%for(var a=0; a< authUser.mystudy.length; a++){
-                                  if(board._id==authUser.mystudy[a].studyid){ flag=1;}} if(flag==0){%>
-                                  <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#join" style="width:100%;">참여 신청하기</button>
+                                  <%if(authUser.mystudy.length){
+                                    for(var a=0; a< authUser.mystudy.length; a++){%>
+                                  <%if(board._id==authUser.mystudy[a].studyid){ flag=1;}}}
+                                  if(board.currentNum==board.maxNum){flag=1;}%>
+                                  <%if(!flag){%>
+                                  <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#join" id="joinbtn" style="width:100%;">참여 신청하기</button>
                                   <%}}} else {%>
                                 <a href="/studentapply" style="width:100%;" class="btn btn-transparent">참여 신청하기</a>
                                 <%}%>
+                                <script type="text/javascript">
+                                  var today = new Date();
+                                  var term = new Date('<%- board.deadline %>');
+                                  term.setDate(term.getDate()+(<%=board.studyTerm%>*7));
+                                  if(today>term){
+                                    document.getElementById('joinbtn').style.display = "none";
+                                  }
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -194,10 +205,10 @@
                             <%if(board.studentList.length){%>
                                 <%for (var i=0; i< board.studentList.length; i++){%>
                                   <tr>
-                                    <td id="name"></td>
+                                    <td class="name"></td>
                                     <script type="text/javascript">
                                       var name = "<%=board.studentList[i].name%>";
-                                      document.getElementById('name').innerHTML = name.substr(0,1) +"XX";
+                                      document.getElementsByClassName('name')[<%=i%>].innerHTML = name.substr(0,1) +"XX";
                                     </script>
                                     <%if(!board.studentList[i].statue){%>
                                       <td>신청</td>
@@ -256,7 +267,7 @@
                           <% for (var i =0;i< commentsList.length;i++){ %>
                       <div class="row comment" style="width:100%;">
                         <div class="col-lg-2 commentimg">
-                          <img src="<%- authUser.photo %>" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
+                          <img src="<%= authUser.photo %>" style="height: 55px;width:55px;margin:auto;display: block;border-radius:50%;" alt="">
                         </div>
                         <div class="col-lg-10 commentcnt">
                           <table style="width:100%;">
@@ -394,13 +405,24 @@
             map.setCenter(marker.getPosition());
         });
     }
-    //본인글 본인이 후기 작성 금지
+    //본인글 본인이 후기 작성 금지 & 참여학생외 금지
     $('form#replyAction').on('submit', function (e) {
       <%if(authUser.id==board.id){%>
         alert("본인은 작성하실 수 없습니다.");
         document.getElementById('commentcontents').value ="";
         return false;
       <%}%>
+      <%if(!board.studentList.length){%>
+        alert("참여학생이 아닌 학생은 작성하실 수 없습니다.");
+        document.getElementById('commentcontents').value ="";
+        return false;
+      <%}else{%>
+      <%for(var i=0;i<board.studentList.length;i++){
+        if(!(authUser.id==board.studentList[i].email)){%>
+          alert("참여학생이 아닌 학생은 작성하실 수 없습니다.");
+          document.getElementById('commentcontents').value ="";
+          return false;
+        <%}}}%>
     });
     //본인글 본인 스터디 학생금지
     $('form#studentaction').on('submit', function (e) {

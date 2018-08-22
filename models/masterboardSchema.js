@@ -17,7 +17,7 @@ var MasterBoardSchema = mongoose.Schema({
     deadline : {type: Date, default: moment().format()},
     minNum : {type:Number, min:1},
     maxNum : {type:Number},
-    currentNum : {type:Number, default:0},
+    currentNum : {type:Number, default:0}, //결제완료 학생
     studyTerm : {type:Number, min:1},
     price : {type:Number,min:1,max:100},
     studynum : Number,

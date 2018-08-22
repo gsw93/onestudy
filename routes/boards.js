@@ -53,7 +53,7 @@ module.exports = function (router) {
                 //     "reviewstar" : currentBoard.reviewstar
                 //   }
                 // })
-                updateStudy(req.user[0].id,currentBoard._id,currentBoard.title,currentBoard.deadline,currentBoard.reviewstar);
+                updateStudy(req.user[0].id,currentBoard._id,currentBoard.title,currentBoard.deadline,currentBoard.studyTerm,currentBoard.reviewstar);
                 currentBoard.save(function (err) {
                     if(err) {
                         throw err;
@@ -65,18 +65,19 @@ module.exports = function (router) {
     });
 
 
-    function updateStudy(id,studyid,title,date,star){
+    function updateStudy(id,studyid,title,date,term,star){
     UserModel.findOne({id:id},function(err,rawBoard){
         if (err) {
           throw err;
         }
-        rawBoard.mystudy.push({studyid:studyid,title:title,deadline:date,reviewstar:star});
+        rawBoard.mystudy.push({studyid:studyid,title:title,deadline:date,studyTerm:term,reviewstar:star});
         rawBoard.save(function(err){
           if(err)throw err;
           console.log('마이스터디 추가');
         })
       })
     }
+
 
     router.route('/master').get(function (req, res) {
         if(req.user){
@@ -460,9 +461,41 @@ module.exports = function (router) {
         }
     });
 
+
+    //결제완료
+    router.route('/process/pay').post(function (req, res) {
+        console.log('/process/pay 호출됨.');
+        var id = req.body.id;
+        var stdent_id = req.user[0].id;
+
+
+        MasterBoardModel.findOne({_id:id},function(err,rawBoard){
+            if(err) throw err;
+            if(rawBoard.studentList.length){
+              for(var i =0 ;i<rawBoard.studentList.length ; i++){
+                if(!rawBoard.studentList[i].statue){
+                  rawBoard.studentList[i].statue = true;
+                  console.log (rawBoard.studentList[i].email+'학생 결제완료');
+                }else{
+                  console.log ('결제할 학생이 없습니다.');
+                }
+              }
+            }else{
+              console.log ('결제할 학생이 없습니다.');
+            }
+            rawBoard.save(function(err){
+                if(err) throw err;
+
+                console.log('결제완료');
+                console.log(rawBoard);
+                res.redirect('/payment?id='+id);
+            });
+        });
+      });
+
+
     router.route('/payment').get(function (req, res) {
         var id = req.param('id');
-
         MasterBoardModel.findOne({_id:id},function(err,rawBoard){
             if(err) throw err;
             console.log(rawBoard.studentList)

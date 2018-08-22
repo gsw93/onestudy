@@ -143,30 +143,7 @@
                             </ul>
 
                             <script type="text/javascript">
-                                var ddd = new Date('<%- interboard[i].deadline %>');
-                                var date = new Date();
-                                var x = document.getElementsByClassName("inter_deadlineIcon");
-                                var today = new Date(); //오늘
-                                var term = new Date('<%- interboard[i].deadline %>'); // 스터기기간
-                                date.setDate(date.getDate()+7);
-                                term.setDate(term.getDate()+(<%=interboard[i].studyTerm%>*7));
-                                if (today<=ddd&& ddd < date) {
-                                    x[<%- i%>].style.display = "block";
-                                    x[<%- i%>].style.fontSize = "smaller";
-                                    x[<%- i%>].style.backgroundColor = "red";
-                                    x[<%- i%>].innerHTML = "마감임박";
-                                }
-                                else if(term<today){
-                                  x[<%- i%>].style.display = "block";
-                                  x[<%- i%>].style.fontSize = "smaller";
-                                  x[<%- i%>].style.backgroundColor = " #a6a6a6";
-                                  x[<%- i%>].innerHTML = "종료";
-                                }
-                                else if(ddd>=date){
-                                    x[<%- i%>].style.display = "block";
-                                    x[<%- i%>].style.backgroundColor = "orange";
-                                    x[<%- i%>].innerHTML = "모집중";
-                                }
+
                                 var max = <%- interboard[i].maxNum %>;
 
                                 if(max===1){
@@ -177,6 +154,34 @@
                                     var a = document.getElementsByClassName('inter_studyNum');
                                     a[<%- i %>].innerHTML = "<%- interboard[i].minNum %> : <%- interboard[i].maxNum %>";
                                 }
+
+                                var ddd = new Date('<%- interboard[i].deadline %>');
+                                var date = new Date();
+                                var x = document.getElementsByClassName("inter_deadlineIcon");
+                                var today = new Date(); //오늘
+                                var term = new Date('<%- interboard[i].deadline %>'); // 스터기기간
+                                date.setDate(date.getDate()+7);
+                                term.setDate(term.getDate()+(<%=interboard[i].studyTerm%>*7));
+
+                                var currentNum = <%= interboard[i].currentNum%>
+                                if (today<=ddd&& ddd < date) {
+                                    x[<%- i%>].style.display = "block";
+                                    x[<%- i%>].style.fontSize = "smaller";
+                                    x[<%- i%>].style.backgroundColor = "red";
+                                    x[<%- i%>].innerHTML = "마감임박";
+                                }
+                                if(term<today||currentNum==max){
+                                  x[<%- i%>].style.display = "block";
+                                  x[<%- i%>].style.fontSize = "smaller";
+                                  x[<%- i%>].style.backgroundColor = " #a6a6a6";
+                                  x[<%- i%>].innerHTML = "종료";
+                                }
+                                else if(ddd>=date){
+                                    x[<%- i%>].style.display = "block";
+                                    x[<%- i%>].style.backgroundColor = "orange";
+                                    x[<%- i%>].innerHTML = "모집중";
+                                }
+
                             </script>
                             <div class="cnt">
                                 <div class="cnt_text">

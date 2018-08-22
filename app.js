@@ -56,8 +56,8 @@ app.use(function (req, res, next) {
 // 라우터 객체 참조
 var router = express.Router();
 // 기본 속성 설정
-app.set('port', process.env.PORT || 3000);
-// app.set('port', process.env.PORT || 443);
+// app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 443);
 // view engine 설정
 app.set('view engine', 'ejs');
 // views 폴더 위치 설정
@@ -97,8 +97,8 @@ jusoRoute(app);
 var httpsServer = https.createServer(options, app);
 var httpServer = http.createServer(app);
 
-var httpPort = 3001;
-// var httpPort = 80;
+// var httpPort = 3001;
+var httpPort = 80;
 
 httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);

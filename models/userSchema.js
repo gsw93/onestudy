@@ -30,6 +30,7 @@ var UserSchema = new mongoose.Schema({
       studyid : {type:String},
       title : String,
       deadline : {type: Date, default: moment().format()},
+      studyTerm: {type:Number, min:1},
       reviewstar : Number
     }],
     //07_04 add by sehyeon

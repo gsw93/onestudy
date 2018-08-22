@@ -149,7 +149,7 @@ module.exports = function (router, passport) {
                     board.save(function (err) {
                         if (err)
                             throw err;
-                        res.redirect('/mypage2');
+                        res.redirect('/mypage');
                     });
                 })
             }
