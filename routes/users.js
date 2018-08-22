@@ -140,7 +140,7 @@ module.exports = function (router, passport) {
         MasterBoardModel.findOne({ id : req.session.passport.user.email }, function(err, board) {
             if (err) return res.status(500).json({error: err});
             if (!board) {
-                return res.send('변경할 마스터의 게시글이 없습니다.');
+                console.log('변경할 마스터의 게시글이 없습니다.');
             } else {
                 thumbnail.ensureThumbnail(file.filename, 130, 130, function(err, thumb2){
                     console.log('########### : ' + board.masterphoto);
@@ -149,7 +149,7 @@ module.exports = function (router, passport) {
                     board.save(function (err) {
                         if (err)
                             throw err;
-                        res.redirect('/mypage');
+                        res.redirect('/mypage2');
                     });
                 })
             }

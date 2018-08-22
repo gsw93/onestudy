@@ -1,3 +1,58 @@
+/*=== MEDIA QUERY ===*/
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+body {
+    line-height: 1.5;
+    font-family: "Lato", sans-serif;
+}
+
+p {
+    font-family: "Lato", sans-serif;
+    color: #222222;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Lato", sans-serif;
+}
+
+/**
+ *
+ * Base Elements
+ *
+ */
+body {
+    background: #f6f8fa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #222222;
+}
+
+p {
+    color: #222222;
+}
+a {
+    transition: all .2s ease 0s;
+    color: #222222;
+}
+a:focus, a:hover {
+  text-decoration: underline;
+  outline: 0;
+  color: #ff8000; }
+.store-coupon {
+    padding: 30px 0;
+}
+.store-coupon .block {
+    padding: 25px 30px 30px;
+    background: #fff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ebeaea;
+    border-radius: 3px;
+}
+
+/* custom elements */
 h5,h6{
   font-weight: 800;
   color:#333333;

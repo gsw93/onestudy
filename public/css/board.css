@@ -1,5 +1,341 @@
+/*=== MEDIA QUERY ===*/
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+body {
+    line-height: 1.5;
+    font-family: "Lato", sans-serif;
+}
+
+p, li:not(.star), input, select, button {
+    font-family: "Lato", sans-serif;
+    color: #222222;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 43px;
+}
+
+label {
+    font-size: 18px;
+    letter-spacing: 0;
+    color: #848484;
+}
+/**
+ *
+ * Base Elements
+ *
+ */
+body {
+    background: #f6f8fa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #222222;
+}
+
+p {
+    color: #222222;
+}
+
+ol, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
+a {
+    transition: all .2s ease 0s;
+    color: #222222;
+}
+a:focus, a:hover {
+  text-decoration: underline;
+  outline: 0;
+  color: #ff8000; }
 
 
+  select.form-control:not([size]):not([multiple]) {
+      height: 50px;
+  }
+
+  .form-control {
+      background-color: transparent;
+      color: #222222;
+      box-shadow: none;
+      /* border-radius: 4px; */
+      padding-left: 20px;
+      letter-spacing: .05em;
+      font-size: 15px;
+  }
+
+  .form-control:focus {
+      color: #222222;
+      box-shadow: none;
+      border: 1px solid #ff9933;
+      background-color: transparent;
+  }
+
+  textarea.form-control {
+      padding: 20px;
+  }
+
+  .form-control::-webkit-input-placeholder {
+      color: #848484;
+  }
+
+  /* WebKit, Blink, Edge */
+  .form-control:-moz-placeholder {
+      color: #848484;
+  }
+
+  /* Mozilla Firefox 4 to 18 */
+  .form-control::-moz-placeholder {
+      color: #848484;
+  }
+
+  /* Mozilla Firefox 19+ */
+  .form-control:-ms-input-placeholder {
+      color: #848484;
+  }
+
+  /* Internet Explorer 10-11 */
+  .form-control::-ms-input-placeholder {
+      color: #848484;
+  }
+/* Microsoft Edge */
+.mt-20 {
+    margin-top: 20px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.margin-0 {
+    margin: 0 !important;
+}
+
+button {
+    cursor: pointer;
+}
+
+.btn.active:focus, .btn:active:focus, .btn:focus {
+    outline: 0;
+}
+
+.bg-shadow {
+    background-color: #fff;
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+.section {
+    padding: 100px 0;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 75px;
+}
+
+.section-title h2 {
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+/* .section-title h2:before {
+    content: " ";
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    right: 0;
+    width: 127px;
+    height: 2px;
+    background-color: #e0e0e0;
+}
+
+.section-title h2:after {
+    content: " ";
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    width: 40px;
+    height: 5px;
+    background-color: #f95669;
+} */
+
+.section-title p {
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: 0.05em;
+    color: #848484;
+}
+
+/**
+ *
+ * Button Styles
+ *
+ */
+.btn {
+    font-size: 15px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 15px 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.btn-main {
+    background: #f95669;
+    color: #fff;
+}
+
+.btn-main:hover {
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.btn-transparent {
+    background: transparent;
+    color: #ff8000;
+    background-color: #ffffff;
+    border: 1px solid #ff8000;
+    border-radius: 25px;
+    position:absolute;
+    bottom:50px;
+}
+@media (max-width: 991px) {
+    .btn-transparent{
+        position: relative;
+        bottom:20px;
+    }
+}
+
+
+.btn-transparent-white {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.btn-dual {
+    padding: 12px 0;
+    border: 1px solid #f95669;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-dual .upper {
+    background: #f95669;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 12px 10px 12px 15px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 100;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media (max-width: 400px) {
+    .btn-dual .upper {
+        font-size: 13px;
+        padding: 15px 9px 12px 15px;
+    }
+}
+
+.btn-dual .upper:after {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 43px 0 0 30px;
+    border-color: transparent transparent transparent #f95669;
+    z-index: 101;
+    content: '';
+    transition: .2s ease;
+}
+
+.btn-dual .upper:hover:after {
+    right: -20px;
+    border-width: 43px 0 0 20px;
+}
+
+.btn-dual .lower {
+    background: transparent;
+    padding: 16px 10px;
+    text-transform: uppercase;
+    color: #000;
+    position: relative;
+    z-index: 99;
+    margin-left: -65px;
+}
+
+.btn-group .btn i {
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.btn-group .btn:focus {
+    color: #ff8000;
+}
+
+.btn-group .btn-transparent {
+    color: #d0d0d0;
+    border: 1px solid #d0d0d0;
+    padding: 0;
+    width: 40px;
+}
+
+.btn-group .btn-transparent:hover {
+    color: #e6b322;
+    background: transparent;
+}
+
+.btn-active {
+    color: #e6b322;
+}
+
+.btn:focus {
+    color: #ff8000;
+    border : 1px #ff8000 solid;
+    box-shadow: none;
+}
+
+/* custom */
 .store-coupon {
     padding: 30px 0;
 }
