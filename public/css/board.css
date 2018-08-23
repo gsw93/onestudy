@@ -1071,7 +1071,10 @@ input:checked + .slider:before {
     font-size: 25px;
 }
 
-
+.comment{
+  margin:0;
+  padding:15px;
+}
 .commentcnt table tr td{
   padding-right: 12px;
   font-size: 16px;
@@ -1296,6 +1299,22 @@ input{
   font-weight: bold;
   font-size: 12px;
 }
+.my-custom-class-for-label_hover {
+  width: 80px;
+  min-height: 40px;
+
+  border: 1px solid #ff6600;
+  border-radius: 5px;
+
+  background: #ff6600;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+
+  font-weight: bold;
+  font-size: 12px;
+}
+
 /* student.ejs css */
 .modal-body{
   background-color:white;
