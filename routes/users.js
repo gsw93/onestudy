@@ -38,11 +38,6 @@ module.exports = function (router, passport) {
             if(err) throw err;
             res.render('mypage_master',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
         });
-        // MasterBoardModel.find({studentList.:id},function(err,rawBoard){
-        //     if(err) throw err;
-        //     res.render('mypage',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
-        // });
-
       } else{
           res.render('login');
       }
