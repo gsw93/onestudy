@@ -1349,9 +1349,7 @@ ul.pagination .active a {
 }
 
 .best-deal .block2{
-    margin: 15px;
-    padding : 2.5%;
-    background-color: #ffffff;
+    padding : 0;
 }
 .best-deal .block2 img{
     border: 1px #cccccc solid;

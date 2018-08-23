@@ -180,6 +180,16 @@ function changeMap(bounds) {
             infoWindow.setContent(infowincontent);
             infoWindow.open(map, marker);
         });
+        var z;
+        marker.addListener('mouseover', function() {
+          z=marker.getZIndex();
+          marker.setZIndex(150);
+          marker.set('labelClass', 'my-custom-class-for-label_hover');
+        });
+        marker.addListener('mouseout', function() {
+          marker.setZIndex(z);
+          marker.set('labelClass', 'my-custom-class-for-label');
+        });
         markers.push(marker);
         marker.setMap(map);
 
@@ -215,6 +225,19 @@ function changeMap(bounds) {
             '</div></div></div></div></a></div>';
         $("#items").append(tmpTag);
 
+        $('#items > .list-item').mouseover(function(){
+          var n = $("#items > .list-item").index($(this));
+          markers[n].setZIndex(150);
+          document.getElementsByClassName('my-custom-class-for-label')[n].style.color = "#fff";
+          document.getElementsByClassName('my-custom-class-for-label')[n].style.backgroundColor = "#ff6600";
+        });
+        $('#items > .list-item').mouseout(function(){
+          var n = $("#items > .list-item").index($(this));
+          markers[n].setZIndex(5-n);
+          document.getElementsByClassName('my-custom-class-for-label')[n].style.color = "#ff6600";
+          document.getElementsByClassName('my-custom-class-for-label')[n].style.backgroundColor = "#fff";
+        });
+
         var max = markerElem.maxNum;
 
         if (max === 1) {
@@ -247,11 +270,18 @@ function changeMap(bounds) {
           x[i].style.backgroundColor = " #a6a6a6";
           x[i].innerHTML = "종료";
         }
-        else if (ddd >= date) {
+        if (ddd >= date) {
             var x = document.getElementsByClassName("deadlineIcon");
             x[i].style.display = "block";
             x[i].style.backgroundColor = "orange";
             x[i].innerHTML = "모집중";
+        }
+        if (ddd < today) {
+            var x = document.getElementsByClassName("deadlineIcon");
+            x[i].style.display = "block";
+            x[i].style.fontSize = "smaller";
+            x[i].style.backgroundColor = " #a6a6a6";
+            x[i].innerHTML = "모집 종료";
         }
 
         //var i = new Date(markerElem.deadline);
