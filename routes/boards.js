@@ -418,7 +418,8 @@ module.exports = function (router) {
                         path: path,
                         location: {type: 'Point', coordinates: [locationX, locationY]},
                         regionShort: siNm,
-                        thumbnail_list: boardthumb
+                        thumbnail_list: boardthumb,
+                        originalname: originalname
                     }
                 };
             }
