@@ -232,13 +232,25 @@ button {
     position:absolute;
     bottom:50px;
 }
+
+.stop{
+  position:absolute;
+  bottom:15px;
+  right:0;
+  text-decoration: underline;
+  color:#ccc;
+}
 @media (max-width: 991px) {
     .btn-transparent{
         position: relative;
         bottom:20px;
     }
+    .stop{
+      position:relative;
+      display: block;
+      text-align: center;
+    }
 }
-
 
 .btn-transparent-white {
     background: transparent;
@@ -486,8 +498,11 @@ article ul li a {
   text-align: center;
 }
 
-#sign-in2{
+.sign-in2{
   color:#eb9316;
+}
+.sign-in2:hover{
+  color:#fff;
 }
 .btn-warning:hover{
   color:#fff;
@@ -780,6 +795,9 @@ article ul li a {
   width:150px;
   border:none;
   margin-right:20px;
+}
+#writeBtnstyle:active{
+  color:#fff;
 }
 @media (min-width: 1200px) and (max-width: 1450px) {
     .master_imgBackground{
@@ -1133,6 +1151,15 @@ input:checked + .slider:before {
 
 .registerInner{
     margin: 15px;
+}
+input[type="email"], input[type="password"],input[type="number"], input[type="text"], input[type="tel"] {
+    border-radius: 3px;
+    box-shadow: none;
+    height: 35px;
+    outline: none;
+    margin:auto 0;
+    font-weight: 200;
+    font-size: 15px;
 }
 .media-body input[type=text],input[type=number],input[type=date]{
     text-align: center;

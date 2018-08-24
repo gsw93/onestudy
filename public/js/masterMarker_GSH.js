@@ -223,7 +223,8 @@ function changeMap(bounds) {
             '<span id="deadline[' + i + ']" style="font-size:12px;float:right;line-height:35px;"></span>' +
             '<span id="master_term"><span id="master_money">' + markerElem.price + '만원</span>&nbsp;(주&nbsp;' + markerElem.studynum + '회)</span>' +
             '</div></div></div></div></a></div>';
-        $("#items").append(tmpTag);
+
+          $("#items").append(tmpTag);
 
         $('#items > .list-item').mouseover(function(){
           var n = $("#items > .list-item").index($(this));

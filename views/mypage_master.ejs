@@ -142,22 +142,22 @@
             <div class="block-cnt">
               <div class="cnt_title">
                   <h4>스터디 관리</h4>
-                  <div class="option">
+                  <!-- <div class="option">
                       <button class="btn_div active" value="전체">전체</button>
                       <button class="btn_div" value="모집중">모집중</button>
                       <button class="btn_div" value="진행중">진행중</button>
                       <button class="btn_div" value="종료">종료</button>
-                  </div>
+                  </div> -->
               </div>
               <table class="table table-hover" style="margin-top: 30px;">
                   <tbody style="font-size: 0.8rem;">
                   <%for (var i=0; i< board.length; i++){ %>
                   <tr id="<%=i%>"><%var s=i+1;%>
                       <td><%=s%></td>
-                      <td rowspan="2"><a href="/payment?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
+                      <td><a href="/payment?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
                       <td style="width:100px;"><a href="" style="margin-right:5px;">수정</a> / <a href="" style="margin-left:5px;">삭제</a></td>
                       <td style="text-align:right;width:100px;" id="date<%=i%>"></td>
-                      <td style="width:80px;">
+                      <td style="width:90px;">
                         <div class="study_state"></div>
                       </td>
                       <script>
@@ -178,6 +178,10 @@
                       }
                       if(today>term){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
+                      }
+                      if(<%=board[i].stop[0].statue%>){
+                        document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중단";
                         document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                       }
                         var i = new Date('<%- board[i].deadline %>');
