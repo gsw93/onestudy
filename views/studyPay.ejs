@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>원스터디 - 스터디 매칭 서비스</title>
-
+    <!-- Include jQuery lib. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- PLUGINS CSS STYLE -->
     <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -228,8 +229,18 @@
 
         </div>
     </div>
-
     </div>
+    <%if(board.stop[0].statue && (board.id==authUser.id)){%>
+    <!-- 수업 중단 마스터 -->
+    <div class="modal fade" role="dialog" id="stopmaster" style="top: 10%;">
+        <div class="modal-dialog" >
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.href='/mypage'">&times;</button>
+                    <h3 style="text-align: center;font-weight:700;">중단된 스터디입니다.</h3>
+                </div>
+        </div>
+    </div>
+    <%}%>
 </section>
 
 <!--============================
@@ -238,6 +249,11 @@
 <%- include footer.ejs %>
 
 <!-- JAVASCRIPTS -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#stopmaster").modal({backdrop: "static"});
+  });
+</script>
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/tether/js/tether.min.js"></script>

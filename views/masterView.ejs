@@ -152,7 +152,9 @@
                                 <!-- 작성자 수정 -->
                                 <%if(authUser.id==board.id){%>
                                 <button type="button" class="btn btn-transparent" onclick="location.href='/ModifywriteMaster?id=<%=board._id%>'" style="width:100%;">수정하기</button>
-                                <%} else{ var flag=0; %>
+                                <%if(!board.stop[0].statue){%>
+                                <a href="" data-toggle="modal" data-target="#stop"  class="stop">모집중단</a>
+                                <%}} else{ var flag=0; %>
                                   <%if(authUser.mystudy.length){
                                     for(var a=0; a< authUser.mystudy.length; a++){%>
                                   <%if(board._id==authUser.mystudy[a].studyid){ flag=1;}}}
@@ -351,6 +353,7 @@
     <!-- Container End -->
 </section>
 
+<!-- 참여하기 모달 -->
 <div class="modal fade" role="dialog" id="join" style="top: 10%;">
     <div class="modal-dialog signup-content" >
             <br><br>
@@ -363,7 +366,7 @@
                         <textarea name="selfIntroduction" rows="8" id="selfIntroduction" style="width: 100%;"></textarea>
                     </div>
                     <div class="login-set">
-                        <button type="submit" class="form-control btn btn-warning" id="sign-in2">스터디 참여하기</button>
+                        <button type="submit" class="form-control btn btn-warning" class="sign-in2">스터디 참여하기</button>
                     </div>
                     <input type="hidden" name="replyId" id="replyId2" value="<%=board._id%>">
                 </div>
@@ -373,6 +376,66 @@
     </div>
 </div>
 
+<!-- 수업 중단 신청 모달 -->
+<div class="modal fade" role="dialog" id="stop" style="top: 10%;">
+    <div class="modal-dialog signup-content" >
+            <br><br>
+        <form action="/process/stopstudy?id=<%=board._id%>" method="post" class="form-horizontal">
+            <div class="form-group" style="margin:auto;">
+                <div class="real_content" style="padding:0;">
+                    <h3 style="text-align: center;font-weight:700;">수업 중단 사유</h3>
+                    <p style="text-align:center; color:gray;">참여 신청한 학생을 위해 수업 중단 사유를 자세히 작성해주세요.</p>
+                    <div class="login-set">
+                        <textarea name="stopreason" rows="8" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="login-set">
+                        <button type="submit" class="form-control btn btn-warning" class="sign-in2">스터디 중단하기</button>
+                    </div>
+                    <input type="hidden" name="replyId" value="<%=board._id%>">
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>
+
+<%if(board.stop[0].statue && (board.id==authUser.id)){%>
+<!-- 수업 중단 마스터 -->
+<div class="modal fade" role="dialog" id="stopmaster" style="top: 10%;">
+    <div class="modal-dialog signup-content" >
+            <br><br>
+        <form action="/process/stopstudy?id=<%=board._id%>" method="post" class="form-horizontal">
+            <div class="form-group" style="margin:auto;">
+                <div class="real_content" style="padding:0;">
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.href='/mypage2'">&times;</button>
+                    <h3 style="text-align: center;font-weight:700;">스터디가 중단되었습니다.</h3>
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>
+<%}%>
+
+<%for(var n=0;n< board.studentList.length;n++){
+if(board.stop[0].statue && (board.studentList[n].email==authUser.id)){%>
+<!-- 수업 중단 학생 -->
+<div class="modal fade" role="dialog" id="stopmaster" style="top: 10%;">
+    <div class="modal-dialog signup-content" >
+            <br><br>
+        <form action="/process/stopstudy?id=<%=board._id%>" method="post" class="form-horizontal">
+            <div class="form-group" style="margin:auto;">
+                <div class="real_content" style="padding:0;">
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.href='/mypage'">&times;</button>
+                    <h3 style="text-align: center;font-weight:700;">중단된 스터디입니다.</h3>
+                    <p style="text-align:center; color:gray;">이유:<br><%=board.stop[0].reason%></p>
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>
+<%}}%>
 <!--============================
 =            Footer            =
 =============================-->
@@ -477,6 +540,7 @@
     });
   });
 
+  $("#stopmaster").modal({backdrop: "static"});
 
   /* 2. Action to perform on click */
   $('#stars li').on('click', function(){

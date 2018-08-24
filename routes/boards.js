@@ -44,7 +44,7 @@ module.exports = function (router) {
                 currentBoard.currentNum++;
                 console.log(currentBoard);
 
-                updateStudy(req.user[0].id,currentBoard._id,currentBoard.title,currentBoard.deadline,currentBoard.studyTerm,currentBoard.reviewstar);
+                updateStudy(req.user[0].id,currentBoard._id,currentBoard.title,currentBoard.deadline,currentBoard.studyTerm,currentBoard.reviewstar,currentBoard.stop[0].statue);
                 currentBoard.save(function (err) {
                     if(err) {
                         throw err;
@@ -55,13 +55,60 @@ module.exports = function (router) {
         });
     });
 
+    router.route('/process/stopstudy').post(function (req, res) {
+      console.log('/process/stopstudy 호출됨.');
 
-    function updateStudy(id,studyid,title,date,term,star){
+        var id = req.body.replyId;
+        UserModel.find({},{"mystudy":[{studyid:id}]},function(err,users){
+          if(err) throw err;
+
+          for(var i =0; i< users.length;i++){
+            var user = users[i];
+            for(var n = 0; n < user.mystudy.length;n++){
+              if(user.mystudy[n].studyid==id){
+                user.mystudy[n].statue = true;
+                console.log(user.id);
+                console.log(user.mystudy[n]);
+              }
+            }
+            user.save(function (err){
+              if(err) throw err;
+              console.log('학생 DB 스터디상태 변경');
+            })
+          }
+
+        });
+        MasterBoardModel.findById(req.query.id ,function (err, board) {
+            var currentBoard = board[0];
+            if(err){
+                throw err;
+                console.log(err);
+            }
+            // 아이디 중복 제거 해야합니다!!
+            if(currentBoard){
+              var stop = {
+                  "statue" : true,
+                  "reason": req.body.stopreason
+              };
+              currentBoard.stop[0] = stop;
+              console.log(currentBoard.stop[0]);
+
+              currentBoard.save(function (err) {
+                  if(err) {
+                      throw err;
+                  }
+                  res.redirect('/masterView?id='+req.query.id);
+              });
+            }
+          });
+    });
+
+    function updateStudy(id,studyid,title,date,term,star,statue){
     UserModel.findOne({id:id},function(err,rawBoard){
         if (err) {
           throw err;
         }
-        rawBoard.mystudy.push({studyid:studyid,title:title,deadline:date,studyTerm:term,reviewstar:star});
+        rawBoard.mystudy.push({studyid:studyid,title:title,deadline:date,studyTerm:term,reviewstar:star,statue:statue});
         rawBoard.save(function(err){
           if(err)throw err;
           console.log('마이스터디 추가');
@@ -294,7 +341,7 @@ module.exports = function (router) {
             if(err) console.error(err);
             thumbnail_list = '/uploads/boardThumb/'+thumb1;
 
-            var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"originalname":originalname,"thumbnail_list":thumbnail_list,"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
+            var masterboard = new MasterBoardModel({"id": id, "masterphoto": masterphoto, "title": title, "author": author,"category":category,"day":day, "region": region, "deadline":deadline, "minNum":minNum,"maxNum":maxNum,"studyTerm":studyTerm,"price":price,"studynum":studynum,"masterInfo":masterInfo, "studyInfo": studyInfo,"reviewstar":reviewstar,"path":path,"originalname":originalname,"thumbnail_list":thumbnail_list,"stop":[{statue:false}],"location":{type:'Point',coordinates:[locationX,locationY]}, "regionShort":siNm});
 
             console.log('#####check point#####');
 
@@ -370,6 +417,7 @@ module.exports = function (router) {
                         masterInfo: masterInfo,
                         studyInfo: studyInfo,
                         reviewstar: reviewstar,
+                        stop : [{statue:false}],
                         location: {type: 'Point', coordinates: [locationX, locationY]},
                         regionShort: siNm
                     }

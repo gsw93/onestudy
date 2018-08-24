@@ -47,6 +47,10 @@ var MasterBoardSchema = mongoose.Schema({
       contents : {type:String},
       star_rating:Number
     }],
+    stop :[{
+      statue : {type:Boolean, default:false},
+      reason : String
+    }],
 
     //07_04 add by sehyeon
     //location 좌표 저장, level 추가

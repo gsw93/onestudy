@@ -191,6 +191,10 @@
                             document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
                             document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                           }
+                          if(<%=authUser.mystudy[i].statue%>){
+                            document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중단";
+                            document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
+                          }
                           </script>
                       </tr>
                       <%}%>

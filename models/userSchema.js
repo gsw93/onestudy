@@ -31,7 +31,8 @@ var UserSchema = new mongoose.Schema({
       title : String,
       deadline : {type: Date, default: moment().format()},
       studyTerm: {type:Number, min:1},
-      reviewstar : Number
+      reviewstar : Number,
+      statue : {type:Boolean, deafult:false}
     }],
     //07_04 add by sehyeon
     //location 좌표 저장, level 추가
