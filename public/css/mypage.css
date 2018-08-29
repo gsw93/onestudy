@@ -684,7 +684,7 @@ ul.pagination li a {
     color: #222222;
 }
 
-ul.pagination .active a {
+ul.pagination  a.active {
     background-color: #D8D8D8;
     color: black;
 }

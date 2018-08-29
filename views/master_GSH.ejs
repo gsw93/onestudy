@@ -111,13 +111,8 @@
         <div class="container-fluid" style="margin-top: 20px;">
             <%if(authUser.phoneAuthCheck&&authUser.location.coordinates[0]){%>
             <div class="row">
-                <% if(interboard !== null && interboard.length!==0){ %>
-                <div class="col-md-6" style="color:orange;" id="recommendmaster">
-                    추천 마스터
-                </div>
-                <%}if(seller){
-                  if(interboard.length==0){%>
-                  <div class="col-md-6"></div><%}%>
+                <%if(seller){%>
+                <div class="col-md-6"></div>
                 <div class="col-md-6" id="writeBtn">
                     <button onclick="location.href='/writeMaster'" type="button" class="btn btn-primary btn-sm" id="writeBtnstyle">글 등록</button>
                 </div>
@@ -132,6 +127,11 @@
                 </div>
             </div>
             <div class="row">
+              <%if(interboard !== null && interboard.length!==0){ %>
+             <div class="col-md-12" style="color:orange;" id="recommendmaster">
+                 추천 마스터
+             </div>
+             <%}%>
                 <% if(interboard !== null && interboard.length!==0){
                 for (var i=0; i< interboard.length; i++){ %>
                 <div class="col-lg-3 col-md-6 col-sm-6 list-item">
@@ -157,30 +157,35 @@
                                 }
 
                                 var ddd = new Date('<%- interboard[i].deadline %>');
-                                var date = new Date();
+                                var date = new Date(); // 오늘+7일
                                 var x = document.getElementsByClassName("inter_deadlineIcon");
                                 var today = new Date(); //오늘
                                 var term = new Date('<%- interboard[i].deadline %>'); // 스터기기간
                                 date.setDate(date.getDate()+7);
                                 term.setDate(term.getDate()+(<%=interboard[i].studyTerm%>*7));
 
-                                var currentNum = <%= interboard[i].currentNum%>
                                 if (today<=ddd&& ddd < date) {
                                     x[<%- i%>].style.display = "block";
                                     x[<%- i%>].style.fontSize = "smaller";
                                     x[<%- i%>].style.backgroundColor = "red";
                                     x[<%- i%>].innerHTML = "마감임박";
                                 }
-                                if(term<today||currentNum==max){
+                                if(term<today){
                                   x[<%- i%>].style.display = "block";
                                   x[<%- i%>].style.fontSize = "smaller";
                                   x[<%- i%>].style.backgroundColor = " #a6a6a6";
                                   x[<%- i%>].innerHTML = "종료";
                                 }
-                                else if(ddd>=date){
+                                if(ddd>=date){
                                     x[<%- i%>].style.display = "block";
                                     x[<%- i%>].style.backgroundColor = "orange";
                                     x[<%- i%>].innerHTML = "모집중";
+                                }
+                                if (ddd < today) {
+                                    x[<%- i%>].style.display = "block";
+                                    x[<%- i%>].style.fontSize = "smaller";
+                                    x[<%- i%>].style.backgroundColor = " #a6a6a6";
+                                    x[<%- i%>].innerHTML = "모집 종료";
                                 }
 
                             </script>

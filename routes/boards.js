@@ -122,7 +122,7 @@ module.exports = function (router) {
             //07_15 add by sehyeon
             if(req.user[0].location.coordinates[0])
             {
-                    MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                    MasterBoardModel.find({'stop.statue':false}).sort({date:-1}).exec(function(err,rawBoards){
                     MasterBoardModel.find({location: {
                             $near : {
                                 $geometry : {
@@ -131,7 +131,7 @@ module.exports = function (router) {
                                 }
                             }
                         },
-                        category:req.user[0].interested}).limit( 4 ).
+                        category:req.user[0].interested,'stop.statue':false}).limit( 4 ).
                     exec(function (err,interBoards){
                         if(err) throw err;
                         console.log('마스터게시판 목록 출력');
@@ -144,7 +144,7 @@ module.exports = function (router) {
                 });
             }
             else {
-                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+                MasterBoardModel.find({'stop.statue':false}).sort({date:-1}).exec(function(err,rawBoards){
                     if(err) throw err;
                     console.log('마스터게시판 목록 출력');
                     console.log('test: '+ rawBoards);
@@ -156,43 +156,43 @@ module.exports = function (router) {
         }  else
             res.render('login');
     });
-    router.route('/master_jjy').get(function (req, res) {
-        if(req.user){
-            //07_15 add by sehyeon
-            if(req.user[0].location.coordinates[0])
-            {
-                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-                    MasterBoardModel.find({location: {
-                            $near : {
-                                $geometry : {
-                                    type: "Point",
-                                    coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
-                                }
-                            }
-                        },
-                        category:req.user[0].interested}).limit( 4 ).
-                    exec(function (err,interBoards){
-                        if(err) throw err;
-                        console.log('마스터게시판 목록 출력');
-                        //console.log(req.user[0]);
-                        console.log(interBoards);
-                        //07_04 add master->master_GSH 변경
-                        res.render('master_JJY',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
-                    });
-                });
-            }
-            else {
-                MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-                    if(err) throw err;
-                    console.log('마스터게시판 목록 출력');
-                    //console.log(req.user[0]);
-                    //07_04 add master->master_GSH 변경
-                    res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
-                });
-            }
-        }  else
-            res.render('login');
-    });
+    // router.route('/master_jjy').get(function (req, res) {
+    //     if(req.user){
+    //         //07_15 add by sehyeon
+    //         if(req.user[0].location.coordinates[0])
+    //         {
+    //             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+    //                 MasterBoardModel.find({location: {
+    //                         $near : {
+    //                             $geometry : {
+    //                                 type: "Point",
+    //                                 coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
+    //                             }
+    //                         }
+    //                     },
+    //                     category:req.user[0].interested}).limit( 4 ).
+    //                 exec(function (err,interBoards){
+    //                     if(err) throw err;
+    //                     console.log('마스터게시판 목록 출력');
+    //                     //console.log(req.user[0]);
+    //                     console.log(interBoards);
+    //                     //07_04 add master->master_GSH 변경
+    //                     res.render('master_JJY',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
+    //                 });
+    //             });
+    //         }
+    //         else {
+    //             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
+    //                 if(err) throw err;
+    //                 console.log('마스터게시판 목록 출력');
+    //                 //console.log(req.user[0]);
+    //                 //07_04 add master->master_GSH 변경
+    //                 res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
+    //             });
+    //         }
+    //     }  else
+    //         res.render('login');
+    // });
 
 
     router.route('/writeMaster').get(function (req, res) {

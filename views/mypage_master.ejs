@@ -107,9 +107,9 @@
               </div>
               <table class="table table-hover" style="margin-top: 30px;">
                   <tbody style="font-size: 0.8rem;">
-                  <%for (var i=0; i< board.length; i++){ %>
+                  <%for (var i=0; i< board.length; i++,skipSize++){ %>
                   <tr>
-                    <td><%=i+1%></td>
+                    <td><%=skipSize+1%></td>
                     <td colspan="2"><a href="/masterView?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
                     <td><%=board[i].comments.length%>개</td>
                     <td><% var star = board[i].reviewstar;var x;%>
@@ -123,19 +123,21 @@
                   <%}%>
                   </tbody>
               </table>
-              <!-- <div class="text-center">
+              <div class="text-center">
                   <ul class="pagination">
-                      <li class="active"><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
+                      <li><a href="/mypage2?page=1" class="page1 active">1</a></li>
+                      <%for(var n=2;n<= pagination;n++){%>
+                      <li><a href="/mypage2?page=<%=n%>" class="page1"><%=n%></a></li>
+                      <%}%>
                   </ul>
-              </div> -->
+              </div>
+              </script>
             </div>
           </div>
           <!-- 후기관리 끝 -->
         </div>
         <%}%>
-          <% if(board !== null && board.length!==0){%>
+          <% if(board2 !== null && board2.length!==0){%>
         <div class="row">
           <!-- 스터디 관리 -->
           <div class="col-lg-6 col-md-12 col-sm-12">
@@ -151,10 +153,10 @@
               </div>
               <table class="table table-hover" style="margin-top: 30px;">
                   <tbody style="font-size: 0.8rem;">
-                  <%for (var i=0; i< board.length; i++){ %>
-                  <tr id="<%=i%>"><%var s=i+1;%>
-                      <td><%=s%></td>
-                      <td><a href="/payment?id=<%=board[i]._id%>"><%=board[i].title%></a></td>
+                  <%for (var i=0; i< board2.length; i++,skipSize2++){ %>
+                  <tr id="<%=i%>">
+                      <td><%=skipSize2+1%></td>
+                      <td><a href="/payment?id=<%=board2[i]._id%>"><%=board2[i].title%></a></td>
                       <td style="width:100px;"><a href="" style="margin-right:5px;">수정</a> / <a href="" style="margin-left:5px;">삭제</a></td>
                       <td style="text-align:right;width:100px;" id="date<%=i%>"></td>
                       <td style="width:90px;">
@@ -162,11 +164,11 @@
                       </td>
                       <script>
                       var today = new Date();
-                      var dead = new Date('<%- board[i].deadline %>');
-                      var term = new Date('<%- board[i].deadline %>');
-                      term.setDate(term.getDate()+(<%=board[i].studyTerm%>*7));
-                      var currentNum = <%= board[i].currentNum%>
-                      var max = <%= board[i].currentNum%>
+                      var dead = new Date('<%- board2[i].deadline %>');
+                      var term = new Date('<%- board2[i].deadline %>');
+                      term.setDate(term.getDate()+(<%=board2[i].studyTerm%>*7));
+                      var currentNum = <%= board2[i].currentNum%>
+                      var max = <%= board2[i].currentNum%>
 
                       if(today<=dead){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
@@ -180,11 +182,11 @@
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
                         document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                       }
-                      if(<%=board[i].stop[0].statue%>){
+                      if(<%=board2[i].stop[0].statue%>){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중단";
                         document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                       }
-                        var i = new Date('<%- board[i].deadline %>');
+                        var i = new Date('<%- board2[i].deadline %>');
                         document.getElementById('date<%=i%>').innerHTML = date_format(i);
                         function date_format(dateValue){
                           var dd = dateValue.getDate();
@@ -214,12 +216,13 @@
                   <%}%>
                   </tbody>
               </table>
-              <div class="cnt_text">
-                <div class="row">
-                  <ul class="create_study">
-                      <li><a href="/writeMaster" style="color: white; text-decoration: none;">스터디 만들기</a></li>
+              <div class="text-center">
+                  <ul class="pagination">
+                      <li><a href="/mypage2?page2=1" class="page2 active">1</a></li>
+                      <%for(var n=2;n<= pagination2;n++){%>
+                      <li><a href="/mypage2?page2=<%=n%>" class="page2"><%=n%></a></li>
+                      <%}%>
                   </ul>
-                </div>
               </div>
             </div>
           </div>
@@ -351,22 +354,51 @@ if(<%-authUser.phoneAuthCheck%>==false){
     cert[0].innerHTML = "인증";
 }
 
-// Get the container element
-var btnContainer = document.getElementsByClassName("option");
+// // Get the container element
+// var btnContainer = document.getElementsByClassName("option");
+//
+// // Get all buttons with class="btn" inside the container
+// var btns = btnContainer[0].getElementsByClassName("btn_div");
+// var current = document.getElementsByClassName("btn_div active");
+//
+// // 스터디관리 btn active
+// for (var i = 0; i < 4; i++) {
+//   btns[i].addEventListener("click", function() {
+//     current[0].className = current[0].className.replace(" active", "");
+//     this.className += " active";
+//   });
+// }
+
+
+// pagination1
+var pagination = document.getElementsByClassName("pagination");
 
 // Get all buttons with class="btn" inside the container
-var btns = btnContainer[0].getElementsByClassName("btn_div");
-var current = document.getElementsByClassName("btn_div active");
+var page1 = pagination[0].getElementsByClassName("page1");
+var current_page1 = document.getElementsByClassName("page1 active");
 
-// 스터디관리 btn active
-for (var i = 0; i < 4; i++) {
-  btns[i].addEventListener("click", function() {
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
+for(var n =0; n< page1.length;n++){
+  var lo_page = 'https://localhost:3000/mypage2?page='+(n+1);
+  if(window.location.href == lo_page){
+    current_page1[0].className = current_page1[0].className.replace(" active", "");
+    page1[n].className += " active";
+  }
 }
 
+// pagination2
+var pagination = document.getElementsByClassName("pagination");
 
+// Get all buttons with class="btn" inside the container
+var page2 = pagination[1].getElementsByClassName("page2");
+var current_page2 = document.getElementsByClassName("page2 active");
+
+for(var n =0; n< page2.length;n++){
+  var lo_page = 'https://localhost:3000/mypage2?page2='+(n+1);
+  if(window.location.href == lo_page){
+    current_page2[0].className = current_page2[0].className.replace(" active", "");
+    page2[n].className += " active";
+  }
+}
 
 </script>
 

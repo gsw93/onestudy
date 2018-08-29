@@ -311,6 +311,11 @@
                             <tr>
                               <td colspan="3" style="font-size:18px;color:gray;width:100%;"><%=commentsList[i].contents%></td>
                             </tr>
+                            <%if(commentsList[i].author==authUser.name){%>
+                            <tr>
+                              <td style="font-size:11px;color:#ccc;"><a href="" style="margin-right:5px;">수정</a> / <a href="" style="margin-left:5px;">삭제</a></td>
+                            </tr>
+                            <%}%>
                           </table>
                         </div>
                       </div>

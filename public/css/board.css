@@ -938,7 +938,7 @@ article ul li a {
     }
     #writeBtn{
         position: absolute;
-        z-index: 5;
+        z-index: 6;
         top: -45px;
         left: -55%;
     }
@@ -980,7 +980,7 @@ article ul li a {
     }
     #writeBtn{
         position: absolute;
-        z-index: 5;
+        z-index: 6;
         top: -45px;
         left: -55%;
     }

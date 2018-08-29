@@ -34,10 +34,35 @@ module.exports = function (router, passport) {
     router.route('/mypage2').get(function (req, res) {
       if(req.user){
         var id = req.user[0].id;
-        MasterBoardModel.find({id:id},function(err,rawBoard){
-            if(err) throw err;
-            res.render('mypage_master',{board:rawBoard, seller:req.session.passport.user.seller, authUser: req.user[0]});
-        });
+
+        //후기관리
+        var page = req.param('page');
+        if(page==null){page=1;};
+
+        var skipSize = (page-1)*5;
+        var limitSize = 5;
+        var pageNum = 1;
+
+        //스터디관리
+        var page2 = req.param('page2');
+        if(page2==null){page2=1;};
+
+        var skipSize2 = (page2-1)*5;
+        var pageNum2 = 1;
+
+        MasterBoardModel.count({id:id},function(err,totalCount){
+          if(err) throw err;
+
+          pageNum = Math.ceil(totalCount/limitSize);
+          pageNum2 = Math.ceil(totalCount/limitSize);
+
+          MasterBoardModel.find({id:id}).sort({date:-1}).skip(skipSize).limit(limitSize).exec(function(err,rawBoard){
+            MasterBoardModel.find({id:id}).sort({date:-1}).skip(skipSize2).limit(limitSize).exec(function(err,rawBoard2){
+              if(err) throw err;
+              res.render('mypage_master',{board:rawBoard,board2:rawBoard2,pagination:pageNum,skipSize:skipSize,pagination2:pageNum2,skipSize2:skipSize2, seller:req.session.passport.user.seller, authUser: req.user[0]});
+            })
+          });
+        })
       } else{
           res.render('login');
       }

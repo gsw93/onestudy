@@ -200,13 +200,7 @@
                       <%}%>
                       </tbody>
                   </table>
-                  <!-- <div class="text-center">
-                      <ul class="pagination">
-                          <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                      </ul>
-                  </div> -->
+
               </div>
             </div>
           </div>
@@ -258,13 +252,7 @@
                         <%}%>
                       </tbody>
                   </table>
-                  <!-- <div class="text-center">
-                      <ul class="pagination">
-                          <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                      </ul>
-                  </div> -->
+
               </div>
             </div>
           </div>
@@ -330,21 +318,49 @@ if(<%-authUser.phoneAuthCheck%>==false){
 }
 
 
-// Get the container element
-var btnContainer = document.getElementsByClassName("option");
-
-// Get all buttons with class="btn" inside the container
-var btns = btnContainer[0].getElementsByClassName("btn_div");
-var current = document.getElementsByClassName("btn_div active");
-
-//btn active
-for (var i = 0; i < 4; i++) {
-  btns[i].addEventListener("click", function() {
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-
+// // Get the container element
+// var btnContainer = document.getElementsByClassName("option");
+//
+// // Get all buttons with class="btn" inside the container
+// var btns = btnContainer[0].getElementsByClassName("btn_div");
+// var current = document.getElementsByClassName("btn_div active");
+//
+// //btn active
+// for (var i = 0; i < 4; i++) {
+//   btns[i].addEventListener("click", function() {
+//     current[0].className = current[0].className.replace(" active", "");
+//     this.className += " active";
+//   });
+// }
+// // pagination1
+// var pagination = document.getElementsByClassName("pagination");
+//
+// // Get all buttons with class="btn" inside the container
+// var page1 = pagination[0].getElementsByClassName("page1");
+// var current_page1 = document.getElementsByClassName("page1 active");
+//
+// for(var n =0; n< page1.length;n++){
+//   var lo_page = 'https://localhost:3000/mypage?page='+(n+1);
+//   if(window.location.href == lo_page){
+//     current_page1[0].className = current_page1[0].className.replace(" active", "");
+//     page1[n].className += " active";
+//   }
+// }
+//
+// // pagination2
+// var pagination = document.getElementsByClassName("pagination");
+//
+// // Get all buttons with class="btn" inside the container
+// var page2 = pagination[1].getElementsByClassName("page2");
+// var current_page2 = document.getElementsByClassName("page2 active");
+//
+// for(var n =0; n< page2.length;n++){
+//   var lo_page = 'https://localhost:3000/mypage?page2='+(n+1);
+//   if(window.location.href == lo_page){
+//     current_page2[0].className = current_page2[0].className.replace(" active", "");
+//     page2[n].className += " active";
+//   }
+// }
 
 
 </script>
