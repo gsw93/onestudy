@@ -144,13 +144,14 @@
                   </div> -->
                   <table class="table table-hover" style="margin-top: 30px;">
                       <tbody style="font-size: 0.8rem;">
-                        <%for (var i=0; i< authUser.mystudy.length; i++){ %>
+                        <%for (var i=0; i< user.length; i++,skipSize++){ %>
                       <tr>
-                          <td><%=i+1%></td>
-                          <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i].studyid%>"><%=authUser.mystudy[i].title%></a></td>
+                          <td><%=skipSize+1%></td>
+                          <td colspan="2"><a href="/masterView?id=<%=user[i].studyid%>">
+                            <%=user[i].title%></a></td>
                           <td id="date[<%=i%>]"></td>
                           <script>
-                          var i = new Date('<%- authUser.mystudy[i].deadline %>');
+                          var i = new Date('<%- user[i].deadline %>');
                           document.getElementById('date[<%=i%>]').innerHTML = date_format2(i);
                             function date_format2(dateValue){
                               var dd = dateValue.getDate();
@@ -176,9 +177,9 @@
                           <td><div class="study_state"></div></td>
                           <script>
                           var today = new Date();
-                          var dead = new Date('<%- authUser.mystudy[i].deadline %>');
-                          var term = new Date('<%- authUser.mystudy[i].deadline %>');
-                          term.setDate(term.getDate()+(<%=authUser.mystudy[i].studyTerm%>*7));
+                          var dead = new Date('<%- user[i].deadline %>');
+                          var term = new Date('<%- user[i].deadline %>');
+                          term.setDate(term.getDate()+(<%=user[i].studyTerm%>*7));
                           if(today<=dead){
                             document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
                             document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(89, 89, 89)';
@@ -191,7 +192,7 @@
                             document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
                             document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                           }
-                          if(<%=authUser.mystudy[i].statue%>){
+                          if(<%=user[i].statue%>){
                             document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중단";
                             document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
                           }
@@ -200,27 +201,34 @@
                       <%}%>
                       </tbody>
                   </table>
-
+                  <div class="text-center">
+                      <ul class="pagination">
+                          <li><a href="/mypage?page=1" class="page1 active">1</a></li>
+                          <%for(var n=2;n<= pagination;n++){%>
+                          <li><a href="/mypage?page=<%=n%>" class="page1"><%=n%></a></li>
+                          <%}%>
+                      </ul>
+                  </div>
               </div>
             </div>
           </div>
           <%}%>
           <!-- 스터디 관리 끝 -->
           <!-- 스터디 평가  -->
-          <% if(authUser.mystudy.length!==0){%>
+          <% if(user2.length!==0){%>
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="block-cnt">
               <div class="cnt_title">
                   <h4>스터디 평가하기</h4>
                   <table class="table table-hover" style="margin-top: 30px;">
                       <tbody style="font-size: 0.8rem;">
-                        <%for (var i=0; i< authUser.mystudy.length; i++){ %>
+                        <%for (var i=0; i< user2.length; i++,skipSize2++){ %>
                         <tr>
-                            <td><%=i+1%></td>
-                            <td colspan="2"><a href="/masterView?id=<%=authUser.mystudy[i].studyid%>"><%=authUser.mystudy[i].title%></a></td>
+                            <td><%=skipSize2+1%></td>
+                            <td colspan="2"><a href="/masterView?id=<%=user2[i].studyid%>"><%=user2[i].title%></a></td>
                             <td id="date2[<%=i%>]"></td>
                             <script>
-                            var i = new Date('<%- authUser.mystudy[i].deadline %>');
+                            var i = new Date('<%- user2[i].deadline %>');
                             document.getElementById('date2[<%=i%>]').innerHTML = date_format2(i);
                               function date_format2(dateValue){
                                 var dd = dateValue.getDate();
@@ -243,8 +251,8 @@
                                 return yyyy+'.'+mm+'.'+dd+" - "+hh+":"+mimi;
                               }
                             </script>
-                            <td><%=authUser.mystudy[i].reviewstar+'.0'%>
-                              <% var temp=0;var s; for(s=0;s< authUser.mystudy[i].reviewstar;s++){ %>
+                            <td><%=user2[i].reviewstar+'.0'%>
+                              <% var temp=0;var s; for(s=0;s< user2[i].reviewstar;s++){ %>
                               <i class="fas fa-star" style="color:#ff751a;"></i><% } %>
                               <% for(s;s< 5;s++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
                             </td>
@@ -252,7 +260,14 @@
                         <%}%>
                       </tbody>
                   </table>
-
+                  <div class="text-center">
+                      <ul class="pagination">
+                          <li><a href="/mypage?page2=1" class="page2 active">1</a></li>
+                          <%for(var n=2;n<= pagination;n++){%>
+                          <li><a href="/mypage?page2=<%=n%>" class="page2"><%=n%></a></li>
+                          <%}%>
+                      </ul>
+                  </div>
               </div>
             </div>
           </div>
@@ -332,35 +347,35 @@ if(<%-authUser.phoneAuthCheck%>==false){
 //     this.className += " active";
 //   });
 // }
-// // pagination1
-// var pagination = document.getElementsByClassName("pagination");
-//
-// // Get all buttons with class="btn" inside the container
-// var page1 = pagination[0].getElementsByClassName("page1");
-// var current_page1 = document.getElementsByClassName("page1 active");
-//
-// for(var n =0; n< page1.length;n++){
-//   var lo_page = 'https://localhost:3000/mypage?page='+(n+1);
-//   if(window.location.href == lo_page){
-//     current_page1[0].className = current_page1[0].className.replace(" active", "");
-//     page1[n].className += " active";
-//   }
-// }
-//
-// // pagination2
-// var pagination = document.getElementsByClassName("pagination");
-//
-// // Get all buttons with class="btn" inside the container
-// var page2 = pagination[1].getElementsByClassName("page2");
-// var current_page2 = document.getElementsByClassName("page2 active");
-//
-// for(var n =0; n< page2.length;n++){
-//   var lo_page = 'https://localhost:3000/mypage?page2='+(n+1);
-//   if(window.location.href == lo_page){
-//     current_page2[0].className = current_page2[0].className.replace(" active", "");
-//     page2[n].className += " active";
-//   }
-// }
+// pagination1
+var pagination = document.getElementsByClassName("pagination");
+
+// Get all buttons with class="btn" inside the container
+var page1 = pagination[0].getElementsByClassName("page1");
+var current_page1 = document.getElementsByClassName("page1 active");
+
+for(var n =0; n< page1.length;n++){
+  var lo_page = 'https://localhost:3000/mypage?page='+(n+1);
+  if(window.location.href == lo_page){
+    current_page1[0].className = current_page1[0].className.replace(" active", "");
+    page1[n].className += " active";
+  }
+}
+
+// pagination2
+var pagination = document.getElementsByClassName("pagination");
+
+// Get all buttons with class="btn" inside the container
+var page2 = pagination[1].getElementsByClassName("page2");
+var current_page2 = document.getElementsByClassName("page2 active");
+
+for(var n =0; n< page2.length;n++){
+  var lo_page = 'https://localhost:3000/mypage?page2='+(n+1);
+  if(window.location.href == lo_page){
+    current_page2[0].className = current_page2[0].className.replace(" active", "");
+    page2[n].className += " active";
+  }
+}
 
 
 </script>

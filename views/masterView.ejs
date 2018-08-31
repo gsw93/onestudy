@@ -264,7 +264,7 @@
                           <i class="fas fa-star" style="color:#ff751a;"></i><% } %>
                           <% for(s;s< 5;s++){%><i class="fas fa-star" style="color:#e6e6e6;"></i><%}%></span>
                       </div>
-                      <form id="replyAction" action="/process/comment" method="post">
+
                         <% if(board.comments.length>0){ var commentsList = board.comments;%>
                           <% for (var i =0;i< commentsList.length;i++){ %>
                       <div class="row comment" style="width:100%;">
@@ -273,6 +273,7 @@
                         </div>
                         <div class="col-lg-10 commentcnt">
                           <table style="width:100%;">
+                            <form id="commentdelete" action="/process/deleteComment" method="post">
                             <tr>
                               <td><%=commentsList[i].author%></td>
                               <td id="comment_date[<%=i%>]" style="font-size:13px;width:50px;"></td>
@@ -309,17 +310,22 @@
                               </td>
                             </tr>
                             <tr>
+                              <input type="hidden" name="commentcnt" value="<%=commentsList[i].contents%>">
                               <td colspan="3" style="font-size:18px;color:gray;width:100%;"><%=commentsList[i].contents%></td>
                             </tr>
                             <%if(commentsList[i].author==authUser.name){%>
                             <tr>
-                              <td style="font-size:11px;color:#ccc;"><a href="" style="margin-right:5px;">수정</a> / <a href="" style="margin-left:5px;">삭제</a></td>
+                              <input type="hidden" name="Id" value="<%=board._id%>">
+                              <td style="font-size:11px;color:#ccc;"><a href="" style="margin-right:5px;">수정</a> /
+                                <button type="submit" name="button" style="border:none;background:none;font-size:11px;">삭제</button>
                             </tr>
                             <%}%>
+                            </form>
                           </table>
                         </div>
                       </div>
                       <%}}%>
+                      <form id="replyAction" action="/process/comment" method="post">
                       <div class="rating-stars" style="background-color:#e6e6e6;margin:20px;padding:25px;text-align:center;">
                         <ul id='stars'>
                           <li class='star' title='Poor' data-value='1'>
@@ -500,6 +506,7 @@ if(board.stop[0].statue && (board.studentList[n].email==authUser.id)){%>
         return false;
       <%}%>
     });
+
 
     $(function(){
       $('.text').froalaEditor({
