@@ -100,7 +100,7 @@ function changeMap(bounds) {
     var i=0;
 
     Array.prototype.forEach.call(data,function (markerElem) {
-      
+
         var title = markerElem.title;
         //var name = markerElem.getAttribute('name');
         var region = markerElem.regionShort;

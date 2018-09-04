@@ -22,15 +22,56 @@ var Thumbnail = require('thumbnail');
 var thumbnail = new Thumbnail('./public/uploads/user',  './public/uploads/userThumb');
 
 module.exports = function (router, passport) {
+
+    // 학생 마이페이지
     router.route('/mypage').get(function (req, res) {
       if(req.user){
-        var id = req.user[0].id;
-        res.render('mypage_student',{seller:req.session.passport.user.seller, authUser: req.user[0]});
+        var user = req.user[0];
 
+        //나의 스터디 관리
+        var page = req.param('page');
+        if(page==null){page=1;};
+
+        var skipSize = (page-1)*5;
+        var limitSize = 5;
+        var pageNum = 1;
+
+        //스터디 평가하기
+        var page2 = req.param('page2');
+        if(page2==null){page2=1;};
+
+        var skipSize2 = (page2-1)*5;
+        var pageNum2 = 1;
+
+        var totalCount = req.user[0].mystudy.length;
+        pageNum = Math.ceil(totalCount/limitSize); // 나의스터디 관리 페이지
+        pageNum2 = Math.ceil(totalCount/limitSize); // 스터디평가하기 페이지
+
+        //나의 스터디 관리 페이징
+        UserModel.aggregate([
+          {$match:{'id':req.user[0].id}},
+          {$unwind:'$mystudy'},
+          {$project:{_id:'$mystudy._id',deadline:'$mystudy.deadline',studyid:'$mystudy.studyid',
+          title:'$mystudy.title',studyTerm:'$mystudy.studyTerm',reviewstar:'$mystudy.reviewstar',statue:'$mystudy.statue'}}
+        ]).sort({date:-1}).skip(skipSize).limit(limitSize).exec(function(err,user){
+
+            //스터디 평가하기 페이징
+            UserModel.aggregate([
+              {$match:{'id':req.user[0].id}},
+              {$unwind:'$mystudy'},
+              {$project:{_id:'$mystudy._id',deadline:'$mystudy.deadline',studyid:'$mystudy.studyid',
+              title:'$mystudy.title',studyTerm:'$mystudy.studyTerm',reviewstar:'$mystudy.reviewstar',statue:'$mystudy.statue'}}
+            ]).sort({date:-1}).skip(skipSize2).limit(limitSize).exec(function(err,user2){
+              if (err) throw err;
+              res.render('mypage_student',{user:user,user2:user2,pagination:pageNum,skipSize:skipSize,pagination2:pageNum2,skipSize2:skipSize2,seller:req.session.passport.user.seller, authUser: req.user[0]});
+            })
+        })
       } else{
           res.render('login');
       }
     });
+
+    // 마스터 마이페이지
     router.route('/mypage2').get(function (req, res) {
       if(req.user){
         var id = req.user[0].id;
@@ -56,7 +97,9 @@ module.exports = function (router, passport) {
           pageNum = Math.ceil(totalCount/limitSize);
           pageNum2 = Math.ceil(totalCount/limitSize);
 
+          //후기관리 페이징
           MasterBoardModel.find({id:id}).sort({date:-1}).skip(skipSize).limit(limitSize).exec(function(err,rawBoard){
+            //스터디관리 페이징
             MasterBoardModel.find({id:id}).sort({date:-1}).skip(skipSize2).limit(limitSize).exec(function(err,rawBoard2){
               if(err) throw err;
               res.render('mypage_master',{board:rawBoard,board2:rawBoard2,pagination:pageNum,skipSize:skipSize,pagination2:pageNum2,skipSize2:skipSize2, seller:req.session.passport.user.seller, authUser: req.user[0]});
@@ -67,6 +110,8 @@ module.exports = function (router, passport) {
           res.render('login');
       }
     });
+
+    // 카테고리 변경 프로세스
     router.route('/process/categoryModify').post(function(req,res){
       var id = req.user[0].id;
       var interested = req.body.check_c;

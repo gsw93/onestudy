@@ -208,6 +208,8 @@ module.exports = function (router) {
         });
     });
 
+
+
     router.route('/masterView').get(function (req, res) {
         var id = req.param('id');
 
@@ -269,6 +271,7 @@ module.exports = function (router) {
         console.log('리뷰 별점 변경');
       })
     }
+
     router.route('/process/comment').post(function (req, res) {
         var reply_id=req.body.replyId;
         var author = req.user[0].nickname;
@@ -280,6 +283,36 @@ module.exports = function (router) {
 
         res.redirect('/masterView?id='+req.body.replyId);
     });
+
+    router.route('/process/deleteComment').post(function (req, res) {
+        var reply_id=req.body.Id;
+        var commentcnt = req.body.commentcnt;
+
+       console.log('/process/deleteComment 호출');
+
+       MasterBoardModel.findOne({_id:reply_id},function(err,rawBoard){
+         if(err) throw err;
+         var commentlength = rawBoard.comments.length;
+         var commenttotal = 0;
+
+         for(var i = 0; i< rawBoard.comments.length; i++){
+           commenttotal += rawBoard.comments[i].star_rating;
+           if((rawBoard.comments[i].author == req.user[0].nickname) &&(rawBoard.comments[i].contents == commentcnt)){
+             var commentstar = rawBoard.comments[i].star_rating;
+           }
+         }
+         console.log(commentstar);
+         var reviewstar = Math.round((commenttotal-commentstar) / commentlength);
+
+         MasterBoardModel.update({_id:reply_id},{$pull:{'comments':{'author':req.user[0].nickname,'contents':commentcnt}}},function(err,rawBoard){
+           if(err) throw err;
+           console.log(req.user[0].nickname + ' 댓글 삭제');
+           updateStar(reply_id,reviewstar);
+       })
+     });
+        res.redirect('/masterView?id='+reply_id);
+    });
+
     //검색기능 부탁해 세현오빠ㅎㅎㅎㅎ
     router.get('/process/search',function(req,res){
       var select_region2 = req.param('select_region2');
