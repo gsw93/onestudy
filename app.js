@@ -21,14 +21,14 @@ var app = express();
 var multer = require('multer');
 var fs = require('fs');
 //세션 설정
-var store = new MongoDBStore({
-
-    // uri: 'mongodb://35.189.135.181/db',
-    // uri: 'mongodb://localhost:27017/db',
-    uri: 'mongodb://35.189.135.181/db',
-    databaseName: 'db',
-    collection: 'sessions'
-});
+// var store = new MongoDBStore({
+//
+//     // uri: 'mongodb://35.189.135.181/db',
+//     uri: 'mongodb://localhost:27017/db',
+//     // uri: 'mongodb://35.189.135.181/db',
+//     databaseName: 'db',
+//     collection: 'sessions'
+// });
 var options = {
     ca: fs.readFileSync('./gogetssl/onestudyca.pem'),
     key: fs.readFileSync('./gogetssl/onestudykey.pem'),
@@ -38,15 +38,15 @@ var options = {
 app.use(serveStatic(path.join(__dirname, './public')));
 app.use('/froala', express.static('froala'));
 
-app.use(require('express-session')({
-    secret: 'sad@*!lsd42scc',
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7 //1week
-    },
-    store: store,
-    resave: true,
-    savaUninitialized: false
-}));
+// app.use(require('express-session')({
+//     secret: 'sad@*!lsd42scc',
+//     cookie: {
+//         maxAge: 1000 * 60 * 60 * 24 * 7 //1week
+//     },
+//     store: store,
+//     resave: true,
+//     savaUninitialized: false
+// }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
@@ -74,26 +74,26 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 //============================ 모듈 설정 끝 ============================
 
-var connectDB = require('./models/database');
+// var connectDB = require('./models/database');
 //============================ 데이터베이스에 연결 끝 ============================
 
-var configPassport = require('./config/controller');
-configPassport(app, passport);
+// var configPassport = require('./config/controller');
+// configPassport(app, passport);
 //============================ 로그인 기능 끝 ============================
 
-var indexRoute = require('./routes/index_KSW');
-var passportRoute = require('./routes/passport');
-var usersRoute = require('./routes/users');
-var boardsRoute = require('./routes/boards');
-//07_04 add by sehyeon
-var jusoRoute = require('./routes/juso_GSH');
-
-indexRoute(app);
-boardsRoute(app);
-usersRoute(app, passport);
-passportRoute(app, passport);
-//07_04 add by sehyeon
-jusoRoute(app);
+// var indexRoute = require('./routes/index_KSW');
+// var passportRoute = require('./routes/passport');
+// var usersRoute = require('./routes/users');
+// var boardsRoute = require('./routes/boards');
+// //07_04 add by sehyeon
+// var jusoRoute = require('./routes/juso_GSH');
+//
+// indexRoute(app);
+// boardsRoute(app);
+// usersRoute(app, passport);
+// passportRoute(app, passport);
+// //07_04 add by sehyeon
+// jusoRoute(app);
 //============================ 라우터 끝 ============================
 
 var httpsServer = https.createServer(options, app);
@@ -102,9 +102,13 @@ var httpServer = http.createServer(app);
 // var httpPort = 3001;
 var httpPort = 80;
 
+router.route('/').get(function (req, res) {
+    res.render('checkevent');
+});
+
 httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);
-    connectDB();
+    // connectDB();
 });
 httpsServer.listen(app.get('port'), function () {
     console.log('https 서버가 시작되었습니다. 포트 : ' + app.get('port'));
