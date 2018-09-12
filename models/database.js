@@ -14,11 +14,16 @@ module.exports = function connectDB() { // mongoose db
     var database;
     // 데이터베이스 연결 정보
     var databaseUrl = "mongodb://localhost:27017/db";
+    var dbOptions = {
+        user: "dbAdmin",
+        pass: "vlrtpfdkdl0505!",
+        useMongoClient: true
+    };
 
     // 데이터베이스 연결
     console.log('데이터베이스 연결을 시도합니다.');
     mongoose.Promise = global.Promise; // node의 promise를 js의 promise로 바꿈
-    mongoose.connect(databaseUrl);
+    mongoose.connect(databaseUrl,dbOptions);
     database = mongoose.connection;
 
     database.on('error', console.error.bind(console, 'mongoose connection error.'));
