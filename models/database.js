@@ -13,17 +13,20 @@ module.exports = function connectDB() { // mongoose db
 
     var database;
     // 데이터베이스 연결 정보
-    var databaseUrl = "mongodb://localhost:27017/db";
-    var dbOptions = {
-        user: "dbAdmin",
-        pass: "vlrtpfdkdl0505!",
-        useMongoClient: true
-    };
-
+    var databaseUrl = "mongodb://dbController:vlrtpfdkdl0505!@35.185.173.101/db?authSource=db";
+    // var databaseUrl = "mongodb://35.185.173.101:27017/db";
     // 데이터베이스 연결
     console.log('데이터베이스 연결을 시도합니다.');
     mongoose.Promise = global.Promise; // node의 promise를 js의 promise로 바꿈
-    mongoose.connect(databaseUrl,dbOptions);
+    // mongoose.connect(databaseUrl,{ auth:{
+    //     authSource:"admin",
+    //     user: "dbController",
+    //     password: "vlrtpfdkdl0505!",
+    //     useMongoClient: true
+    // }}).then(function (db) {
+    //     mongoose.connection.close();
+    // });
+    mongoose.connect(databaseUrl);
     database = mongoose.connection;
 
     database.on('error', console.error.bind(console, 'mongoose connection error.'));
