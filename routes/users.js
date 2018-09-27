@@ -123,10 +123,10 @@ module.exports = function (router, passport) {
         UserModel.updateOne(myquery,newvalue,function(err,res){
           if(err) throw err;
           console.log('카테고리 변경');
-        })
+        });
         res.redirect('/mypage');
       })
-    })
+    });
 
     router.route('/masterapply').get(function (req, res) {
         if(req.user){

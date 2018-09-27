@@ -22,10 +22,8 @@ var multer = require('multer');
 var fs = require('fs');
 //세션 설정
 var store = new MongoDBStore({
-
-    // uri: 'mongodb://35.189.135.181/db',
+    uri: 'mongodb://35.185.173.101/db',
     // uri: 'mongodb://localhost:27017/db',
-    uri: 'mongodb://35.189.135.181/db',
     databaseName: 'db',
     collection: 'sessions'
 });
@@ -101,6 +99,10 @@ var httpServer = http.createServer(app);
 
 // var httpPort = 3001;
 var httpPort = 80;
+
+router.route('/').get(function (req, res) {
+    res.render('checkevent');
+});
 
 httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);

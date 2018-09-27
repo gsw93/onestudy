@@ -19,9 +19,6 @@ var FroalaEditor = require('../node_modules/wysiwyg-editor-node-sdk');
 
 module.exports = function (router) {
 
-    // 스터디에 참여한 학생들 저장하기
-    // 스터디 참여하면 마이페이지로 리다이렉트 시키고 자신이 신청한 스터디 목록이 뜨게 하려고 했으나
-    // 마이페이지는 대대적인 수정이 필요해보임. 그래서 일단 보류
     router.route('/process/participateStudy').post(function (req, res) {
         console.log('/process/participateStudy 호출됨.');
         console.log(req.user);
@@ -156,43 +153,6 @@ module.exports = function (router) {
         }  else
             res.render('login');
     });
-    // router.route('/master_jjy').get(function (req, res) {
-    //     if(req.user){
-    //         //07_15 add by sehyeon
-    //         if(req.user[0].location.coordinates[0])
-    //         {
-    //             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-    //                 MasterBoardModel.find({location: {
-    //                         $near : {
-    //                             $geometry : {
-    //                                 type: "Point",
-    //                                 coordinates : [req.user[0].location.coordinates[0],req.user[0].location.coordinates[1]]
-    //                             }
-    //                         }
-    //                     },
-    //                     category:req.user[0].interested}).limit( 4 ).
-    //                 exec(function (err,interBoards){
-    //                     if(err) throw err;
-    //                     console.log('마스터게시판 목록 출력');
-    //                     //console.log(req.user[0]);
-    //                     console.log(interBoards);
-    //                     //07_04 add master->master_GSH 변경
-    //                     res.render('master_JJY',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:interBoards});
-    //                 });
-    //             });
-    //         }
-    //         else {
-    //             MasterBoardModel.find({}).sort({date:-1}).exec(function(err,rawBoards){
-    //                 if(err) throw err;
-    //                 console.log('마스터게시판 목록 출력');
-    //                 //console.log(req.user[0]);
-    //                 //07_04 add master->master_GSH 변경
-    //                 res.render('master_GSH',{board:rawBoards, seller:req.session.passport.user.seller, authUser: req.user[0],interboard:null});
-    //             });
-    //         }
-    //     }  else
-    //         res.render('login');
-    // });
 
 
     router.route('/writeMaster').get(function (req, res) {
@@ -208,7 +168,12 @@ module.exports = function (router) {
         });
     });
 
-
+    router.get('/deleteMaster', function(req, res){
+        var id = req.param('id');
+        MasterBoardModel.remove({_id:id}, function(err){
+            res.redirect('/mypage2');
+        });
+    });
 
     router.route('/masterView').get(function (req, res) {
         var id = req.param('id');

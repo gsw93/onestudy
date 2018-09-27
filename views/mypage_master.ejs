@@ -157,7 +157,23 @@
                   <tr id="<%=i%>">
                       <td><%=skipSize2+1%></td>
                       <td><a href="/payment?id=<%=board2[i]._id%>"><%=board2[i].title%></a></td>
-                      <td style="width:100px;"><a href="" style="margin-right:5px;">수정</a> / <a href="" style="margin-left:5px;">삭제</a></td>
+                      <td style="width:100px;"><a href="/ModifywriteMaster?id=<%=board2[i]._id%>" style="margin-right:5px;">수정</a>/<a href="#" data-toggle="modal" data-target="#delete_confirm<%=i%>" style="margin-left:5px;">삭제</a></td>
+                      <div class="modal fade" role="dialog" id="delete_confirm<%=i%>" style="top: 10%;">
+                          <div class="modal-dialog signup-content" >
+                              <br><br>
+                                  <div class="real_content">
+                                      <h4 style="text-align: center;">정말로 삭제하시겠습니까 ?</h4>
+                                      <p style="text-align:center; color:gray;">스터디 참여 인원이 있을시 삭제가 불가능합니다. <a href="/masterView?id=<%=board2[i]._id%>" style="text-decoration: underline;">모집중단</a></p>
+                                      <div class="login-set">
+                                          <button class="form-control btn btn-warning" class="sign-in2 close" data-dismiss="modal">뒤로 가기</button>
+                                          <%if(!board2[i].studentList[0]){%>
+                                          <button class="form-control btn btn-danger" class="sign-in2" onclick="location.href='/deleteMaster?id=<%=board2[i]._id%>'">삭제</button>
+                                          <%}%>
+                                      </div>
+                                  </div>
+                              <br><br>
+                          </div>
+                      </div>
                       <td style="text-align:right;width:100px;" id="date<%=i%>"></td>
                       <td style="width:90px;">
                         <div class="study_state"></div>
@@ -307,6 +323,7 @@
         </form>
     </div>
 </div>
+
 <!--============================
 =            Footer            =
 =============================-->
