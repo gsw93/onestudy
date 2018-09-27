@@ -172,15 +172,15 @@
 
                       if(today<=dead){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중";
-                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(89, 89, 89)';
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = '#ab31fe';
                       }
                       if((dead<today && today<=term)||currentNum==max){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "진행중";
-                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = 'rgb(255, 128, 0)';
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor = '#3147fe';
                       }
                       if(today>term){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "종료";
-                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='rgb(204, 204, 204)';
+                        document.getElementsByClassName('study_state')[<%=i%>].style.backgroundColor ='#a5a4a5';
                       }
                       if(<%=board2[i].stop[0].statue%>){
                         document.getElementsByClassName('study_state')[<%=i%>].innerHTML = "모집중단";

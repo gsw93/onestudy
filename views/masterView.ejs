@@ -311,13 +311,15 @@
                             </tr>
                             <tr>
                               <input type="hidden" name="commentcnt" value="<%=commentsList[i].contents%>">
-                              <td colspan="3" style="font-size:18px;color:gray;width:100%;"><%=commentsList[i].contents%></td>
+                              <td colspan="3" style="font-size:18px;color:gray;width:100%;" id="comment_cnt[<%=i%>]"><%=commentsList[i].contents%></td>
                             </tr>
                             <%if(commentsList[i].author==authUser.name){%>
                             <tr>
                               <input type="hidden" name="Id" value="<%=board._id%>">
-                              <td style="font-size:11px;color:#ccc;"><a href="" style="margin-right:5px;">수정</a> /
+                              <td style="font-size:11px;color:#ccc;">
+                                <button type="submit" name="button" style="border:none;background:none;font-size:11px;margin-right:5px;">수정</button> /
                                 <button type="submit" name="button" style="border:none;background:none;font-size:11px;">삭제</button>
+                              </td>
                             </tr>
                             <%}%>
                             </form>
@@ -348,12 +350,15 @@
                         <input type="hidden" id="hidden_point" name="star_rating" value="">
                         <input type="hidden" id="reviewstar" name="reviewstar" value="">
                       </div>
+                      <%for(var n=0;n< board.studentList.length;n++){
+                      if(!board.stop[0].statue){%>
                       <div class="comment_write" style="margin:20px;">
                         <input type="hidden" name="replyId" id="replyId" value="<%=board._id%>">
                         <textarea name="contents" id="commentcontents" class="form-control" rows="2"
                                   style="display: inline;width:80%;float:left;" placeholder="감사합니다."  /required></textarea>
                         <button type="submit" name="button" class="btn" style="background-color:#ff751a;color:#fff;float:left;width:15%;height:78px;">전송</button>
                       </div>
+                      <%}}%>
                       </form>
                     </div>
                   </div>
@@ -437,7 +442,7 @@ if(board.stop[0].statue && (board.studentList[n].email==authUser.id)){%>
         <form action="/process/stopstudy?id=<%=board._id%>" method="post" class="form-horizontal">
             <div class="form-group" style="margin:auto;">
                 <div class="real_content" style="padding:0;">
-                    <button type="button" class="close" data-dismiss="modal" onclick="location.href='/mypage'">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 style="text-align: center;font-weight:700;">중단된 스터디입니다.</h3>
                     <p style="text-align:center; color:gray;">이유:<br><%=board.stop[0].reason%></p>
                 </div>
@@ -461,6 +466,7 @@ if(board.stop[0].statue && (board.studentList[n].email==authUser.id)){%>
 <!-- JAVASCRIPTS -->
 
 <script type="text/javascript">
+
     var x=<%-board.location.coordinates[1]%>;
     var y=<%-board.location.coordinates[0]%>;
     function myMap() {

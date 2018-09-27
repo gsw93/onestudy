@@ -261,23 +261,23 @@ function changeMap(bounds) {
             var x = document.getElementsByClassName("deadlineIcon");
             x[i].style.display = "block";
             x[i].style.fontSize = "smaller";
-            x[i].style.backgroundColor = "red";
+            x[i].style.backgroundColor = "#fe161d";
             x[i].innerHTML = "마감임박";
         }
-        if(term<today||currentNum==max){
+        if(term<today){
           var x = document.getElementsByClassName("deadlineIcon");
           x[i].style.display = "block";
           x[i].style.fontSize = "smaller";
-          x[i].style.backgroundColor = " #a6a6a6";
+          x[i].style.backgroundColor = " #a5a4a5";
           x[i].innerHTML = "종료";
         }
         if (ddd >= date) {
             var x = document.getElementsByClassName("deadlineIcon");
             x[i].style.display = "block";
-            x[i].style.backgroundColor = "orange";
+            x[i].style.backgroundColor = "#ab31fe";
             x[i].innerHTML = "모집중";
         }
-        if (ddd < today) {
+        if (ddd < today||currentNum==max) {
             var x = document.getElementsByClassName("deadlineIcon");
             x[i].style.display = "block";
             x[i].style.fontSize = "smaller";
