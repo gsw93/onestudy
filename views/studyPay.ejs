@@ -157,6 +157,7 @@
                                 <th>상태</th>
                                 <th>연락처</th>
                                 <th>크래딧</th>
+                                <th>자기소개</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -172,10 +173,12 @@
                                   <td>신청</td>
                                   <td>010-XXXX-XXXX</td>
                                   <td><%=(2000+(board.price*200))%></td>
+                                  <td><button type="button" name="button" style="background-color:#ccc;border:none;border-radius: 50px;width:50px;padding:5px 10px;color:#fff;" data-toggle="modal" data-target="#introduce<%=i%>">보기</button></td>
                                 <%} else{%>
                                   <td>결제완료</td>
                                   <td><%=board.studentList[i].phone%></td>
                                   <td style="text-decoration: line-through;color:#808080;"><%=(2000+(board.price*200))%></td>
+                                  <td><button type="button" name="button" style="background-color:#ccc;border:none;border-radius: 50px;width:50px;padding:5px 10px;color:#fff;" data-toggle="modal" data-target="#introduce<%=i%>">보기</button></td>
                                 <%}%>
                               </tr>
                                   <%}%>
@@ -225,10 +228,10 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">뒤로가기</button>
                     <button type="submit" class="btn btn-default" form="payprocess">결제하기</button>
                 </div>
+
             </div>
 
         </div>
-    </div>
     </div>
     <%if(board.stop[0].statue && (board.id==authUser.id)){%>
     <!-- 수업 중단 마스터 -->
@@ -241,6 +244,29 @@
         </div>
     </div>
     <%}%>
+
+    <%if(board.studentList.length){%>
+        <%for (var i=0; i< board.studentList.length; i++){%>
+    <div class="modal fade" id="introduce<%=i%>" role="dialog" style="top: 150px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" style="padding:10px;">
+                <div class="modal-header">
+                  <h5 style="font-weight:600;margin:auto;display:inline-block;"><span class="name2"></span>의 자기소개</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <script type="text/javascript">
+                  var name = "<%=board.studentList[i].name%>";
+                  document.getElementsByClassName('name2')[<%=i%>].innerHTML = name.substr(0,1) +"XX";
+                </script>
+                <div class="modal-body">
+                    <h5 style="padding: 30px 20px;"><%=board.studentList[i].introduce%></h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <%}}%>
 </section>
 
 <!--============================

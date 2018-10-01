@@ -266,8 +266,18 @@ module.exports = function (router) {
              var commentstar = rawBoard.comments[i].star_rating;
            }
          }
-         console.log(commentstar);
-         var reviewstar = Math.round((commenttotal-commentstar) / commentlength);
+         if(commentlength==1){
+           var reviewstar = 0;
+         }else{
+            var reviewstar = Math.round((commenttotal-commentstar) / (commentlength-1));
+         }
+
+         console.log("============================");
+         console.log("기존 댓글 개수 : " + commentlength);
+         console.log("기존 별점 총합 : " + commenttotal);
+         console.log("삭제할 댓글 별점  : " + commentstar);
+         console.log("변경된 게시글 별점 : " + reviewstar);
+         console.log("============================");
 
          MasterBoardModel.update({_id:reply_id},{$pull:{'comments':{'author':req.user[0].nickname,'contents':commentcnt}}},function(err,rawBoard){
            if(err) throw err;
