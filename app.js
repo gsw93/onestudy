@@ -100,10 +100,6 @@ var httpServer = http.createServer(app);
 // var httpPort = 3001;
 var httpPort = 80;
 
-router.route('/').get(function (req, res) {
-    res.render('checkevent');
-});
-
 httpServer.listen(httpPort, function () {
     console.log('http 서버가 시작되었습니다. 포트 : ' + httpPort);
     connectDB();

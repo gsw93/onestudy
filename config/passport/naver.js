@@ -9,7 +9,7 @@ var UserModel = mongoose.model("users");
 module.exports = (new NaverStrategy({
         clientID: 'cCdRfBjCIIIPqOXYOyLq',
         clientSecret: 'AEDh4B0iGW',
-        callbackURL: "https://onestudy.co.kr/auth/naver/callback"
+        callbackURL: "https://www.onestudy.co.kr/auth/naver/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         console.log('passport의 naver 호출 됌.');
