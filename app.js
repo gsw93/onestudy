@@ -22,7 +22,6 @@ var multer = require('multer');
 var fs = require('fs');
 //세션 설정
 var store = new MongoDBStore({
-    //uri: 'mongodb://35.220.161.170/db',
     uri: 'mongodb://localhost:27017/db',
     databaseName: 'db',
     collection: 'sessions'
