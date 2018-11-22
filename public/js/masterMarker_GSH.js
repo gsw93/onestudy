@@ -80,14 +80,11 @@ function markingMap(map){
 
 var markers=[];
 function changeMap(bounds) {
-    var bb,ff,fb,bf;
-    var bounds;
-
-    fb = bounds.f.b;
-    ff = bounds.f.f;
-    bb = bounds.b.b;
-    bf = bounds.b.f;
-    var item={bigx:ff,smallx:fb,bigy:bf,smally:bb};
+    var aNorth = bounds.getNorthEast().lat();
+    var aEast = bounds.getNorthEast().lng();
+    var aSouth = bounds.getSouthWest().lat();
+    var aWest = bounds.getSouthWest().lng();
+    var item={bigx:aNorth,smallx:aSouth,bigy:aEast,smally:aWest};
     var data=mapchange(item);
     var infoWindow = new google.maps.InfoWindow;
     for (var i = 0; i < markers.length; i++) {
